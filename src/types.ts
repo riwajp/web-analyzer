@@ -10,7 +10,7 @@ export interface SiteData {
   js: string[];
   scriptSrc: string[];
   script: string[];
-  meta: string[];
+  meta: Record<string, string>;
   text: string[];
 }
 

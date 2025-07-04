@@ -65,8 +65,18 @@ const WebAnalyzer = {
       .map((el) => el.textContent || "")
       .filter((script) => script.trim());
 
-    const meta = Array.from<HTMLElement>(doc.querySelectorAll("meta")).map(
-      (el) => el.outerHTML
+    const meta: Record<string, string> = {};
+    Array.from<HTMLElement>(doc.querySelectorAll("meta")).forEach(
+      (metaElement) => {
+        const nameAttr =
+          metaElement.getAttribute("name") ||
+          metaElement.getAttribute("property");
+        const contentAttr = metaElement.getAttribute("content");
+
+        if (nameAttr && contentAttr) {
+          meta[nameAttr.toLowerCase()] = contentAttr;
+        }
+      }
     );
 
     const text =
@@ -117,68 +127,67 @@ const WebAnalyzer = {
     ) as [string, any][]) {
       let detected = false;
 
-      // Check JS keys (look for substring in any site js strings)
+      // Match JavaScript keys
       if (techData.js) {
-        const jsKeys = Object.keys(techData.js);
-        detected = jsKeys.some((key) =>
-          site_data.js.some((script) => script.includes(key))
+        detected = Object.keys(techData.js).some((key: string) =>
+          site_data.js.some((script) => WebAnalyzer.matchPattern(script, key))
         );
       }
 
-      // Check scriptSrc with regex matching against each scriptSrc string
+      // Match scriptSrc (using regex or fallback)
       if (!detected && techData.scriptSrc) {
-        try {
-          const regex = new RegExp(techData.scriptSrc, "i");
-          detected = site_data.scriptSrc.some((src) => regex.test(src));
-        } catch {
-          // fallback: exact match
-          detected = site_data.scriptSrc.includes(techData.scriptSrc);
-        }
+        const patterns = Array.isArray(techData.scriptSrc)
+          ? techData.scriptSrc
+          : [techData.scriptSrc];
+
+        detected = patterns.some((pattern: string) =>
+          site_data.scriptSrc.some((src) =>
+            WebAnalyzer.matchPattern(src, pattern)
+          )
+        );
       }
 
-      // Check cookies keys
-      // if (!detected && techData.cookies) {
-      //   const cookieKeys = Object.keys(techData.cookies);
-      //   detected = cookieKeys.some(key =>
-      //     url_data.cookies.some(cookie => cookie.includes(key))
-      //   );
-      // }
+      //   Check cookies keys
+      if (!detected && techData.cookies) {
+        const cookieKeys = Object.keys(techData.cookies);
+        detected = cookieKeys.some((key) => url_data.cookies.includes(key));
+      }
 
       // Check CSS selectors/regex
       if (!detected && techData.css) {
         const cssPatterns = Array.isArray(techData.css)
           ? techData.css
           : [techData.css];
+
         detected = cssPatterns.some((pattern: string) =>
-          site_data.css_selectors.some((css) =>
-            WebAnalyzer.matchPattern(css, pattern)
+          site_data.css_selectors.some((selector) =>
+            WebAnalyzer.matchPattern(selector, pattern)
           )
         );
       }
 
-      // Check headers with key-value regex matching
       if (!detected && techData.headers) {
-        detected = Object.entries(techData.headers).every(
-          ([headerKey, headerVal]: [string, any]) => {
-            const siteHeaderVal = url_data.headers.get(
-              headerKey.trim().replace(":", "")
+        detected = Object.entries(techData.headers).some(
+          ([key, val]: [string, any]) => {
+            const headerValue = url_data.headers.get(
+              key.trim().replace(":", "")
             );
-            if (!siteHeaderVal) return false;
             return (
-              headerVal === "" || new RegExp(headerVal, "i").test(siteHeaderVal)
+              headerValue !== null &&
+              (val === "" || WebAnalyzer.matchPattern(headerValue, val))
             );
           }
         );
       }
 
-      // Check meta tags with key-value regex matching
-      // if (!detected && techData.meta) {
-      //   detected = Object.entries(techData.meta).every(([metaKey, metaVal]:[string,any]) => {
-      //     const siteMetaVal = site_data.meta[metaKey.toLowerCase()];
-      //     if (!siteMetaVal) return false;
-      //     return metaVal === '' || new RegExp(metaVal, 'i').test(siteMetaVal);
-      //   });
-      // }
+      if (!detected && techData.meta && site_data.meta) {
+        detected = Object.entries(techData.meta).some(
+          ([key, val]: [string, any]) => {
+            const metaVal = site_data.meta[key];
+            return metaVal ? WebAnalyzer.matchPattern(metaVal, val) : false;
+          }
+        );
+      }
 
       if (detected) {
         detectedTechnologies[techName] = techData;
