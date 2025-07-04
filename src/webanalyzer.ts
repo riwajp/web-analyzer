@@ -2,7 +2,7 @@ import { JSDOM } from "jsdom";
 import { SiteData, type URLData } from "./types";
 
 const WebAnalyzer = {
-  technologies: {},
+  technologies: {} as Record<string, any>,
   relations: {
     // certIssuer: "oo",
     cookies: "mm",
@@ -121,54 +121,83 @@ const WebAnalyzer = {
 
   detectPatterns: (site_data: SiteData, url_data: URLData) => {
     const detectedTechnologies: Record<string, any> = {};
+    const visited = new Set<string>();
 
-    for (const [techName, techData] of Object.entries(
-      WebAnalyzer.technologies
-    ) as [string, any][]) {
+    const detect = (techName: string) => {
+      if (visited.has(techName)) return;
+      visited.add(techName);
+
+      const techData = WebAnalyzer.technologies[techName];
+      if (!techData) return;
+
       let detected = false;
+      let detectedUsing: string | null = null;
 
       // Match JavaScript keys
-      if (techData.js) {
-        detected = Object.keys(techData.js).some((key: string) =>
-          site_data.js.some((script) => WebAnalyzer.matchPattern(script, key))
-        );
+      if (
+        techData.js &&
+        site_data.js.some((script) =>
+          Object.keys(techData.js).some((key) =>
+            WebAnalyzer.matchPattern(script, key)
+          )
+        )
+      ) {
+        detected = true;
+        detectedUsing = "js";
       }
 
-      // Match scriptSrc (using regex or fallback)
+      // Match scriptSrc
       if (!detected && techData.scriptSrc) {
         const patterns = Array.isArray(techData.scriptSrc)
           ? techData.scriptSrc
           : [techData.scriptSrc];
 
-        detected = patterns.some((pattern: string) =>
-          site_data.scriptSrc.some((src) =>
-            WebAnalyzer.matchPattern(src, pattern)
+        if (
+          patterns.some((pattern: string) =>
+            site_data.scriptSrc.some((src) =>
+              WebAnalyzer.matchPattern(src, pattern)
+            )
           )
-        );
+        ) {
+          detected = true;
+          detectedUsing = "scriptSrc";
+        }
       }
 
-      //   Check cookies keys
+      // Match cookies
       if (!detected && techData.cookies) {
-        const cookieKeys = Object.keys(techData.cookies);
-        detected = cookieKeys.some((key) => url_data.cookies.includes(key));
-      }
-
-      // Check CSS selectors/regex
-      if (!detected && techData.css) {
-        const cssPatterns = Array.isArray(techData.css)
-          ? techData.css
-          : [techData.css];
-
-        detected = cssPatterns.some((pattern: string) =>
-          site_data.css_selectors.some((selector) =>
-            WebAnalyzer.matchPattern(selector, pattern)
+        if (
+          Object.keys(techData.cookies).some((key) =>
+            url_data.cookies.includes(key)
           )
-        );
+        ) {
+          detected = true;
+          detectedUsing = "cookies";
+        }
       }
 
+      // Match CSS
+      // if (!detected && techData.css) {
+      //   const cssPatterns = Array.isArray(techData.css)
+      //     ? techData.css
+      //     : [techData.css];
+
+      //   if (
+      //     cssPatterns.some((pattern: string) =>
+      //       site_data.css_selectors.some((selector) =>
+      //         WebAnalyzer.matchPattern(selector, pattern)
+      //       )
+      //     )
+      //   ) {
+      //     detected = true;
+      //     detectedUsing = "css";
+      //   }
+      // }
+
+      // Match headers
       if (!detected && techData.headers) {
-        detected = Object.entries(techData.headers).some(
-          ([key, val]: [string, any]) => {
+        if (
+          Object.entries(techData.headers).some(([key, val]: [string, any]) => {
             const headerValue = url_data.headers.get(
               key.trim().replace(":", "")
             );
@@ -176,22 +205,51 @@ const WebAnalyzer = {
               headerValue !== null &&
               (val === "" || WebAnalyzer.matchPattern(headerValue, val))
             );
-          }
-        );
+          })
+        ) {
+          detected = true;
+          detectedUsing = "headers";
+        }
       }
 
+      // Match meta
       if (!detected && techData.meta && site_data.meta) {
-        detected = Object.entries(techData.meta).some(
-          ([key, val]: [string, any]) => {
-            const metaVal = site_data.meta[key];
+        if (
+          Object.entries(techData.meta).some(([key, val]: [string, any]) => {
+            const metaVal = site_data.meta[key.toLowerCase()];
             return metaVal ? WebAnalyzer.matchPattern(metaVal, val) : false;
-          }
-        );
+          })
+        ) {
+          detected = true;
+          detectedUsing = "meta";
+        }
       }
 
       if (detected) {
-        detectedTechnologies[techName] = techData;
+        detectedTechnologies[techName] = {
+          ...techData,
+          detectedUsing,
+        };
+
+        // Recursively add implied technologies
+        const implies = techData.implies;
+        if (implies) {
+          const impliedTechs = Array.isArray(implies) ? implies : [implies];
+          impliedTechs.forEach(detect);
+        }
+
+        // Recursively add required technologies
+        const requires = techData.requires;
+        if (requires) {
+          const requiredTechs = Array.isArray(requires) ? requires : [requires];
+          requiredTechs.forEach(detect);
+        }
       }
+    };
+
+    // Main detection loop
+    for (const techName of Object.keys(WebAnalyzer.technologies)) {
+      detect(techName);
     }
 
     return detectedTechnologies;

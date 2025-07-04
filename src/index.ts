@@ -24,11 +24,17 @@ for (const index of Array(27).keys()) {
 WebAnalyzer.technologies = technologies;
 
 const urls = [
-  "https://discord.com/",
   "https://www.cloudflare.com/",
   "https://vercel.com/",
   "https://unsplash.com/",
   "https://laterical.com/",
+  "https://riwaj-tetris-game.netlify.app/",
+  "https://www.linkedin.com/feed/",
+  "https://github.com/",
+  "https://www.figma.com/",
+  "https://www.booking.com/",
+  "https://chatgpt.com/",
+  "https://huggingface.co/",
 ];
 
 const outputFile = "detected_technologies.jsonl";
@@ -52,11 +58,16 @@ const stream = fs.createWriteStream(outputFile, { flags: "w" });
       );
       timings.afterDetect = performance.now();
 
-      const techNames = Object.keys(detected_technologies);
+      const techInfo = Object.entries(detected_technologies)
+        .filter(([_, data]) => data.cats && data.cats.includes(16))
+        .map(([name, data]) => ({
+          name,
+          detectedUsing: data.detectedUsing || null,
+        }));
 
       const jsonlEntry = {
         url,
-        technologies: techNames,
+        technologies: techInfo,
         timings: {
           fetch: +(timings.afterFetch - timings.fetchStart).toFixed(2),
           parse: +(timings.afterParse - timings.afterFetch).toFixed(2),
