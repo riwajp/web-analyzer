@@ -14,18 +14,4 @@ export interface SiteData {
   text: string[];
 }
 
-// export interface Technology {
-//   cats: number[];
-//   description?: string;
-//   icon?: string;
-//   implies?: string | string[];
-//   js?: Record<string, string>;
-//   dom?: string;
-//   oss?: boolean;
-//   saas?: boolean;
-//   pricing?: string[];
-//   scriptSrc?: string;
-//   website?: string;
-// }
-
 export type TechnologiesMap = Record<string, any>;

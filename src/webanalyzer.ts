@@ -43,9 +43,9 @@ const WebAnalyzer = {
     const dom = new JSDOM(source_code);
     const doc = dom.window.document;
 
-    const css_selectors = Array.from<HTMLElement>(doc.querySelectorAll("*"))
-      .map((el) => el.tagName.toLowerCase())
-      .filter((value, index, self) => self.indexOf(value) === index);
+    // const css_selectors = Array.from<HTMLElement>(doc.querySelectorAll("*"))
+    //   .map((el) => el.tagName.toLowerCase())
+    //   .filter((value, index, self) => self.indexOf(value) === index);
 
     const links = Array.from<HTMLAnchorElement>(doc.querySelectorAll("a"))
       .map((el) => el.href)
@@ -84,7 +84,7 @@ const WebAnalyzer = {
       "";
 
     return {
-      css_selectors,
+      css_selectors: [],
       links,
       js,
       scriptSrc,
@@ -94,6 +94,7 @@ const WebAnalyzer = {
     };
   },
 
+  // utility function to match a text and object pattern
   matchPattern: (
     value: string,
     pattern: string | Record<string, string>

@@ -45,19 +45,24 @@ const stream = fs.createWriteStream(outputFile, { flags: "w" });
     const timings: Record<string, number> = {};
 
     try {
+      // fetch the URL for source code and headers
       timings.fetchStart = performance.now();
       const url_data = await WebAnalyzer.fetchURL(url);
       timings.afterFetch = performance.now();
 
+      // parse the code to detect components
       const site_data = WebAnalyzer.parseSourceCode(url_data.source_code);
       timings.afterParse = performance.now();
 
+      // detect technologies using the parsed data
       const detected_technologies = WebAnalyzer.detectPatterns(
         site_data,
         url_data
       );
       timings.afterDetect = performance.now();
 
+      // ==============================================================================
+      // For logging purposes ==========================================================
       const techInfo = Object.entries(detected_technologies)
         .filter(([_, data]) => data.cats && data.cats.includes(16))
         .map(([name, data]) => ({
