@@ -4,6 +4,8 @@ import fs from "fs";
 import path from "path";
 
 const WebAnalyzer = {
+  initialized: false,
+
   technologies: {} as TechnologiesMap,
 
   // Adds technologies data from the provided list of json files
@@ -19,6 +21,8 @@ const WebAnalyzer = {
         ...technologiesFromFile,
       };
     }
+
+    WebAnalyzer.initialized = true;
 
     console.log(
       `Loaded ${Object.keys(WebAnalyzer.technologies).length} technologies.`

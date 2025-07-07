@@ -3,11 +3,17 @@ import fs from "fs";
 import { performance } from "perf_hooks";
 import type { TechnologiesMap, DetectionResult } from "./types";
 
-// Load all category 16 technologies
-WebAnalyzer.init(["src/data/technologies_cat16.json"]);
-
+function ensureInitialized() {
+  if (!WebAnalyzer.initialized) {
+    // Load all technologies data
+    WebAnalyzer.init(["src/data/technologies.json"]);
+  }
+}
 // detect technology for a given URL
 export async function detectTechnology(url: string): Promise<DetectionResult> {
+  ensureInitialized();
+
+  // timings for benchmarks
   const timings: Record<string, number> = {};
 
   try {
