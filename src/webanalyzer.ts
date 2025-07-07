@@ -1,23 +1,28 @@
 import { JSDOM } from "jsdom";
-import { SiteData, type URLData } from "./types";
+import type { SiteData, TechnologiesMap, URLData } from "./types";
+import fs from "fs";
+import path from "path";
 
 const WebAnalyzer = {
-  technologies: {} as Record<string, any>,
-  relations: {
-    // certIssuer: "oo",
-    cookies: "mm",
-    css: "oo",
-    dns: "mm",
-    headers: "mm",
-    html: "oo",
-    meta: "mm",
-    // probe: "mm",
-    // robots: "oo",
-    scriptSrc: "om",
-    scripts: "oo",
-    text: "oo",
-    url: "oo",
-    // xhr: "oo",
+  technologies: {} as TechnologiesMap,
+
+  // Adds technologies data from the provided list of json files
+  init: (data_files: string[]) => {
+    for (const file of data_files) {
+      const filePath = path.resolve(file);
+      const fileContent = fs.readFileSync(filePath, "utf-8");
+
+      const technologiesFromFile: TechnologiesMap = JSON.parse(fileContent);
+
+      WebAnalyzer.technologies = {
+        ...WebAnalyzer.technologies,
+        ...technologiesFromFile,
+      };
+    }
+
+    console.log(
+      `Loaded ${Object.keys(WebAnalyzer.technologies).length} technologies.`
+    );
   },
 
   // Fetches the source code, headers, and set-cookie headers from a given URL
@@ -38,34 +43,26 @@ const WebAnalyzer = {
     }
   },
 
-  // Parses the source code of a webpage and extracts data for further analysis and detection
+  // Parses the source code of a webpage and extracts components for further analysis and detection
   parseSourceCode: (source_code: string): SiteData => {
     const dom = new JSDOM(source_code);
     const doc = dom.window.document;
 
-    // const css_selectors = Array.from<HTMLElement>(doc.querySelectorAll("*"))
-    //   .map((el) => el.tagName.toLowerCase())
-    //   .filter((value, index, self) => self.indexOf(value) === index);
-
-    const links = Array.from<HTMLAnchorElement>(doc.querySelectorAll("a"))
-      .map((el) => el.href)
-      .filter((href) => href);
-
-    const js = Array.from<HTMLElement>(doc.querySelectorAll("script"))
-      .map((el) => el.textContent || "")
-      .filter((script) => script.trim());
-
+    //  extract script src attributes
     const scriptSrc = Array.from<HTMLElement>(
       doc.querySelectorAll("script[src]")
     )
       .map((el) => el.getAttribute("src"))
       .filter((src) => src != null);
 
-    const script = Array.from<HTMLElement>(doc.querySelectorAll("script"))
+    // extract script text content
+    const js = Array.from<HTMLElement>(doc.querySelectorAll("script"))
       .map((el) => el.textContent || "")
       .filter((script) => script.trim());
 
+    //  extract meta data
     const meta: Record<string, string> = {};
+
     Array.from<HTMLElement>(doc.querySelectorAll("meta")).forEach(
       (metaElement) => {
         const nameAttr =
@@ -79,18 +76,10 @@ const WebAnalyzer = {
       }
     );
 
-    const text =
-      doc.body.innerText?.split("\n").filter((line: string) => line.trim()) ??
-      "";
-
     return {
-      css_selectors: [],
-      links,
-      js,
       scriptSrc,
-      script,
+      js,
       meta,
-      text,
     };
   },
 
@@ -121,7 +110,7 @@ const WebAnalyzer = {
   },
 
   detectPatterns: (site_data: SiteData, url_data: URLData) => {
-    const detectedTechnologies: Record<string, any> = {};
+    const detectedTechnologies: any[] = [];
     const visited = new Set<string>();
 
     const detect = (techName: string) => {
@@ -177,24 +166,6 @@ const WebAnalyzer = {
         }
       }
 
-      // Match CSS
-      // if (!detected && techData.css) {
-      //   const cssPatterns = Array.isArray(techData.css)
-      //     ? techData.css
-      //     : [techData.css];
-
-      //   if (
-      //     cssPatterns.some((pattern: string) =>
-      //       site_data.css_selectors.some((selector) =>
-      //         WebAnalyzer.matchPattern(selector, pattern)
-      //       )
-      //     )
-      //   ) {
-      //     detected = true;
-      //     detectedUsing = "css";
-      //   }
-      // }
-
       // Match headers
       if (!detected && techData.headers) {
         if (
@@ -227,10 +198,7 @@ const WebAnalyzer = {
       }
 
       if (detected) {
-        detectedTechnologies[techName] = {
-          ...techData,
-          detectedUsing,
-        };
+        detectedTechnologies.push({ name: techName, detectedUsing });
 
         // Recursively add implied technologies
         const implies = techData.implies;

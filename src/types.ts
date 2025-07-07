@@ -1,17 +1,29 @@
-export interface URLData {
+export type URLData = {
   source_code: string;
   headers: Headers;
   cookies: string;
-}
+};
 
-export interface SiteData {
-  css_selectors: string[];
-  links: string[];
-  js: string[];
+export type SiteData = {
   scriptSrc: string[];
-  script: string[];
+  js: string[];
   meta: Record<string, string>;
-  text: string[];
-}
+};
+
+export type DetectedTechnology = {
+  name: string;
+  detectedUsing: string | null;
+};
+
+export type DetectionResult = {
+  url: string;
+  technologies: DetectedTechnology[];
+  timings: {
+    fetch: number;
+    parse: number;
+    detect: number;
+    total: number;
+  };
+};
 
 export type TechnologiesMap = Record<string, any>;

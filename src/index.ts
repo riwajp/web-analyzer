@@ -1,27 +1,55 @@
 import WebAnalyzer from "./webanalyzer";
 import fs from "fs";
-import path from "path";
 import { performance } from "perf_hooks";
-import type { TechnologiesMap } from "./types";
+import type { TechnologiesMap, DetectionResult } from "./types";
 
-let technologies: TechnologiesMap = {};
+// Load all category 16 technologies
+WebAnalyzer.init(["src/data/technologies_cat16.json"]);
 
-// Load all technology data from JSON files in the technologies directory
-for (const index of Array(27).keys()) {
-  const character = index ? String.fromCharCode(index + 96) : "_";
+// detect technology for a given URL
+export async function detectTechnology(url: string): Promise<DetectionResult> {
+  const timings: Record<string, number> = {};
 
-  technologies = {
-    ...technologies,
-    ...JSON.parse(
-      fs.readFileSync(
-        path.resolve(`${__dirname}/technologies/${character}.json`),
-        "utf-8"
-      )
-    ),
-  };
+  try {
+    timings.fetchStart = performance.now();
+    const url_data = await WebAnalyzer.fetchURL(url);
+    timings.afterFetch = performance.now();
+
+    const site_data = WebAnalyzer.parseSourceCode(url_data.source_code);
+    timings.afterParse = performance.now();
+
+    const detected_technologies = WebAnalyzer.detectPatterns(
+      site_data,
+      url_data
+    );
+
+    timings.afterDetect = performance.now();
+
+    const result: DetectionResult = {
+      url,
+      technologies: detected_technologies,
+      timings: {
+        fetch: +(timings.afterFetch - timings.fetchStart).toFixed(2),
+        parse: +(timings.afterParse - timings.afterFetch).toFixed(2),
+        detect: +(timings.afterDetect - timings.afterParse).toFixed(2),
+        total: +(timings.afterDetect - timings.fetchStart).toFixed(2),
+      },
+    };
+
+    console.log("Detected for:", url);
+
+    return result;
+  } catch (error) {
+    console.error(`Error processing ${url}:`, error);
+    throw error;
+  }
 }
 
-WebAnalyzer.technologies = technologies;
+// Append result to a JSONL file
+export function appendToJSONL(filePath: string, entry: DetectionResult): void {
+  const jsonLine = JSON.stringify(entry) + "\n";
+  fs.appendFileSync(filePath, jsonLine, "utf-8");
+}
 
 const urls = [
   "https://www.cloudflare.com/",
@@ -38,57 +66,17 @@ const urls = [
 ];
 
 const outputFile = "detected_technologies.jsonl";
-const stream = fs.createWriteStream(outputFile, { flags: "w" });
 
 (async () => {
   for (const url of urls) {
-    const timings: Record<string, number> = {};
-
     try {
-      // fetch the URL for source code and headers
-      timings.fetchStart = performance.now();
-      const url_data = await WebAnalyzer.fetchURL(url);
-      timings.afterFetch = performance.now();
-
-      // parse the code to detect components
-      const site_data = WebAnalyzer.parseSourceCode(url_data.source_code);
-      timings.afterParse = performance.now();
-
-      // detect technologies using the parsed data
-      const detected_technologies = WebAnalyzer.detectPatterns(
-        site_data,
-        url_data
-      );
-      timings.afterDetect = performance.now();
-
-      // ==============================================================================
-      // For logging purposes ==========================================================
-      const techInfo = Object.entries(detected_technologies)
-        .filter(([_, data]) => data.cats && data.cats.includes(16))
-        .map(([name, data]) => ({
-          name,
-          detectedUsing: data.detectedUsing || null,
-        }));
-
-      const jsonlEntry = {
-        url,
-        technologies: techInfo,
-        timings: {
-          fetch: +(timings.afterFetch - timings.fetchStart).toFixed(2),
-          parse: +(timings.afterParse - timings.afterFetch).toFixed(2),
-          detect: +(timings.afterDetect - timings.afterParse).toFixed(2),
-          total: +(timings.afterDetect - timings.fetchStart).toFixed(2),
-        },
-      };
-
-      stream.write(JSON.stringify(jsonlEntry) + "\n");
-      console.log(`Processed: ${url}`);
+      const result = await detectTechnology(url);
+      appendToJSONL(outputFile, result);
     } catch (error) {
-      console.error(`Error processing ${url}:`, error);
+      console.log(`Error processing URL:${url}`, error);
+      throw error;
     }
   }
 
-  stream.end(() => {
-    console.log(`Done! Results saved to ${outputFile}`);
-  });
+  console.log(`All results saved to ${outputFile}`);
 })();
