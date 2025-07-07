@@ -47,7 +47,7 @@ async function scrapeBuiltWithTable(url) {
     }
 }
 
-async function scrapeMetaTrailTable(url) {
+async function scrapeMetaTrailTable(url, entryName) {
     let browser;
     try {
         const puppeteer = require('puppeteer');
@@ -55,7 +55,9 @@ async function scrapeMetaTrailTable(url) {
         browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
         console.log(`Navigating to ${url}...`);
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 120000 });
+        // Wait for 10 seconds before grabbing the HTML
+        // await new Promise(resolve => setTimeout(resolve, 20000));
         const htmlContent = await page.content();
         const $ = cheerio.load(htmlContent);
         // Select all <a> tags inside <div class="font-medium text-gray-900">
@@ -77,12 +79,10 @@ async function scrapeMetaTrailTable(url) {
             console.log('First few lines of HTML content to debug (truncated):');
             console.log(htmlContent.substring(0, 1000));
         }
-        // Write results to CSV file named after the URL
+        // Write results to CSV file named websitelist_<entryName>.csv
         if (websiteUrls.length > 0) {
-            const urlObj = new URL(url);
-            let filename = urlObj.pathname.replace(/\/+/, '').replace(/\//g, '_');
-            if (!filename) filename = 'output';
-            const csvFile = path.join(__dirname, `${filename}.csv`);
+            const safeName = entryName.replace(/[^a-zA-Z0-9_-]/g, '_');
+            const csvFile = path.join(__dirname, `websitelist_${safeName}.csv`);
             const csvContent = websiteUrls.map(name => `"${name.replace(/"/g, '""')}"`).join('\n');
             fs.writeFileSync(csvFile, csvContent, 'utf8');
             console.log(`Results written to ${csvFile}`);
