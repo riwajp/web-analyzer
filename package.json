@@ -18,6 +18,8 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "jsdom": "^26.1.0"
+    "cheerio": "^1.1.0",
+    "jsdom": "^26.1.0",
+    "puppeteer": "^24.11.2"
   }
 }
