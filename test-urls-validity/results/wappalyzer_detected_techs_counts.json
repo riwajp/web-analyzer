@@ -1,0 +1,346 @@
+[
+  {
+    "tech": "HSTS",
+    "count": 147
+  },
+  {
+    "tech": "reCAPTCHA",
+    "count": 49
+  },
+  {
+    "tech": "Akamai Bot Manager",
+    "count": 33
+  },
+  {
+    "tech": "BuySafe",
+    "count": 18
+  },
+  {
+    "tech": "Accertify",
+    "count": 17
+  },
+  {
+    "tech": "Cloudflare Bot Management",
+    "count": 13
+  },
+  {
+    "tech": "Imperva",
+    "count": 13
+  },
+  {
+    "tech": "AntiBot.Cloud",
+    "count": 10
+  },
+  {
+    "tech": "ARCaptcha",
+    "count": 8
+  },
+  {
+    "tech": "Cloudflare Turnstile",
+    "count": 8
+  },
+  {
+    "tech": "hCaptcha",
+    "count": 5
+  },
+  {
+    "tech": "Akamai Web Application Protector",
+    "count": 4
+  },
+  {
+    "tech": "Blue Triangle",
+    "count": 3
+  },
+  {
+    "tech": "PerimeterX",
+    "count": 3
+  },
+  {
+    "tech": "ClickCease",
+    "count": 2
+  },
+  {
+    "tech": "Forter",
+    "count": 2
+  },
+  {
+    "tech": "Captch Me",
+    "count": 1
+  },
+  {
+    "tech": "DataDome",
+    "count": 1
+  },
+  {
+    "tech": "Kasada",
+    "count": 1
+  },
+  {
+    "tech": "AWS WAF Captcha",
+    "count": 0
+  },
+  {
+    "tech": "Alibaba Cloud Verification Code",
+    "count": 0
+  },
+  {
+    "tech": "Altcha",
+    "count": 0
+  },
+  {
+    "tech": "adCAPTCHA",
+    "count": 0
+  },
+  {
+    "tech": "Basic",
+    "count": 0
+  },
+  {
+    "tech": "Bugcrowd",
+    "count": 0
+  },
+  {
+    "tech": "Clear",
+    "count": 0
+  },
+  {
+    "tech": "Cloud Guard",
+    "count": 0
+  },
+  {
+    "tech": "CoinHive Captcha",
+    "count": 0
+  },
+  {
+    "tech": "Combahton FlowShield",
+    "count": 0
+  },
+  {
+    "tech": "Confiant",
+    "count": 0
+  },
+  {
+    "tech": "DDoS-Guard",
+    "count": 0
+  },
+  {
+    "tech": "Dataships",
+    "count": 0
+  },
+  {
+    "tech": "Detectify",
+    "count": 0
+  },
+  {
+    "tech": "Digest",
+    "count": 0
+  },
+  {
+    "tech": "Drata",
+    "count": 0
+  },
+  {
+    "tech": "Fortinet FortiGate",
+    "count": 0
+  },
+  {
+    "tech": "Fraud Blocker",
+    "count": 0
+  },
+  {
+    "tech": "FraudLabs Pro",
+    "count": 0
+  },
+  {
+    "tech": "Friendly Captcha",
+    "count": 0
+  },
+  {
+    "tech": "FunCaptcha",
+    "count": 0
+  },
+  {
+    "tech": "GeeTest",
+    "count": 0
+  },
+  {
+    "tech": "Hanko",
+    "count": 0
+  },
+  {
+    "tech": "Human Presence",
+    "count": 0
+  },
+  {
+    "tech": "Imunify360",
+    "count": 0
+  },
+  {
+    "tech": "iThemes Security",
+    "count": 0
+  },
+  {
+    "tech": "Jumio",
+    "count": 0
+  },
+  {
+    "tech": "Kerberos",
+    "count": 0
+  },
+  {
+    "tech": "Keybase",
+    "count": 0
+  },
+  {
+    "tech": "Konduto",
+    "count": 0
+  },
+  {
+    "tech": "Kount",
+    "count": 0
+  },
+  {
+    "tech": "Limit Login Attempts Reloaded",
+    "count": 0
+  },
+  {
+    "tech": "MTCaptcha",
+    "count": 0
+  },
+  {
+    "tech": "Mollom",
+    "count": 0
+  },
+  {
+    "tech": "NTLM",
+    "count": 0
+  },
+  {
+    "tech": "NexusPIPE",
+    "count": 0
+  },
+  {
+    "tech": "NoFraud",
+    "count": 0
+  },
+  {
+    "tech": "Norton Shopping Guarantee",
+    "count": 0
+  },
+  {
+    "tech": "Onfido",
+    "count": 0
+  },
+  {
+    "tech": "Proxmox Mail Gateway",
+    "count": 0
+  },
+  {
+    "tech": "RapidSec",
+    "count": 0
+  },
+  {
+    "tech": "Riskified",
+    "count": 0
+  },
+  {
+    "tech": "SPNEGO",
+    "count": 0
+  },
+  {
+    "tech": "Sift",
+    "count": 0
+  },
+  {
+    "tech": "Signifyd",
+    "count": 0
+  },
+  {
+    "tech": "SiteGuard WP Plugin",
+    "count": 0
+  },
+  {
+    "tech": "SiteLock",
+    "count": 0
+  },
+  {
+    "tech": "Skyflow",
+    "count": 0
+  },
+  {
+    "tech": "Slider Captcha",
+    "count": 0
+  },
+  {
+    "tech": "SnapHost",
+    "count": 0
+  },
+  {
+    "tech": "Solve Media",
+    "count": 0
+  },
+  {
+    "tech": "Sqreen",
+    "count": 0
+  },
+  {
+    "tech": "StarTest",
+    "count": 0
+  },
+  {
+    "tech": "Sucuri",
+    "count": 0
+  },
+  {
+    "tech": "Tencent Waterproof Wall",
+    "count": 0
+  },
+  {
+    "tech": "Testflow",
+    "count": 0
+  },
+  {
+    "tech": "ThreatMetrix",
+    "count": 0
+  },
+  {
+    "tech": "TruValidate",
+    "count": 0
+  },
+  {
+    "tech": "VAPTCHA",
+    "count": 0
+  },
+  {
+    "tech": "Vanta",
+    "count": 0
+  },
+  {
+    "tech": "Variti",
+    "count": 0
+  },
+  {
+    "tech": "VentryShield",
+    "count": 0
+  },
+  {
+    "tech": "Very Good Security",
+    "count": 0
+  },
+  {
+    "tech": "v4Guard Checkpoint",
+    "count": 0
+  },
+  {
+    "tech": "Wordfence",
+    "count": 0
+  },
+  {
+    "tech": "Wordfence Login Security",
+    "count": 0
+  },
+  {
+    "tech": "Yandex SmartCaptcha",
+    "count": 0
+  }
+]

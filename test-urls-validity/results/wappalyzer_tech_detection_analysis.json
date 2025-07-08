@@ -1,0 +1,106 @@
+[
+  {
+    "tech": "Alibaba Cloud Verification Code",
+    "total": 1,
+    "detected": 0,
+    "missed": 1,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Altcha",
+    "total": 3,
+    "detected": 0,
+    "missed": 3,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Basic",
+    "total": 40,
+    "detected": 0,
+    "missed": 40,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Bugcrowd",
+    "total": 40,
+    "detected": 0,
+    "missed": 40,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Akamai Web Application Protector",
+    "total": 49,
+    "detected": 3,
+    "missed": 46,
+    "detectionRate": 0.06,
+    "missRate": 0.94
+  },
+  {
+    "tech": "Blue Triangle",
+    "total": 50,
+    "detected": 3,
+    "missed": 47,
+    "detectionRate": 0.06,
+    "missRate": 0.94
+  },
+  {
+    "tech": "ARCaptcha",
+    "total": 40,
+    "detected": 8,
+    "missed": 32,
+    "detectionRate": 0.2,
+    "missRate": 0.8
+  },
+  {
+    "tech": "AntiBot.Cloud",
+    "total": 50,
+    "detected": 10,
+    "missed": 40,
+    "detectionRate": 0.2,
+    "missRate": 0.8
+  },
+  {
+    "tech": "Captch Me",
+    "total": 5,
+    "detected": 1,
+    "missed": 4,
+    "detectionRate": 0.2,
+    "missRate": 0.8
+  },
+  {
+    "tech": "ClickCease",
+    "total": 5,
+    "detected": 1,
+    "missed": 4,
+    "detectionRate": 0.2,
+    "missRate": 0.8
+  },
+  {
+    "tech": "Accertify",
+    "total": 40,
+    "detected": 17,
+    "missed": 23,
+    "detectionRate": 0.42,
+    "missRate": 0.57
+  },
+  {
+    "tech": "BuySafe",
+    "total": 40,
+    "detected": 18,
+    "missed": 22,
+    "detectionRate": 0.45,
+    "missRate": 0.55
+  },
+  {
+    "tech": "Akamai Bot Manager",
+    "total": 39,
+    "detected": 20,
+    "missed": 19,
+    "detectionRate": 0.51,
+    "missRate": 0.49
+  }
+]
