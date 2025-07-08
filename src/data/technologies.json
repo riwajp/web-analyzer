@@ -56,9 +56,14 @@
     "cookies": {
       "ak_bmsc": "",
       "bm_sv": "",
-      "bm_sz": ""
+      "bm_sz": "",
+      "abck": ""
     },
-    "description": "Akamai Bot Manager detect bots using device fingerprinting bot signatures.",
+    "headers": {
+      "akamai-grn": ".+",
+      "set-cookie": "abck=|bm_sz=|ak_bmsc=|bm_sv="
+    },
+    "description": "Akamai Bot Manager detects bots using device fingerprinting and behavioral signatures.",
     "icon": "Akamai.svg",
     "implies": [
       "Akamai"
@@ -137,6 +142,9 @@
     "scriptSrc": [
       "/antibot8/static/peel\\.js"
     ],
+    "js": {
+      "/antibot8/8.php": ""
+    },
     "website": "https://antibot.cloud"
   },
   "adCAPTCHA": {
@@ -538,6 +546,10 @@
     "dom": [
       "div.frc-captcha"
     ],
+    "headers": {
+      "host": "friendlycaptcha\\.com",
+      "referer": "friendlycaptcha\\.com"
+    },
     "icon": "FriendlyCaptcha.svg",
     "pricing": [
       "low",
@@ -569,19 +581,31 @@
     "cats": [
       16
     ],
-    "description": "GeeTest is a CAPTCHA and bot management provider, protects websites, mobile apps, and APIs from automated bot-driven attacks, like ATO, credential stuffing, web scalping, etc.",
-    "headers": {
-      "content-security-policy": "\\.geetest\\.com"
-    },
+    "description": "GeeTest is a CAPTCHA and bot management provider that protects websites, mobile apps, and APIs from automated bot-driven attacks such as credential stuffing, scraping, and account takeover. This detection includes GT3 and GT4 variants.",
     "icon": "GeeTest.svg",
     "pricing": [
       "poa"
     ],
     "saas": true,
+    "website": "https://www.geetest.com",
+    "headers": {
+      "content-security-policy": "\\.geetest\\.com",
+      "set-cookie": "GeeTestCaptcha|geetest"
+    },
     "scriptSrc": [
-      "\\.geetest\\.com/"
+      "\\.geetest\\.com/",
+      "static\\.geetest\\.com/static/js/gt",
+      "gt4\\.geetest\\.com",
+      "gcaptcha4\\.geetest\\.com/load",
+      "gcaptcha4\\.geetest\\.com/register-slide",
+      "gcaptcha4\\.geetest\\.com/validate-slide"
     ],
-    "website": "https://www.geetest.com"
+    "html": "captcha_id=|challenge=|gt4-init",
+    "cookies": {
+      "GeeTestCaptcha": "",
+      "geeTestUser": "",
+      "captcha_v[1-9][0-9]*": ""
+    }
   },
   "HSTS": {
     "cats": [
@@ -1450,7 +1474,7 @@
       "WordPress"
     ],
     "scriptSrc": [
-      "/wp-content/plugins/wordfence/.+admin\\.ajaxWatcher\\.\\d+\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1"
+      "/wp-content/plugins/wordfence/"
     ],
     "website": "https://www.wordfence.com"
   },
@@ -1470,7 +1494,7 @@
       "WordPress"
     ],
     "scriptSrc": [
-      "/wp-content/plugins/wordfence/.+login\\.\\d+\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1"
+      "/wp-content/plugins/wordfence/"
     ],
     "website": "https://www.wordfence.com"
   },
