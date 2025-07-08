@@ -1,0 +1,266 @@
+[
+  {
+    "tech": "Riskified",
+    "total": 5,
+    "detected": 0,
+    "missed": 5,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Kount",
+    "total": 30,
+    "detected": 0,
+    "missed": 30,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "MTCaptcha",
+    "total": 37,
+    "detected": 0,
+    "missed": 37,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Hanko",
+    "total": 7,
+    "detected": 0,
+    "missed": 7,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Imunify360",
+    "total": 17,
+    "detected": 0,
+    "missed": 17,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Wordfence",
+    "total": 17,
+    "detected": 0,
+    "missed": 17,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Konduto",
+    "total": 1,
+    "detected": 0,
+    "missed": 1,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "SiteLock",
+    "total": 4,
+    "detected": 0,
+    "missed": 4,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Skyflow",
+    "total": 5,
+    "detected": 0,
+    "missed": 5,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Vanta",
+    "total": 9,
+    "detected": 0,
+    "missed": 9,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Basic",
+    "total": 27,
+    "detected": 0,
+    "missed": 27,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "ARCaptcha",
+    "total": 30,
+    "detected": 0,
+    "missed": 30,
+    "detectionRate": 0,
+    "missRate": 1
+  },
+  {
+    "tech": "Mollom",
+    "total": 18,
+    "detected": 1,
+    "missed": 17,
+    "detectionRate": 0.06,
+    "missRate": 0.94
+  },
+  {
+    "tech": "ThreatMetrix",
+    "total": 12,
+    "detected": 1,
+    "missed": 11,
+    "detectionRate": 0.08,
+    "missRate": 0.92
+  },
+  {
+    "tech": "Confiant",
+    "total": 26,
+    "detected": 4,
+    "missed": 22,
+    "detectionRate": 0.15,
+    "missRate": 0.85
+  },
+  {
+    "tech": "SnapHost",
+    "total": 23,
+    "detected": 4,
+    "missed": 19,
+    "detectionRate": 0.17,
+    "missRate": 0.83
+  },
+  {
+    "tech": "reCAPTCHA",
+    "total": 20,
+    "detected": 4,
+    "missed": 16,
+    "detectionRate": 0.2,
+    "missRate": 0.8
+  },
+  {
+    "tech": "hCaptcha",
+    "total": 5,
+    "detected": 1,
+    "missed": 4,
+    "detectionRate": 0.2,
+    "missRate": 0.8
+  },
+  {
+    "tech": "ClickCease",
+    "total": 29,
+    "detected": 6,
+    "missed": 23,
+    "detectionRate": 0.21,
+    "missRate": 0.79
+  },
+  {
+    "tech": "NoFraud",
+    "total": 13,
+    "detected": 3,
+    "missed": 10,
+    "detectionRate": 0.23,
+    "missRate": 0.77
+  },
+  {
+    "tech": "Signifyd",
+    "total": 16,
+    "detected": 5,
+    "missed": 11,
+    "detectionRate": 0.31,
+    "missRate": 0.69
+  },
+  {
+    "tech": "PerimeterX",
+    "total": 21,
+    "detected": 7,
+    "missed": 14,
+    "detectionRate": 0.33,
+    "missRate": 0.67
+  },
+  {
+    "tech": "Forter",
+    "total": 31,
+    "detected": 11,
+    "missed": 20,
+    "detectionRate": 0.35,
+    "missRate": 0.65
+  },
+  {
+    "tech": "Onfido",
+    "total": 25,
+    "detected": 9,
+    "missed": 16,
+    "detectionRate": 0.36,
+    "missRate": 0.64
+  },
+  {
+    "tech": "DataDome",
+    "total": 14,
+    "detected": 6,
+    "missed": 8,
+    "detectionRate": 0.43,
+    "missRate": 0.57
+  },
+  {
+    "tech": "Sqreen",
+    "total": 4,
+    "detected": 2,
+    "missed": 2,
+    "detectionRate": 0.5,
+    "missRate": 0.5
+  },
+  {
+    "tech": "Sift",
+    "total": 27,
+    "detected": 20,
+    "missed": 7,
+    "detectionRate": 0.74,
+    "missRate": 0.26
+  },
+  {
+    "tech": "Accertify",
+    "total": 20,
+    "detected": 16,
+    "missed": 4,
+    "detectionRate": 0.8,
+    "missRate": 0.2
+  },
+  {
+    "tech": "RapidSec",
+    "total": 20,
+    "detected": 18,
+    "missed": 2,
+    "detectionRate": 0.9,
+    "missRate": 0.1
+  },
+  {
+    "tech": "Drata",
+    "total": 27,
+    "detected": 25,
+    "missed": 2,
+    "detectionRate": 0.93,
+    "missRate": 0.07
+  },
+  {
+    "tech": "HSTS",
+    "total": 20,
+    "detected": 19,
+    "missed": 1,
+    "detectionRate": 0.95,
+    "missRate": 0.05
+  },
+  {
+    "tech": "Imperva",
+    "total": 20,
+    "detected": 20,
+    "missed": 0,
+    "detectionRate": 1,
+    "missRate": 0
+  },
+  {
+    "tech": "Kasada",
+    "total": 16,
+    "detected": 16,
+    "missed": 0,
+    "detectionRate": 1,
+    "missRate": 0
+  }
+]

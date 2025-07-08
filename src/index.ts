@@ -47,7 +47,8 @@ export async function detectTechnology(url: string): Promise<DetectionResult> {
     return result;
   } catch (error) {
     console.error(`Error processing ${url}:`, error);
-    throw error;
+    // throw error;
+    return {} as DetectionResult; // Return empty result on error
   }
 }
 
@@ -57,32 +58,36 @@ export function appendToJSONL(filePath: string, entry: DetectionResult): void {
   fs.appendFileSync(filePath, jsonLine, "utf-8");
 }
 
-const urls = [
-  "https://www.cloudflare.com/",
-  "https://vercel.com/",
-  "https://unsplash.com/",
-  "https://laterical.com/",
-  "https://riwaj-tetris-game.netlify.app/",
-  "https://www.linkedin.com/feed/",
-  "https://github.com/",
-  "https://www.figma.com/",
-  "https://www.booking.com/",
-  "https://chatgpt.com/",
-  "https://huggingface.co/",
-];
+// const urls = [
+//   "https://www.cloudflare.com/",
+//   "https://vercel.com/",
+//   "https://unsplash.com/",
+//   "https://laterical.com/",
+//   "https://riwaj-tetris-game.netlify.app/",
+//   "https://www.linkedin.com/feed/",
+//   "https://github.com/",
+//   "https://www.figma.com/",
+//   "https://www.booking.com/",
+//   "https://chatgpt.com/",
+//   "https://huggingface.co/",
+// ];
 
-const outputFile = "detected_technologies.jsonl";
+// const outputFile = "detected_technologies.jsonl";
 
-(async () => {
-  for (const url of urls) {
-    try {
-      const result = await detectTechnology(url);
-      appendToJSONL(outputFile, result);
-    } catch (error) {
-      console.log(`Error processing URL:${url}`, error);
-      throw error;
-    }
-  }
+// (async () => {
+//   for (const url of urls) {
+//     try {
+//       const result = await detectTechnology(url);
+//       if (!result) {
+//         console.log(`No result for URL: ${url}`);
+//         continue;
+//       }
+//       appendToJSONL(outputFile, result);
+//     } catch (error) {
+//       console.log(`Error processing URL:${url}`, error);
+//       throw error;
+//     }
+//   }
 
-  console.log(`All results saved to ${outputFile}`);
-})();
+//   console.log(`All results saved to ${outputFile}`);
+// })();
