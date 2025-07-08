@@ -17,9 +17,8 @@ interface TechStats {
   missed: number;
 }
 
-// === 1. Load and invert the ground truth (tech → urls) into url → techs[] ===
 const rawGroundTruth: Record<string, string[]> = JSON.parse(
-  fs.readFileSync("src/data/output.json", "utf-8")
+  fs.readFileSync("src/data/technologies_test.json", "utf-8")
 );
 
 const test_sites: Record<string, string[]> = {};
@@ -31,12 +30,10 @@ for (const [tech, urls] of Object.entries(rawGroundTruth)) {
   }
 }
 
-// === 2. Load raw detection results ===
 const raw_test_results: Partial<TestResult>[] = JSON.parse(
   fs.readFileSync("src/data/test_results.json", "utf-8")
 );
 
-// === 3. Enrich detection results ===
 const enriched_results: TestResult[] = [];
 
 for (const entry of raw_test_results) {
@@ -71,13 +68,11 @@ for (const entry of raw_test_results) {
   });
 }
 
-// === 4. Save enriched results ===
 fs.writeFileSync(
   "src/test_results_analysis.json",
   JSON.stringify(enriched_results, null, 2)
 );
 
-// === 5. Build tech-wise statistics ===
 const stats: Record<string, TechStats> = {};
 
 for (const entry of enriched_results) {
@@ -95,7 +90,6 @@ for (const entry of enriched_results) {
   }
 }
 
-// === 6. Create and display final report ===
 const report = Object.entries(stats).map(([tech, s]) => ({
   tech,
   total: s.total,
@@ -109,5 +103,4 @@ report.sort((a, b) => b.missRate - a.missRate);
 
 console.table(report);
 
-// === 7. Save report ===
 fs.writeFileSync("test_results_stats.json", JSON.stringify(report, null, 2));

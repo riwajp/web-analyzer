@@ -1,17 +1,15 @@
 import fs from "fs";
-import path from "path";
-import { detectTechnology } from "./index"; // Assumes JS export
+import { detectTechnology } from "./index";
 
-// Read input JSON: { tech1: [...urls], tech2: [...urls] }
 const data: any[] = JSON.parse(
-  fs.readFileSync("src/data/output.json", "utf-8")
+  fs.readFileSync("src/data/technologies_test.json", "utf-8")
 );
 
 // Flatten all domain arrays into one list
 const urls: string[] = Object.values(data).flat();
 
 async function detectOnUrl(url: string) {
-  console.log(`🔍 Detecting technologies on ${url}...`);
+  console.log(`Detecting technologies on ${url}...`);
   try {
     const detection_results = await detectTechnology(`https://${url}`);
     return {
@@ -20,7 +18,7 @@ async function detectOnUrl(url: string) {
     };
   } catch (err) {
     console.warn(
-      `⚠️  Error on ${url}: ${err instanceof Error ? err.message : err}`
+      `Error on ${url}: ${err instanceof Error ? err.message : err}`
     );
     return {
       url,
@@ -38,13 +36,13 @@ async function run() {
 
     // Save after every 10 URLs
     if ((i + 1) % 10 === 0 || i === urls.length - 1) {
-      fs.writeFileSync("test_results.json", JSON.stringify(results, null, 2));
-      console.log(`💾 Progress saved after ${i + 1} URLs`);
+      fs.writeFileSync("test_results-1.json", JSON.stringify(results, null, 2));
+      console.log(`Progress saved after ${i + 1} URLs`);
     }
   }
 
   console.log(
-    `✅ Finished. ${results.length} URLs processed. Results saved to test_results.json`
+    `Finished. ${results.length} URLs processed. Results saved to test_results.json`
   );
 }
 

@@ -1,3873 +1,606 @@
 {
-  "footofan.com": [
-    "ARCaptcha"
-  ],
-  "wallex.ir": [
-    "ARCaptcha"
-  ],
-  "780.travel": [
-    "ARCaptcha"
-  ],
-  "yogan.ir": [
-    "ARCaptcha"
-  ],
-  "foryas.ir": [
-    "ARCaptcha"
-  ],
-  "paapak.ir": [
-    "ARCaptcha"
-  ],
-  "platco.ir": [
-    "ARCaptcha"
-  ],
-  "xenozi.com": [
-    "ARCaptcha"
-  ],
-  "farahome.net": [
-    "ARCaptcha"
-  ],
-  "farahome-vue3.pages.dev": [
-    "ARCaptcha"
-  ],
-  "femtoinnovations.com": [
-    "ARCaptcha"
-  ],
-  "goldengap.ir": [
-    "ARCaptcha"
-  ],
-  "graphisme-junior.ch": [
-    "ARCaptcha"
-  ],
-  "paapakbs.ir": [
-    "ARCaptcha"
-  ],
-  "partrabits.ir": [
-    "ARCaptcha"
-  ],
-  "pcgamescenter.ir": [
-    "ARCaptcha"
-  ],
-  "pharmpet.ir": [
-    "ARCaptcha"
-  ],
-  "phpropertyacquisition.com": [
-    "ARCaptcha"
-  ],
-  "pingwax.ir": [
-    "ARCaptcha"
-  ],
-  "poostia.com": [
-    "ARCaptcha"
-  ],
-  "portalpishro.ir": [
-    "ARCaptcha"
-  ],
-  "pranice.com": [
-    "ARCaptcha"
-  ],
-  "pst-iranian.ir": [
-    "ARCaptcha"
-  ],
-  "wisegridenergy.com": [
-    "ARCaptcha"
-  ],
-  "yasinhost.com": [
-    "ARCaptcha"
-  ],
-  "yisamitech.com": [
-    "ARCaptcha"
-  ],
-  "divar.ir": [
-    "ARCaptcha"
-  ],
-  "destinationiran.com": [
-    "ARCaptcha"
-  ],
-  "drmashinet.com": [
-    "ARCaptcha"
-  ],
-  "hac.ir": [
-    "ARCaptcha"
-  ],
-  "repco.ir": [
-    "ARCaptcha"
-  ],
-  "dakpha.com": [
-    "ARCaptcha"
-  ],
-  "heewaa.com": [
-    "ARCaptcha"
-  ],
-  "ramchi.ir": [
-    "ARCaptcha"
-  ],
-  "damactrade.net": [
-    "ARCaptcha"
-  ],
-  "deeragency.ir": [
-    "ARCaptcha"
-  ],
-  "msbtrucktyres.devwebsite.com.au": [
-    "ARCaptcha"
-  ],
-  "drkavehnadizadeh.com": [
-    "ARCaptcha"
-  ],
-  "hatamilawfirm.com": [
-    "ARCaptcha"
-  ],
-  "havaniroo.com": [
-    "ARCaptcha"
-  ],
-  "stoneberry.com": [
-    "Accertify"
-  ],
-  "as.tickets.visitsealife.com": [
-    "Accertify"
-  ],
-  "sfzoo.sfz-passport.sfzoo.org": [
-    "Accertify"
-  ],
-  "mthood-skibowl.tickets.skibowl.com": [
-    "Accertify"
-  ],
-  "sportsbet.com.au": [
-    "Accertify"
-  ],
-  "shop.ironmountainhotsprings.com": [
-    "Accertify"
-  ],
-  "lg-svseattle.ticket-store.skyviewobservatory.com": [
-    "Accertify"
-  ],
-  "me-salon.tickets.shreksadventure.com": [
-    "Accertify"
-  ],
-  "shellgiftcard.ca": [
-    "Accertify"
-  ],
-  "accertify.speks.co": [
-    "Accertify"
-  ],
-  "inauth.com": [
-    "Accertify"
-  ],
-  "sm-pay.com": [
-    "Accertify"
-  ],
-  "irvineretailgiftcards.com": [
-    "Accertify"
-  ],
-  "oj-ojmidleton.store.jamesondistillery.com": [
-    "Accertify"
-  ],
-  "live.jcpdiamondvault.com": [
-    "Accertify"
-  ],
-  "starplus.com": [
-    "Accertify"
-  ],
-  "kumu-test.s-hawaiianairlines.com": [
-    "Accertify"
-  ],
-  "lg-viewbos.ticket-store.viewboston.com": [
-    "Accertify"
-  ],
-  "markandgraham.com": [
-    "Accertify"
-  ],
-  "direct.asda.com": [
-    "Accertify"
-  ],
-  "me-mtlon.eu.tickets.madametussauds.com": [
-    "Accertify"
-  ],
-  "ani-anilouisiana.store.audubonnatureinstitute.org": [
-    "Accertify"
-  ],
-  "me-twalton.tickets.altontowers.com": [
-    "Accertify"
-  ],
-  "me-oe.secure-cdn.meg-na.accessoticketing.com": [
-    "Accertify"
-  ],
-  "ajamww.space": [
-    "Accertify"
-  ],
-  "accertify.com": [
-    "Accertify"
-  ],
-  "aicorporate.id": [
-    "Accertify"
-  ],
-  "airasia.world": [
-    "Accertify"
-  ],
-  "amiryaqub.com": [
-    "Accertify"
-  ],
-  "tickets.aquariumattheboardwalk.com": [
-    "Accertify"
-  ],
-  "markandgraham.ca": [
-    "Accertify"
-  ],
-  "me-annualpass.tickets.merlinannualpass.co.uk": [
-    "Accertify"
-  ],
-  "milagrocentregiftcards.com": [
-    "Accertify"
-  ],
-  "store.mohmuseum.org": [
-    "Accertify"
-  ],
-  "store.montsutton.com": [
-    "Accertify"
-  ],
-  "qatarairways.com": [
-    "Accertify"
-  ],
-  "fitflop.com": [
-    "Accertify"
-  ],
-  "shop.glenwoodcaverns.com": [
-    "Accertify"
-  ],
-  "me-wcwarwickshire.tickets.warwick-castle.com": [
-    "Accertify"
-  ],
-  "potterybarnkids.ca": [
-    "Accertify"
-  ],
-  "antipolygraph.org": [
-    "Basic"
-  ],
-  "eastlakes.aag.org": [
-    "Basic"
-  ],
-  "animal-care.com": [
-    "Basic"
-  ],
-  "blog.msteddybear.com": [
-    "Basic"
-  ],
-  "emathzone.com": [
-    "Basic"
-  ],
-  "ky.myacpa.org": [
-    "Basic"
-  ],
-  "mohawkhome.com": [
-    "Basic"
-  ],
-  "epicdash.com": [
-    "Basic"
-  ],
-  "5g-iot.mdx.ac.uk": [
-    "Basic"
-  ],
-  "almostbananas.net": [
-    "Basic"
-  ],
-  "atyourbidding.net": [
-    "Basic"
-  ],
-  "minecraftdls.com": [
-    "Basic"
-  ],
-  "mastercleansesecrets.com": [
-    "Basic"
-  ],
-  "erudyt.net": [
-    "Basic"
-  ],
-  "fcmk.minzdrav.gov.ru": [
-    "Basic"
-  ],
-  "forum2.mn-shop.com": [
-    "Basic"
-  ],
-  "oduvanchik.minobr63.ru": [
-    "Basic"
-  ],
-  "ezyinsights.com": [
-    "Basic"
-  ],
-  "managementguru.net": [
-    "Basic"
-  ],
-  "microlyrics.com": [
-    "Basic"
-  ],
-  "alonot.com": [
-    "Basic"
-  ],
-  "unilime-wp-basic.d0.acom.cloud": [
-    "Basic"
-  ],
-  "ksab.astranet.ru": [
-    "Basic"
-  ],
-  "mindbendingstuff.com": [
-    "Basic"
-  ],
-  "mhelp.kz": [
-    "Basic"
-  ],
-  "muck-in.fr": [
-    "Basic"
-  ],
-  "medblog.by": [
-    "Basic"
-  ],
-  "espremiera.amumgk.ru": [
-    "Basic"
-  ],
-  "marketsguruji.com": [
-    "Basic"
-  ],
-  "amarasara.info": [
-    "Basic"
-  ],
-  "aujc.ru": [
-    "Basic"
-  ],
-  "malkalorenz.ru": [
-    "Basic"
-  ],
-  "ambu03.ru": [
-    "Basic"
-  ],
-  "econadi.com": [
-    "Basic"
-  ],
-  "english100.ru": [
-    "Basic"
-  ],
-  "micelics.ru": [
-    "Basic"
-  ],
-  "mindcheats.net": [
-    "Basic"
-  ],
-  "montazh-zaborov.ru": [
-    "Basic"
-  ],
-  "moy-zheludok.ru": [
-    "Basic"
-  ],
-  "mytor.ru": [
-    "Basic"
-  ],
-  "emoderndecor.com": [
-    "BuySafe"
-  ],
-  "absolutegenerators.com": [
-    "BuySafe"
-  ],
-  "memorial-urns.com": [
-    "BuySafe"
-  ],
-  "mwave.com": [
-    "BuySafe"
-  ],
-  "ezdd214.com": [
-    "BuySafe"
-  ],
-  "allergybegone.com": [
-    "BuySafe"
-  ],
-  "airdistributor.net": [
-    "BuySafe"
-  ],
-  "melhart.com": [
-    "BuySafe"
-  ],
-  "tcp.dev.metrex.net": [
-    "BuySafe"
-  ],
-  "alliancesupply.com": [
-    "BuySafe"
-  ],
-  "marshallfloralproducts.com": [
-    "BuySafe"
-  ],
-  "melhartmarimbas.com": [
-    "BuySafe"
-  ],
-  "mineralhygienics.com": [
-    "BuySafe"
-  ],
-  "monstervisionclothing.com": [
-    "BuySafe"
-  ],
-  "motocross-atv.com": [
-    "BuySafe"
-  ],
-  "mycolorid.com": [
-    "BuySafe"
-  ],
-  "inkfarm.com": [
-    "BuySafe"
-  ],
-  "vermontmoviestore.com": [
-    "BuySafe"
-  ],
-  "vacshack.com": [
-    "BuySafe"
-  ],
-  "instantimmersion.com": [
-    "BuySafe"
-  ],
-  "adbuddy.johncrestani.com": [
-    "BuySafe"
-  ],
-  "vpn.co.th": [
-    "BuySafe"
-  ],
-  "inetvideo.ca": [
-    "BuySafe"
-  ],
-  "garciniacambogialean.ipeamerica.com": [
-    "BuySafe"
-  ],
-  "jaktsports.com": [
-    "BuySafe"
-  ],
-  "jalynnscloset.com": [
-    "BuySafe"
-  ],
-  "jandrugs.su": [
-    "BuySafe"
-  ],
-  "salt-and-pepper.com": [
-    "BuySafe"
-  ],
-  "scrapbookgifts.com": [
-    "BuySafe"
-  ],
-  "senapacards.com": [
-    "BuySafe"
-  ],
-  "shuttersbyempire.com": [
-    "BuySafe"
-  ],
-  "signaturedreams.com": [
-    "BuySafe"
-  ],
-  "simpleibscure.com": [
-    "BuySafe"
-  ],
-  "skinnyshrooms.com": [
-    "BuySafe"
-  ],
-  "smellstoinhalellc.com": [
-    "BuySafe"
-  ],
-  "speedgear-wholesale.com": [
-    "BuySafe"
-  ],
-  "spookyland.net": [
-    "BuySafe"
-  ],
-  "sportsupplements.com": [
-    "BuySafe"
-  ],
-  "starsandstripesproducts.com": [
-    "BuySafe"
-  ],
-  "swanscandles.com": [
-    "BuySafe"
-  ],
-  "socialcatfish.com": [
-    "ClickCease"
-  ],
-  "jobble.com": [
-    "ClickCease"
-  ],
-  "smg.com": [
-    "ClickCease"
-  ],
-  "submittable.com": [
-    "ClickCease"
-  ],
-  "virtru.com": [
-    "ClickCease"
-  ],
-  "sharefaith.com": [
-    "ClickCease"
-  ],
-  "iqair.com": [
-    "ClickCease"
-  ],
-  "indiegala.com": [
-    "ClickCease"
-  ],
-  "studysoup.com": [
-    "ClickCease"
-  ],
-  "310nutrition.com": [
-    "ClickCease"
-  ],
-  "onlineundergrad.syracuse.edu": [
-    "ClickCease"
-  ],
-  "intakeq.com": [
-    "ClickCease"
-  ],
-  "onlinelaw.seattleu.edu": [
-    "ClickCease"
-  ],
-  "st.com": [
-    "ClickCease"
-  ],
-  "onlinedegrees.valpo.edu": [
-    "ClickCease"
-  ],
-  "shopko.com": [
-    "ClickCease"
-  ],
-  "instapage.com": [
-    "ClickCease"
-  ],
-  "suppliesoutlet.com": [
-    "ClickCease"
-  ],
-  "answering.vodafone.com.au": [
-    "ClickCease"
-  ],
-  "surplusrecord.com": [
-    "ClickCease"
-  ],
-  "shop-brigite.com": [
-    "ClickCease"
-  ],
-  "industrialmetalsupply.com": [
-    "ClickCease"
-  ],
-  "suffolk.edu": [
-    "ClickCease"
-  ],
-  "smallflower.com": [
-    "ClickCease"
-  ],
-  "ivywise.com": [
-    "ClickCease"
-  ],
-  "shearcomfort.com": [
-    "ClickCease"
-  ],
-  "sisense.com": [
-    "ClickCease"
-  ],
-  "spigglelaw.com": [
-    "ClickCease"
-  ],
-  "network.seu.edu": [
-    "ClickCease"
-  ],
-  "strutmasters.com": [
-    "ClickCease"
-  ],
-  "joyfolie.com": [
-    "ClickCease"
-  ],
-  "scholarshipamerica.org": [
-    "ClickCease"
-  ],
-  "imtresidential.com": [
-    "ClickCease"
-  ],
-  "stockwheels.com": [
-    "ClickCease"
-  ],
-  "insiderealestate.com": [
-    "ClickCease"
-  ],
-  "sempersolaris.com": [
-    "ClickCease"
-  ],
-  "swanstone.com": [
-    "ClickCease"
-  ],
-  "socalchevy.com": [
-    "ClickCease"
-  ],
-  "versare.com": [
-    "ClickCease"
-  ],
-  "stangelawfirm.com": [
-    "ClickCease"
-  ],
-  "equibase.com": [
-    "Confiant"
-  ],
-  "awfulannouncing.com": [
-    "Confiant"
-  ],
-  "aspicyperspective.com": [
-    "Confiant"
-  ],
-  "encyclopedia.com": [
-    "Confiant"
-  ],
-  "motorauthority.com": [
-    "Confiant"
-  ],
-  "amindfullmom.com": [
-    "Confiant"
-  ],
-  "eagletribune.com": [
-    "Confiant"
-  ],
-  "enworld.org": [
-    "Confiant"
-  ],
-  "app.com": [
-    "Confiant"
-  ],
-  "montgomeryadvertiser.com": [
-    "Confiant"
-  ],
-  "argusleader.com": [
-    "Confiant"
-  ],
-  "askamanager.org": [
-    "Confiant"
-  ],
-  "modthesims.info": [
-    "Confiant"
-  ],
-  "eregulations.com": [
-    "Confiant"
-  ],
-  "advancedeventsystems.com": [
-    "Confiant"
-  ],
-  "masonfit.com": [
-    "Confiant"
-  ],
-  "mariowiki.com": [
-    "Confiant"
-  ],
-  "allfreecrochet.com": [
-    "Confiant"
-  ],
-  "mydramalist.com": [
-    "Confiant"
-  ],
-  "ana-white.com": [
-    "Confiant"
-  ],
-  "equipmenttrader.com": [
-    "Confiant"
-  ],
-  "mgoblog.com": [
-    "Confiant"
-  ],
-  "ambitiouskitchen.com": [
-    "Confiant"
-  ],
-  "mankatofreepress.com": [
-    "Confiant"
-  ],
-  "metaspoon.com": [
-    "Confiant"
-  ],
-  "apost.com": [
-    "Confiant"
-  ],
-  "atvtrader.com": [
-    "Confiant"
-  ],
-  "asweetpeachef.com": [
-    "Confiant"
-  ],
-  "automobile-catalog.com": [
-    "Confiant"
-  ],
-  "eatingbirdfood.com": [
-    "Confiant"
-  ],
-  "mbworld.org": [
-    "Confiant"
-  ],
-  "apracticalwedding.com": [
-    "Confiant"
-  ],
-  "mma-core.com": [
-    "Confiant"
-  ],
-  "acurazine.com": [
-    "Confiant"
-  ],
-  "abc27.com": [
-    "Confiant"
-  ],
-  "allfreeknitting.com": [
-    "Confiant"
-  ],
-  "antennaweb.org": [
-    "Confiant"
-  ],
-  "mycentraljersey.com": [
-    "Confiant"
-  ],
-  "myfigurecollection.net": [
-    "Confiant"
-  ],
-  "equipboard.com": [
-    "Confiant"
-  ],
-  "rocketreach.co": [
-    "DataDome"
-  ],
-  "healthcentral.com": [
-    "DataDome"
-  ],
-  "hobbylark.com": [
-    "DataDome"
-  ],
-  "dengarden.com": [
-    "DataDome"
-  ],
-  "gdc2022.unity.com": [
-    "DataDome"
-  ],
-  "usatoday.com": [
-    "DataDome"
-  ],
-  "hydroflask.com": [
-    "DataDome"
-  ],
-  "delishably.com": [
-    "DataDome"
-  ],
-  "hokaoneone.com": [
-    "DataDome"
-  ],
-  "lmr.com": [
-    "DataDome"
-  ],
-  "applyundergradessaycomp.hoover.org": [
-    "DataDome"
-  ],
-  "loccitane.com": [
-    "DataDome"
-  ],
-  "despegar.com": [
-    "DataDome"
-  ],
-  "raileurope.com": [
-    "DataDome"
-  ],
-  "leboncoin.fr": [
-    "DataDome"
-  ],
-  "drhyman.com": [
-    "DataDome"
-  ],
-  "helixsleep.com": [
-    "DataDome"
-  ],
-  "secure.usgoldbureau.com": [
-    "DataDome"
-  ],
-  "store.hslda.org": [
-    "DataDome"
-  ],
-  "learningresources.com": [
-    "DataDome"
-  ],
-  "hellyhansen.com": [
-    "DataDome"
-  ],
-  "decolar.com": [
-    "DataDome"
-  ],
-  "halosleep.com": [
-    "DataDome"
-  ],
-  "rewardlink.io": [
-    "DataDome"
-  ],
-  "dealbreaker.com": [
-    "DataDome"
-  ],
-  "daytimeconfidential.com": [
-    "DataDome"
-  ],
-  "us.rs-online.com": [
-    "DataDome"
-  ],
-  "eventfinder.hennessy.com": [
-    "DataDome"
-  ],
-  "donnakaran.com": [
-    "DataDome"
-  ],
-  "80stees.com": [
-    "DataDome"
-  ],
-  "despegar.com.ar": [
-    "DataDome"
-  ],
-  "lm.com": [
-    "DataDome"
-  ],
-  "harmanaudio.com": [
-    "DataDome"
-  ],
-  "harmankardon.com": [
-    "DataDome"
-  ],
-  "devex.com": [
-    "DataDome"
-  ],
-  "awards.rode.com": [
-    "DataDome"
-  ],
-  "jobmine.himss.org": [
-    "DataDome"
-  ],
-  "diamondcbd.com": [
-    "DataDome"
-  ],
-  "znanija.com": [
-    "DataDome"
-  ],
-  "it.hudsonreed.com": [
-    "DataDome"
-  ],
-  "madebymary.com": [
-    "Dataships"
-  ],
-  "eboost.com": [
-    "Dataships"
-  ],
-  "moanabikini.com": [
-    "Dataships"
-  ],
-  "shop.mindbodygreen.com": [
-    "Dataships"
-  ],
-  "ekster.com": [
-    "Dataships"
-  ],
-  "ancestralsupplements.com": [
-    "Dataships"
-  ],
-  "englandathletics.org": [
-    "Dataships"
-  ],
-  "aretesyndicate.com": [
-    "Dataships"
-  ],
-  "andyfrisella.com": [
-    "Dataships"
-  ],
-  "mcelhinneys.com": [
-    "Dataships"
-  ],
-  "mkc.co": [
-    "Dataships"
-  ],
-  "epres.ie": [
-    "Dataships"
-  ],
-  "adaptcentre.ie": [
-    "Dataships"
-  ],
-  "addisonross.com": [
-    "Dataships"
-  ],
-  "airback.fr": [
-    "Dataships"
-  ],
-  "airback.shop": [
-    "Dataships"
-  ],
-  "airback.store": [
-    "Dataships"
-  ],
-  "airback.es": [
-    "Dataships"
-  ],
-  "amourscents.com": [
-    "Dataships"
-  ],
-  "ancientandbrave.earth": [
-    "Dataships"
-  ],
-  "antennebooks.com": [
-    "Dataships"
-  ],
-  "anthonyryans.com": [
-    "Dataships"
-  ],
-  "aretesyndicate.shop": [
-    "Dataships"
-  ],
-  "asapskincare.co.uk": [
-    "Dataships"
-  ],
-  "asapskincare.ie": [
-    "Dataships"
-  ],
-  "ascentnutritionhemp.com": [
-    "Dataships"
-  ],
-  "athleticshub.co.uk": [
-    "Dataships"
-  ],
-  "atlasrosedarkromance.com": [
-    "Dataships"
-  ],
-  "avedastore.ie": [
-    "Dataships"
-  ],
-  "ayucosmetics.com": [
-    "Dataships"
-  ],
-  "eatiqbar.com": [
-    "Dataships"
-  ],
-  "eatmila.com": [
-    "Dataships"
-  ],
-  "wpmagallanes.ecloudapp.site": [
-    "Dataships"
-  ],
-  "eleatcereal.com": [
-    "Dataships"
-  ],
-  "elevenaustralia.ie": [
-    "Dataships"
-  ],
-  "emeraldpark.ie": [
-    "Dataships"
-  ],
-  "equinutritive.com": [
-    "Dataships"
-  ],
-  "ericjavits.com": [
-    "Dataships"
-  ],
-  "ever-eden.com": [
-    "Dataships"
-  ],
-  "evolutiondigital.ie": [
-    "Dataships"
-  ],
-  "trust.muckrack.com": [
-    "Drata"
-  ],
-  "trust.mileiq.com": [
-    "Drata"
-  ],
-  "trust.aba.com": [
-    "Drata"
-  ],
-  "trust.extensis.com": [
-    "Drata"
-  ],
-  "trust.alliedbenefit.com": [
-    "Drata"
-  ],
-  "trust.abclegal.com": [
-    "Drata"
-  ],
-  "trust.extrahop.com": [
-    "Drata"
-  ],
-  "trust.accelevents.com": [
-    "Drata"
-  ],
-  "trust.eventmobi.com": [
-    "Drata"
-  ],
-  "trust.expedient.com": [
-    "Drata"
-  ],
-  "trust.alianza.com": [
-    "Drata"
-  ],
-  "trust.axiomlaw.com": [
-    "Drata"
-  ],
-  "trust.alpha-sense.com": [
-    "Drata"
-  ],
-  "trust.metabase.com": [
-    "Drata"
-  ],
-  "trust.mercurygate.com": [
-    "Drata"
-  ],
-  "trust.energycap.com": [
-    "Drata"
-  ],
-  "trust.enlyft.com": [
-    "Drata"
-  ],
-  "trust.magic.link": [
-    "Drata"
-  ],
-  "trust.addsearch.com": [
-    "Drata"
-  ],
-  "trust.moniepoint.com": [
-    "Drata"
-  ],
-  "trust.abilitie.com": [
-    "Drata"
-  ],
-  "trust.aisera.com": [
-    "Drata"
-  ],
-  "trust.ermetic.com": [
-    "Drata"
-  ],
-  "trustcenter.exiger.com": [
-    "Drata"
-  ],
-  "trust.eql.com": [
-    "Drata"
-  ],
-  "trust.ai21.com": [
-    "Drata"
-  ],
-  "trust.arch.dev": [
-    "Drata"
-  ],
-  "trust.mpac.io": [
-    "Drata"
-  ],
-  "abbey.io": [
-    "Drata"
-  ],
-  "trust.adept.ai": [
-    "Drata"
-  ],
-  "trust.ahead.com": [
-    "Drata"
-  ],
-  "trust.althq.com": [
-    "Drata"
-  ],
-  "trust.anova.ai": [
-    "Drata"
-  ],
-  "trust.aphex.co": [
-    "Drata"
-  ],
-  "trust.asapp.com": [
-    "Drata"
-  ],
-  "trustcenter.axiad.com": [
-    "Drata"
-  ],
-  "mambo.io": [
-    "Drata"
-  ],
-  "trust.mayan.co": [
-    "Drata"
-  ],
-  "trust.merge.dev": [
-    "Drata"
-  ],
-  "sunglasshut.com": [
-    "Forter"
-  ],
-  "jomashop.com": [
-    "Forter"
-  ],
-  "spartan.com": [
-    "Forter"
-  ],
-  "jamesallen.com": [
-    "Forter"
-  ],
-  "skims.com": [
-    "Forter"
-  ],
-  "vitamix.com": [
-    "Forter"
-  ],
-  "stadiumgoods.com": [
-    "Forter"
-  ],
-  "scentbird.com": [
-    "Forter"
-  ],
-  "justfashionnow.com": [
-    "Forter"
-  ],
-  "stylewe.com": [
-    "Forter"
-  ],
-  "shoprevelry.com": [
-    "Forter"
-  ],
-  "shop.com": [
-    "Forter"
-  ],
-  "sasshoes.com": [
-    "Forter"
-  ],
-  "staging.checkout.ie.vuoriclothing.com": [
-    "Forter"
-  ],
-  "vminnovations.com": [
-    "Forter"
-  ],
-  "schottnyc.com": [
-    "Forter"
-  ],
-  "checkout.jmclaughlin.com": [
-    "Forter"
-  ],
-  "strackandvantil.com": [
-    "Forter"
-  ],
-  "skiroundtop.com": [
-    "Forter"
-  ],
-  "schutz-shoes.com": [
-    "Forter"
-  ],
-  "spacenk.com": [
-    "Forter"
-  ],
-  "splits59.com": [
-    "Forter"
-  ],
-  "spektrumrc.com": [
-    "Forter"
-  ],
-  "spearmintlove.com": [
-    "Forter"
-  ],
-  "iedm.com": [
-    "Forter"
-  ],
-  "skiwhitetail.com": [
-    "Forter"
-  ],
-  "stjohnknits.com": [
-    "Forter"
-  ],
-  "jackery.com": [
-    "Forter"
-  ],
-  "soccerpro.com": [
-    "Forter"
-  ],
-  "samssoutherneatery.com": [
-    "Forter"
-  ],
-  "storeyourboard.com": [
-    "Forter"
-  ],
-  "jfbb.com": [
-    "Forter"
-  ],
-  "sephora.com.au": [
-    "Forter"
-  ],
-  "jamesperse.com": [
-    "Forter"
-  ],
-  "skisnowcreek.com": [
-    "Forter"
-  ],
-  "sherrihill.com": [
-    "Forter"
-  ],
-  "stackedskincare.com": [
-    "Forter"
-  ],
-  "shopredone.com": [
-    "Forter"
-  ],
-  "solidandstriped.com": [
-    "Forter"
-  ],
-  "islesurfandsup.com": [
-    "Forter"
-  ],
-  "1c.ru": [
-    "HSTS"
-  ],
-  "bbc.co.uk": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "bbc.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "behance.net": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "bswui-frontend-dev-6176.acceptance.bidswitch.net": [
-    "HSTS"
-  ],
-  "ir.bilibili.com": [
-    "HSTS"
-  ],
-  "bloomberg.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "branch.io": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "store.storeimages.cdn-apple.com": [
-    "HSTS"
-  ],
-  "chatgpt.com": [
-    "HSTS"
-  ],
-  "checkpoint.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "service.data.clarity.ms": [
-    "HSTS"
-  ],
-  "teams.cloud.microsoft": [
-    "HSTS"
-  ],
-  "cloudflare.net": [
-    "HSTS"
-  ],
-  "cpanel.net": [
-    "HSTS"
-  ],
-  "creativecommons.org": [
-    "HSTS"
-  ],
-  "criteo.com": [
-    "HSTS"
-  ],
-  "sb.mdlp.crpt.ru": [
-    "HSTS"
-  ],
-  "gsi-fe-1.kaspersky-labs.com": [
-    "HSTS"
-  ],
-  "kaspersky.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "ir.netease.com": [
-    "HSTS"
-  ],
-  "partnerforms.octools.prod.netflix.net": [
-    "HSTS"
-  ],
-  "ngenix.net": [
-    "HSTS"
-  ],
-  "nginx.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "unit.nginx.org": [
-    "HSTS"
-  ],
-  "nist.gov": [
-    "HSTS"
-  ],
-  "gitl.notamedia.ru": [
-    "HSTS"
-  ],
-  "ntp.org": [
-    "HSTS"
-  ],
-  "ok.ru": [
-    "HSTS"
-  ],
-  "jag.tt-stage3.omtrdc.net": [
-    "HSTS"
-  ],
-  "h.online-metrix.net": [
-    "HSTS"
-  ],
-  "openai.com": [
-    "HSTS"
-  ],
-  "opendns.com": [
-    "HSTS"
-  ],
-  "opera.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "outbrain.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "ozon.ru": [
-    "HSTS"
-  ],
-  "t-mobile.com": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "t.co": [
-    "HSTS",
-    "reCAPTCHA"
-  ],
-  "t.me": [
-    "HSTS"
-  ],
-  "test.iios.io": [
-    "Hanko"
-  ],
-  "dashboard.stixs.ai": [
-    "Hanko"
-  ],
-  "as.sahito.no": [
-    "Hanko"
-  ],
-  "devapp.sdossier.com": [
-    "Hanko"
-  ],
-  "subtasker.com": [
-    "Hanko"
-  ],
-  "voice-notes.pages.dev": [
-    "Hanko"
-  ],
-  "fap.ci.denvs.top": [
-    "Hanko"
-  ],
-  "demo.hanko.com": [
-    "Hanko"
-  ],
-  "lewis.directory": [
-    "Hanko"
-  ],
-  "roger.re": [
-    "Hanko"
-  ],
-  "vagaro.com": [
-    "hCaptcha",
-    "Imperva"
-  ],
-  "experience.iu.edu": [
-    "hCaptcha"
-  ],
-  "form.jotform.us": [
-    "hCaptcha"
-  ],
-  "video.samaritanspurse.org": [
-    "hCaptcha"
-  ],
-  "se-payments.sportsengine.com": [
-    "hCaptcha"
-  ],
-  "sermoncentral.com": [
-    "hCaptcha"
-  ],
-  "investors.ibotta.com": [
-    "hCaptcha"
-  ],
-  "store.visualcapitalist.com": [
-    "hCaptcha"
-  ],
-  "register.commercialsolutions.visa.com": [
-    "hCaptcha"
-  ],
-  "shop.interestingengineering.com": [
-    "hCaptcha"
-  ],
-  "partner-login.shipt.com": [
-    "hCaptcha"
-  ],
-  "auth.sendlane.com": [
-    "hCaptcha"
-  ],
-  "root.irobot.com": [
-    "hCaptcha"
-  ],
-  "iscorp.com": [
-    "hCaptcha"
-  ],
-  "podcasters.spotify.com": [
-    "hCaptcha"
-  ],
-  "investors.3m.com": [
-    "hCaptcha"
-  ],
-  "login-preview.spe.sony.com": [
-    "hCaptcha"
-  ],
-  "login.sofi.com": [
-    "hCaptcha"
-  ],
-  "itsfoss.com": [
-    "hCaptcha"
-  ],
-  "izooto.com": [
-    "hCaptcha"
-  ],
-  "investors.synchrony.com": [
-    "hCaptcha"
-  ],
-  "launch.spacex.com": [
-    "hCaptcha"
-  ],
-  "govconnect.iowa.gov": [
-    "hCaptcha"
-  ],
-  "skillshare.com": [
-    "hCaptcha"
-  ],
-  "mysteryshop.jdpower.com": [
-    "hCaptcha"
-  ],
-  "scoop.it": [
-    "hCaptcha"
-  ],
-  "vanillagift.com": [
-    "hCaptcha",
-    "Imperva"
-  ],
-  "events.sjsu.edu": [
-    "hCaptcha"
-  ],
-  "italymagazine.com": [
-    "hCaptcha"
-  ],
-  "status.icontact.com": [
-    "hCaptcha"
-  ],
-  "jobs.studocu.com": [
-    "hCaptcha"
-  ],
-  "idrivesafely.com": [
-    "hCaptcha"
-  ],
-  "intelix.sophos.com": [
-    "hCaptcha"
-  ],
-  "ctrl.vungle.com": [
-    "hCaptcha"
-  ],
-  "smalltownwoman.com": [
-    "hCaptcha"
-  ],
-  "schedulicity.com": [
-    "hCaptcha"
-  ],
-  "preferences.skyscanner.net": [
-    "hCaptcha"
-  ],
-  "signin.schnucks.com": [
-    "hCaptcha"
-  ],
-  "steelersdepot.com": [
-    "hCaptcha"
-  ],
-  "secure20.salvationarmy.org": [
-    "hCaptcha"
-  ],
-  "jtv.com": [
-    "Imperva"
-  ],
-  "iaai.com": [
-    "Imperva"
-  ],
-  "jewelosco.com": [
-    "Imperva"
-  ],
-  "simplemobile.com": [
-    "Imperva"
-  ],
-  "vons.com": [
-    "Imperva"
-  ],
-  "serve.com": [
-    "Imperva"
-  ],
-  "sans.org": [
-    "Imperva"
-  ],
-  "shaws.com": [
-    "Imperva"
-  ],
-  "vusevapor.com": [
-    "Imperva"
-  ],
-  "jrcigars.com": [
-    "Imperva"
-  ],
-  "icruise.com": [
-    "Imperva"
-  ],
-  "consulmex.sre.gob.mx": [
-    "Imperva"
-  ],
-  "standard.com": [
-    "Imperva"
-  ],
-  "johnsonoutdoors.com": [
-    "Imperva"
-  ],
-  "barapplication.sccourts.org": [
-    "Imperva"
-  ],
-  "steinertractor.com": [
-    "Imperva"
-  ],
-  "safelink.com": [
-    "Imperva"
-  ],
-  "johnsoncontrols.com": [
-    "Imperva"
-  ],
-  "showtix4u.com": [
-    "Imperva"
-  ],
-  "stealthcam.com": [
-    "Imperva"
-  ],
-  "sogknives.com": [
-    "Imperva"
-  ],
-  "advisor.securian.com": [
-    "Imperva"
-  ],
-  "showmecables.com": [
-    "Imperva"
-  ],
-  "jettools.com": [
-    "Imperva"
-  ],
-  "saudia.com": [
-    "Imperva"
-  ],
-  "starmarket.com": [
-    "Imperva"
-  ],
-  "totg.scfta.org": [
-    "Imperva"
-  ],
-  "spiedigitallibrary.org": [
-    "Imperva"
-  ],
-  "banking.starone.org": [
-    "Imperva"
-  ],
-  "imperva.com": [
-    "Imperva"
-  ],
-  "sans.edu": [
-    "Imperva"
-  ],
-  "webpr3.supermicro.com": [
-    "Imperva"
-  ],
-  "showmetheparts.com": [
-    "Imperva"
-  ],
-  "siriusxm.ca": [
-    "Imperva"
-  ],
-  "spie.org": [
-    "Imperva"
-  ],
-  "varetire.org": [
-    "Imperva"
-  ],
-  "jccal.org": [
-    "Imperva"
-  ],
-  "secure.strathmore.org": [
-    "Imperva"
-  ],
-  "blog.fredericknewspost.com": [
-    "Imunify360"
-  ],
-  "subaru.xtime.com": [
-    "Imunify360"
-  ],
-  "instructions.polaris.com": [
-    "Imunify360"
-  ],
-  "totalchat.web.com": [
-    "Imunify360"
-  ],
-  "cpcontacts.pajiba.com": [
-    "Imunify360"
-  ],
-  "blog.pipingrock.com": [
-    "Imunify360"
-  ],
-  "wordstream.com": [
-    "Imunify360"
-  ],
-  "chnconnection.fullerton.edu": [
-    "Imunify360"
-  ],
-  "community.guinnessworldrecords.com": [
-    "Imunify360"
-  ],
-  "r.www.govplanet.com": [
-    "Imunify360"
-  ],
-  "seesnapsend.wtol.com": [
-    "Imunify360"
-  ],
-  "familyfun.wwlp.com": [
-    "Imunify360"
-  ],
-  "daadvisors.pmi.org": [
-    "Imunify360"
-  ],
-  "prometric.com": [
-    "Imunify360"
-  ],
-  "mail-srv1.play-asia.com": [
-    "Imunify360"
-  ],
-  "familyfun.wdtn.com": [
-    "Imunify360"
-  ],
-  "staging.platingsandpairings.com": [
-    "Imunify360"
-  ],
-  "chs.camas.wednet.edu": [
-    "Imunify360"
-  ],
-  "destek.greenpeace.org": [
-    "Imunify360"
-  ],
-  "legalhelp.wyo.gov": [
-    "Imunify360"
-  ],
-  "my.wvva.com": [
-    "Imunify360"
-  ],
-  "whatgreatgrandmaate.com": [
-    "Imunify360"
-  ],
-  "assinaturas.folhape.com.br": [
-    "Imunify360"
-  ],
-  "display.worldjournal.com": [
-    "Imunify360"
-  ],
-  "jp.wisecleaner.com": [
-    "Imunify360"
-  ],
-  "my.wrex.com": [
-    "Imunify360"
-  ],
-  "jud10.flcourts.org": [
-    "Imunify360"
-  ],
-  "staging.foxandbriar.com": [
-    "Imunify360"
-  ],
-  "portafolio.prensalibre.com": [
-    "Imunify360"
-  ],
-  "support.go-parts.com": [
-    "Imunify360"
-  ],
-  "blog.xola.com": [
-    "Imunify360"
-  ],
-  "pogdesign.co.uk": [
-    "Imunify360"
-  ],
-  "northernohio.pga.com": [
-    "Imunify360"
-  ],
-  "staging.freshoffthegrid.com": [
-    "Imunify360"
-  ],
-  "contest.frommfamily.com": [
-    "Imunify360"
-  ],
-  "gospanish.yabla.com": [
-    "Imunify360"
-  ],
-  "server1.gopusa.com": [
-    "Imunify360"
-  ],
-  "dyo.greenhousemegastore.com": [
-    "Imunify360"
-  ],
-  "my.wgem.com": [
-    "Imunify360"
-  ],
-  "news.williamhill.com": [
-    "Imunify360",
-    "Wordfence"
-  ],
-  "wards.com": [
-    "Kasada"
-  ],
-  "booking.funjet.com": [
-    "Kasada"
-  ],
-  "dev.wisconsincheeseman.com": [
-    "Kasada"
-  ],
-  "footlocker.co.uk": [
-    "Kasada"
-  ],
-  "footlocker.ca": [
-    "Kasada"
-  ],
-  "flatmates.com.au": [
-    "Kasada"
-  ],
-  "footlocker.com.au": [
-    "Kasada"
-  ],
-  "footlocker.fr": [
-    "Kasada"
-  ],
-  "firstchoiceliquor.com.au": [
-    "Kasada"
-  ],
-  "footlocker.de": [
-    "Kasada"
-  ],
-  "g5-8.com": [
-    "Kasada"
-  ],
-  "vai.p1xl.me": [
-    "Kasada"
-  ],
-  "plan.sa.gov.au": [
-    "Kasada"
-  ],
-  "akr2.630318.xyz": [
-    "Kasada"
-  ],
-  "filt88.com": [
-    "Kasada"
-  ],
-  "p44vhw.com": [
-    "Kasada"
-  ],
-  "wastex.dev": [
-    "Kasada"
-  ],
-  "6b4izb1dfr.life": [
-    "Kasada"
-  ],
-  "7daysbracelets.com": [
-    "Kasada"
-  ],
-  "f9e8fff9.com": [
-    "Kasada"
-  ],
-  "fablehealth.ai": [
-    "Kasada"
-  ],
-  "ffklpnwwfjy.com": [
-    "Kasada"
-  ],
-  "ai-demo.flyfruition.com": [
-    "Kasada"
-  ],
-  "footlocker.at": [
-    "Kasada"
-  ],
-  "footlocker.be": [
-    "Kasada"
-  ],
-  "footlocker.co.nz": [
-    "Kasada"
-  ],
-  "footlocker.cz": [
-    "Kasada"
-  ],
-  "footlocker.dk": [
-    "Kasada"
-  ],
-  "footlocker.es": [
-    "Kasada"
-  ],
-  "footlocker.hu": [
-    "Kasada"
-  ],
-  "footlocker.it": [
-    "Kasada"
-  ],
-  "footlocker.kr": [
-    "Kasada"
-  ],
-  "footlocker.lu": [
-    "Kasada"
-  ],
-  "footlocker.nl": [
-    "Kasada"
-  ],
-  "footlocker.no": [
-    "Kasada"
-  ],
-  "footlocker.pl": [
-    "Kasada"
-  ],
-  "footlocker.pt": [
-    "Kasada"
-  ],
-  "footlocker.se": [
-    "Kasada"
-  ],
-  "gacorhabis.info": [
-    "Kasada"
-  ],
-  "11711287321752699.gcipadleo.com": [
-    "Kasada"
-  ],
-  "easy.vivo.com.br": [
-    "Konduto"
-  ],
-  "app.jivosite.com": [
-    "Konduto"
-  ],
-  "shopping.sicredi.com.br": [
-    "Konduto"
-  ],
-  "infoleo.com.br": [
-    "Konduto"
-  ],
-  "isabelaflores.com": [
-    "Konduto"
-  ],
-  "insiderstore.com.br": [
-    "Konduto"
-  ],
-  "s2magazine.com.br": [
-    "Konduto"
-  ],
-  "pay-sandbox.jeton.com": [
-    "Konduto"
-  ],
-  "app.jivo.ru": [
-    "Konduto"
-  ],
-  "sbb.com.br": [
-    "Konduto"
-  ],
-  "superpe.com.br": [
-    "Konduto"
-  ],
-  "jipebras.com.br": [
-    "Konduto"
-  ],
-  "shoptoys.com.br": [
-    "Konduto"
-  ],
-  "super25.com.br": [
-    "Konduto"
-  ],
-  "i2go.com.br": [
-    "Konduto"
-  ],
-  "imperiodaslinhas.com.br": [
-    "Konduto"
-  ],
-  "venex.com.ar": [
-    "Konduto"
-  ],
-  "supermercadosdia.com.ar": [
-    "Konduto"
-  ],
-  "imaginarium.com.br": [
-    "Konduto"
-  ],
-  "loja.imperiobateriassantos.com.br": [
-    "Konduto"
-  ],
-  "livraria.sensoincomum.org": [
-    "Konduto"
-  ],
-  "ah.flamengo.superingresso.com.br": [
-    "Konduto"
-  ],
-  "vibrashop.com.br": [
-    "Konduto"
-  ],
-  "sottilecasa.com.br": [
-    "Konduto"
-  ],
-  "portal.safrapay.com.br": [
-    "Konduto"
-  ],
-  "stencildecor.com.br": [
-    "Konduto"
-  ],
-  "impressorajato.com.br": [
-    "Konduto"
-  ],
-  "st.esp.br": [
-    "Konduto"
-  ],
-  "3dt.com.br": [
-    "Konduto"
-  ],
-  "ico.ind.br": [
-    "Konduto"
-  ],
-  "ida.com.vc": [
-    "Konduto"
-  ],
-  "ird.net.br": [
-    "Konduto"
-  ],
-  "m.apostas.jcb.com.br": [
-    "Konduto"
-  ],
-  "loja.jmc.com.br": [
-    "Konduto"
-  ],
-  "vea.com.ar": [
-    "Konduto"
-  ],
-  "vh2.com.br": [
-    "Konduto"
-  ],
-  "vpa.com.br": [
-    "Konduto"
-  ],
-  "vsb.com.br": [
-    "Konduto"
-  ],
-  "3car.com.br": [
-    "Konduto"
-  ],
-  "loja.3fit.com.br": [
-    "Konduto"
-  ],
-  "adriannapapell.com": [
-    "Kount"
-  ],
-  "mypatriotsupply.com": [
-    "Kount"
-  ],
-  "mgemi.com": [
-    "Kount"
-  ],
-  "elevatestyles.com": [
-    "Kount"
-  ],
-  "store.melaniemartinezmusic.com": [
-    "Kount"
-  ],
-  "evereve.com": [
-    "Kount"
-  ],
-  "usstore.muse.mu": [
-    "Kount"
-  ],
-  "equestriancollections.com": [
-    "Kount"
-  ],
-  "usstore.edsheeran.com": [
-    "Kount"
-  ],
-  "escentual.com": [
-    "Kount"
-  ],
-  "mahalocases.com": [
-    "Kount"
-  ],
-  "americanrag.com": [
-    "Kount"
-  ],
-  "checkout.manscaped.com": [
-    "Kount"
-  ],
-  "arthrozene.com": [
-    "Kount"
-  ],
-  "epiphanie.co": [
-    "Kount"
-  ],
-  "audienhearing.com": [
-    "Kount"
-  ],
-  "asrv.com": [
-    "Kount"
-  ],
-  "avirex.com": [
-    "Kount"
-  ],
-  "e3free.co.uk": [
-    "Kount"
-  ],
-  "mihodo.com": [
-    "Kount"
-  ],
-  "store.aboogiehbtl.com": [
-    "Kount"
-  ],
-  "abstrakjsnc.org": [
-    "Kount"
-  ],
-  "abxylute.com": [
-    "Kount"
-  ],
-  "abxylute.live": [
-    "Kount"
-  ],
-  "abxylute.shop": [
-    "Kount"
-  ],
-  "abxylute.online": [
-    "Kount"
-  ],
-  "acheterblueset.ca": [
-    "Kount"
-  ],
-  "achetergothamhammered.ca": [
-    "Kount"
-  ],
-  "achetergothamsteelhammered.ca": [
-    "Kount"
-  ],
-  "achetermyfoldawayfan.ca": [
-    "Kount"
-  ],
-  "acheternutriblade.ca": [
-    "Kount"
-  ],
-  "achetersocketfan.ca": [
-    "Kount"
-  ],
-  "achetervacutrim.ca": [
-    "Kount"
-  ],
-  "acheterinstaseal.ca": [
-    "Kount"
-  ],
-  "achetergothamcream.ca": [
-    "Kount"
-  ],
-  "adienhearing.com": [
-    "Kount"
-  ],
-  "adphotovideo.com": [
-    "Kount"
-  ],
-  "aedmarket.com": [
-    "Kount"
-  ],
-  "aileyshop.com": [
-    "Kount"
-  ],
-  "alexapure.com": [
-    "Kount"
-  ],
-  "healthearizonaplus.gov": [
-    "MTCaptcha"
-  ],
-  "events.uvic.ca": [
-    "MTCaptcha"
-  ],
-  "member.hide.me": [
-    "MTCaptcha"
-  ],
-  "langhamhotels.com": [
-    "MTCaptcha"
-  ],
-  "mypasswordtest.uhnj.org": [
-    "MTCaptcha"
-  ],
-  "linuxliteos.com": [
-    "MTCaptcha"
-  ],
-  "leica-microsystems.com": [
-    "MTCaptcha"
-  ],
-  "leicabiosystems.com": [
-    "MTCaptcha"
-  ],
-  "entreprises.unistra.fr": [
-    "MTCaptcha"
-  ],
-  "vox.radiofrance.fr": [
-    "MTCaptcha"
-  ],
-  "ecritures.univ-lorraine.fr": [
-    "MTCaptcha"
-  ],
-  "hahnair.com": [
-    "MTCaptcha"
-  ],
-  "compte.univ-paris1.fr": [
-    "MTCaptcha"
-  ],
-  "hydrotech.com": [
-    "MTCaptcha"
-  ],
-  "univ-lemans.fr": [
-    "MTCaptcha"
-  ],
-  "defle.u-bordeaux-montaigne.fr": [
-    "MTCaptcha"
-  ],
-  "legrand.com": [
-    "MTCaptcha"
-  ],
-  "dan.com": [
-    "MTCaptcha"
-  ],
-  "www-lbcm.univ-ubs.fr": [
-    "MTCaptcha"
-  ],
-  "e.umea.se": [
-    "MTCaptcha"
-  ],
-  "robots.net": [
-    "MTCaptcha"
-  ],
-  "legrand.ro": [
-    "MTCaptcha"
-  ],
-  "accounts.dpworld.com": [
-    "MTCaptcha"
-  ],
-  "lecese.fr": [
-    "MTCaptcha"
-  ],
-  "css.deltastate.gov.ng": [
-    "MTCaptcha"
-  ],
-  "specialchapter2021.rscjinternational.org": [
-    "MTCaptcha"
-  ],
-  "lashotel.gr": [
-    "MTCaptcha"
-  ],
-  "zavodsota.ru": [
-    "MTCaptcha"
-  ],
-  "d2t.notaires.fr": [
-    "MTCaptcha"
-  ],
-  "dna.notaires.fr": [
-    "MTCaptcha"
-  ],
-  "hlm.coop": [
-    "MTCaptcha"
-  ],
-  "l2m.notaires.fr": [
-    "MTCaptcha"
-  ],
-  "lew.de": [
-    "MTCaptcha"
-  ],
-  "llp.notaires.fr": [
-    "MTCaptcha"
-  ],
-  "l-g.notaires.fr": [
-    "MTCaptcha"
-  ],
-  "ray.notaires.fr": [
-    "MTCaptcha"
-  ],
-  "rtm.fr": [
-    "MTCaptcha"
-  ],
-  "happydays.umr.fr": [
-    "MTCaptcha"
-  ],
-  "dcbm.notaires.fr": [
-    "MTCaptcha"
-  ],
-  "deza.paris": [
-    "MTCaptcha"
-  ],
-  "lawandjustice.edc.org": [
-    "Mollom"
-  ],
-  "al-islam.org": [
-    "Mollom"
-  ],
-  "organize.afsc.org": [
-    "Mollom"
-  ],
-  "rsn.aarweb.org": [
-    "Mollom"
-  ],
-  "aashe.org": [
-    "Mollom"
-  ],
-  "primlangues.education.fr": [
-    "Mollom"
-  ],
-  "fieldbook.mottmac.com": [
-    "Mollom"
-  ],
-  "cise.espol.edu.ec": [
-    "Mollom"
-  ],
-  "medicinehunter.com": [
-    "Mollom"
-  ],
-  "edboost.org": [
-    "Mollom"
-  ],
-  "a-abana.com": [
-    "Mollom"
-  ],
-  "mapawatt.com": [
-    "Mollom"
-  ],
-  "acid-play.com": [
-    "Mollom"
-  ],
-  "activelivingresearch.org": [
-    "Mollom"
-  ],
-  "etana.org": [
-    "Mollom"
-  ],
-  "doane.myplannedgift.org": [
-    "Mollom"
-  ],
-  "aiatopten.org": [
-    "Mollom"
-  ],
-  "awolraffles.com": [
-    "Mollom"
-  ],
-  "profiles.mu.ac.ke": [
-    "Mollom"
-  ],
-  "muscleinsider.com": [
-    "Mollom"
-  ],
-  "managingresearchlibrary.org": [
-    "Mollom"
-  ],
-  "mydbsync.com": [
-    "Mollom"
-  ],
-  "animalrescuekorea.org": [
-    "Mollom"
-  ],
-  "mediaplus.com.jo": [
-    "Mollom"
-  ],
-  "a2.nl": [
-    "Mollom"
-  ],
-  "ml.dp.ua": [
-    "Mollom"
-  ],
-  "blikoortje.aart.work": [
-    "Mollom"
-  ],
-  "horsesmouth.agci.org": [
-    "Mollom"
-  ],
-  "amqp.org": [
-    "Mollom"
-  ],
-  "ecfs.eu": [
-    "Mollom"
-  ],
-  "edra.energy": [
-    "Mollom"
-  ],
-  "erka.wroclaw.pl": [
-    "Mollom"
-  ],
-  "espy.org.gr": [
-    "Mollom"
-  ],
-  "e-ig.ru": [
-    "Mollom"
-  ],
-  "mdgs.it": [
-    "Mollom"
-  ],
-  "mmbm.org": [
-    "Mollom"
-  ],
-  "mmex.org": [
-    "Mollom"
-  ],
-  "mpdl.org": [
-    "Mollom"
-  ],
-  "mtaz.co.zw": [
-    "Mollom"
-  ],
-  "mypz.com": [
-    "Mollom"
-  ],
-  "shop.gop.com": [
-    "NoFraud"
-  ],
-  "purehockey.com": [
-    "NoFraud"
-  ],
-  "gfuel.com": [
-    "NoFraud"
-  ],
-  "fragrantjewels.com": [
-    "NoFraud"
-  ],
-  "winc.com": [
-    "NoFraud"
-  ],
-  "pfaltzgraff.com": [
-    "NoFraud"
-  ],
-  "wisteria.com": [
-    "NoFraud"
-  ],
-  "winechateau.com": [
-    "NoFraud"
-  ],
-  "perfumania.com": [
-    "NoFraud"
-  ],
-  "gundogsupply.com": [
-    "NoFraud"
-  ],
-  "weldingsuppliesfromioc.com": [
-    "NoFraud"
-  ],
-  "goalzero.com": [
-    "NoFraud"
-  ],
-  "factorypure.com": [
-    "NoFraud"
-  ],
-  "frostnyc.com": [
-    "NoFraud"
-  ],
-  "yakima.com": [
-    "NoFraud"
-  ],
-  "wineinsiders.com": [
-    "NoFraud"
-  ],
-  "patmcgrath.com": [
-    "NoFraud"
-  ],
-  "grandappliance.com": [
-    "NoFraud"
-  ],
-  "pairofthieves.com": [
-    "NoFraud"
-  ],
-  "fivefingerdeathpunch.com": [
-    "NoFraud"
-  ],
-  "parktool.com": [
-    "NoFraud"
-  ],
-  "furtherfood.com": [
-    "NoFraud"
-  ],
-  "getkion.com": [
-    "NoFraud"
-  ],
-  "walkerfurniture.com": [
-    "NoFraud"
-  ],
-  "qunol.com": [
-    "NoFraud"
-  ],
-  "petswarehouse.com": [
-    "NoFraud"
-  ],
-  "xchair.com": [
-    "NoFraud"
-  ],
-  "shop.planbonestep.com": [
-    "NoFraud"
-  ],
-  "pearlizumi.com": [
-    "NoFraud"
-  ],
-  "fenix-store.com": [
-    "NoFraud"
-  ],
-  "peterthomasroth.com": [
-    "NoFraud"
-  ],
-  "finalmouse.com": [
-    "NoFraud"
-  ],
-  "shop.ghost-official.com": [
-    "NoFraud"
-  ],
-  "pancharmbracelets.com": [
-    "NoFraud"
-  ],
-  "fragranceoutlet.com": [
-    "NoFraud"
-  ],
-  "procam.com": [
-    "NoFraud"
-  ],
-  "wellbots.com": [
-    "NoFraud"
-  ],
-  "shop.godsmack.com": [
-    "NoFraud"
-  ],
-  "pilotmall.com": [
-    "NoFraud"
-  ],
-  "wiredforwine.com": [
-    "NoFraud"
-  ],
-  "spareroom.com": [
-    "Onfido"
-  ],
-  "spareroom.co.uk": [
-    "Onfido"
-  ],
-  "sharemoney.com": [
-    "Onfido"
-  ],
-  "nl.smart.com": [
-    "Onfido"
-  ],
-  "savings.apply.sainsburysbank.co.uk": [
-    "Onfido"
-  ],
-  "app.staging.shine.fr": [
-    "Onfido"
-  ],
-  "shakepay.com": [
-    "Onfido"
-  ],
-  "app-staging.sleek.sg": [
-    "Onfido"
-  ],
-  "account.ixo.world": [
-    "Onfido"
-  ],
-  "juno.finance": [
-    "Onfido"
-  ],
-  "imove.eco": [
-    "Onfido"
-  ],
-  "imove.no": [
-    "Onfido"
-  ],
-  "imove.se": [
-    "Onfido"
-  ],
-  "idvd.soldo.com": [
-    "Onfido"
-  ],
-  "app.veliu.com": [
-    "Onfido"
-  ],
-  "vesto.io": [
-    "Onfido"
-  ],
-  "itouyu.top": [
-    "Onfido"
-  ],
-  "help.settld.care": [
-    "Onfido"
-  ],
-  "qualify.sirius.money": [
-    "Onfido"
-  ],
-  "spinit.com": [
-    "Onfido"
-  ],
-  "beausoleil.immersiveat.com": [
-    "Onfido"
-  ],
-  "secure.informdirect.co.uk": [
-    "Onfido"
-  ],
-  "lugginidverif.innov237.com": [
-    "Onfido"
-  ],
-  "instamove.uk": [
-    "Onfido"
-  ],
-  "quote.insurethebox.com": [
-    "Onfido"
-  ],
-  "test.integralix.io": [
-    "Onfido"
-  ],
-  "app.investglass.com": [
-    "Onfido"
-  ],
-  "dtsocialize.investhub.io": [
-    "Onfido"
-  ],
-  "itbitget.com": [
-    "Onfido"
-  ],
-  "pre.sabadellconsumeronline.com": [
-    "Onfido"
-  ],
-  "sanqianwenhua.xyz": [
-    "Onfido"
-  ],
-  "scriptrx.co.uk": [
-    "Onfido"
-  ],
-  "sendscript.com": [
-    "Onfido"
-  ],
-  "web.qa.shakepay.dev": [
-    "Onfido"
-  ],
-  "shangpay.me": [
-    "Onfido"
-  ],
-  "portal.sigmacorezoid.workers.dev": [
-    "Onfido"
-  ],
-  "web.attempt.signicat.io": [
-    "Onfido"
-  ],
-  "silksecure.net": [
-    "Onfido"
-  ],
-  "console.simulator.company": [
-    "Onfido"
-  ],
-  "sjk2oahoo1.com": [
-    "Onfido"
-  ],
-  "avis.com": [
-    "PerimeterX"
-  ],
-  "moneygram.com": [
-    "PerimeterX"
-  ],
-  "excite.com": [
-    "PerimeterX"
-  ],
-  "abcmouse.com": [
-    "PerimeterX"
-  ],
-  "airtable.com": [
-    "PerimeterX"
-  ],
-  "extraspace.com": [
-    "PerimeterX"
-  ],
-  "monoprice.com": [
-    "PerimeterX"
-  ],
-  "elfcosmetics.com": [
-    "PerimeterX"
-  ],
-  "shop.arkansasrazorbacks.com": [
-    "PerimeterX"
-  ],
-  "mikebloomberg.com": [
-    "PerimeterX"
-  ],
-  "agweb.com": [
-    "PerimeterX"
-  ],
-  "allivet.com": [
-    "PerimeterX"
-  ],
-  "order.moes.com": [
-    "PerimeterX"
-  ],
-  "expressnews.com": [
-    "PerimeterX"
-  ],
-  "book.autoslash.com": [
-    "PerimeterX"
-  ],
-  "orderahead-qa.einsteinbros.com": [
-    "PerimeterX"
-  ],
-  "shop.auburntigers.com": [
-    "PerimeterX"
-  ],
-  "mp.mercuryinsurance.com": [
-    "PerimeterX"
-  ],
-  "mountainmikespizza.com": [
-    "PerimeterX"
-  ],
-  "accounts.moneylion.com": [
-    "PerimeterX"
-  ],
-  "hotels.easyjet.com": [
-    "PerimeterX"
-  ],
-  "everythinglubbock.com": [
-    "PerimeterX"
-  ],
-  "mystateline.com": [
-    "PerimeterX"
-  ],
-  "altrarunning.com": [
-    "PerimeterX"
-  ],
-  "middletownpress.com": [
-    "PerimeterX"
-  ],
-  "autozone.com.mx": [
-    "PerimeterX",
-    "ThreatMetrix"
-  ],
-  "asda.com": [
-    "PerimeterX"
-  ],
-  "mypanhandle.com": [
-    "PerimeterX"
-  ],
-  "mrt.com": [
-    "PerimeterX"
-  ],
-  "mysanantonio.com": [
-    "PerimeterX"
-  ],
-  "myhighplains.com": [
-    "PerimeterX"
-  ],
-  "newsletter.mb.com.ph": [
-    "PerimeterX"
-  ],
-  "newsletter.magicalrecipesonline.com": [
-    "PerimeterX"
-  ],
-  "newsletter.momentumdash.com": [
-    "PerimeterX"
-  ],
-  "ashleydirect.com": [
-    "PerimeterX"
-  ],
-  "airportrentalcars.com": [
-    "PerimeterX"
-  ],
-  "manhattanprep.com": [
-    "PerimeterX"
-  ],
-  "myplainview.com": [
-    "PerimeterX"
-  ],
-  "appliancedirect.com": [
-    "PerimeterX"
-  ],
-  "ffsb.be": [
-    "RapidSec"
-  ],
-  "gis.praha6.cz": [
-    "RapidSec"
-  ],
-  "wilykv.fr": [
-    "RapidSec"
-  ],
-  "fallensubs.com": [
-    "RapidSec"
-  ],
-  "fettings.com": [
-    "RapidSec"
-  ],
-  "focushunting.ro": [
-    "RapidSec"
-  ],
-  "forest-itsolutions.co.uk": [
-    "RapidSec"
-  ],
-  "gestoutlet.com": [
-    "RapidSec"
-  ],
-  "nzdemo.goodspaceschools.com": [
-    "RapidSec"
-  ],
-  "grupoaval.com.br": [
-    "RapidSec"
-  ],
-  "gsproducts.co.uk": [
-    "RapidSec"
-  ],
-  "guydumais.digital": [
-    "RapidSec"
-  ],
-  "pmfsurvey.com": [
-    "RapidSec"
-  ],
-  "purihealthproducts.com": [
-    "RapidSec"
-  ],
-  "quebraacorrente.pt": [
-    "RapidSec"
-  ],
-  "waldenkennel.co.uk": [
-    "RapidSec"
-  ],
-  "weaveyourwebdreams.com": [
-    "RapidSec"
-  ],
-  "portal.whereversim.de": [
-    "RapidSec"
-  ],
-  "wireropeshop.co.uk": [
-    "RapidSec"
-  ],
-  "yamahagap.com": [
-    "RapidSec"
-  ],
-  "yamahagapclaims.com": [
-    "RapidSec"
-  ],
-  "chat.hdfclife.com": [
-    "RapidSec"
-  ],
-  "route66warranty.com": [
-    "RapidSec"
-  ],
-  "ziftsolutions.com": [
-    "RapidSec"
-  ],
-  "messaging.hub.support": [
-    "RapidSec"
-  ],
-  "hmsg.io": [
-    "RapidSec"
-  ],
-  "gestordocumentalcs.rfsc.cl": [
-    "RapidSec"
-  ],
-  "hipdv.com.br": [
-    "RapidSec"
-  ],
-  "praha6.gis.lepsi.dev": [
-    "RapidSec"
-  ],
-  "ursula.ramos.one": [
-    "RapidSec"
-  ],
-  "hovisszanyero-szelloztetes.hu": [
-    "RapidSec"
-  ],
-  "lboexpertise.com": [
-    "RapidSec"
-  ],
-  "lehokolo.eu": [
-    "RapidSec"
-  ],
-  "lis-na-plasty.cz": [
-    "RapidSec"
-  ],
-  "regmyrides.com": [
-    "RapidSec"
-  ],
-  "route66outdoors.com": [
-    "RapidSec"
-  ],
-  "rwestudydesign.com": [
-    "RapidSec"
-  ],
-  "homeloan.bdo.com.ph": [
-    "RapidSec"
-  ],
-  "bind.com.mx": [
-    "RapidSec"
-  ],
-  "omie.com.br": [
-    "RapidSec"
-  ],
-  "gymshark.com": [
-    "Riskified"
-  ],
-  "ghbass.com": [
-    "Riskified"
-  ],
-  "flighthub.com": [
-    "Riskified"
-  ],
-  "pay.podium.com": [
-    "Riskified"
-  ],
-  "grailed.com": [
-    "Riskified"
-  ],
-  "gilt.com": [
-    "Riskified"
-  ],
-  "hotels.profootballhof.com": [
-    "Riskified"
-  ],
-  "giftcardgranny.com": [
-    "Riskified"
-  ],
-  "fcpeuro.com": [
-    "Riskified"
-  ],
-  "fsastore.com": [
-    "Riskified"
-  ],
-  "store.wawa.com": [
-    "Riskified"
-  ],
-  "yoox.com": [
-    "Riskified"
-  ],
-  "guess.com": [
-    "Riskified"
-  ],
-  "wilsonsleather.com": [
-    "Riskified"
-  ],
-  "checkout-dev.fashiontofigure.com": [
-    "Riskified"
-  ],
-  "gh5urmmfqa.b8042f2837bec75ac2262fc12fbb9cb6.careersite.pageuppeople.com": [
-    "Riskified"
-  ],
-  "gametime.co": [
-    "Riskified"
-  ],
-  "guessfactory.com": [
-    "Riskified"
-  ],
-  "reservations.georgiaaquarium.org": [
-    "Riskified"
-  ],
-  "plumbersstock.com": [
-    "Riskified"
-  ],
-  "prada.com": [
-    "Riskified"
-  ],
-  "fendi.com": [
-    "Riskified"
-  ],
-  "gardenoflife.com": [
-    "Riskified"
-  ],
-  "peakdesign.com": [
-    "Riskified"
-  ],
-  "pinkcoconutboutique.com": [
-    "Riskified"
-  ],
-  "book.gonola.com": [
-    "Riskified"
-  ],
-  "psychobunny.com": [
-    "Riskified"
-  ],
-  "fwrd.com": [
-    "Riskified"
-  ],
-  "partsgiant.com": [
-    "Riskified"
-  ],
-  "goldsilver.com": [
-    "Riskified"
-  ],
-  "gear4music.com": [
-    "Riskified"
-  ],
-  "wayfair.co.uk": [
-    "Riskified"
-  ],
-  "hotels.flaquarium.org": [
-    "Riskified"
-  ],
-  "book.golakehavasu.com": [
-    "Riskified"
-  ],
-  "checkout.fanatec.com": [
-    "Riskified"
-  ],
-  "lodging.worldsoffun.com": [
-    "Riskified"
-  ],
-  "tickets.founderscard.com": [
-    "Riskified"
-  ],
-  "checkout2.premiumseatsusa.com": [
-    "Riskified"
-  ],
-  "pcnation.com": [
-    "Riskified"
-  ],
-  "globaltestsupply.com": [
-    "Riskified"
-  ],
-  "online.1c.ru": [
-    "reCAPTCHA"
-  ],
-  "bit.ly": [
-    "reCAPTCHA"
-  ],
-  "features.cpanel.net": [
-    "reCAPTCHA"
-  ],
-  "marketing.criteo.com": [
-    "reCAPTCHA"
-  ],
-  "chzweb01.crpt.ru": [
-    "reCAPTCHA"
-  ],
-  "netangels.ru": [
-    "reCAPTCHA"
-  ],
-  "password.pandora.prod.netflix.net": [
-    "reCAPTCHA"
-  ],
-  "paste.nginx.org": [
-    "reCAPTCHA"
-  ],
-  "csrc.nist.gov": [
-    "reCAPTCHA"
-  ],
-  "status.openai.com": [
-    "reCAPTCHA"
-  ],
-  "taboola.com": [
-    "reCAPTCHA"
-  ],
-  "bzm.telekom.net": [
-    "reCAPTCHA"
-  ],
-  "theguardian.com": [
-    "reCAPTCHA"
-  ],
-  "timeweb.ru": [
-    "reCAPTCHA"
-  ],
-  "tp-link.com": [
-    "reCAPTCHA"
-  ],
-  "aeg-ms32-prod.trafficmanager.net": [
-    "reCAPTCHA"
-  ],
-  "independent.co.uk": [
-    "reCAPTCHA"
-  ],
-  "issuu.com": [
-    "reCAPTCHA"
-  ],
-  "ivi.ru": [
-    "reCAPTCHA"
-  ],
-  "developer.salesforce.com": [
-    "reCAPTCHA"
-  ],
-  "samsung.com": [
-    "reCAPTCHA"
-  ],
-  "sharethrough.com": [
-    "reCAPTCHA"
-  ],
-  "shop.sophos.com": [
-    "reCAPTCHA"
-  ],
-  "soundcloud.com": [
-    "reCAPTCHA"
-  ],
-  "spotify.com": [
-    "reCAPTCHA"
-  ],
-  "vimeo.com": [
-    "reCAPTCHA"
-  ],
-  "vk.com": [
-    "reCAPTCHA"
-  ],
-  "swappa.com": [
-    "Sift"
-  ],
-  "swisscolony.com": [
-    "Sift"
-  ],
-  "seventhavenue.com": [
-    "Sift"
-  ],
-  "tech.seymourduncan.com": [
-    "Sift"
-  ],
-  "academy.volunteerhub.com": [
-    "Sift"
-  ],
-  "account.simplepractice.com": [
-    "Sift"
-  ],
-  "cloud.justpruvit.com": [
-    "Sift"
-  ],
-  "courses.screencastify.com": [
-    "Sift"
-  ],
-  "steamgifts.com": [
-    "Sift"
-  ],
-  "jdate.com": [
-    "Sift"
-  ],
-  "swyftfilings.com": [
-    "Sift"
-  ],
-  "academy.strongtowns.org": [
-    "Sift"
-  ],
-  "stackskills.com": [
-    "Sift"
-  ],
-  "activities.vueling.com": [
-    "Sift"
-  ],
-  "grow.serviceautopilot.com": [
-    "Sift"
-  ],
-  "academy.virtuagym.com": [
-    "Sift"
-  ],
-  "courses.smartpassiveincome.com": [
-    "Sift"
-  ],
-  "courses.shakeuplearning.com": [
-    "Sift"
-  ],
-  "vacatia.com": [
-    "Sift"
-  ],
-  "learn.shakespeare.org.uk": [
-    "Sift"
-  ],
-  "learn.shambhala.com": [
-    "Sift"
-  ],
-  "training.spreadsheeto.com": [
-    "Sift"
-  ],
-  "songtradr.com": [
-    "Sift"
-  ],
-  "learn.investfourmore.com": [
-    "Sift"
-  ],
-  "getcertified.subitup.com": [
-    "Sift"
-  ],
-  "my.vitalanimal.com": [
-    "Sift"
-  ],
-  "academy.vuzix.com": [
-    "Sift"
-  ],
-  "courses.videoschoolonline.com": [
-    "Sift"
-  ],
-  "learn.inkwellpress.com": [
-    "Sift"
-  ],
-  "information.com": [
-    "Sift"
-  ],
-  "donate.sikhnet.com": [
-    "Sift"
-  ],
-  "learnbass.scottsbasslessons.com": [
-    "Sift"
-  ],
-  "universitycity.starbuds.us": [
-    "Sift"
-  ],
-  "isaacsrestaurants.com": [
-    "Sift"
-  ],
-  "customers.site5.com": [
-    "Sift"
-  ],
-  "learn.selfpublishingformula.com": [
-    "Sift"
-  ],
-  "courses.52kards.com": [
-    "Sift"
-  ],
-  "verio.com": [
-    "Sift"
-  ],
-  "courses.smallgroups.com": [
-    "Sift"
-  ],
-  "explore1.jason.org": [
-    "Sift"
-  ],
-  "lumens.com": [
-    "Signifyd"
-  ],
-  "au.lovesac.com": [
-    "Signifyd"
-  ],
-  "lifeisgood.com": [
-    "Signifyd"
-  ],
-  "rockport.com": [
-    "Signifyd"
-  ],
-  "dealers.roughcountry.com": [
-    "Signifyd"
-  ],
-  "renttherunway.com": [
-    "Signifyd"
-  ],
-  "remington.com": [
-    "Signifyd"
-  ],
-  "rodanandfields.com": [
-    "Signifyd"
-  ],
-  "dwr.com": [
-    "Signifyd"
-  ],
-  "rkguns.com": [
-    "Signifyd"
-  ],
-  "dtlr.com": [
-    "Signifyd"
-  ],
-  "reservebar.com": [
-    "Signifyd"
-  ],
-  "radpowerbikes.com": [
-    "Signifyd"
-  ],
-  "dearfoams.com": [
-    "Signifyd"
-  ],
-  "rainierarms.com": [
-    "Signifyd"
-  ],
-  "dartagnan.com": [
-    "Signifyd"
-  ],
-  "lacoste.com": [
-    "Signifyd"
-  ],
-  "lionelstore.com": [
-    "Signifyd"
-  ],
-  "rag-bone.com": [
-    "Signifyd"
-  ],
-  "zwift.com": [
-    "Signifyd"
-  ],
-  "lesliespool.com": [
-    "Signifyd"
-  ],
-  "hunterboots.com": [
-    "Signifyd"
-  ],
-  "store.hermanmiller.com": [
-    "Signifyd"
-  ],
-  "ripndipclothing.com": [
-    "Signifyd"
-  ],
-  "heartlandamerica.com": [
-    "Signifyd"
-  ],
-  "uscutter.com": [
-    "Signifyd"
-  ],
-  "rockvilleaudio.com": [
-    "Signifyd"
-  ],
-  "rallysportdirect.com": [
-    "Signifyd"
-  ],
-  "dreamlandjewelry.com": [
-    "Signifyd"
-  ],
-  "lightsonline.com": [
-    "Signifyd"
-  ],
-  "relaxtheback.com": [
-    "Signifyd"
-  ],
-  "leibish.com": [
-    "Signifyd"
-  ],
-  "hunterfan.com": [
-    "Signifyd"
-  ],
-  "homeandcooksales.com": [
-    "Signifyd"
-  ],
-  "hats.com": [
-    "Signifyd"
-  ],
-  "rearviewsafety.com": [
-    "Signifyd"
-  ],
-  "dagnedover.com": [
-    "Signifyd"
-  ],
-  "dcshoes.com": [
-    "Signifyd"
-  ],
-  "refrigiwear.com": [
-    "Signifyd"
-  ],
-  "designeroptics.com": [
-    "Signifyd"
-  ],
-  "garage-organization.com": [
-    "SiteLock"
-  ],
-  "german-way.com": [
-    "SiteLock"
-  ],
-  "flexpvc.com": [
-    "SiteLock"
-  ],
-  "promarengine.com": [
-    "SiteLock"
-  ],
-  "powerstridebattery.com": [
-    "SiteLock"
-  ],
-  "philosiblog.com": [
-    "SiteLock"
-  ],
-  "portrait-painting.com": [
-    "SiteLock"
-  ],
-  "support.foodbanknyc.org": [
-    "SiteLock"
-  ],
-  "wealthinsideralert.com": [
-    "SiteLock"
-  ],
-  "freeyellow.com": [
-    "SiteLock"
-  ],
-  "fx-sabers.com": [
-    "SiteLock"
-  ],
-  "paintwithkevin.com": [
-    "SiteLock"
-  ],
-  "globat.com": [
-    "SiteLock"
-  ],
-  "parasitecleanse.com": [
-    "SiteLock"
-  ],
-  "proaxil.com": [
-    "SiteLock"
-  ],
-  "gbodyparts.com": [
-    "SiteLock"
-  ],
-  "geographics.com": [
-    "SiteLock"
-  ],
-  "parksidefcu.com": [
-    "SiteLock"
-  ],
-  "professays.com": [
-    "SiteLock"
-  ],
-  "websterspages.com": [
-    "SiteLock"
-  ],
-  "greyhawkonline.com": [
-    "SiteLock"
-  ],
-  "yardsignwholesale.com": [
-    "SiteLock"
-  ],
-  "webhost4life.com": [
-    "SiteLock"
-  ],
-  "fhagovernmentloans.org": [
-    "SiteLock"
-  ],
-  "goldrushgetaways.com": [
-    "SiteLock"
-  ],
-  "grishastewart.com": [
-    "SiteLock"
-  ],
-  "pghestatesales.com": [
-    "SiteLock"
-  ],
-  "floridaregistrations.org": [
-    "SiteLock"
-  ],
-  "prowaterheatersupply.com": [
-    "SiteLock"
-  ],
-  "worlduph.com": [
-    "SiteLock"
-  ],
-  "flowbee.com": [
-    "SiteLock"
-  ],
-  "photodon.com": [
-    "SiteLock"
-  ],
-  "freeremoteinstructions.com": [
-    "SiteLock"
-  ],
-  "purehost.com": [
-    "SiteLock"
-  ],
-  "finenaturalhairandfaith.com": [
-    "SiteLock"
-  ],
-  "floridaelks.org": [
-    "SiteLock"
-  ],
-  "goldeneagledirect.com": [
-    "SiteLock"
-  ],
-  "greathairtransplants.com": [
-    "SiteLock"
-  ],
-  "wintick.com": [
-    "SiteLock"
-  ],
-  "yourwebhosting.com": [
-    "SiteLock"
-  ],
-  "hawaiiauctionservices.com": [
-    "Skyflow"
-  ],
-  "pay.helpprio.com": [
-    "Skyflow"
-  ],
-  "reservations.hotel-spider.com": [
-    "Skyflow"
-  ],
-  "localdeals.bid": [
-    "Skyflow"
-  ],
-  "pay.loxario.com": [
-    "Skyflow"
-  ],
-  "luxustars.com": [
-    "Skyflow"
-  ],
-  "pay.resadexa.com": [
-    "Skyflow"
-  ],
-  "reserve-ici.com": [
-    "Skyflow"
-  ],
-  "booking.reserv-go.com": [
-    "Skyflow"
-  ],
-  "booking.reso-pro.com": [
-    "Skyflow"
-  ],
-  "marijuanaplantsonline.com": [
-    "SnapHost"
-  ],
-  "ambery.com": [
-    "SnapHost"
-  ],
-  "allaboutadapters.com": [
-    "SnapHost"
-  ],
-  "martinbrotherspainting.com": [
-    "SnapHost"
-  ],
-  "abcchemical.com": [
-    "SnapHost"
-  ],
-  "mail.anal.com": [
-    "SnapHost"
-  ],
-  "ablns.com": [
-    "SnapHost"
-  ],
-  "ackma.org": [
-    "SnapHost"
-  ],
-  "arduo.be": [
-    "SnapHost"
-  ],
-  "arts9.in": [
-    "SnapHost"
-  ],
-  "asitn.com": [
-    "SnapHost"
-  ],
-  "avfii.com": [
-    "SnapHost"
-  ],
-  "eumbc.org": [
-    "SnapHost"
-  ],
-  "mag37.co.il": [
-    "SnapHost"
-  ],
-  "adultx.vip": [
-    "SnapHost"
-  ],
-  "airmas.com": [
-    "SnapHost"
-  ],
-  "maps4u.com": [
-    "SnapHost"
-  ],
-  "marlev.com": [
-    "SnapHost"
-  ],
-  "midone.site": [
-    "SnapHost"
-  ],
-  "mms-se.com": [
-    "SnapHost"
-  ],
-  "mrtech.com.my": [
-    "SnapHost"
-  ],
-  "mrterm.com": [
-    "SnapHost"
-  ],
-  "mvcsnm.org": [
-    "SnapHost"
-  ],
-  "myipis.net": [
-    "SnapHost"
-  ],
-  "a2btaxiservices.es": [
-    "SnapHost"
-  ],
-  "aas24news.in": [
-    "SnapHost"
-  ],
-  "abacus-it.com": [
-    "SnapHost"
-  ],
-  "abcglobalsign.com": [
-    "SnapHost"
-  ],
-  "ableautoglass.com": [
-    "SnapHost"
-  ],
-  "absembroidery.co.uk": [
-    "SnapHost"
-  ],
-  "absolutelykittens.com": [
-    "SnapHost"
-  ],
-  "acacia-development.org": [
-    "SnapHost"
-  ],
-  "academicprofit.com": [
-    "SnapHost"
-  ],
-  "academywonderworld.com": [
-    "SnapHost"
-  ],
-  "accappwny.com": [
-    "SnapHost"
-  ],
-  "acecanada.net": [
-    "SnapHost"
-  ],
-  "acemondo.co.nz": [
-    "SnapHost"
-  ],
-  "acpocketnews.com": [
-    "SnapHost"
-  ],
-  "actioncarhire.co.uk": [
-    "SnapHost"
-  ],
-  "actproductions.com": [
-    "SnapHost"
-  ],
-  "swd.com.au": [
-    "Sqreen"
-  ],
-  "vigny.fr": [
-    "Sqreen"
-  ],
-  "scotref.live": [
-    "Sqreen"
-  ],
-  "automech.io": [
-    "Sqreen"
-  ],
-  "murlock.org": [
-    "Sqreen"
-  ],
-  "mlbshop.com": [
-    "ThreatMetrix"
-  ],
-  "madewell.com": [
-    "ThreatMetrix"
-  ],
-  "aclu.org": [
-    "ThreatMetrix"
-  ],
-  "cashadvantageadvisors.ebanking-services.com": [
-    "ThreatMetrix"
-  ],
-  "shop.atlantafalcons.com": [
-    "ThreatMetrix"
-  ],
-  "checkout.amway.com": [
-    "ThreatMetrix"
-  ],
-  "shop.msuspartans.com": [
-    "ThreatMetrix"
-  ],
-  "mrporter.com": [
-    "ThreatMetrix"
-  ],
-  "arbonne.com": [
-    "ThreatMetrix"
-  ],
-  "apply.acecashexpress.com": [
-    "ThreatMetrix"
-  ],
-  "ancestry.co.uk": [
-    "ThreatMetrix"
-  ],
-  "aeromexico.com": [
-    "ThreatMetrix"
-  ],
-  "shop.miamidolphins.com": [
-    "ThreatMetrix"
-  ],
-  "eyeconic.com": [
-    "ThreatMetrix"
-  ],
-  "shop.azcardinals.com": [
-    "ThreatMetrix"
-  ],
-  "secure.myfax.com": [
-    "ThreatMetrix"
-  ],
-  "muckbootcompany.com": [
-    "ThreatMetrix"
-  ],
-  "ancestry.ca": [
-    "ThreatMetrix"
-  ],
-  "approve.me": [
-    "ThreatMetrix"
-  ],
-  "viagens.magazineluiza.com.br": [
-    "ThreatMetrix"
-  ],
-  "ancestry.com.au": [
-    "ThreatMetrix"
-  ],
-  "shop.mutigers.com": [
-    "ThreatMetrix"
-  ],
-  "store.motogp.com": [
-    "ThreatMetrix"
-  ],
-  "myus.com": [
-    "ThreatMetrix"
-  ],
-  "donate.amnestyusa.org": [
-    "ThreatMetrix"
-  ],
-  "mlsstore.com": [
-    "ThreatMetrix"
-  ],
-  "online.affinityplus.org": [
-    "ThreatMetrix"
-  ],
-  "mitchellandness.com": [
-    "ThreatMetrix"
-  ],
-  "elemis.com": [
-    "ThreatMetrix"
-  ],
-  "myaccount.metrofax.com": [
-    "ThreatMetrix"
-  ],
-  "blog.ansi.org": [
-    "ThreatMetrix"
-  ],
-  "shop.ecupirates.com": [
-    "ThreatMetrix"
-  ],
-  "merlenorman.com": [
-    "ThreatMetrix"
-  ],
-  "book.austrian.com": [
-    "ThreatMetrix"
-  ],
-  "medicalert.org": [
-    "ThreatMetrix"
-  ],
-  "englinsfinefootwear.com": [
-    "ThreatMetrix"
-  ],
-  "armynavyoutdoors.com": [
-    "ThreatMetrix"
-  ],
-  "ao.com": [
-    "ThreatMetrix"
-  ],
-  "marktplaats.nl": [
-    "ThreatMetrix"
-  ],
-  "trust.edpuzzle.com": [
-    "Vanta"
-  ],
-  "trust.easypost.com": [
-    "Vanta"
-  ],
-  "trust.anydesk.com": [
-    "Vanta"
-  ],
-  "trust.morningconsult.com": [
-    "Vanta"
-  ],
-  "everlance.com": [
-    "Vanta"
-  ],
-  "trustcenter.apploi.com": [
-    "Vanta"
-  ],
-  "trust.ecardsystems.com": [
-    "Vanta"
-  ],
-  "trust.ellucian.com": [
-    "Vanta"
-  ],
-  "trust.agorapulse.com": [
-    "Vanta"
-  ],
-  "trust.allclearid.com": [
-    "Vanta"
-  ],
-  "trust.apptoto.com": [
-    "Vanta"
-  ],
-  "trust.amilia.com": [
-    "Vanta"
-  ],
-  "trust.aurorasolar.com": [
-    "Vanta"
-  ],
-  "trust.ebanx.com": [
-    "Vanta"
-  ],
-  "alphacard.com": [
-    "Vanta"
-  ],
-  "trust.affinipay.com": [
-    "Vanta"
-  ],
-  "trust.activtrak.com": [
-    "Vanta"
-  ],
-  "trust.azul.com": [
-    "Vanta"
-  ],
-  "trust.agilitycms.com": [
-    "Vanta"
-  ],
-  "trust.easygenerator.com": [
-    "Vanta"
-  ],
-  "trust.masterelectronics.com": [
-    "Vanta"
-  ],
-  "trust.appcues.com": [
-    "Vanta"
-  ],
-  "trust.assetpanda.com": [
-    "Vanta"
-  ],
-  "security.amdigital.co.uk": [
-    "Vanta"
-  ],
-  "trust.autosoftdms.com": [
-    "Vanta"
-  ],
-  "trust.engageinteractive.co.uk": [
-    "Vanta"
-  ],
-  "trust.magnushealth.com": [
-    "Vanta"
-  ],
-  "trustcenter.exterro.com": [
-    "Vanta"
-  ],
-  "trust.mobileaction.co": [
-    "Vanta"
-  ],
-  "trust.aptean.com": [
-    "Vanta"
-  ],
-  "akka.io": [
-    "Vanta"
-  ],
-  "trust.audiense.com": [
-    "Vanta"
-  ],
-  "security.activeprospect.com": [
-    "Vanta"
-  ],
-  "trust.amplience.com": [
-    "Vanta"
-  ],
-  "trust.modolabs.com": [
-    "Vanta"
-  ],
-  "edist.com": [
-    "Vanta"
-  ],
-  "trust.engagingnetworks.net": [
-    "Vanta"
-  ],
-  "trust.enowsoftware.com": [
-    "Vanta"
-  ],
-  "trust.editshare.com": [
-    "Vanta"
-  ],
-  "trust.artie.com": [
-    "Vanta"
-  ],
-  "xtime.com": [
-    "Wordfence"
-  ],
-  "blog.pressreader.com": [
-    "Wordfence"
-  ],
-  "factcheck.org": [
-    "Wordfence"
-  ],
-  "foundmoneyguide.com": [
-    "Wordfence"
-  ],
-  "magazine.waldenu.edu": [
-    "Wordfence"
-  ],
-  "dev.powerofpositivity.com": [
-    "Wordfence"
-  ],
-  "familyfreshmeals.com": [
-    "Wordfence"
-  ],
-  "blogs.fourseasons.com": [
-    "Wordfence"
-  ],
-  "il.wisconsin.edu": [
-    "Wordfence"
-  ],
-  "blog.pilotflyingj.com": [
-    "Wordfence"
-  ],
-  "gfsstore.com": [
-    "Wordfence"
-  ],
-  "uk.worx.com": [
-    "Wordfence"
-  ],
-  "blog.wildtangent.com": [
-    "Wordfence"
-  ],
-  "pageuppeople.com": [
-    "Wordfence"
-  ],
-  "festfoods.com": [
-    "Wordfence"
-  ],
-  "blog.greatnonprofits.org": [
-    "Wordfence"
-  ],
-  "ffxivguild.com": [
-    "Wordfence"
-  ],
-  "aerd.partners.org": [
-    "Wordfence"
-  ],
-  "wyomilitary.wyo.gov": [
-    "Wordfence"
-  ],
-  "learn.wichita.edu": [
-    "Wordfence"
-  ],
-  "givingtuesday.org": [
-    "Wordfence"
-  ],
-  "geteducated.com": [
-    "Wordfence"
-  ],
-  "pistolsfiringblog.com": [
-    "Wordfence"
-  ],
-  "skyrangertraining.flir.com": [
-    "Wordfence"
-  ],
-  "institute.glaad.org": [
-    "Wordfence"
-  ],
-  "geekdad.com": [
-    "Wordfence"
-  ],
-  "greatbigstory.com": [
-    "Wordfence"
-  ],
-  "padi.com": [
-    "Wordfence"
-  ],
-  "magazinearchive.gonzaga.edu": [
-    "Wordfence"
-  ],
-  "library.wlu.edu": [
-    "Wordfence"
-  ],
-  "goodcheapeats.com": [
-    "Wordfence"
-  ],
-  "roseparade.wcu.edu": [
-    "Wordfence"
-  ],
-  "getairsports.com": [
-    "Wordfence"
-  ],
-  "blogs.fscj.edu": [
-    "Wordfence"
-  ],
-  "quic.queensu.ca": [
-    "Wordfence"
-  ],
-  "research.pomona.edu": [
-    "Wordfence"
-  ],
-  "freegovernmentcellphoneguide.com": [
-    "Wordfence"
-  ],
-  "prtradingresearch.com": [
-    "Wordfence"
-  ],
-  "archives.parliament.uk": [
-    "Wordfence"
+  "akamai-bot-manager": [
+    "samsung.com",
+    "nike.com",
+    "ikea.com",
+    "bestfabricshaver.com",
+    "tiktok.com",
+    "sureguardinsurance.com",
+    "britishairways.com",
+    "gap.com.mx",
+    "dell.com",
+    "wellsfargo.com",
+    "vsinsurance.com",
+    "tracyinsurance.com",
+    "segalinsagency.com",
+    "rosenbergins.com",
+    "randinsuranceagency.com",
+    "prime-meridian.com",
+    "policydude.com",
+    "pikeinsurance.com",
+    "parkerandparkerins.com"
+  ],
+  "basic": [
+    "zwickroell.com",
+    "sanofigenzymeneurologycongresscontent.com",
+    "lovenox.com",
+    "kidneytransplantconnectors.com",
+    "compsource.com",
+    "effata.at",
+    "schmatz.cc",
+    "rtl-theme.com",
+    "doctorhadizadeh.ir",
+    "optimizemyday.com",
+    "smarter-traveller.co.uk",
+    "vaxinlife.com.br",
+    "menactra.com",
+    "sanofipasteureurope.com",
+    "bebegimveben.com",
+    "mypraluent.co.uk",
+    "diguan.es",
+    "sketchup-pro.ir",
+    "type2inflammation.com",
+    "transformmyeloma.com"
+  ],
+  "blue-triangle": [
+    "globalcu.org",
+    "marriott.com",
+    "super8.com",
+    "aireserv.com",
+    "mollymaid.com",
+    "pearson.com",
+    "bose.com",
+    "groundsguys.com",
+    "mrappliance.com",
+    "boots.com",
+    "4brandedproducts.com",
+    "mrelectric.com",
+    "imprintablefashion.com",
+    "livingspaces.com",
+    "homedepot.com",
+    "extraspace.com",
+    "mx.puma.com",
+    "homedepot.com.mx",
+    "bose.fr",
+    "slickdeals.net"
+  ],
+  "bugcrowd": [
+    "crissaevelaraaria.etsy.com",
+    "squareup.com",
+    "fokcus.com",
+    "betterhelp.com",
+    "twitch.tv",
+    "thermofisher.com",
+    "pharmafluidics.com",
+    "graingroovewoodworks.etsy.com",
+    "dzone.com",
+    "skyscanner.net",
+    "canvas.com",
+    "typeform.com",
+    "qcfygu5p7so.typeform.com",
+    "smartsheet.com",
+    "docusign.com",
+    "demandbase.com",
+    "creativegiftingideas.etsy.com",
+    "housesensationsart.com",
+    "kcsdesignsbykim.etsy.com",
+    "obeeatelier.etsy.com"
+  ],
+  "captch-me": [
+    "hedichina.com",
+    "presta.infos.st",
+    "btyearbook.com",
+    "dreamdesigners.e-monsite.com",
+    "meyersi.com",
+    "hoangkhoi38.violet.vn",
+    "biggersoybean.com",
+    "nan-paso.com"
+  ],
+  "clear": [],
+  "coinhive-captcha": [
+    "kanal9.se",
+    "gtvarese.it",
+    "classmobilier.fr",
+    "ideakonyvter.ro",
+    "ucow.io",
+    "yandek.ru",
+    "artefactumshop.es",
+    "frulli.it",
+    "gabardos.com",
+    "houstonhare.com",
+    "paulott.com",
+    "fotosylibrosuruguay.com",
+    "twinpicks.com",
+    "armeriavarona.com",
+    "elcuadernoindiscreto.com",
+    "miscool.blogspot.com",
+    "topfortuna.com",
+    "jelekoke.blogspot.com",
+    "administrasinegaraunair.blogspot.com",
+    "farmazumaia.com"
+  ],
+  "datadome": [
+    "collectionsetc.com",
+    "lemonde.fr",
+    "iiadallas.org",
+    "loaderservices.com",
+    "oregonloggers.org",
+    "krha.org",
+    "iiaw.com",
+    "iiasd.org",
+    "nytimes.com",
+    "viator.com",
+    "crissaevelaraaria.etsy.com",
+    "harpstylehomes.com",
+    "yelp.com",
+    "rbeverett.com",
+    "tgv.com",
+    "bestwestrn.com",
+    "klbobcat.com",
+    "courir.com",
+    "fr.loccitane.com",
+    "propertiesincalgary.ca"
+  ],
+  "detectify": [
+    "radicl.com",
+    "ossworldwidemovers.com",
+    "opensolar.com",
+    "docker.com",
+    "abc-companies.com",
+    "bongs.ca",
+    "loaggi.top",
+    "manmatters.com",
+    "selcoinsurance.com",
+    "garrett-mosier.com",
+    "meetleo.com",
+    "yorkshirewildlifepark.com",
+    "dailymail.co.uk",
+    "dailymail.com",
+    "warrantywise.co.uk",
+    "ccnugget.com",
+    "rrd.com",
+    "univistainsurance.com",
+    "sedex.com",
+    "spinezone.com"
+  ],
+  "digest": [
+    "motofabrika.ru",
+    "rebeccadunne.net",
+    "shigakyogo.or.jp",
+    "nww.de",
+    "jonmight.com",
+    "kavangard.eu",
+    "tbes.me",
+    "marlek.com",
+    "reifenschmidt.de",
+    "livechat.to",
+    "194.117.170.14",
+    "213.132.237.251",
+    "netagents.at",
+    "reifen-ehrhardt.de",
+    "danibanani.com",
+    "firststop.de",
+    "chilehaus.dnsalias.net",
+    "media.aea1.k12.ia.us",
+    "russian.psydeshow.org",
+    "myfiles.ur.de"
+  ],
+  "forter": [
+    "maxwarehouse.com",
+    "cablestogo.com",
+    "wayfair.com",
+    "nike.com",
+    "glossier.com",
+    "euro.polene-paris.com",
+    "bangkokblvd.com",
+    "orderbubbasgoodeats.com",
+    "wooswingsokc.com",
+    "hilton.com",
+    "bronsonvitamins.com",
+    "diamonddotmarketaz.com",
+    "unice.com",
+    "tattydevine.com",
+    "guestreservations.com",
+    "pe-es.flightnetwork.com",
+    "psychobunny.com",
+    "shein.co.uk",
+    "roxiesbreakfastandlunch.com",
+    "dryrobe.com"
+  ],
+  "hcaptcha": [
+    "hostinger.com",
+    "neins.com",
+    "brownbaglaundry.com",
+    "upudwater.com",
+    "tsiagency.com",
+    "davidscbc.org",
+    "karstensfinancial.com",
+    "griffinins.net",
+    "portofcoosbay.com",
+    "advantage-oneins.com",
+    "yosnelexotic.com",
+    "payhip.com",
+    "morar.co.za",
+    "edmsoaps.com",
+    "uptimeus.com",
+    "seoptimer.com",
+    "affordableplusremodeling.com",
+    "sofreshlaundromat.com",
+    "berneyflowers.com",
+    "carelincmed.com"
+  ],
+  "imperva": [
+    "onlinefabricstore.com",
+    "mycca.com.au",
+    "nationalnotary.org",
+    "midfirst.com",
+    "johnmurcott.com",
+    "hvcu.org",
+    "bastiansolutions.com",
+    "zeposia.at",
+    "zeposia.se",
+    "yervoy.com",
+    "yervoy.jp",
+    "vagaro.com",
+    "unsubscribeh.bmscustomerconnect.com",
+    "switchcraft.com",
+    "sprycel-hcp.com",
+    "sprycel.jp",
+    "rethinkmultiplemyeloma.jp",
+    "rheumaktuell.de",
+    "orencia.jp",
+    "orencia.de"
+  ],
+  "konduto": [
+    "easy.com.ar",
+    "cetrogar.com.ar",
+    "47street.com.ar",
+    "app.retornai.com.br",
+    "umcoffeeco.com.br",
+    "coffeemais.com",
+    "mokaclube.com.br",
+    "aguadocepraia.com.br",
+    "prodigycompanystore.com.br",
+    "mimo.com.ar",
+    "cheeky.com.ar",
+    "visionmarinetraining.com.br",
+    "insiderstore.com.br",
+    "diaonline.supermercadosdia.com.ar",
+    "gringa.com.br",
+    "pacecompany.com.br",
+    "intimissimi.com.br",
+    "henzy.com.ar",
+    "nakyk.com.br",
+    "cellarvinhos.com"
+  ],
+  "kount": [
+    "ghostguns.com",
+    "ghostgunner.net",
+    "wholelattelove.com",
+    "halifaxhumanesociety.org",
+    "giftya.com",
+    "nationalbusinessfurniture.com",
+    "chess.com",
+    "skinnyfit.com",
+    "nerdwallet.com",
+    "digistore24.com",
+    "topextracts.com",
+    "moviautos.com",
+    "seednutrition.com",
+    "saddleupla.com",
+    "amotech.com.br",
+    "excelsu.com.br",
+    "creativewagering.com",
+    "vanillarewardcard.com",
+    "ifut.com.br",
+    "subscription.people.com"
+  ],
+  "mollom": [
+    "atsmath.com",
+    "chefplus.es",
+    "vichemgroup.com",
+    "hortscleaningservices.com.au",
+    "learningrhythms.com",
+    "philschibeci.com.au",
+    "cocoa.kit-ipp.org",
+    "blackheathlettings.com",
+    "topvorm.be",
+    "schwartzfurs.com",
+    "ctinjurylawyers.com",
+    "pro72.ru",
+    "links.in-christ.net",
+    "e-ig.ru",
+    "tappingcourse.com",
+    "scroggin.ch",
+    "pro72.com",
+    "firstcanadianmessenger.com",
+    "drcomputertech.de",
+    "weaverheritage.com"
+  ],
+  "ntlm": [
+    "ephag.es",
+    "spchartexamples.nevron.com",
+    "waterlandschap.be",
+    "webed.ped.state.nm.us",
+    "sdn.sg",
+    "cloughbawn.gaa.ie",
+    "developers89.byethost14.com",
+    "pmfhk.cz",
+    "aerolaplata.com.ar",
+    "ipqcs.com",
+    "ppadb.co.bw",
+    "helpdesk.sycamoreschools.org",
+    "cp.sheridan.com",
+    "afyonkarahisar.tarim.gov.tr",
+    "repair.rhinelander.k12.wi.us",
+    "helpdesk.lwase843.org",
+    "portal.mywccc.org",
+    "workflow.columbustech.edu",
+    "reportingservices.augustana.edu",
+    "nts.slc.edu"
+  ],
+  "perimeterx": [
+    "wayfair.com",
+    "crunchbase.com",
+    "brownrigg.com",
+    "booking.com",
+    "textnow.com",
+    "skyscanner.com",
+    "zillow.com",
+    "juul.com",
+    "soundcloud.com",
+    "mhr.pt",
+    "wix.com",
+    "yelp.com",
+    "master.ca",
+    "jstor.org",
+    "rayfitout-02a00a.design.webflow.com",
+    "baptisthealth.net",
+    "super.walmart.com.mx",
+    "similarweb.com",
+    "walmart.com",
+    "nextinsurance.com"
+  ],
+  "riskified": [
+    "kennettkissandco.printify.me",
+    "wayfair.com",
+    "skullcandy.com",
+    "uline.ca",
+    "nokop-and-nye.printify.me",
+    "cardcash.com",
+    "unice.com",
+    "nadula.com",
+    "beautyforever.com",
+    "booking.com",
+    "agoda.com",
+    "psychobunny.com",
+    "viator.com",
+    "shein.co.uk",
+    "magnaflow.com",
+    "lornajane.com.au",
+    "jbhifi.com.au",
+    "smartbamboo.mx",
+    "roots.com",
+    "meshki.us"
+  ],
+  "recaptcha": [
+    "economiso.fr",
+    "integrated-me.com",
+    "21rio.com",
+    "liveclairmont.com",
+    "thestandardatdomainnorthside.com",
+    "airiedenver.com",
+    "evanagrove.com",
+    "eskildhansen.com",
+    "themirabelapts.com",
+    "mysihatpal.com.my",
+    "her2know.com.my",
+    "her2know.in",
+    "medicalinformation.astrazeneca.ph",
+    "breathebetter.ph",
+    "her2know-eg.com",
+    "insuficienciacardiaca.com.ar",
+    "themorganstpete.com",
+    "woodincreekvillage.com",
+    "bestlondonconcrete.co.uk",
+    "academiairving.com"
+  ],
+  "spnego": [
+    "manager.webeskan.com",
+    "guanjia.com.cn",
+    "agencygateway1.allstate.com",
+    "azuretec.com",
+    "daehang.com",
+    "fuduric.de",
+    "piesedacia.net",
+    "fma.mc",
+    "all-about-davenport.de",
+    "fastlink.club.tw",
+    "melissafletcher.ca",
+    "countrypassport.com",
+    "mysvg.de",
+    "wipo.taleo.net",
+    "banaana.co.il",
+    "referrals.redhat.com",
+    "thammycaldeira.com",
+    "acroyoga-hamburg.de",
+    "dream.inf.ed.ac.uk",
+    "sat-rat.de"
+  ],
+  "sift": [
+    "calendars.com",
+    "wayfair.com",
+    "vercel.com",
+    "banvira.com",
+    "honey-power.com",
+    "alesaei-aes.com",
+    "thulaimoud.com",
+    "scribd.com",
+    "rental.turbotenant.com",
+    "new-fouz.com",
+    "cardcash.com",
+    "shopvillastyle.com",
+    "danah4oud.com",
+    "alsultan-ksa.com",
+    "nsh-sa.com",
+    "best-shield.com",
+    "diamondsourcenyc.com",
+    "indiegogo.com",
+    "airbnb.com",
+    "ghaithperfume.com"
+  ],
+  "signifyd": [
+    "grizzly.com",
+    "wayfair.com",
+    "samsung.com",
+    "levinfurniture.com",
+    "brooklynhair.com",
+    "atbbq.com",
+    "row.venum.com",
+    "busybeetools.com",
+    "oscarstonenyc.com",
+    "watchguynyc.com",
+    "mefoto.com",
+    "duvalfits.com",
+    "psychobunny.com",
+    "myvega.com",
+    "vuoriclothing.com",
+    "coldsteel.com",
+    "rcworst.com",
+    "teamprostandard.com",
+    "bananas.com",
+    "squareup.com"
+  ],
+  "solve-media": [
+    "socialmediainuk.com",
+    "safelinking.com",
+    "shortit.pw",
+    "vude.de",
+    "hedichina.com",
+    "syamsecurity.blogspot.com",
+    "russia-edu.ru",
+    "cppsmeorijinal.blogspot.com",
+    "bitcoinker.com",
+    "weatherx.co.in",
+    "safelinking.net",
+    "bzn.us",
+    "faucetofbob.xyz",
+    "privatedelegate.biz",
+    "chan155.wodemo.com",
+    "freebitcoin.biz",
+    "ubercount.com",
+    "kikurl.com",
+    "tappingbox.com",
+    "bruce-lab.blogspot.fr"
+  ],
+  "sqreen": [
+    "lemonde.fr",
+    "importrust.com",
+    "alan.com",
+    "ikebanavase.com",
+    "patreon.com",
+    "dieutaime.com",
+    "sulamita.com.br",
+    "agwayofportjefferson.com",
+    "harmoniemutuellesemideparis.com",
+    "donorbox.org",
+    "lojalaguapa.com.br",
+    "bechtelsvilleagway.com",
+    "triciasmith.realscout.com",
+    "forgethenarrative.com",
+    "yoopies.pt",
+    "sanjorge.cafe",
+    "monego.fr",
+    "sertaoshop.com.br",
+    "nanomax.com.br",
+    "myutm.sophos.com"
+  ],
+  "sucuri": [
+    "azhealthclub.com.hk",
+    "azlive.co.kr",
+    "programafazbem.com.br",
+    "solunum724.com",
+    "stopsn.com.ua",
+    "yes2breathe.co.za",
+    "astrazeneca724.tv",
+    "az-engage.com",
+    "myphakamisa.com",
+    "impactacademy.astrazeneca.com",
+    "milwaukeegutterguard.com",
+    "tnaguideservice.com",
+    "techbullion.com",
+    "stormguardrc.com",
+    "renu.inc",
+    "out-teach.org",
+    "otd.harvard.edu",
+    "mspcorp.ca",
+    "moynihancenter.ccny.cuny.edu",
+    "leapsandboundsschool.com"
+  ],
+  "tencent-waterproof-wall": [
+    "caterware.com.au",
+    "open.yuewen.com",
+    "lingostar.me",
+    "sz-pharma.com",
+    "sinodis.com",
+    "168tcw.cn",
+    "pymh.com",
+    "joyinflatable.com",
+    "cifnews.com",
+    "ydniu.com",
+    "iplpowersupply.com",
+    "yqn.com",
+    "asianfinancialforum.hktdc.com",
+    "aptekcables.com",
+    "nhash.net",
+    "77377.net",
+    "yingyan.com",
+    "yangtao.com",
+    "66949.com",
+    "38365.com"
+  ],
+  "threatmetrix": [
+    "liveclairmont.com",
+    "grizzly.com",
+    "wayfair.com",
+    "dlpwexford.com",
+    "brooklynhair.com",
+    "atbbq.com",
+    "row.venum.com",
+    "dell.com",
+    "busybeetools.com",
+    "metalmemories.net",
+    "thestand.apartments",
+    "theshelby.apartments",
+    "thevirginia.apartments",
+    "therhoads.apartments",
+    "tuscanyvillas.apartments",
+    "lakeeolaheights.apartments",
+    "theblackwell.apartments",
+    "themorton.apartments",
+    "silversprings.apartments",
+    "thefisher.apartments"
+  ],
+  "truvalidate": [
+    "samsung.com",
+    "nike.com",
+    "whitakerinsurancegroup.com",
+    "aarons.com",
+    "hazletonhonda.com",
+    "thebowersagency.com",
+    "statebankofodell.com",
+    "midcountrybank.com",
+    "kerndtbrothers.com",
+    "epremierbank.com",
+    "htbmn.com",
+    "greatplainsbank.com",
+    "fmcommunity.com",
+    "firstnebraskabank.com",
+    "fcb4u.com",
+    "ebankstar.com",
+    "csbarlington.com",
+    "kttape.com",
+    "unitedbank4u.com",
+    "astra.bank"
   ]
 }
