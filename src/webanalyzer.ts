@@ -84,6 +84,7 @@ const WebAnalyzer = {
       scriptSrc,
       js,
       meta,
+      dom,
     };
   },
 
@@ -198,6 +199,27 @@ const WebAnalyzer = {
         ) {
           detected = true;
           detectedUsing = "meta";
+        }
+      }
+
+      // Match DOM
+      if (!detected && techData.dom && site_data.dom) {
+        const document = site_data.dom.window.document;
+        const domPatterns = Array.isArray(techData.dom)
+          ? techData.dom
+          : [techData.dom];
+
+        if (
+          domPatterns.some((selector: string) => {
+            try {
+              return document.querySelector(selector) !== null;
+            } catch (e) {
+              return false;
+            }
+          })
+        ) {
+          detected = true;
+          detectedUsing = "dom";
         }
       }
 

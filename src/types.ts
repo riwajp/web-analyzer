@@ -8,6 +8,7 @@ export type SiteData = {
   scriptSrc: string[];
   js: string[];
   meta: Record<string, string>;
+  dom: any;
 };
 
 export type DetectedTechnology = {
