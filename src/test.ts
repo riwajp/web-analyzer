@@ -1,60 +1,51 @@
 import fs from "fs";
-import { detectTechnology } from "./index";
+import path from "path";
+import { detectTechnology } from "./index"; // Assumes JS export
 
-const test_sites = JSON.parse(
-  fs.readFileSync("src/data/technologies_test.json", "utf-8")
+// Read input JSON: { tech1: [...urls], tech2: [...urls] }
+const data: any[] = JSON.parse(
+  fs.readFileSync("src/data/output.json", "utf-8")
 );
 
-console.log(test_sites);
+// Flatten all domain arrays into one list
+const urls: string[] = Object.values(data).flat();
 
-// Run tests and benchmark
-const results: any = [];
-let count = 0;
+async function detectOnUrl(url: string) {
+  console.log(`🔍 Detecting technologies on ${url}...`);
+  try {
+    const detection_results = await detectTechnology(`https://${url}`);
+    return {
+      url,
+      detection_results,
+    };
+  } catch (err) {
+    console.warn(
+      `⚠️  Error on ${url}: ${err instanceof Error ? err.message : err}`
+    );
+    return {
+      url,
+      error: err instanceof Error ? err.message : String(err),
+    };
+  }
+}
 
-(async () => {
-  for (const url of Object.keys(test_sites)) {
-    const expected: string[] = test_sites[url];
+async function run() {
+  const results: any[] = [];
 
-    try {
-      const detection_results = await detectTechnology("https://" + url);
+  for (let i = 0; i < urls.length; i++) {
+    const result = await detectOnUrl(urls[i]);
+    results.push(result);
 
-      const falsePositives = detection_results.technologies.filter(
-        (d) => !expected.includes(d.name)
-      );
-      const missed = expected.filter(
-        (e) => !detection_results.technologies.find((d) => d.name == e)
-      );
-
-      results.push({
-        url,
-        expected,
-        detection_results: detection_results,
-        falsePositives,
-        missed,
-        match:
-          expected.length === detection_results.technologies.length &&
-          falsePositives.length === 0,
-      });
-
-      console.log(`Processed ${url}`);
-    } catch (err) {
-      console.error(`Error processing ${url}:`, err);
-      results.push({
-        url,
-        error: err instanceof Error ? err.message : String(err),
-      });
-    }
-
-    count++;
-
-    // Save every 20 URLs
-    if (count % 20 === 0) {
-      fs.writeFileSync("test_results-1.json", JSON.stringify(results, null));
-      console.log(`Saved progress after ${count} sites.`);
+    // Save after every 10 URLs
+    if ((i + 1) % 10 === 0 || i === urls.length - 1) {
+      fs.writeFileSync("test_results.json", JSON.stringify(results, null, 2));
+      console.log(`💾 Progress saved after ${i + 1} URLs`);
     }
   }
 
-  // Write results
-  fs.writeFileSync("test_results-1.json", JSON.stringify(results, null));
-  console.log("Test results saved to test_results-1.json");
-})();
+  console.log(
+    `✅ Finished. ${results.length} URLs processed. Results saved to test_results.json`
+  );
+}
+
+run();

@@ -12,6 +12,7 @@ function ensureInitialized() {
 // detect technology for a given URL
 export async function detectTechnology(url: string): Promise<DetectionResult> {
   ensureInitialized();
+  console.log(`Detecting technologies for: ${url}`);
 
   // timings for benchmarks
   const timings: Record<string, number> = {};
