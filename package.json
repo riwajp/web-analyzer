@@ -20,6 +20,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "jsdom": "^26.1.0"
+    "jsdom": "^26.1.0",
+    "webappalyzer-js": "^1.0.7"
   }
 }

@@ -36,9 +36,14 @@
     "cookies": {
       "ak_bmsc": "",
       "bm_sv": "",
-      "bm_sz": ""
+      "bm_sz": "",
+      "abck": ""
     },
-    "description": "Akamai Bot Manager detect bots using device fingerprinting bot signatures.",
+    "headers": {
+      "akamai-grn": ".+",
+      "set-cookie": "abck=|bm_sz=|ak_bmsc=|bm_sv="
+    },
+    "description": "Akamai Bot Manager detects bots using device fingerprinting and behavioral signatures.",
     "icon": "Akamai.svg",
     "implies": ["Akamai"],
     "pricing": ["poa"],
@@ -87,8 +92,10 @@
     },
     "pricing": ["low", "recurring"],
     "saas": true,
-    "js": { "/antibot8/8.php": "" },
     "scriptSrc": ["/antibot8/static/peel\\.js"],
+    "js": {
+      "/antibot8/8.php": ""
+    },
     "website": "https://antibot.cloud"
   },
   "adCAPTCHA": {
@@ -358,6 +365,10 @@
     "cats": [16],
     "description": "Friendly Captcha is a proof-of-work based solution in which the user’s device does all the work.",
     "dom": ["div.frc-captcha"],
+    "headers": {
+      "host": "friendlycaptcha\\.com",
+      "referer": "friendlycaptcha\\.com"
+    },
     "icon": "FriendlyCaptcha.svg",
     "pricing": ["low", "freemium", "recurring", "poa"],
     "saas": true,
@@ -374,15 +385,29 @@
   },
   "GeeTest": {
     "cats": [16],
-    "description": "GeeTest is a CAPTCHA and bot management provider, protects websites, mobile apps, and APIs from automated bot-driven attacks, like ATO, credential stuffing, web scalping, etc.",
-    "headers": {
-      "content-security-policy": "\\.geetest\\.com"
-    },
+    "description": "GeeTest is a CAPTCHA and bot management provider that protects websites, mobile apps, and APIs from automated bot-driven attacks such as credential stuffing, scraping, and account takeover. This detection includes GT3 and GT4 variants.",
     "icon": "GeeTest.svg",
     "pricing": ["poa"],
     "saas": true,
-    "scriptSrc": ["\\.geetest\\.com/"],
-    "website": "https://www.geetest.com"
+    "website": "https://www.geetest.com",
+    "headers": {
+      "content-security-policy": "\\.geetest\\.com",
+      "set-cookie": "GeeTestCaptcha|geetest"
+    },
+    "scriptSrc": [
+      "\\.geetest\\.com/",
+      "static\\.geetest\\.com/static/js/gt",
+      "gt4\\.geetest\\.com",
+      "gcaptcha4\\.geetest\\.com/load",
+      "gcaptcha4\\.geetest\\.com/register-slide",
+      "gcaptcha4\\.geetest\\.com/validate-slide"
+    ],
+    "html": "captcha_id=|challenge=|gt4-init",
+    "cookies": {
+      "GeeTestCaptcha": "",
+      "geeTestUser": "",
+      "captcha_v[1-9][0-9]*": ""
+    }
   },
   "HSTS": {
     "cats": [16],
@@ -932,9 +957,7 @@
     },
     "pricing": ["freemium", "low", "recurring"],
     "requires": ["WordPress"],
-    "scriptSrc": [
-      "/wp-content/plugins/wordfence/.+admin\\.ajaxWatcher\\.\\d+\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1"
-    ],
+    "scriptSrc": ["/wp-content/plugins/wordfence/"],
     "website": "https://www.wordfence.com"
   },
   "Wordfence Login Security": {
@@ -943,9 +966,7 @@
     "icon": "Wordfence.svg",
     "pricing": ["freemium", "low", "recurring"],
     "requires": ["WordPress"],
-    "scriptSrc": [
-      "/wp-content/plugins/wordfence/.+login\\.\\d+\\.js(?:\\?ver=(\\d+(?:\\.\\d+)+))?\\;version:\\1"
-    ],
+    "scriptSrc": ["/wp-content/plugins/wordfence/"],
     "website": "https://www.wordfence.com"
   },
   "Yandex SmartCaptcha": {
