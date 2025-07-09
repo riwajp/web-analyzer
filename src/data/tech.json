@@ -1,0 +1,376 @@
+{
+    "Cloudflare": {
+      "description": "Cloudflare DDoS protection and bot management",
+      "website": "https://www.cloudflare.com",
+      "headers": {
+        "cf-ray": ".*",
+        "cf-cache-status": ".*",
+        "server": "cloudflare"
+      },
+      "cookies": {
+        "__cf_bm": ".*",
+        "cf_clearance": ".*",
+        "__cfruid": ".*"
+      },
+      "js": [
+        "challenge-platform",
+        "cf-4/",
+        "cloudflare-static/rocket-loader",
+        "/cdn-cgi/challenge-platform/"
+      ],
+      "html": [
+        "Checking your browser before accessing",
+        "DDoS protection by Cloudflare",
+        "Ray ID:",
+        "cf-browser-verification"
+      ],
+      "scriptSrc": [
+        "/cdn-cgi/challenge-platform/",
+        "cloudflare-static/rocket-loader"
+      ]
+    },
+    "DataDome": {
+      "description": "DataDome bot protection",
+      "website": "https://datadome.co",
+      "scriptSrc": [
+        "js\\.datadome\\.co",
+        "ct\\.datadome\\.co"
+      ],
+      "js": [
+        "dataDome",
+        "dd_cookie_test",
+        "DD_RUM"
+      ],
+      "cookies": {
+        "datadome": ".*"
+      },
+      "headers": {
+        "x-dd-debug": ".*"
+      },
+      "html": [
+        "DataDome"
+      ]
+    },
+    "Imperva Incapsula": {
+      "description": "Imperva Incapsula bot protection",
+      "website": "https://www.imperva.com",
+      "cookies": {
+        "visid_incap_": ".*",
+        "incap_ses_": ".*",
+        "___utmvc": ".*"
+      },
+      "headers": {
+        "x-iinfo": ".*",
+        "x-cdn": "Incapsula"
+      },
+      "js": [
+        "incapsula",
+        "imperva"
+      ],
+      "html": [
+        "Request unsuccessful. Incapsula incident ID"
+      ]
+    },
+    "Akamai Bot Manager": {
+      "description": "Akamai Bot Manager protection",
+      "website": "https://www.akamai.com",
+      "cookies": {
+        "_abck": ".*",
+        "ak_bmsc": ".*",
+        "bm_sz": ".*",
+        "_bm_sv": ".*"
+      },
+      "js": [
+        "akamai",
+        "bmak",
+        "challenge.js"
+      ],
+      "headers": {
+        "akamai-origin-hop": ".*"
+      },
+      "scriptSrc": [
+        "akam-sw.js"
+      ]
+    },
+    "PerimeterX": {
+      "description": "PerimeterX bot protection",
+      "website": "https://www.perimeterx.com",
+      "cookies": {
+        "_px2": ".*",
+        "_px3": ".*",
+        "_pxhd": ".*",
+        "_pxde": ".*"
+      },
+      "js": [
+        "perimeterx",
+        "px-captcha",
+        "_pxAppId"
+      ],
+      "headers": {
+        "x-px-original-token": ".*"
+      },
+      "scriptSrc": [
+        "client\\.perimeterx\\.net"
+      ]
+    },
+    "Shape Security": {
+      "description": "Shape Security bot protection",
+      "website": "https://www.shapesecurity.com",
+      "scriptSrc": [
+        "\\.chunk\\.js",
+        "shape.*security"
+      ],
+      "js": [
+        "shape",
+        "botguard"
+      ],
+      "html": [
+        "shape security"
+      ]
+    },
+    "reCAPTCHA": {
+      "description": "Google reCAPTCHA",
+      "website": "https://www.google.com/recaptcha",
+      "scriptSrc": [
+        "recaptcha.*\\.js",
+        "www\\.google\\.com/recaptcha"
+      ],
+      "js": [
+        "grecaptcha",
+        "g-recaptcha"
+      ],
+      "html": [
+        "g-recaptcha",
+        "recaptcha"
+      ],
+      "dom": {
+        ".g-recaptcha": true,
+        "[data-sitekey]": true
+      }
+    },
+    "hCaptcha": {
+      "description": "hCaptcha bot protection",
+      "website": "https://www.hcaptcha.com",
+      "scriptSrc": [
+        "hcaptcha\\.com.*\\.js"
+      ],
+      "js": [
+        "hcaptcha"
+      ],
+      "html": [
+        "h-captcha"
+      ],
+      "dom": {
+        ".h-captcha": true
+      }
+    },
+    "Arkose Labs": {
+      "description": "Arkose Labs FunCaptcha",
+      "website": "https://www.arkoselabs.com",
+      "scriptSrc": [
+        "client-api\\.arkoselabs\\.com",
+        "funcaptcha\\.com"
+      ],
+      "js": [
+        "funcaptcha",
+        "arkose"
+      ],
+      "html": [
+        "funcaptcha"
+      ]
+    },
+    "Kasada": {
+      "description": "Kasada bot protection",
+      "website": "https://www.kasada.io",
+      "scriptSrc": [
+        "kasada"
+      ],
+      "js": [
+        "kasada",
+        "kpsdk"
+      ],
+      "cookies": {
+        "x-kpsdk-ct": ".*"
+      }
+    },
+    "Distil Networks": {
+      "description": "Distil Networks bot protection",
+      "website": "https://www.distilnetworks.com",
+      "cookies": {
+        "distil_RID": ".*"
+      },
+      "js": [
+        "distil"
+      ],
+      "html": [
+        "distil_r_blocked"
+      ]
+    },
+    "Radware": {
+      "description": "Radware bot protection",
+      "website": "https://www.radware.com",
+      "cookies": {
+        "rdwrCookie": ".*"
+      },
+      "js": [
+        "radware"
+      ]
+    },
+    "Reblaze": {
+      "description": "Reblaze bot protection",
+      "website": "https://www.reblaze.com",
+      "cookies": {
+        "rbzid": ".*",
+        "rbzsessionid": ".*"
+      },
+      "js": [
+        "reblaze"
+      ]
+    },
+    "Queue-Fair": {
+      "description": "Queue-Fair virtual waiting room",
+      "website": "https://queue-fair.com",
+      "scriptSrc": [
+        "queue-fair"
+      ],
+      "js": [
+        "queue-fair",
+        "queuefair"
+      ],
+      "cookies": {
+        "QueueFair": ".*"
+      }
+    },
+    "F5 BIG-IP ASM": {
+      "description": "F5 BIG-IP Application Security Manager",
+      "website": "https://www.f5.com",
+      "cookies": {
+        "BIGipServer": ".*",
+        "F5_fullWT": ".*",
+        "LastMRH_Session": ".*"
+      },
+      "headers": {
+        "x-waf-event-info": ".*"
+      }
+    },
+    "Amazon CloudFront": {
+      "description": "Amazon CloudFront CDN with bot protection",
+      "website": "https://aws.amazon.com/cloudfront",
+      "headers": {
+        "x-amz-cf-id": ".*",
+        "x-amz-cf-pop": ".*",
+        "via": ".*cloudfront.*"
+      }
+    },
+    "Sucuri": {
+      "description": "Sucuri Website Firewall",
+      "website": "https://sucuri.net",
+      "headers": {
+        "x-sucuri-id": ".*",
+        "x-sucuri-cache": ".*"
+      },
+      "html": [
+        "sucuri",
+        "Access Denied - Sucuri Website Firewall"
+      ]
+    },
+    "Barracuda": {
+      "description": "Barracuda Web Application Firewall",
+      "website": "https://www.barracuda.com",
+      "cookies": {
+        "barra_counter_session": ".*"
+      },
+      "html": [
+        "barracuda"
+      ]
+    },
+    "ModSecurity": {
+      "description": "ModSecurity Web Application Firewall",
+      "website": "https://www.modsecurity.org",
+      "headers": {
+        "x-mod-pagespeed": ".*"
+      },
+      "html": [
+        "mod_security",
+        "ModSecurity"
+      ]
+    },
+    "Fortinet FortiWeb": {
+      "description": "Fortinet FortiWeb WAF",
+      "website": "https://www.fortinet.com",
+      "cookies": {
+        "FORTIWAFSID": ".*"
+      },
+      "headers": {
+        "x-forwarded-for": ".*fortinet.*"
+      }
+    },
+    "Comodo": {
+      "description": "Comodo Web Application Firewall",
+      "website": "https://www.comodo.com",
+      "html": [
+        "Protected by Comodo WAF"
+      ]
+    },
+    "GeeTest": {
+      "description": "GeeTest CAPTCHA",
+      "website": "https://www.geetest.com",
+      "scriptSrc": [
+        "geetest\\.com"
+      ],
+      "js": [
+        "geetest",
+        "initGeetest"
+      ],
+      "html": [
+        "geetest"
+      ]
+    },
+    "KeyCAPTCHA": {
+      "description": "KeyCAPTCHA",
+      "website": "https://www.keycaptcha.com",
+      "scriptSrc": [
+        "keycaptcha"
+      ],
+      "js": [
+        "keycaptcha"
+      ]
+    },
+    "Turnstile": {
+      "description": "Cloudflare Turnstile CAPTCHA",
+      "website": "https://www.cloudflare.com/products/turnstile",
+      "scriptSrc": [
+        "challenges\\.cloudflare\\.com/turnstile"
+      ],
+      "js": [
+        "turnstile"
+      ],
+      "html": [
+        "cf-turnstile"
+      ],
+      "dom": {
+        ".cf-turnstile": true
+      }
+    },
+    "Auth0": {
+      "description": "Auth0 Bot Detection",
+      "website": "https://auth0.com",
+      "scriptSrc": [
+        "cdn\\.auth0\\.com"
+      ],
+      "js": [
+        "auth0"
+      ]
+    },
+    "AWS WAF": {
+      "description": "Amazon Web Services WAF",
+      "website": "https://aws.amazon.com/waf",
+      "headers": {
+        "x-amzn-requestid": ".*",
+        "x-amzn-trace-id": ".*"
+      },
+      "html": [
+        "AWS WAF"
+      ]
+    }
+  }
