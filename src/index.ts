@@ -5,16 +5,14 @@ import type { TechnologiesMap, DetectionResult } from "./types";
 
 function ensureInitialized() {
   if (!WebAnalyzer.initialized) {
-    // Load all technologies data
-    WebAnalyzer.init(["src/data/technologies.json"]);
+    WebAnalyzer.init(["src/data/tech.json"]);
   }
 }
-// detect technology for a given URL
+
 export async function detectTechnology(url: string): Promise<DetectionResult> {
   ensureInitialized();
   console.log(`Detecting technologies for: ${url}`);
 
-  // timings for benchmarks
   const timings: Record<string, number> = {};
 
   try {
@@ -22,7 +20,7 @@ export async function detectTechnology(url: string): Promise<DetectionResult> {
     const url_data = await WebAnalyzer.fetchURL(url);
     timings.afterFetch = performance.now();
 
-    const site_data = WebAnalyzer.parseSourceCode(url_data.source_code);
+    const site_data = await WebAnalyzer.parseSourceCode(url_data.source_code, url);
     timings.afterParse = performance.now();
 
     const detected_technologies = WebAnalyzer.detectPatterns(
@@ -48,47 +46,35 @@ export async function detectTechnology(url: string): Promise<DetectionResult> {
     return result;
   } catch (error) {
     console.error(`Error processing ${url}:`, error);
-    // throw error;
-    return {} as DetectionResult; // Return empty result on error
+    return {} as DetectionResult;  
   }
 }
 
-// Append result to a JSONL file
 export function appendToJSONL(filePath: string, entry: DetectionResult): void {
   const jsonLine = JSON.stringify(entry) + "\n";
   fs.appendFileSync(filePath, jsonLine, "utf-8");
 }
 
-// const urls = [
-//   "https://www.cloudflare.com/",
-//   "https://vercel.com/",
-//   "https://unsplash.com/",
-//   "https://laterical.com/",
-//   "https://riwaj-tetris-game.netlify.app/",
-//   "https://www.linkedin.com/feed/",
-//   "https://github.com/",
-//   "https://www.figma.com/",
-//   "https://www.booking.com/",
-//   "https://chatgpt.com/",
-//   "https://huggingface.co/",
-// ];
+const urls = [
+  "https://www.godaddy.com/"
+];
 
-// const outputFile = "detected_technologies.jsonl";
+const outputFile = "detected_technologies.jsonl";
 
-// (async () => {
-//   for (const url of urls) {
-//     try {
-//       const result = await detectTechnology(url);
-//       if (!result) {
-//         console.log(`No result for URL: ${url}`);
-//         continue;
-//       }
-//       appendToJSONL(outputFile, result);
-//     } catch (error) {
-//       console.log(`Error processing URL:${url}`, error);
-//       throw error;
-//     }
-//   }
+(async () => {
+  for (const url of urls) {
+    try {
+      const result = await detectTechnology(url);
+      if (!result) {
+        console.log(`No result for URL: ${url}`);
+        continue;
+      }
+      appendToJSONL(outputFile, result);
+    } catch (error) {
+      console.log(`Error processing URL:${url}`, error);
+      throw error;
+    }
+  }
 
-//   console.log(`All results saved to ${outputFile}`);
-// })();
+  console.log(`All results saved to ${outputFile}`);
+})();

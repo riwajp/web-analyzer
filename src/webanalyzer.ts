@@ -48,32 +48,50 @@ const WebAnalyzer = {
   },
 
   // Parses the source code of a webpage and extracts components for further analysis and detection
-  parseSourceCode: (source_code: string): SiteData => {
+  parseSourceCode: async (source_code: string, baseUrl?: string): Promise<SiteData> => {
     const dom = new JSDOM(source_code);
     const doc = dom.window.document;
 
-    //  extract script src attributes
+    // extract script src attributes
     const scriptSrc = Array.from<HTMLElement>(
       doc.querySelectorAll("script[src]")
     )
       .map((el) => el.getAttribute("src"))
       .filter((src) => src != null);
 
-    // extract script text content
-    const js = Array.from<HTMLElement>(doc.querySelectorAll("script"))
+    // extract inline script text content
+    let js = Array.from<HTMLElement>(doc.querySelectorAll("script"))
       .map((el) => el.textContent || "")
       .filter((script) => script.trim());
 
-    //  extract meta data
-    const meta: Record<string, string> = {};
+    // fetch and add external JS file contents (limit to 50 for performance)
+    if (baseUrl && scriptSrc.length > 0) {
+      const fetchPromises = scriptSrc.slice(0, 50).map(async (src) => {
+        try {
+          // Handle relative URLs
+          const url = src.startsWith("http") ? src : new URL(src, baseUrl).href;
+          const res = await fetch(url);
+          if (res.ok) {
+            const text = await res.text();
+            return text;
+          }
+        } catch (e) {
+          // Ignore fetch errors
+        }
+        return null;
+      });
+      const externalJs = await Promise.all(fetchPromises);
+      js = js.concat(externalJs.filter(Boolean) as string[]);
+    }
 
+    // extract meta data
+    const meta: Record<string, string> = {};
     Array.from<HTMLElement>(doc.querySelectorAll("meta")).forEach(
       (metaElement) => {
         const nameAttr =
           metaElement.getAttribute("name") ||
           metaElement.getAttribute("property");
         const contentAttr = metaElement.getAttribute("content");
-
         if (nameAttr && contentAttr) {
           meta[nameAttr.toLowerCase()] = contentAttr;
         }
@@ -118,6 +136,13 @@ const WebAnalyzer = {
     const detectedTechnologies: any[] = [];
     const visited = new Set<string>();
 
+    // Technologies that can be detected with a single strong signal
+    const strongMatchTechs = ["Amazon CloudFront"];
+
+    // Debug: print scriptSrcs and headers
+    console.log("[DEBUG] scriptSrcs:", site_data.scriptSrc);
+    console.log("[DEBUG] headers:", Array.from(url_data.headers.entries()));
+
     const detect = (techName: string) => {
       if (visited.has(techName)) return;
       visited.add(techName);
@@ -125,85 +150,88 @@ const WebAnalyzer = {
       const techData = WebAnalyzer.technologies[techName];
       if (!techData) return;
 
-      let detected = false;
-      let detectedUsing: string | null = null;
+      let detectedTypes: string[] = [];
 
       // Match JavaScript keys
       if (
         techData.js &&
         site_data.js.some((script) =>
-          Object.keys(techData.js).some((key) =>
-            WebAnalyzer.matchPattern(script, key)
-          )
+          Object.keys(techData.js).some((key) => {
+            const matched = WebAnalyzer.matchPattern(script, key);
+            if (matched) {
+              console.log(`[DEBUG] JS match for ${techName}: pattern="${key}" in script:`, script.slice(0, 100));
+            }
+            return matched;
+          })
         )
       ) {
-        detected = true;
-        detectedUsing = "js";
+        detectedTypes.push("js");
       }
 
       // Match scriptSrc
-      if (!detected && techData.scriptSrc) {
+      if (techData.scriptSrc) {
         const patterns = Array.isArray(techData.scriptSrc)
           ? techData.scriptSrc
           : [techData.scriptSrc];
 
         if (
           patterns.some((pattern: string) =>
-            site_data.scriptSrc.some((src) =>
-              WebAnalyzer.matchPattern(src, pattern)
-            )
+            site_data.scriptSrc.some((src) => {
+              const matched = WebAnalyzer.matchPattern(src, pattern);
+              if (matched) {
+                console.log(`[DEBUG] scriptSrc match for ${techName}: pattern="${pattern}" in src:`, src);
+              }
+              return matched;
+            })
           )
         ) {
-          detected = true;
-          detectedUsing = "scriptSrc";
+          detectedTypes.push("scriptSrc");
         }
       }
 
       // Match cookies
-      if (!detected && techData.cookies) {
+      if (techData.cookies) {
         if (
           Object.keys(techData.cookies).some((key) =>
             url_data.cookies.includes(key)
           )
         ) {
-          detected = true;
-          detectedUsing = "cookies";
+          detectedTypes.push("cookies");
         }
       }
 
       // Match headers
-      if (!detected && techData.headers) {
+      if (techData.headers) {
         if (
           Object.entries(techData.headers).some(([key, val]: [string, any]) => {
             const headerValue = url_data.headers.get(
               key.trim().replace(":", "")
             );
-            return (
-              headerValue !== null &&
-              (val === "" || WebAnalyzer.matchPattern(headerValue, val))
-            );
+            const matched = headerValue !== null && (val === "" || WebAnalyzer.matchPattern(headerValue, val));
+            if (matched) {
+              console.log(`[DEBUG] header match for ${techName}: header="${key}" value="${headerValue}"`);
+            }
+            return matched;
           })
         ) {
-          detected = true;
-          detectedUsing = "headers";
+          detectedTypes.push("headers");
         }
       }
 
       // Match meta
-      if (!detected && techData.meta && site_data.meta) {
+      if (techData.meta && site_data.meta) {
         if (
           Object.entries(techData.meta).some(([key, val]: [string, any]) => {
             const metaVal = site_data.meta[key.toLowerCase()];
             return metaVal ? WebAnalyzer.matchPattern(metaVal, val) : false;
           })
         ) {
-          detected = true;
-          detectedUsing = "meta";
+          detectedTypes.push("meta");
         }
       }
 
       // Match DOM
-      if (!detected && techData.dom && site_data.dom) {
+      if (techData.dom && site_data.dom) {
         const document = site_data.dom.window.document;
         const domPatterns = Array.isArray(techData.dom)
           ? techData.dom
@@ -218,13 +246,15 @@ const WebAnalyzer = {
             }
           })
         ) {
-          detected = true;
-          detectedUsing = "dom";
+          detectedTypes.push("dom");
         }
       }
 
-      if (detected) {
-        detectedTechnologies.push({ name: techName, detectedUsing });
+      // Allow strong single match for certain technologies
+      const minMatches = strongMatchTechs.includes(techName) ? 1 : 2;
+      if (detectedTypes.length >= minMatches) {
+        console.log(`[DETECTED] ${techName} using: ${detectedTypes.join(", ")}`);
+        detectedTechnologies.push({ name: techName, detectedUsing: detectedTypes });
 
         // Recursively add implied technologies
         const implies = techData.implies;

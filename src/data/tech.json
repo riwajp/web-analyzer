@@ -260,7 +260,10 @@
         "x-amz-cf-id": ".*",
         "x-amz-cf-pop": ".*",
         "via": ".*cloudfront.*"
-      }
+      },
+      "scriptSrc": [
+        "cloudfront\\.net"
+      ]
     },
     "Sucuri": {
       "description": "Sucuri Website Firewall",
