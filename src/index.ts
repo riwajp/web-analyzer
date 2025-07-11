@@ -56,11 +56,6 @@ export async function detectTechnology(url: string): Promise<DetectionResult> {
   }
 }
 
-export function appendToJSONL(filePath: string, entry: DetectionResult): void {
-  const jsonLine = JSON.stringify(entry) + "\n";
-  fs.appendFileSync(filePath, jsonLine, "utf-8");
-}
-
 const urls = [
   "https://www.fiverr.com/",
   "https://www.footlocker.com/",
@@ -157,10 +152,10 @@ const urls = [
   "https://www.worten.pt/"
 ];
 
-
-const outputFile = "brightData-premium-domains.jsonl";
+const outputFile = "brightData-premium-domains.json";
 
 (async () => {
+  const allResults: DetectionResult[] = [];
   for (const url of urls) {
     try {
       const result = await detectTechnology(url);
@@ -168,12 +163,14 @@ const outputFile = "brightData-premium-domains.jsonl";
         console.log(`No result for URL: ${url}`);
         continue;
       }
-      appendToJSONL(outputFile, result);
+      allResults.push(result);
     } catch (error) {
       console.log(`Error processing URL:${url}`, error);
       throw error;
     }
   }
 
+  // Write all results as a JSON array
+  fs.writeFileSync(outputFile, JSON.stringify(allResults, null, 2), "utf-8");
   console.log(`All results saved to ${outputFile}`);
 })();
