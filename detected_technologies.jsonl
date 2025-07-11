@@ -5,3 +5,5 @@
 {"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":1760.22,"parse":1652.65,"detect":40.34,"total":3453.21}}
 {"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":1883.53,"parse":1679.63,"detect":44.75,"total":3607.91}}
 {"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":1775.23,"parse":2735.31,"detect":38.22,"total":4548.76}}
+{"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":3373.55,"parse":3394.68,"detect":19.98,"total":6788.21}}
+{"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":2757.6,"parse":5214.09,"detect":33.42,"total":8005.1}}

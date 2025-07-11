@@ -59,6 +59,17 @@ const WebAnalyzer = {
       .map((el) => el.getAttribute("src"))
       .filter((src) => src != null);
 
+    // extract all asset URLs (scripts, links, images, etc.)
+    const assetUrls = [
+      ...Array.from(doc.querySelectorAll("script[src]")).map(el => el.getAttribute("src")),
+      ...Array.from(doc.querySelectorAll("link[href]" )).map(el => el.getAttribute("href")),
+      ...Array.from(doc.querySelectorAll("img[src]"   )).map(el => el.getAttribute("src")),
+      ...Array.from(doc.querySelectorAll("iframe[src]" )).map(el => el.getAttribute("src")),
+      ...Array.from(doc.querySelectorAll("source[src]" )).map(el => el.getAttribute("src")),
+      ...Array.from(doc.querySelectorAll("video[src]"  )).map(el => el.getAttribute("src")),
+      ...Array.from(doc.querySelectorAll("audio[src]"  )).map(el => el.getAttribute("src")),
+    ].filter((src): src is string => !!src);
+
     // extract inline script text content
     let js = Array.from<HTMLElement>(doc.querySelectorAll("script"))
       .map((el) => el.textContent || "")
@@ -103,6 +114,7 @@ const WebAnalyzer = {
       js,
       meta,
       dom,
+      assetUrls,
     };
   },
 
@@ -141,6 +153,7 @@ const WebAnalyzer = {
 
     // Debug: print scriptSrcs and headers
     console.log("[DEBUG] scriptSrcs:", site_data.scriptSrc);
+    console.log("[DEBUG] assetUrls:", site_data.assetUrls);
     console.log("[DEBUG] headers:", Array.from(url_data.headers.entries()));
 
     const detect = (techName: string) => {
@@ -168,7 +181,7 @@ const WebAnalyzer = {
         detectedTypes.push("js");
       }
 
-      // Match scriptSrc
+      // Match scriptSrc and assetUrls
       if (techData.scriptSrc) {
         const patterns = Array.isArray(techData.scriptSrc)
           ? techData.scriptSrc
@@ -176,10 +189,10 @@ const WebAnalyzer = {
 
         if (
           patterns.some((pattern: string) =>
-            site_data.scriptSrc.some((src) => {
+            (site_data.assetUrls || []).some((src) => {
               const matched = WebAnalyzer.matchPattern(src, pattern);
               if (matched) {
-                console.log(`[DEBUG] scriptSrc match for ${techName}: pattern="${pattern}" in src:`, src);
+                console.log(`[DEBUG] assetUrl match for ${techName}: pattern=\"${pattern}\" in url:`, src);
               }
               return matched;
             })
@@ -200,7 +213,7 @@ const WebAnalyzer = {
         }
       }
 
-      // Match headers
+      // Fix header debug log
       if (techData.headers) {
         if (
           Object.entries(techData.headers).some(([key, val]: [string, any]) => {
@@ -209,7 +222,7 @@ const WebAnalyzer = {
             );
             const matched = headerValue !== null && (val === "" || WebAnalyzer.matchPattern(headerValue, val));
             if (matched) {
-              console.log(`[DEBUG] header match for ${techName}: header="${key}" value="${headerValue}"`);
+              console.log(`[DEBUG] header match for ${techName}: header=\"${key}\" value=\"${headerValue}\"`);
             }
             return matched;
           })
