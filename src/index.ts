@@ -156,17 +156,25 @@ const outputFile = "brightData-premium-domains.json";
 
 (async () => {
   const allResults: DetectionResult[] = [];
+  const defaultTimings = { fetch: 0, parse: 0, detect: 0, total: 0 };
   for (const url of urls) {
     try {
       const result = await detectTechnology(url);
-      if (!result) {
-        console.log(`No result for URL: ${url}`);
-        continue;
+      // Always push a result for every URL
+      if (!result || !result.technologies) {
+        allResults.push({ url, technologies: [], timings: defaultTimings });
+      } else {
+        // If technologies is undefined, set to []
+        allResults.push({
+          ...result,
+          url,
+          technologies: Array.isArray(result.technologies) ? result.technologies : [],
+        });
       }
-      allResults.push(result);
-    } catch (error) {
+    } catch (error: any) {
+      // On error, push a result with empty technologies and default timings
+      allResults.push({ url, technologies: [], timings: defaultTimings });
       console.log(`Error processing URL:${url}`, error);
-      throw error;
     }
   }
 

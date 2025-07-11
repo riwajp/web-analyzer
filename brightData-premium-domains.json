@@ -1,13 +1,22 @@
 [
-  {},
+  {
+    "url": "https://www.fiverr.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.footlocker.com/",
     "technologies": [],
     "timings": {
-      "fetch": 300.06,
-      "parse": 878.81,
-      "detect": 736.88,
-      "total": 1915.75
+      "fetch": 309.41,
+      "parse": 847.28,
+      "detect": 486.48,
+      "total": 1643.17
     }
   },
   {
@@ -23,10 +32,10 @@
       }
     ],
     "timings": {
-      "fetch": 1072.78,
-      "parse": 1020.83,
-      "detect": 1353.42,
-      "total": 3447.03
+      "fetch": 1468.66,
+      "parse": 638.19,
+      "detect": 889.11,
+      "total": 2995.96
     }
   },
   {
@@ -38,10 +47,10 @@
       }
     ],
     "timings": {
-      "fetch": 1140.46,
-      "parse": 44.86,
-      "detect": 8.23,
-      "total": 1193.55
+      "fetch": 1125.52,
+      "parse": 20.68,
+      "detect": 4.83,
+      "total": 1151.03
     }
   },
   {
@@ -57,10 +66,10 @@
       }
     ],
     "timings": {
-      "fetch": 1411.1,
-      "parse": 1342.95,
-      "detect": 970.11,
-      "total": 3724.16
+      "fetch": 1922.46,
+      "parse": 881.29,
+      "detect": 634.63,
+      "total": 3438.37
     }
   },
   {
@@ -80,13 +89,22 @@
       }
     ],
     "timings": {
-      "fetch": 768.52,
-      "parse": 1208.11,
-      "detect": 718.76,
-      "total": 2695.38
+      "fetch": 728.38,
+      "parse": 1781.07,
+      "detect": 483.43,
+      "total": 2992.87
     }
   },
-  {},
+  {
+    "url": "https://www.advanceautoparts.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.affitto.it/",
     "technologies": [
@@ -96,10 +114,10 @@
       }
     ],
     "timings": {
-      "fetch": 1243.43,
-      "parse": 353.36,
-      "detect": 272.48,
-      "total": 1869.27
+      "fetch": 1639.16,
+      "parse": 449.29,
+      "detect": 129.33,
+      "total": 2217.78
     }
   },
   {
@@ -119,14 +137,32 @@
       }
     ],
     "timings": {
-      "fetch": 1130.41,
-      "parse": 1836.71,
-      "detect": 3955.03,
-      "total": 6922.15
+      "fetch": 1140.09,
+      "parse": 1484.27,
+      "detect": 2597.06,
+      "total": 5221.42
     }
   },
-  {},
-  {},
+  {
+    "url": "https://www.albertsons.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.allpeople.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.autozone.com/",
     "technologies": [
@@ -144,10 +180,10 @@
       }
     ],
     "timings": {
-      "fetch": 1869.65,
-      "parse": 1061.54,
-      "detect": 847.65,
-      "total": 3778.84
+      "fetch": 2871.35,
+      "parse": 1951.29,
+      "detect": 647.66,
+      "total": 5470.31
     }
   },
   {
@@ -159,10 +195,10 @@
       }
     ],
     "timings": {
-      "fetch": 358.18,
-      "parse": 705.75,
-      "detect": 626.48,
-      "total": 1690.42
+      "fetch": 406.86,
+      "parse": 653.43,
+      "detect": 480.27,
+      "total": 1540.56
     }
   },
   {
@@ -186,10 +222,10 @@
       }
     ],
     "timings": {
-      "fetch": 759.4,
-      "parse": 1383.29,
-      "detect": 4292.36,
-      "total": 6435.04
+      "fetch": 1640.83,
+      "parse": 1999.66,
+      "detect": 3306.23,
+      "total": 6946.72
     }
   },
   {
@@ -201,18 +237,72 @@
       }
     ],
     "timings": {
-      "fetch": 1850.2,
-      "parse": 1737.9,
-      "detect": 101.78,
-      "total": 3689.88
+      "fetch": 1690.44,
+      "parse": 2309.05,
+      "detect": 89.97,
+      "total": 4089.47
     }
   },
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
+  {
+    "url": "https://www.bottlerover.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.carousell.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.carousell.com.hk/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.carousell.com.my/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.carousell.ph/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.carousell.sg/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.carsales.com.au/",
     "technologies": [
@@ -226,13 +316,22 @@
       }
     ],
     "timings": {
-      "fetch": 1334.37,
-      "parse": 1048.98,
-      "detect": 1981.02,
-      "total": 4364.37
+      "fetch": 1485,
+      "parse": 930.98,
+      "detect": 2244.05,
+      "total": 4660.03
     }
   },
-  {},
+  {
+    "url": "https://www.chewy.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.costco.com/",
     "technologies": [
@@ -246,13 +345,22 @@
       }
     ],
     "timings": {
-      "fetch": 943.54,
-      "parse": 2482.62,
-      "detect": 1145.87,
-      "total": 4572.03
+      "fetch": 808.07,
+      "parse": 1880.71,
+      "detect": 1024.59,
+      "total": 3713.37
     }
   },
-  {},
+  {
+    "url": "https://www.cvs.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.despegar.com.mx/",
     "technologies": [
@@ -270,14 +378,32 @@
       }
     ],
     "timings": {
-      "fetch": 3524.34,
-      "parse": 2133.39,
-      "detect": 1139.91,
-      "total": 6797.65
+      "fetch": 1392.27,
+      "parse": 2248.01,
+      "detect": 787.81,
+      "total": 4428.09
     }
   },
-  {},
-  {},
+  {
+    "url": "https://www.dickssportinggoods.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.dynos.es/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.emaxme.com/",
     "technologies": [
@@ -291,14 +417,32 @@
       }
     ],
     "timings": {
-      "fetch": 1430.26,
-      "parse": 943.05,
-      "detect": 720.76,
-      "total": 3094.06
+      "fetch": 775.76,
+      "parse": 514.72,
+      "detect": 460.02,
+      "total": 1750.5
     }
   },
-  {},
-  {},
+  {
+    "url": "https://www.familytreenow.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.feuvert.fr/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.flooranddecor.com/",
     "technologies": [
@@ -312,26 +456,62 @@
       }
     ],
     "timings": {
-      "fetch": 2528.9,
-      "parse": 1701.47,
-      "detect": 609.73,
-      "total": 4840.1
+      "fetch": 2601,
+      "parse": 1172.94,
+      "detect": 378.78,
+      "total": 4152.72
     }
   },
-  {},
+  {
+    "url": "https://www.foodlion.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.footlocker.co.uk/",
     "technologies": [],
     "timings": {
-      "fetch": 313.78,
-      "parse": 610.74,
-      "detect": 663.42,
-      "total": 1587.94
+      "fetch": 283.26,
+      "parse": 423.09,
+      "detect": 406.13,
+      "total": 1112.48
     }
   },
-  {},
-  {},
-  {},
+  {
+    "url": "https://www.giantfoodstores.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.gopuff.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.gplay.bg/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.hermes.com/",
     "technologies": [
@@ -345,13 +525,22 @@
       }
     ],
     "timings": {
-      "fetch": 842.51,
-      "parse": 753.88,
-      "detect": 483.75,
-      "total": 2080.15
+      "fetch": 842.57,
+      "parse": 531.04,
+      "detect": 283.96,
+      "total": 1657.56
     }
   },
-  {},
+  {
+    "url": "https://www.hyatt.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.idealo.de/",
     "technologies": [
@@ -369,10 +558,10 @@
       }
     ],
     "timings": {
-      "fetch": 1111.26,
-      "parse": 1237.94,
-      "detect": 558.06,
-      "total": 2907.27
+      "fetch": 1138.56,
+      "parse": 830.78,
+      "detect": 367.84,
+      "total": 2337.18
     }
   },
   {
@@ -388,13 +577,22 @@
       }
     ],
     "timings": {
-      "fetch": 859.3,
-      "parse": 1088.41,
-      "detect": 531.27,
-      "total": 2478.98
+      "fetch": 728.03,
+      "parse": 968.55,
+      "detect": 308.87,
+      "total": 2005.45
     }
   },
-  {},
+  {
+    "url": "https://www.ingatlan.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.instacart.com/",
     "technologies": [
@@ -416,10 +614,10 @@
       }
     ],
     "timings": {
-      "fetch": 1016.31,
-      "parse": 2092.17,
-      "detect": 1621.79,
-      "total": 4730.27
+      "fetch": 1092.1,
+      "parse": 1201.31,
+      "detect": 1173.38,
+      "total": 3466.8
     }
   },
   {
@@ -431,13 +629,22 @@
       }
     ],
     "timings": {
-      "fetch": 1560.3,
-      "parse": 2282.47,
-      "detect": 643.98,
-      "total": 4486.75
+      "fetch": 1560.52,
+      "parse": 2275.13,
+      "detect": 2898.68,
+      "total": 6734.33
     }
   },
-  {},
+  {
+    "url": "https://www.joann.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.kroger.com/",
     "technologies": [
@@ -451,10 +658,10 @@
       }
     ],
     "timings": {
-      "fetch": 2778.27,
-      "parse": 1164.09,
-      "detect": 1899.97,
-      "total": 5842.34
+      "fetch": 2258.82,
+      "parse": 1204.65,
+      "detect": 1602.07,
+      "total": 5065.53
     }
   },
   {
@@ -466,10 +673,10 @@
       }
     ],
     "timings": {
-      "fetch": 882.8,
-      "parse": 769.95,
-      "detect": 1551.19,
-      "total": 3203.93
+      "fetch": 1276.65,
+      "parse": 757.34,
+      "detect": 1010.62,
+      "total": 3044.61
     }
   },
   {
@@ -481,10 +688,10 @@
       }
     ],
     "timings": {
-      "fetch": 2135.76,
-      "parse": 420.17,
-      "detect": 931.69,
-      "total": 3487.62
+      "fetch": 1020.02,
+      "parse": 481.85,
+      "detect": 2655.82,
+      "total": 4157.7
     }
   },
   {
@@ -496,10 +703,10 @@
       }
     ],
     "timings": {
-      "fetch": 2607.03,
-      "parse": 321.31,
-      "detect": 764.61,
-      "total": 3692.95
+      "fetch": 2173.81,
+      "parse": 1448.72,
+      "detect": 3470.48,
+      "total": 7093.01
     }
   },
   {
@@ -511,10 +718,10 @@
       }
     ],
     "timings": {
-      "fetch": 2584.3,
-      "parse": 324.7,
-      "detect": 731.82,
-      "total": 3640.82
+      "fetch": 839.28,
+      "parse": 876.2,
+      "detect": 537.46,
+      "total": 2252.94
     }
   },
   {
@@ -526,10 +733,10 @@
       }
     ],
     "timings": {
-      "fetch": 1005.95,
-      "parse": 294.82,
-      "detect": 782.42,
-      "total": 2083.19
+      "fetch": 2196.01,
+      "parse": 524.36,
+      "detect": 875.49,
+      "total": 3595.86
     }
   },
   {
@@ -541,36 +748,72 @@
       }
     ],
     "timings": {
-      "fetch": 2431.68,
-      "parse": 1014.79,
-      "detect": 785.55,
-      "total": 4232.01
+      "fetch": 1959.8,
+      "parse": 473.45,
+      "detect": 936.99,
+      "total": 3370.24
     }
   },
-  {},
+  {
+    "url": "https://www.lowes.ca/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.lowes.com/",
     "technologies": [],
     "timings": {
-      "fetch": 314.16,
-      "parse": 5.82,
-      "detect": 3.75,
-      "total": 323.73
+      "fetch": 469.02,
+      "parse": 7.25,
+      "detect": 5.84,
+      "total": 482.11
     }
   },
   {
     "url": "https://www.mcmaster.com/",
     "technologies": [],
     "timings": {
-      "fetch": 939.87,
-      "parse": 117,
-      "detect": 6.2,
-      "total": 1063.07
+      "fetch": 865.42,
+      "parse": 141.64,
+      "detect": 6.02,
+      "total": 1013.09
     }
   },
-  {},
-  {},
-  {},
+  {
+    "url": "https://www.mediamarkt.de/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.mediamarkt.es/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.medline.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.mscdirect.com/",
     "technologies": [
@@ -580,16 +823,52 @@
       }
     ],
     "timings": {
-      "fetch": 205.94,
-      "parse": 7.22,
-      "detect": 4.96,
-      "total": 218.12
+      "fetch": 227.12,
+      "parse": 8.07,
+      "detect": 4.08,
+      "total": 239.27
     }
   },
-  {},
-  {},
-  {},
-  {},
+  {
+    "url": "https://www.napaonline.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.nofrills.ca/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.peoplefinders.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.platt.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.publicdatausa.com/",
     "technologies": [
@@ -599,14 +878,32 @@
       }
     ],
     "timings": {
-      "fetch": 1116.04,
-      "parse": 94.54,
-      "detect": 19.84,
-      "total": 1230.42
+      "fetch": 1258.33,
+      "parse": 240.29,
+      "detect": 13.71,
+      "total": 1512.33
     }
   },
-  {},
-  {},
+  {
+    "url": "https://www.realcanadiansuperstore.ca/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.realestate.com.au/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.restaurantguru.com/",
     "technologies": [
@@ -616,121 +913,130 @@
       }
     ],
     "timings": {
-      "fetch": 3092.72,
-      "parse": 714.91,
-      "detect": 281.99,
-      "total": 4089.62
+      "fetch": 3029.61,
+      "parse": 652.77,
+      "detect": 284.03,
+      "total": 3966.41
     }
   },
-  {},
+  {
+    "url": "https://www.searchpeoplefree.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.shopee.cl/",
     "technologies": [],
     "timings": {
-      "fetch": 2662.6,
-      "parse": 242.32,
+      "fetch": 2899.14,
+      "parse": 102.39,
       "detect": 6.85,
-      "total": 2911.76
+      "total": 3008.37
     }
   },
   {
     "url": "https://www.shopee.co.id/",
     "technologies": [],
     "timings": {
-      "fetch": 706.84,
-      "parse": 31.6,
-      "detect": 7.81,
-      "total": 746.25
+      "fetch": 750.87,
+      "parse": 25.98,
+      "detect": 7.01,
+      "total": 783.87
     }
   },
   {
     "url": "https://www.shopee.co.th/",
     "technologies": [],
     "timings": {
-      "fetch": 1023.45,
-      "parse": 29.32,
-      "detect": 5.98,
-      "total": 1058.75
+      "fetch": 757.81,
+      "parse": 105.59,
+      "detect": 7.34,
+      "total": 870.74
     }
   },
   {
     "url": "https://www.shopee.com.br/",
     "technologies": [],
     "timings": {
-      "fetch": 2508.94,
-      "parse": 40.75,
-      "detect": 8.87,
-      "total": 2558.56
+      "fetch": 2432.25,
+      "parse": 96.21,
+      "detect": 6.47,
+      "total": 2534.93
     }
   },
   {
     "url": "https://www.shopee.com.co/",
     "technologies": [],
     "timings": {
-      "fetch": 2754.32,
-      "parse": 20.83,
-      "detect": 7.39,
-      "total": 2782.54
+      "fetch": 2841.31,
+      "parse": 20.37,
+      "detect": 13.51,
+      "total": 2875.18
     }
   },
   {
     "url": "https://www.shopee.com.mx/",
     "technologies": [],
     "timings": {
-      "fetch": 2694.85,
-      "parse": 23.98,
-      "detect": 8.33,
-      "total": 2727.17
+      "fetch": 2699.79,
+      "parse": 31.8,
+      "detect": 7.26,
+      "total": 2738.85
     }
   },
   {
     "url": "https://www.shopee.com.my/",
     "technologies": [],
     "timings": {
-      "fetch": 724.6,
-      "parse": 25.19,
-      "detect": 8.48,
-      "total": 758.27
+      "fetch": 673.16,
+      "parse": 38.69,
+      "detect": 10.04,
+      "total": 721.88
     }
   },
   {
     "url": "https://www.shopee.ph/",
     "technologies": [],
     "timings": {
-      "fetch": 754.25,
-      "parse": 30.47,
-      "detect": 7.22,
-      "total": 791.94
+      "fetch": 698.1,
+      "parse": 28.31,
+      "detect": 6.32,
+      "total": 732.74
     }
   },
   {
     "url": "https://www.shopee.sg/",
     "technologies": [],
     "timings": {
-      "fetch": 779.44,
-      "parse": 77.18,
-      "detect": 12.14,
-      "total": 868.76
+      "fetch": 848.4,
+      "parse": 22.77,
+      "detect": 6.94,
+      "total": 878.12
     }
   },
   {
     "url": "https://www.shopee.tw/",
     "technologies": [],
     "timings": {
-      "fetch": 2696.06,
-      "parse": 51.33,
-      "detect": 6.84,
-      "total": 2754.22
+      "fetch": 910.48,
+      "parse": 44.79,
+      "detect": 12.64,
+      "total": 967.92
     }
   },
   {
     "url": "https://www.shopee.vn/",
     "technologies": [],
     "timings": {
-      "fetch": 754.18,
-      "parse": 28.35,
-      "detect": 7.46,
-      "total": 789.99
+      "fetch": 759.69,
+      "parse": 39.15,
+      "detect": 10.83,
+      "total": 809.67
     }
   },
   {
@@ -746,10 +1052,10 @@
       }
     ],
     "timings": {
-      "fetch": 1040.95,
-      "parse": 866.61,
-      "detect": 940.38,
-      "total": 2847.94
+      "fetch": 1008.9,
+      "parse": 972.01,
+      "detect": 1281.76,
+      "total": 3262.67
     }
   },
   {
@@ -765,10 +1071,10 @@
       }
     ],
     "timings": {
-      "fetch": 998.16,
-      "parse": 213.38,
-      "detect": 93.53,
-      "total": 1305.08
+      "fetch": 692.56,
+      "parse": 217.85,
+      "detect": 81.83,
+      "total": 992.25
     }
   },
   {
@@ -784,13 +1090,22 @@
       }
     ],
     "timings": {
-      "fetch": 453.84,
-      "parse": 141.74,
-      "detect": 88.09,
-      "total": 683.67
+      "fetch": 426.88,
+      "parse": 108.06,
+      "detect": 85.94,
+      "total": 620.87
     }
   },
-  {},
+  {
+    "url": "https://www.stopandshop.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.target.com/",
     "technologies": [
@@ -800,10 +1115,10 @@
       }
     ],
     "timings": {
-      "fetch": 1728.14,
-      "parse": 940.37,
-      "detect": 1368.47,
-      "total": 4036.99
+      "fetch": 1510.79,
+      "parse": 876.81,
+      "detect": 1366.41,
+      "total": 3754.01
     }
   },
   {
@@ -815,10 +1130,10 @@
       }
     ],
     "timings": {
-      "fetch": 613.31,
-      "parse": 179.01,
-      "detect": 103.07,
-      "total": 895.39
+      "fetch": 628.76,
+      "parse": 346.56,
+      "detect": 131.68,
+      "total": 1107
     }
   },
   {
@@ -830,14 +1145,32 @@
       }
     ],
     "timings": {
-      "fetch": 2896.18,
-      "parse": 713.26,
-      "detect": 400.43,
-      "total": 4009.88
+      "fetch": 590.32,
+      "parse": 943.06,
+      "detect": 543.63,
+      "total": 2077.01
     }
   },
-  {},
-  {},
+  {
+    "url": "https://www.totalwine.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.tractorsupply.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
   {
     "url": "https://www.walmart.com.mx/",
     "technologies": [
@@ -855,10 +1188,10 @@
       }
     ],
     "timings": {
-      "fetch": 1895.71,
-      "parse": 1792.14,
-      "detect": 608.88,
-      "total": 4296.73
+      "fetch": 1447.64,
+      "parse": 1819.89,
+      "detect": 913.77,
+      "total": 4181.3
     }
   },
   {
@@ -882,13 +1215,40 @@
       }
     ],
     "timings": {
-      "fetch": 1396.08,
-      "parse": 831.7,
-      "detect": 1298.04,
-      "total": 3525.83
+      "fetch": 2051.83,
+      "parse": 1386.24,
+      "detect": 1611.44,
+      "total": 5049.51
     }
   },
-  {},
-  {},
-  {}
+  {
+    "url": "https://www.weismarkets.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.wizzair.com/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  },
+  {
+    "url": "https://www.worten.pt/",
+    "technologies": [],
+    "timings": {
+      "fetch": 0,
+      "parse": 0,
+      "detect": 0,
+      "total": 0
+    }
+  }
 ]
