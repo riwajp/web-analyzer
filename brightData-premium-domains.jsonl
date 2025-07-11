@@ -1,0 +1,93 @@
+{}
+{"url":"https://www.footlocker.com/","technologies":[],"timings":{"fetch":393.43,"parse":833.98,"detect":471.28,"total":1698.69}}
+{"url":"https://www.tripadvisor.com/","technologies":[{"name":"DataDome","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1180.73,"parse":585.79,"detect":916.82,"total":2683.34}}
+{"url":"https://www.cdiscount.com/","technologies":[{"name":"Cloudflare","detectedUsing":"js, headers, cookies"}],"timings":{"fetch":1136.5,"parse":24.39,"detect":4.86,"total":1165.75}}
+{"url":"https://www.salesforce.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1172.63,"parse":3562.31,"detect":651.57,"total":5386.51}}
+{"url":"https://www.intuit.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"},{"name":"AWS WAF","detectedUsing":"headers"}],"timings":{"fetch":831.49,"parse":660.41,"detect":489.66,"total":1981.56}}
+{}
+{"url":"https://www.affitto.it/","technologies":[{"name":"Cloudflare","detectedUsing":"headers"}],"timings":{"fetch":1364.26,"parse":1344.54,"detect":131.53,"total":2840.32}}
+{"url":"https://www.agoda.cn/","technologies":[{"name":"Shape Security","detectedUsing":"js"},{"name":"Akamai Bot Manager","detectedUsing":"js"},{"name":"GeeTest","detectedUsing":"js"}],"timings":{"fetch":1057.64,"parse":2173.63,"detect":2494.75,"total":5726.02}}
+{}
+{}
+{"url":"https://www.autozone.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js"},{"name":"Shape Security","detectedUsing":"js"},{"name":"PerimeterX","detectedUsing":"cookies"}],"timings":{"fetch":3051.69,"parse":1007.96,"detect":562.12,"total":4621.76}}
+{"url":"https://www.bestbuy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"}],"timings":{"fetch":324.39,"parse":785.35,"detect":407.82,"total":1517.56}}
+{"url":"https://www.bestwestern.com/","technologies":[{"name":"DataDome","detectedUsing":"js, cookies"},{"name":"Akamai Bot Manager","detectedUsing":"js"},{"name":"Shape Security","detectedUsing":"js"},{"name":"reCAPTCHA","detectedUsing":"js"}],"timings":{"fetch":1190.1,"parse":1099.61,"detect":3100.81,"total":5390.52}}
+{"url":"https://www.billiger.de/","technologies":[{"name":"Cloudflare","detectedUsing":"scriptSrc, headers"}],"timings":{"fetch":1785.41,"parse":1568.06,"detect":58.56,"total":3412.03}}
+{}
+{}
+{}
+{}
+{}
+{}
+{"url":"https://www.carsales.com.au/","technologies":[{"name":"Amazon CloudFront","detectedUsing":"headers"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1224.64,"parse":1328.09,"detect":1370.41,"total":3923.15}}
+{}
+{"url":"https://www.costco.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":2558.19,"parse":4371.32,"detect":1089.23,"total":8018.75}}
+{}
+{"url":"https://www.despegar.com.mx/","technologies":[{"name":"Cloudflare","detectedUsing":"headers, cookies"},{"name":"DataDome","detectedUsing":"js"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":3893.2,"parse":3368.41,"detect":790.98,"total":8052.6}}
+{}
+{}
+{"url":"https://www.emaxme.com/","technologies":[{"name":"Cloudflare","detectedUsing":"js, headers, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":864.62,"parse":1212.33,"detect":456.93,"total":2533.88}}
+{}
+{}
+{"url":"https://www.flooranddecor.com/","technologies":[{"name":"Cloudflare","detectedUsing":"js, headers, cookies"},{"name":"Amazon CloudFront","detectedUsing":"scriptSrc"}],"timings":{"fetch":2272.7,"parse":1195.11,"detect":499.6,"total":3967.4}}
+{}
+{"url":"https://www.footlocker.co.uk/","technologies":[],"timings":{"fetch":470.31,"parse":469.6,"detect":1250.04,"total":2189.94}}
+{}
+{}
+{}
+{"url":"https://www.hermes.com/","technologies":[{"name":"Cloudflare","detectedUsing":"headers, cookies"},{"name":"DataDome","detectedUsing":"js"}],"timings":{"fetch":993.05,"parse":542.09,"detect":365.39,"total":1900.53}}
+{}
+{"url":"https://www.idealo.de/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Amazon CloudFront","detectedUsing":"headers"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1079.11,"parse":1124.79,"detect":357.4,"total":2561.31}}
+{"url":"https://www.immobilienscout24.de/","technologies":[{"name":"Shape Security","detectedUsing":"js"},{"name":"Amazon CloudFront","detectedUsing":"headers"}],"timings":{"fetch":795.88,"parse":848.54,"detect":365.39,"total":2009.81}}
+{}
+{"url":"https://www.instacart.com/","technologies":[{"name":"Cloudflare","detectedUsing":"headers, cookies"},{"name":"DataDome","detectedUsing":"js"},{"name":"Shape Security","detectedUsing":"js"},{"name":"Amazon CloudFront","detectedUsing":"scriptSrc"}],"timings":{"fetch":1365.96,"parse":2827.5,"detect":1124.73,"total":5318.18}}
+{"url":"https://www.intersport.fr/","technologies":[{"name":"reCAPTCHA","detectedUsing":"js"}],"timings":{"fetch":1622.5,"parse":2208.04,"detect":349.11,"total":4179.65}}
+{}
+{"url":"https://www.kroger.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":3059.47,"parse":961.75,"detect":1274.04,"total":5295.26}}
+{"url":"https://www.lazada.co.id/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":2105.43,"parse":901.39,"detect":1113.49,"total":4120.31}}
+{"url":"https://www.lazada.co.th/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":909.93,"parse":477.35,"detect":1210.09,"total":2597.37}}
+{"url":"https://www.lazada.com.my/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":2179.36,"parse":568.3,"detect":949.44,"total":3697.11}}
+{"url":"https://www.lazada.com.ph/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":2229.94,"parse":289.33,"detect":899.39,"total":3418.65}}
+{"url":"https://www.lazada.sg/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":2157.7,"parse":369.48,"detect":886.35,"total":3413.53}}
+{"url":"https://www.lazada.vn/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":2112.87,"parse":820.73,"detect":684.44,"total":3618.03}}
+{}
+{"url":"https://www.lowes.com/","technologies":[],"timings":{"fetch":506.7,"parse":5.25,"detect":3.76,"total":515.71}}
+{"url":"https://www.mcmaster.com/","technologies":[],"timings":{"fetch":596.45,"parse":59.95,"detect":5.42,"total":661.82}}
+{}
+{}
+{}
+{"url":"https://www.mscdirect.com/","technologies":[{"name":"Imperva Incapsula","detectedUsing":"js, headers, cookies"}],"timings":{"fetch":798.97,"parse":8.04,"detect":5.07,"total":812.08}}
+{}
+{}
+{}
+{}
+{"url":"https://www.publicdatausa.com/","technologies":[{"name":"Cloudflare","detectedUsing":"js, headers"}],"timings":{"fetch":1870.9,"parse":1381.15,"detect":15.24,"total":3267.29}}
+{}
+{}
+{"url":"https://www.restaurantguru.com/","technologies":[{"name":"reCAPTCHA","detectedUsing":"js"}],"timings":{"fetch":2877.1,"parse":813.42,"detect":218.49,"total":3909.01}}
+{}
+{"url":"https://www.shopee.cl/","technologies":[],"timings":{"fetch":2820.12,"parse":164.42,"detect":9.24,"total":2993.78}}
+{"url":"https://www.shopee.co.id/","technologies":[],"timings":{"fetch":818.42,"parse":31.14,"detect":9.24,"total":858.81}}
+{"url":"https://www.shopee.co.th/","technologies":[],"timings":{"fetch":974.14,"parse":38.93,"detect":9.12,"total":1022.18}}
+{"url":"https://www.shopee.com.br/","technologies":[],"timings":{"fetch":2595.39,"parse":33.28,"detect":6.27,"total":2634.94}}
+{"url":"https://www.shopee.com.co/","technologies":[],"timings":{"fetch":2768.29,"parse":23.74,"detect":7.13,"total":2799.15}}
+{"url":"https://www.shopee.com.mx/","technologies":[],"timings":{"fetch":2758.64,"parse":45.84,"detect":6.66,"total":2811.14}}
+{"url":"https://www.shopee.com.my/","technologies":[],"timings":{"fetch":756.8,"parse":45.49,"detect":81.41,"total":883.71}}
+{"url":"https://www.shopee.ph/","technologies":[],"timings":{"fetch":807.41,"parse":34.19,"detect":8.49,"total":850.1}}
+{"url":"https://www.shopee.sg/","technologies":[],"timings":{"fetch":1470.68,"parse":34.44,"detect":7.35,"total":1512.47}}
+{"url":"https://www.shopee.tw/","technologies":[],"timings":{"fetch":2568.8,"parse":29.45,"detect":6.54,"total":2604.79}}
+{"url":"https://www.shopee.vn/","technologies":[],"timings":{"fetch":1630.06,"parse":42.62,"detect":9.33,"total":1682.01}}
+{"url":"https://www.similarweb.com/","technologies":[{"name":"Shape Security","detectedUsing":"js"},{"name":"Amazon CloudFront","detectedUsing":"headers"}],"timings":{"fetch":2086.84,"parse":917.23,"detect":1004.83,"total":4008.9}}
+{"url":"https://www.skyscanner.co.kr/","technologies":[{"name":"PerimeterX","detectedUsing":"js, cookies"},{"name":"Amazon CloudFront","detectedUsing":"headers"}],"timings":{"fetch":833.42,"parse":280.88,"detect":106.02,"total":1220.33}}
+{"url":"https://www.skyscanner.net/","technologies":[{"name":"PerimeterX","detectedUsing":"js, cookies"},{"name":"Amazon CloudFront","detectedUsing":"headers"}],"timings":{"fetch":392.84,"parse":234.37,"detect":92.05,"total":719.26}}
+{}
+{"url":"https://www.target.com/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1508.4,"parse":687.37,"detect":928.12,"total":3123.9}}
+{"url":"https://www.temu.com/","technologies":[{"name":"Cloudflare","detectedUsing":"headers, cookies"}],"timings":{"fetch":731.83,"parse":196.83,"detect":104.17,"total":1032.83}}
+{"url":"https://www.ticketmaster.com/","technologies":[{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":3068.69,"parse":776.59,"detect":402.6,"total":4247.88}}
+{}
+{}
+{"url":"https://www.walmart.com.mx/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"PerimeterX","detectedUsing":"js"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":2119.13,"parse":2172.93,"detect":766.87,"total":5058.93}}
+{"url":"https://www.wayfair.com/","technologies":[{"name":"Cloudflare","detectedUsing":"headers"},{"name":"PerimeterX","detectedUsing":"js"},{"name":"Shape Security","detectedUsing":"js"},{"name":"DataDome","detectedUsing":"js"}],"timings":{"fetch":1919.7,"parse":1452.33,"detect":1315.83,"total":4687.86}}
+{}
+{}
+{}

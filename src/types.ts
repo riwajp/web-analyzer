@@ -1,4 +1,3 @@
-// Updated types.ts with enhanced detection support
 
 export type URLData = {
   source_code: string;
@@ -14,13 +13,13 @@ export type SiteData = {
   assetUrls: string[];
 };
 
-// Legacy type for backward compatibility
+
 export type DetectedTechnology = {
   name: string;
   detectedUsing: string | null;
 };
 
-// Enhanced detection result
+
 export type EnhancedDetectedTechnology = {
   name: string;
   confidence: number;
@@ -29,7 +28,7 @@ export type EnhancedDetectedTechnology = {
   matches: PatternMatch[];
 };
 
-// Pattern matching types
+
 export type PatternMatch = {
   pattern: string;
   confidence: number;
@@ -37,7 +36,7 @@ export type PatternMatch = {
   type: 'exact' | 'regex' | 'fuzzy' | 'encoded';
 };
 
-// Enhanced detection result
+
 export type EnhancedDetectionResult = {
   url: string;
   technologies: EnhancedDetectedTechnology[];

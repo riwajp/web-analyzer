@@ -7,3 +7,12 @@
 {"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":1775.23,"parse":2735.31,"detect":38.22,"total":4548.76}}
 {"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":3373.55,"parse":3394.68,"detect":19.98,"total":6788.21}}
 {"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":["js","cookies"]}],"timings":{"fetch":2757.6,"parse":5214.09,"detect":33.42,"total":8005.1}}
+{"url":"https://www.godaddy.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1975.9,"parse":3275.17,"detect":505.63,"total":5756.7}}
+{"url":"https://www.dior.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"},{"name":"DataDome","detectedUsing":"js"}],"timings":{"fetch":1325.94,"parse":1228.99,"detect":1618.27,"total":4173.19}}
+{"url":"https://www.kick.com/","technologies":[{"name":"Cloudflare","detectedUsing":"js, headers, cookies"},{"name":"DataDome","detectedUsing":"js"},{"name":"Shape Security","detectedUsing":"js"},{"name":"Kasada","detectedUsing":"js"}],"timings":{"fetch":3232.01,"parse":2416.38,"detect":643.98,"total":6292.37}}
+{}
+{"url":"https://www.footlocker.com/","technologies":[],"timings":{"fetch":275.05,"parse":730.62,"detect":504.02,"total":1509.69}}
+{"url":"https://www.tripadvisor.com/","technologies":[{"name":"DataDome","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1347.02,"parse":696.95,"detect":838.87,"total":2882.84}}
+{"url":"https://www.cdiscount.com/","technologies":[{"name":"Cloudflare","detectedUsing":"js, headers, cookies"}],"timings":{"fetch":1359.32,"parse":18,"detect":4.51,"total":1381.83}}
+{"url":"https://www.salesforce.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"}],"timings":{"fetch":1118.89,"parse":878.93,"detect":683.63,"total":2681.45}}
+{"url":"https://www.intuit.com/","technologies":[{"name":"Akamai Bot Manager","detectedUsing":"js, cookies"},{"name":"Shape Security","detectedUsing":"js"},{"name":"AWS WAF","detectedUsing":"headers"}],"timings":{"fetch":672.39,"parse":2524.27,"detect":449.75,"total":3646.42}}
