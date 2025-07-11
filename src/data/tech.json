@@ -113,21 +113,6 @@
         "client\\.perimeterx\\.net"
       ]
     },
-    "Shape Security": {
-      "description": "Shape Security bot protection",
-      "website": "https://www.shapesecurity.com",
-      "scriptSrc": [
-        "\\.chunk\\.js",
-        "shape.*security"
-      ],
-      "js": [
-        "shape",
-        "botguard"
-      ],
-      "html": [
-        "shape security"
-      ]
-    },
     "reCAPTCHA": {
       "description": "Google reCAPTCHA",
       "website": "https://www.google.com/recaptcha",
