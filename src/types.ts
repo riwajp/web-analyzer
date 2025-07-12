@@ -70,6 +70,7 @@ export type BlockingIndicators = {
 };
 
 export type PageAnalysis = {
+  dom_element_count: number;
   page_size_bytes: number;
   page_size_human: string;
   dom_complexity: 'LOW' | 'MEDIUM' | 'HIGH';

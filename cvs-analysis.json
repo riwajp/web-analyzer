@@ -1,0 +1,60 @@
+[
+  {
+    "url": "https://www.cvs.com/",
+    "final_url": "https://www.cvs.com/",
+    "status_code": 403,
+    "technologies": [],
+    "blocking_indicators": {
+      "likely_blocked": true,
+      "blocking_score": 50,
+      "indicators": {
+        "status_code_suspicious": true,
+        "minimal_content": true,
+        "challenge_detected": false,
+        "captcha_detected": false,
+        "access_denied_text": false,
+        "suspicious_redirects": false,
+        "bot_detection_js": false,
+        "minimal_dom_elements": false,
+        "unusual_response_time": false
+      },
+      "suspicious_phrases": []
+    },
+    "page_analysis": {
+      "page_size_bytes": 16678,
+      "page_size_human": "16.29 KB",
+      "dom_complexity": "LOW",
+      "content_type": "text/html",
+      "title": "",
+      "description": "",
+      "language": "unknown",
+      "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no",
+      "charset": "unknown",
+      "has_forms": false,
+      "has_javascript": false,
+      "external_resources": 0,
+      "internal_resources": 1,
+      "performance_metrics": {
+        "fetch_time": 1859.864799999632,
+        "parse_time": 109.97220000019297,
+        "total_time": 1979.0822999998927
+      }
+    },
+    "stats": {
+      "total": 0,
+      "byConfidence": {
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 0
+      },
+      "averageConfidence": 0,
+      "topDetection": null
+    },
+    "timings": {
+      "fetch": 1859.86,
+      "parse": 109.97,
+      "detect": 9.25,
+      "total": 1979.83
+    }
+  }
+]

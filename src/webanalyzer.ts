@@ -4,6 +4,7 @@ import { EnhancedTechnologyDetector, EnhancedPatternMatcher } from "./patternMat
 import fs from "fs";
 import path from "path";
 
+// Updated DetectedTechnology interface
 export interface EnhancedDetectedTechnology {
   name: string;
   confidence: number;
@@ -399,6 +400,7 @@ const WebAnalyzer = {
     return {
       page_size_bytes: url_data.content_length,
       page_size_human: formatBytes(url_data.content_length),
+      dom_element_count: site_data.dom_element_count,
       dom_complexity: getDomComplexity(site_data.dom_element_count),
       content_type: url_data.content_type,
       title: site_data.title,
