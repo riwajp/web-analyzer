@@ -1,8 +1,6 @@
 import { detectTechnology } from '../index';
 import type { EnhancedDetectionResult } from '../types';
 
-// No local server or fixtures needed
-
 describe('WebAnalyzer', () => {
   beforeEach(() => {
     // WebAnalyzer.setDetectionMode('NORMAL');
