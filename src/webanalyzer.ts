@@ -399,15 +399,6 @@ class Analyzer {
     let blockingScore = 0;
     const detectedBotProtectionTechs: string[] = [];
 
-    // Define bot protection technologies from tech.json patterns
-    const BOT_PROTECTION_TECHS = {
-      CAPTCHA_SERVICES: ['reCAPTCHA', 'hCaptcha', 'Turnstile', 'GeeTest', 'KeyCAPTCHA', 'Arkose Labs'],
-      DDoS_PROTECTION: ['Cloudflare', 'DataDome', 'Imperva Incapsula', 'Akamai Bot Manager', 'PerimeterX'],
-      WAF_SERVICES: ['Sucuri', 'Barracuda', 'ModSecurity', 'Fortinet FortiWeb', 'Comodo', 'AWS WAF', 'F5 BIG-IP ASM'],
-      QUEUE_SERVICES: ['Queue-Fair'],
-      OTHER_PROTECTION: ['Kasada', 'Distil Networks', 'Radware', 'Reblaze', 'Auth0'],
-    };
-
     const SUSPICIOUS_STATUS_CODES = [403, 429, 503, 520, 521, 522, 523, 524, 525, 526, 527, 530];
     const SUSPICIOUS_TITLES = [
       'just a moment', 'please wait', 'access denied', 'blocked', 'error',
@@ -446,16 +437,13 @@ class Analyzer {
     const allCookies = urlData.cookies.toLowerCase();
     const allHeaders = Array.from(urlData.headers.entries()).map(([k, v]) => `${k}: ${v}`).join(' ').toLowerCase();
 
+    // Check all technologies for bot protection patterns
     for (const [techName, techData] of Object.entries(this.technologies)) {
-      const isBotProtection = [
-        ...BOT_PROTECTION_TECHS.CAPTCHA_SERVICES,
-        ...BOT_PROTECTION_TECHS.DDoS_PROTECTION,
-        ...BOT_PROTECTION_TECHS.WAF_SERVICES,
-        ...BOT_PROTECTION_TECHS.QUEUE_SERVICES,
-        ...BOT_PROTECTION_TECHS.OTHER_PROTECTION
-      ].some(protectionTech => techName.toLowerCase().includes(protectionTech.toLowerCase()));
-
-      if (!isBotProtection) continue;
+      // Skip technologies without any patterns
+      if (!techData.html && !techData.js && !techData.scriptSrc && 
+          !techData.cookies && !techData.headers && !techData.dom) {
+        continue;
+      }
 
       const techResult = this.checkBotProtectionPatterns(techData, {
         fullContent,
@@ -470,6 +458,7 @@ class Analyzer {
         suspiciousPhrases.push(...techResult.phrases);
         blockingScore += Math.min(techResult.score, 25); // Cap per technology
         indicators.botDetectionJs = true;
+        console.log(`[BOT PROTECTION] Detected: ${techName} (score: ${techResult.score})`);
       }
     }
 
@@ -495,23 +484,31 @@ class Analyzer {
     // Determine challenge type based on detected technologies
     let challengeType: 'captcha' | 'javascript' | 'browser_check' | 'rate_limit' | 'access_denied' | undefined;
     
+    // Check for CAPTCHA technologies
+    const captchaKeywords = ['captcha', 'recaptcha', 'hcaptcha', 'turnstile', 'geetest', 'keycaptcha', 'arkose', 'funcaptcha'];
     if (detectedBotProtectionTechs.some(tech => 
-      BOT_PROTECTION_TECHS.CAPTCHA_SERVICES.some(captcha => 
-        tech.toLowerCase().includes(captcha.toLowerCase())
-      )
+      captchaKeywords.some(keyword => tech.toLowerCase().includes(keyword))
     )) {
       challengeType = 'captcha';
-    } else if (detectedBotProtectionTechs.some(tech => 
-      BOT_PROTECTION_TECHS.DDoS_PROTECTION.some(ddos => 
-        tech.toLowerCase().includes(ddos.toLowerCase())
+    } 
+    // Check for DDoS protection technologies
+    else if (detectedBotProtectionTechs.some(tech => 
+      ['cloudflare', 'datadome', 'imperva', 'akamai', 'perimeterx', 'incapsula'].some(keyword => 
+        tech.toLowerCase().includes(keyword)
       )
     )) {
       challengeType = 'javascript';
-    } else if (suspiciousPhrases.some((p) => p.includes('browser'))) {
+    } 
+    // Check for browser verification
+    else if (suspiciousPhrases.some((p) => p.includes('browser'))) {
       challengeType = 'browser_check';
-    } else if (urlData.statusCode === 429) {
+    } 
+    // Check for rate limiting
+    else if (urlData.statusCode === 429) {
       challengeType = 'rate_limit';
-    } else if (indicators.accessDeniedText) {
+    } 
+    // Check for access denied
+    else if (indicators.accessDeniedText) {
       challengeType = 'access_denied';
     }
 

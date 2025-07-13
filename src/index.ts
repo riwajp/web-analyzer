@@ -217,9 +217,6 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
       );
       console.log(`${highConfidenceDetections.length} high-confidence results saved to high-confidence-detections.json`);
     }
-
-    // Example single URL analysis
-    console.log(await WebAnalyzer.analyze('https://www.cvs.com/', config));
   } catch (error) {
     console.error('Fatal error during batch processing:', error);
     process.exit(1);
