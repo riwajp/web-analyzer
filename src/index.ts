@@ -130,7 +130,7 @@ async function processBatch(
           `A complete DetectionConfig with a defined 'mode' property must be provided to WebAnalyzer.analyze.`
         );
       }
-      const result = await WebAnalyzer.analyze(url, config as DetectionConfig);
+      const result = await WebAnalyzer.analyze(url);
       progressCallback?.(i + batch.indexOf(url) + 1, urls.length, url);
       return { url, result };
     });
