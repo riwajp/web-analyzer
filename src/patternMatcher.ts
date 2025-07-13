@@ -202,40 +202,42 @@ export class EnhancedTechnologyDetector {
     const detectedTypes: string[] = [];
     let totalConfidence = 0;
 
-    if (techData.js && siteData.js) {
-      const jsResult = this.checkPatterns(techData.js, siteData.js, 'js');
-      if (jsResult.matched) {
-        allMatches.push(...jsResult.matches);
-        totalConfidence += jsResult.confidence;
-        detectedTypes.push('js');
+    // Define detection configurations
+    const detectionConfigs = [
+      {
+        techKey: 'js',
+        dataKey: 'js',
+        dataSource: siteData,
+        checkMethod: 'checkPatterns',
+        type: 'js'
+      },
+      {
+        techKey: 'scriptSrc',
+        dataKey: 'assetUrls',
+        dataSource: siteData,
+        checkMethod: 'checkPatterns',
+        type: 'scriptSrc'
+      },
+      {
+        techKey: 'headers',
+        dataKey: 'headers',
+        dataSource: urlData,
+        checkMethod: 'checkHeaders',
+        type: 'headers'
+      },
+      {
+        techKey: 'cookies',
+        dataKey: 'cookies',
+        dataSource: urlData,
+        checkMethod: 'checkCookies',
+        type: 'cookies'
       }
-    }
+    ];
 
-    if (techData.scriptSrc && siteData.assetUrls) {
-      const scriptResult = this.checkPatterns(techData.scriptSrc, siteData.assetUrls, 'scriptSrc');
-      if (scriptResult.matched) {
-        allMatches.push(...scriptResult.matches);
-        totalConfidence += scriptResult.confidence;
-        detectedTypes.push('scriptSrc');
-      }
-    }
-
-    if (techData.headers && urlData.headers) {
-      const headerResult = this.checkHeaders(techData.headers, urlData.headers);
-      if (headerResult.matched) {
-        allMatches.push(...headerResult.matches);
-        totalConfidence += headerResult.confidence;
-        detectedTypes.push('headers');
-      }
-    }
-
-    if (techData.cookies && urlData.cookies) {
-      const cookieResult = this.checkCookies(techData.cookies, urlData.cookies);
-      if (cookieResult.matched) {
-        allMatches.push(...cookieResult.matches);
-        totalConfidence += cookieResult.confidence;
-        detectedTypes.push('cookies');
-      }
+    // Process each detection configuration
+    for (const config of detectionConfigs) {
+      const result = this.processDetection(config, techData, allMatches, detectedTypes);
+      totalConfidence += result;
     }
 
     totalConfidence = Math.min(totalConfidence, 100);
@@ -246,6 +248,49 @@ export class EnhancedTechnologyDetector {
       matches: allMatches,
       detectedUsing: detectedTypes,
     };
+  }
+
+  private static processDetection(
+    config: {
+      techKey: string;
+      dataKey: string;
+      dataSource: any;
+      checkMethod: string;
+      type: string;
+    },
+    techData: any,
+    allMatches: PatternMatch[],
+    detectedTypes: string[]
+  ): number {
+    const { techKey, dataKey, dataSource, checkMethod, type } = config;
+    
+    if (!techData[techKey] || !dataSource[dataKey]) {
+      return 0;
+    }
+
+    let result: { matched: boolean; confidence: number; matches: PatternMatch[] };
+    
+    switch (checkMethod) {
+      case 'checkPatterns':
+        result = this.checkPatterns(techData[techKey], dataSource[dataKey], type);
+        break;
+      case 'checkHeaders':
+        result = this.checkHeaders(techData[techKey], dataSource[dataKey]);
+        break;
+      case 'checkCookies':
+        result = this.checkCookies(techData[techKey], dataSource[dataKey]);
+        break;
+      default:
+        return 0;
+    }
+
+    if (result.matched) {
+      allMatches.push(...result.matches);
+      detectedTypes.push(type);
+      return result.confidence;
+    }
+
+    return 0;
   }
 
   private static checkPatterns(
@@ -259,10 +304,7 @@ export class EnhancedTechnologyDetector {
 
     for (const item of items) {
       const result = EnhancedPatternMatcher.matchPatternWithConfidence(item, normalizedPatterns);
-      if (result.matched) {
-        allMatches.push(...result.matches);
-        totalConfidence += result.confidence;
-      }
+      totalConfidence = this.processResult(result, allMatches, totalConfidence);
     }
 
     return {
@@ -270,6 +312,18 @@ export class EnhancedTechnologyDetector {
       confidence: Math.min(totalConfidence, 100),
       matches: allMatches,
     };
+  }
+
+  private static processResult(
+    result: { matched: boolean; confidence: number; matches: PatternMatch[] },
+    allMatches: PatternMatch[],
+    currentConfidence: number
+  ): number {
+    if (result.matched) {
+      allMatches.push(...result.matches);
+      return currentConfidence + result.confidence;
+    }
+    return currentConfidence;
   }
 
   private static checkHeaders(
@@ -291,10 +345,7 @@ export class EnhancedTechnologyDetector {
           matchedValue: headerValue,
         };
         const result = EnhancedPatternMatcher.matchPatternWithConfidence(headerValue, pattern);
-        if (result.matched) {
-          allMatches.push(...result.matches);
-          totalConfidence += result.confidence;
-        }
+        totalConfidence = this.processResult(result, allMatches, totalConfidence);
       }
     }
 

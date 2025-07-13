@@ -1,5 +1,5 @@
 import fs from 'fs';
-import WebAnalyzer from './webanalyzer';
+import { WebAnalyzer } from './webAnalyzer';
 import type { EnhancedDetectionResult, DetectionConfig } from './types';
 
 const urls = [
