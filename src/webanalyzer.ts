@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { performance } from 'perf_hooks';
 import type { URLData, SiteData, EnhancedDetectedTechnology, DetectionConfig, BlockingIndicators, PageAnalysis, EnhancedDetectionResult, TechnologiesMap, DetectionMode, PatternMatch } from './types';
-import { EnhancedPatternMatcher } from './patternMatcher';
+import { EnhancedPatternMatcher, EnhancedTechnologyDetector } from './patternMatcher';
 
 class WebPage {
   private url: string;
@@ -226,191 +226,13 @@ class TechnologyDetector {
     siteData: SiteData,
     urlData: URLData
   ): { confidence: number; matches: PatternMatch[]; detectedUsing: string[] } {
-    const allMatches: PatternMatch[] = [];
-    const detectedTypes: string[] = [];
-    let totalConfidence = 0;
-
-    if (techData.js && siteData.js) {
-      const jsResult = this.checkPatterns(techData.js, siteData.js, 'js');
-      if (jsResult.matched) {
-        allMatches.push(...jsResult.matches);
-        totalConfidence += jsResult.confidence;
-        detectedTypes.push('js');
-      }
-    }
-
-    if (techData.scriptSrc && siteData.assetUrls) {
-      const scriptResult = this.checkPatterns(techData.scriptSrc, siteData.assetUrls, 'scriptSrc');
-      if (scriptResult.matched) {
-        allMatches.push(...scriptResult.matches);
-        totalConfidence += scriptResult.confidence;
-        detectedTypes.push('scriptSrc');
-      }
-    }
-
-    if (techData.headers && urlData.headers) {
-      const headerResult = this.checkHeaders(techData.headers, urlData.headers);
-      if (headerResult.matched) {
-        allMatches.push(...headerResult.matches);
-        totalConfidence += headerResult.confidence;
-        detectedTypes.push('headers');
-      }
-    }
-
-    if (techData.cookies && urlData.cookies) {
-      const cookieResult = this.checkCookies(techData.cookies, urlData.cookies);
-      if (cookieResult.matched) {
-        allMatches.push(...cookieResult.matches);
-        totalConfidence += cookieResult.confidence;
-        detectedTypes.push('cookies');
-      }
-    }
-
+    // Use the EnhancedTechnologyDetector from patternMatcher.ts to avoid duplication
+    const result = EnhancedTechnologyDetector.detectTechnologyWithConfidence(techName, techData, siteData, urlData);
     return {
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-      detectedUsing: detectedTypes,
+      confidence: result.confidence,
+      matches: result.matches,
+      detectedUsing: result.detectedUsing,
     };
-  }
-
-  private checkPatterns(
-    patterns: string[] | PatternMatch[],
-    items: string[],
-    type: string
-  ): { matched: boolean; confidence: number; matches: PatternMatch[] } {
-    const normalizedPatterns = this.normalizePatterns(patterns, type);
-    const allMatches: PatternMatch[] = [];
-    let totalConfidence = 0;
-
-    for (const item of items) {
-      const result = EnhancedPatternMatcher.matchPatternWithConfidence(item, normalizedPatterns);
-      if (result.matched) {
-        allMatches.push(...result.matches);
-        totalConfidence += result.confidence;
-      }
-    }
-
-    return {
-      matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-    };
-  }
-
-  private checkHeaders(
-    headerPatterns: Record<string, string>,
-    headers: Headers
-  ): { matched: boolean; confidence: number; matches: PatternMatch[] } {
-    const allMatches: PatternMatch[] = [];
-    let totalConfidence = 0;
-
-    for (const [headerName, headerPattern] of Object.entries(headerPatterns)) {
-      const headerValue = headers.get(headerName.trim().replace(':', ''));
-      if (headerValue) {
-        const pattern: PatternMatch = {
-          pattern: headerPattern,
-          confidence: 75,
-          priority: 'HIGH',
-          type: 'regex',
-          location: 'headers',
-          matchedValue: headerValue,
-        };
-        const result = EnhancedPatternMatcher.matchPatternWithConfidence(headerValue, pattern);
-        if (result.matched) {
-          allMatches.push(...result.matches);
-          totalConfidence += result.confidence;
-        }
-      }
-    }
-
-    return {
-      matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-    };
-  }
-
-  private checkCookies(
-    cookiePatterns: Record<string, string>,
-    cookies: string
-  ): { matched: boolean; confidence: number; matches: PatternMatch[] } {
-    const allMatches: PatternMatch[] = [];
-    let totalConfidence = 0;
-
-    for (const [cookieName, cookiePattern] of Object.entries(cookiePatterns)) {
-      if (cookies.includes(cookieName)) {
-        const pattern: PatternMatch = {
-          pattern: cookieName,
-          confidence: 85,
-          priority: 'HIGH',
-          type: 'exact',
-          location: 'cookies',
-          matchedValue: cookieName,
-        };
-        allMatches.push(pattern);
-        totalConfidence += pattern.confidence * EnhancedPatternMatcher['PATTERN_WEIGHTS'][pattern.priority];
-      }
-    }
-
-    return {
-      matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-    };
-  }
-
-  private normalizePatterns(patterns: string[] | PatternMatch[], type: string): PatternMatch[] {
-    if (!Array.isArray(patterns)) {
-      patterns = [patterns];
-    }
-
-    return patterns.map((pattern) => {
-      if (typeof pattern === 'string') {
-        return {
-          pattern,
-          confidence: this.getDefaultConfidence(type),
-          priority: this.getDefaultPriority(type),
-          type: this.getDefaultType(pattern),
-          location: type,
-          matchedValue: '',
-        } as PatternMatch;
-      }
-      return pattern;
-    });
-  }
-
-  private getDefaultConfidence(type: string): number {
-    const confidenceMap: Record<string, number> = {
-      js: 60,
-      scriptSrc: 70,
-      headers: 80,
-      cookies: 85,
-      meta: 50,
-      dom: 65,
-    };
-    return confidenceMap[type] || 50;
-  }
-
-  private getDefaultPriority(type: string): 'HIGH' | 'MEDIUM' | 'LOW' {
-    const priorityMap: Record<string, 'HIGH' | 'MEDIUM' | 'LOW'> = {
-      cookies: 'HIGH',
-      headers: 'HIGH',
-      scriptSrc: 'MEDIUM',
-      js: 'MEDIUM',
-      meta: 'LOW',
-      dom: 'MEDIUM',
-    };
-    return priorityMap[type] || 'MEDIUM';
-  }
-
-  private getDefaultType(pattern: string): 'exact' | 'regex' | 'fuzzy' | 'encoded' {
-    if (/[.*+?^${}()|[\]\\]/.test(pattern)) {
-      return 'regex';
-    }
-    if (/[0-9]{2,}|[A-Z]{2,}[a-z]{2,}[A-Z]{2,}/.test(pattern)) {
-      return 'fuzzy';
-    }
-    return 'exact';
   }
 }
 
@@ -482,6 +304,84 @@ class Analyzer {
     }
   }
 
+  private checkBotProtectionPatterns(
+    techData: any,
+    content: {
+      fullContent: string;
+      allScripts: string;
+      allCookies: string;
+      allHeaders: string;
+      suspiciousElements: string[];
+    }
+  ): { detected: boolean; score: number; phrases: string[] } {
+    const phrases: string[] = [];
+    let score = 0;
+    let detected = false;
+
+    // Check HTML patterns
+    if (techData.html && Array.isArray(techData.html)) {
+      for (const htmlPattern of techData.html) {
+        if (content.fullContent.includes(htmlPattern.toLowerCase())) {
+          phrases.push(htmlPattern);
+          score += 15;
+          detected = true;
+        }
+      }
+    }
+
+    // Check JavaScript patterns
+    if (techData.js && Array.isArray(techData.js)) {
+      for (const jsPattern of techData.js) {
+        if (content.allScripts.includes(jsPattern.toLowerCase())) {
+          score += 10;
+          detected = true;
+        }
+      }
+    }
+
+    // Check script source patterns
+    if (techData.scriptSrc && Array.isArray(techData.scriptSrc)) {
+      for (const scriptPattern of techData.scriptSrc) {
+        if (content.allScripts.includes(scriptPattern.toLowerCase())) {
+          score += 12;
+          detected = true;
+        }
+      }
+    }
+
+    // Check cookie patterns
+    if (techData.cookies && typeof techData.cookies === 'object') {
+      for (const cookieName of Object.keys(techData.cookies)) {
+        if (content.allCookies.includes(cookieName.toLowerCase())) {
+          score += 20;
+          detected = true;
+        }
+      }
+    }
+
+    // Check header patterns
+    if (techData.headers && typeof techData.headers === 'object') {
+      for (const headerName of Object.keys(techData.headers)) {
+        if (content.allHeaders.includes(headerName.toLowerCase())) {
+          score += 18;
+          detected = true;
+        }
+      }
+    }
+
+    // Check DOM patterns
+    if (techData.dom && typeof techData.dom === 'object') {
+      for (const domSelector of Object.keys(techData.dom)) {
+        if (content.suspiciousElements.some(el => el.includes(domSelector))) {
+          score += 15;
+          detected = true;
+        }
+      }
+    }
+
+    return { detected, score, phrases };
+  }
+
   private analyzeBlocking(siteData: SiteData, urlData: URLData): BlockingIndicators {
     const indicators = {
       statusCodeSuspicious: false,
@@ -497,63 +397,30 @@ class Analyzer {
 
     const suspiciousPhrases: string[] = [];
     let blockingScore = 0;
+    const detectedBotProtectionTechs: string[] = [];
 
-    const BLOCKING_PATTERNS = {
-      CHALLENGE_PHRASES: [
-        'checking your browser',
-        'please wait',
-        'ddos protection',
-        'ray id',
-        'cloudflare',
-        'access denied',
-        'blocked',
-        'captcha',
-        'bot detection',
-        'security check',
-        'please enable javascript',
-        'browser verification',
-        'challenge platform',
-        'verify you are human',
-        'unusual traffic',
-        'suspicious activity',
-        'rate limit',
-        'too many requests',
-        'forbidden',
-        'not authorized',
-        'incapsula incident',
-        'perimeterx',
-        'datadome',
-        'imperva',
-        'akamai',
-        'protection by',
-        'firewall',
-        'security service',
-      ],
-      SUSPICIOUS_TITLES: [
-        'just a moment',
-        'please wait',
-        'access denied',
-        'blocked',
-        'error',
-        'forbidden',
-        'unauthorized',
-        'security check',
-        'ddos protection',
-        'bot detection',
-      ],
-      SUSPICIOUS_STATUS_CODES: [403, 429, 503, 520, 521, 522, 523, 524, 525, 526, 527, 530],
-      BOT_DETECTION_TECHS: Object.keys(this.technologies).filter((tech) =>
-        ['cloudflare', 'recaptcha', 'hcaptcha', 'turnstile', 'perimeterx', 'datadome', 'imperva', 'akamai'].includes(
-          tech.toLowerCase()
-        )
-      ),
+    // Define bot protection technologies from tech.json patterns
+    const BOT_PROTECTION_TECHS = {
+      CAPTCHA_SERVICES: ['reCAPTCHA', 'hCaptcha', 'Turnstile', 'GeeTest', 'KeyCAPTCHA', 'Arkose Labs'],
+      DDoS_PROTECTION: ['Cloudflare', 'DataDome', 'Imperva Incapsula', 'Akamai Bot Manager', 'PerimeterX'],
+      WAF_SERVICES: ['Sucuri', 'Barracuda', 'ModSecurity', 'Fortinet FortiWeb', 'Comodo', 'AWS WAF', 'F5 BIG-IP ASM'],
+      QUEUE_SERVICES: ['Queue-Fair'],
+      OTHER_PROTECTION: ['Kasada', 'Distil Networks', 'Radware', 'Reblaze', 'Auth0'],
     };
 
-    if (BLOCKING_PATTERNS.SUSPICIOUS_STATUS_CODES.includes(urlData.statusCode)) {
+    const SUSPICIOUS_STATUS_CODES = [403, 429, 503, 520, 521, 522, 523, 524, 525, 526, 527, 530];
+    const SUSPICIOUS_TITLES = [
+      'just a moment', 'please wait', 'access denied', 'blocked', 'error',
+      'forbidden', 'unauthorized', 'security check', 'ddos protection', 'bot detection'
+    ];
+
+    // Check status codes
+    if (SUSPICIOUS_STATUS_CODES.includes(urlData.statusCode)) {
       indicators.statusCodeSuspicious = true;
       blockingScore += 30;
     }
 
+    // Check for minimal content
     if (siteData.textContentLength < 500 && siteData.domElementCount < 50) {
       indicators.minimalContent = true;
       blockingScore += 20;
@@ -564,6 +431,7 @@ class Analyzer {
       blockingScore += 25;
     }
 
+    // Check for challenge elements using tech.json patterns
     if (siteData.hasChallengeElements) {
       indicators.challengeDetected = true;
       blockingScore += 25;
@@ -573,45 +441,71 @@ class Analyzer {
       indicators.captchaDetected = true;
       blockingScore += 30;
     }
-
     const fullContent = `${siteData.title} ${siteData.description} ${urlData.sourceCode}`.toLowerCase();
-    BLOCKING_PATTERNS.CHALLENGE_PHRASES.forEach((phrase) => {
-      if (fullContent.includes(phrase.toLowerCase())) {
-        suspiciousPhrases.push(phrase);
-        blockingScore += 5;
-      }
-    });
+    const allScripts = [...siteData.scriptSrc, ...siteData.js].join(' ').toLowerCase();
+    const allCookies = urlData.cookies.toLowerCase();
+    const allHeaders = Array.from(urlData.headers.entries()).map(([k, v]) => `${k}: ${v}`).join(' ').toLowerCase();
 
+    for (const [techName, techData] of Object.entries(this.technologies)) {
+      const isBotProtection = [
+        ...BOT_PROTECTION_TECHS.CAPTCHA_SERVICES,
+        ...BOT_PROTECTION_TECHS.DDoS_PROTECTION,
+        ...BOT_PROTECTION_TECHS.WAF_SERVICES,
+        ...BOT_PROTECTION_TECHS.QUEUE_SERVICES,
+        ...BOT_PROTECTION_TECHS.OTHER_PROTECTION
+      ].some(protectionTech => techName.toLowerCase().includes(protectionTech.toLowerCase()));
+
+      if (!isBotProtection) continue;
+
+      const techResult = this.checkBotProtectionPatterns(techData, {
+        fullContent,
+        allScripts,
+        allCookies,
+        allHeaders,
+        suspiciousElements: siteData.suspiciousElements
+      });
+
+      if (techResult.detected) {
+        detectedBotProtectionTechs.push(techName);
+        suspiciousPhrases.push(...techResult.phrases);
+        blockingScore += Math.min(techResult.score, 25); // Cap per technology
+        indicators.botDetectionJs = true;
+      }
+    }
+
+    // Check for suspicious titles
     const lowerTitle = siteData.title.toLowerCase();
-    if (BLOCKING_PATTERNS.SUSPICIOUS_TITLES.some((title) => lowerTitle.includes(title))) {
+    if (SUSPICIOUS_TITLES.some((title) => lowerTitle.includes(title))) {
       indicators.accessDeniedText = true;
       blockingScore += 20;
     }
 
-    const allScripts = [...siteData.scriptSrc, ...siteData.js].join(' ').toLowerCase();
-    if (
-      BLOCKING_PATTERNS.BOT_DETECTION_TECHS.some((tech) =>
-        allScripts.includes(tech.toLowerCase())
-      )
-    ) {
-      indicators.botDetectionJs = true;
-      blockingScore += 15;
-    }
-
+    // Check for redirects
     if (urlData.redirectCount > 2) {
       indicators.suspiciousRedirects = true;
       blockingScore += 10;
     }
 
+    // Check response time
     if (urlData.responseTime < 100) {
       indicators.unusualResponseTime = true;
       blockingScore += 5;
     }
 
+    // Determine challenge type based on detected technologies
     let challengeType: 'captcha' | 'javascript' | 'browser_check' | 'rate_limit' | 'access_denied' | undefined;
-    if (indicators.captchaDetected) {
+    
+    if (detectedBotProtectionTechs.some(tech => 
+      BOT_PROTECTION_TECHS.CAPTCHA_SERVICES.some(captcha => 
+        tech.toLowerCase().includes(captcha.toLowerCase())
+      )
+    )) {
       challengeType = 'captcha';
-    } else if (indicators.challengeDetected) {
+    } else if (detectedBotProtectionTechs.some(tech => 
+      BOT_PROTECTION_TECHS.DDoS_PROTECTION.some(ddos => 
+        tech.toLowerCase().includes(ddos.toLowerCase())
+      )
+    )) {
       challengeType = 'javascript';
     } else if (suspiciousPhrases.some((p) => p.includes('browser'))) {
       challengeType = 'browser_check';
@@ -627,6 +521,7 @@ class Analyzer {
       indicators,
       suspiciousPhrases,
       challengeType,
+      detectedBotProtectionTechs, // Add detected technologies for better insights
     };
   }
 
@@ -701,6 +596,7 @@ class Analyzer {
       },
       suspiciousPhrases: [],
       challengeType: undefined,
+      detectedBotProtectionTechs: [],
     };
   }
 

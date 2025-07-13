@@ -67,6 +67,7 @@ export type BlockingIndicators = {
   };
   suspiciousPhrases: string[];
   challengeType?: 'captcha' | 'javascript' | 'browser_check' | 'rate_limit' | 'access_denied';
+  detectedBotProtectionTechs?: string[];
 };
 
 export type PageAnalysis = {
