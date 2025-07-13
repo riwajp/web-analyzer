@@ -178,7 +178,7 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
 
         Top 10 Technologies:
         ${topTechs.join('\n')}
-      `;
+`;
 }
 
 (async () => {
