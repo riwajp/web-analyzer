@@ -119,18 +119,28 @@ async function processBatch(
   for (let i = 0; i < urls.length; i += concurrent) {
     const batch = urls.slice(i, i + concurrent);
     const batchPromises = batch.map(async (url) => {
-      const result = await WebAnalyzer.analyze(url, config);
+      // Ensure config is a complete DetectionConfig, not Partial
+      if (
+        !config ||
+        typeof config !== 'object' ||
+        config.mode === undefined ||
+        config.mode === null
+      ) {
+        throw new Error(
+          `A complete DetectionConfig with a defined 'mode' property must be provided to WebAnalyzer.analyze.`
+        );
+      }
+      const result = await WebAnalyzer.analyze(url, config as DetectionConfig);
       progressCallback?.(i + batch.indexOf(url) + 1, urls.length, url);
-      return result;
+      return { url, result };
     });
 
     const batchResults = await Promise.allSettled(batchPromises);
     batchResults.forEach((result, index) => {
-      if (result.status === 'fulfilled') {
-        results.push(result.value);
+      if (result.status === 'fulfilled' && result.value.result) {
+        results.push(result.value.result);
       } else {
-        console.error(`Failed to process ${batch[index]}:`, result.reason);
-        results.push(WebAnalyzer.getDefaultResult(batch[index]));
+        console.error(`Failed to process ${batch[index]}:`, result.status === 'rejected' ? result.reason : 'No result');
       }
     });
   }
@@ -148,10 +158,10 @@ async function processBatch(
 
 function generateSummaryReport(results: EnhancedDetectionResult[]): string {
   const totalUrls = results.length;
-  const successfulUrls = results.filter((r) => r.statusCode > 0).length;
-  const blockedUrls = results.filter((r) => r.blockingIndicators.likelyBlocked).length;
-  const avgTechnologies = results.reduce((sum, r) => sum + r.stats.total, 0) / totalUrls;
-  const avgConfidence = results.reduce((sum, r) => sum + r.stats.averageConfidence, 0) / totalUrls;
+  const successfulUrls = results.length;
+  const blockedUrls = results.filter((r) => r.blockingIndicators?.likelyBlocked).length;
+  const avgTechnologies = results.reduce((sum, r) => sum + (r.stats?.total ?? 0), 0) / (successfulUrls || 1);
+  const avgConfidence = results.reduce((sum, r) => sum + (r.stats?.averageConfidence ?? 0), 0) / (successfulUrls || 1);
 
   const techCounts: Record<string, number> = {};
   results.forEach((r) => {
@@ -166,18 +176,18 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
     .map(([tech, count]) => `${tech}: ${count}`);
 
   return `
-  SUMMARY
-  ==========================
-  Total URLs: ${totalUrls}
-  Successful: ${successfulUrls} (${totalUrls > 0 ? ((successfulUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
-  Blocked/Failed: ${totalUrls - successfulUrls} (${totalUrls > 0 ? (((totalUrls - successfulUrls) / totalUrls) * 100).toFixed(1) : '0.0'}%)
-  Likely Blocked: ${blockedUrls} (${totalUrls > 0 ? ((blockedUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
+        SUMMARY
+        ==========================
+        Total URLs: ${totalUrls}
+        Successful: ${successfulUrls} (${totalUrls > 0 ? ((successfulUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
+        Blocked/Failed: ${totalUrls - successfulUrls} (${totalUrls > 0 ? (((totalUrls - successfulUrls) / totalUrls) * 100).toFixed(1) : '0.0'}%)
+        Likely Blocked: ${blockedUrls} (${successfulUrls > 0 ? ((blockedUrls / successfulUrls) * 100).toFixed(1) : '0.0'}%)
 
-  Average Technologies per Site: ${isFinite(avgTechnologies) ? avgTechnologies.toFixed(1) : '0.0'}
-  Average Confidence: ${isFinite(avgConfidence) ? avgConfidence.toFixed(1) : '0.0'}%
+        Average Technologies per Site: ${isFinite(avgTechnologies) ? avgTechnologies.toFixed(1) : '0.0'}
+        Average Confidence: ${isFinite(avgConfidence) ? avgConfidence.toFixed(1) : '0.0'}%
 
-  Top 10 Technologies:
-  ${topTechs.join('\n')}
+        Top 10 Technologies:
+        ${topTechs.join('\n')}
 `;
 }
 
@@ -202,7 +212,7 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
 
     console.log(`All ${results.length} URLs processed successfully!`);
 
-    const blockedSites = results.filter((r) => r.blockingIndicators.likelyBlocked);
+    const blockedSites = results.filter((r) => r.blockingIndicators?.likelyBlocked);
     if (blockedSites.length > 0) {
       fs.writeFileSync('blocked-sites-analysis.json', JSON.stringify(blockedSites, null, 2), 'utf-8');
       console.log(`${blockedSites.length} blocked sites saved to blocked-sites-analysis.json`);

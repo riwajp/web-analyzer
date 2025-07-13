@@ -8,26 +8,34 @@ export class WebPage {
     this.url = url;
   }
 
-  async fetchAndParse(): Promise<{ reqData: URLData; siteData: SiteData }> {
+  async fetch(): Promise<{ response: Response; responseTime: number; sourceCode: string }> {
     try {
       const startTime = Date.now();
-      let redirectCount = 0;
       const response = await fetch(this.url, {
         redirect: 'follow',
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         },
       });
-
       const responseTime = Date.now() - startTime;
       const sourceCode = await response.text();
+      return { response, responseTime, sourceCode };
+    } catch (error) {
+      console.error(`Failed to fetch ${this.url}:`, error);
+      throw error;
+    }
+  }
+
+  parse(response: Response, responseTime: number, sourceCode: string): { urlData: URLData; siteData: SiteData } {
+    try {
+      let redirectCount = 0;
       const contentLength = sourceCode.length;
 
       if (response.url !== this.url) {
         redirectCount = 1;
       }
 
-      const reqData: URLData = {
+      const urlData: URLData = {
         sourceCode,
         headers: response.headers,
         cookies: response.headers.get('set-cookie') || '',
@@ -142,9 +150,9 @@ export class WebPage {
         suspiciousElements,
       };
 
-      return { reqData, siteData };
+      return { urlData, siteData };
     } catch (error) {
-      console.error(`Failed to fetch and parse ${this.url}:`, error);
+      console.error(`Failed to parse ${this.url}:`, error);
       throw error;
     }
   }

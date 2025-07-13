@@ -97,7 +97,7 @@ export type EnhancedDetectionResult = {
   finalUrl: string;
   statusCode: number;
   technologies: EnhancedDetectedTechnology[];
-  blockingIndicators: BlockingIndicators;
+  blockingIndicators?: BlockingIndicators;
   pageAnalysis: PageAnalysis;
   stats: {
     total: number;

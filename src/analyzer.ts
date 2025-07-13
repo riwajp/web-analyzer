@@ -13,7 +13,7 @@ export class Analyzer {
     this.technologies = technologies;
   }
 
-  async analyze(reqData: URLData, siteData: SiteData): Promise<EnhancedDetectionResult> {
+  async analyze(reqData: URLData, siteData: SiteData): Promise<EnhancedDetectionResult | null> {
     const timings: Record<string, number> = {};
 
     try {
@@ -23,8 +23,8 @@ export class Analyzer {
       timings.afterDetect = performance.now();
 
       const blockingIndicators = this.config.blockingDetectionEnabled
-        ? this.analyzeBlocking(siteData, reqData)
-        : this.getDefaultBlockingIndicators();
+        ? this.analyzeBlocking(siteData, reqData, technologies)
+        : undefined;
 
       const pageAnalysis = this.analyzePageMetrics(siteData, reqData, {
         fetch: reqData.responseTime,
@@ -62,7 +62,7 @@ export class Analyzer {
       };
     } catch (error) {
       console.error(`Error analyzing ${this.url}:`, error);
-      return this.getDefaultResult();
+      return null;
     }
   }
 
@@ -80,6 +80,7 @@ export class Analyzer {
     let score = 0;
     let detected = false;
 
+    // Check HTML patterns
     if (techData.html && Array.isArray(techData.html)) {
       for (const htmlPattern of techData.html) {
         if (content.fullContent.includes(htmlPattern.toLowerCase())) {
@@ -90,6 +91,7 @@ export class Analyzer {
       }
     }
 
+    // Check JavaScript patterns
     if (techData.js && Array.isArray(techData.js)) {
       for (const jsPattern of techData.js) {
         if (content.allScripts.includes(jsPattern.toLowerCase())) {
@@ -99,6 +101,7 @@ export class Analyzer {
       }
     }
 
+    // Check script src patterns
     if (techData.scriptSrc && Array.isArray(techData.scriptSrc)) {
       for (const scriptPattern of techData.scriptSrc) {
         if (content.allScripts.includes(scriptPattern.toLowerCase())) {
@@ -108,6 +111,7 @@ export class Analyzer {
       }
     }
 
+    // Check cookie patterns
     if (techData.cookies && typeof techData.cookies === 'object') {
       for (const cookieName of Object.keys(techData.cookies)) {
         if (content.allCookies.includes(cookieName.toLowerCase())) {
@@ -117,6 +121,7 @@ export class Analyzer {
       }
     }
 
+    // Check header patterns
     if (techData.headers && typeof techData.headers === 'object') {
       for (const headerName of Object.keys(techData.headers)) {
         if (content.allHeaders.includes(headerName.toLowerCase())) {
@@ -126,6 +131,7 @@ export class Analyzer {
       }
     }
 
+    // Check DOM patterns
     if (techData.dom && typeof techData.dom === 'object') {
       for (const domSelector of Object.keys(techData.dom)) {
         if (content.suspiciousElements.some(el => el.includes(domSelector))) {
@@ -138,7 +144,7 @@ export class Analyzer {
     return { detected, score, phrases };
   }
 
-  private analyzeBlocking(siteData: SiteData, reqData: URLData): BlockingIndicators {
+  private analyzeBlocking(siteData: SiteData, reqData: URLData, detectedTechnologies: EnhancedDetectedTechnology[]): BlockingIndicators {
     const indicators = {
       statusCodeSuspicious: false,
       minimalContent: false,
@@ -175,12 +181,10 @@ export class Analyzer {
       indicators.minimalDomElements = true;
       blockingScore += 25;
     }
-
     if (siteData.hasChallengeElements) {
       indicators.challengeDetected = true;
       blockingScore += 25;
     }
-
     if (siteData.hasCaptchaElements) {
       indicators.captchaDetected = true;
       blockingScore += 30;
@@ -191,11 +195,9 @@ export class Analyzer {
     const allCookies = reqData.cookies.toLowerCase();
     const allHeaders = Array.from(reqData.headers.entries()).map(([k, v]) => `${k}: ${v}`).join(' ').toLowerCase();
 
-    for (const [techName, techData] of Object.entries(this.technologies)) {
-      if (!techData.html && !techData.js && !techData.scriptSrc && 
-          !techData.cookies && !techData.headers && !techData.dom) {
-        continue;
-      }
+    for (const tech of detectedTechnologies) {
+      const techData = this.technologies[tech.name];
+      if (!techData) continue;
 
       const techResult = this.checkBotProtectionPatterns(techData, {
         fullContent,
@@ -206,30 +208,34 @@ export class Analyzer {
       });
 
       if (techResult.detected) {
-        detectedBotProtectionTechs.push(techName);
+        detectedBotProtectionTechs.push(tech.name);
         suspiciousPhrases.push(...techResult.phrases);
         blockingScore += Math.min(techResult.score, 25);
         indicators.botDetectionJs = true;
-        console.log(`[BOT PROTECTION] Detected: ${techName} (score: ${techResult.score})`);
+        console.log(`[BOT PROTECTION] Detected: ${tech.name} (score: ${techResult.score})`);
       }
     }
 
+    // Check for suspicious page titles
     const lowerTitle = siteData.title.toLowerCase();
     if (SUSPICIOUS_TITLES.some((title) => lowerTitle.includes(title))) {
       indicators.accessDeniedText = true;
       blockingScore += 20;
     }
 
+    // Check for suspicious redirects
     if (reqData.redirectCount > 2) {
       indicators.suspiciousRedirects = true;
       blockingScore += 10;
     }
 
+    // Check for unusual response times
     if (reqData.responseTime < 100) {
       indicators.unusualResponseTime = true;
       blockingScore += 5;
     }
 
+    // Determine challenge type
     let challengeType: 'captcha' | 'javascript' | 'browser_check' | 'rate_limit' | 'access_denied' | undefined;
     
     const captchaKeywords = ['captcha', 'recaptcha', 'hcaptcha', 'turnstile', 'geetest', 'keycaptcha', 'arkose', 'funcaptcha'];
@@ -312,65 +318,6 @@ export class Analyzer {
           ? Math.round((results.reduce((sum, r) => sum + r.confidence, 0) / results.length) * 10) / 10
           : 0,
       topDetection: results.length > 0 ? results[0] : null,
-    };
-  }
-
-  private getDefaultBlockingIndicators(): BlockingIndicators {
-    return {
-      likelyBlocked: false,
-      blockingScore: 0,
-      indicators: {
-        statusCodeSuspicious: false,
-        minimalContent: false,
-        challengeDetected: false,
-        captchaDetected: false,
-        accessDeniedText: false,
-        suspiciousRedirects: false,
-        botDetectionJs: false,
-        minimalDomElements: false,
-        unusualResponseTime: false,
-      },
-      suspiciousPhrases: [],
-      challengeType: undefined,
-      detectedBotProtectionTechs: [],
-    };
-  }
-
-  public getDefaultResult(): EnhancedDetectionResult {
-    return {
-      url: this.url,
-      finalUrl: this.url,
-      statusCode: 0,
-      technologies: [],
-      blockingIndicators: this.getDefaultBlockingIndicators(),
-      pageAnalysis: {
-        pageSizeBytes: 0,
-        pageSizeHuman: '0 Bytes',
-        domElementCount: 0,
-        domComplexity: 'LOW',
-        contentType: 'unknown',
-        title: '',
-        description: '',
-        language: 'unknown',
-        viewport: 'not set',
-        charset: 'unknown',
-        hasForms: false,
-        hasJavascript: false,
-        externalResources: 0,
-        internalResources: 0,
-        performanceMetrics: {
-          fetchTime: 0,
-          parseTime: 0,
-          totalTime: 0,
-        },
-      },
-      stats: {
-        total: 0,
-        byConfidence: { HIGH: 0, MEDIUM: 0, LOW: 0 },
-        averageConfidence: 0,
-        topDetection: null,
-      },
-      timings: { fetch: 0, parse: 0, detect: 0, total: 0 },
     };
   }
 }
