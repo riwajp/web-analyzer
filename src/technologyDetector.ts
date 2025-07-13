@@ -15,20 +15,55 @@ export class TechnologyDetector {
     console.log(`Detection mode set to: ${mode}`);
   }
 
-  detectTechnologies(reqData: URLData, siteData: SiteData): EnhancedDetectedTechnology[] {
-    const detected: EnhancedDetectedTechnology[] = [];
-    for (const techName in this.technologies) {
+  detectTechnologies(urlData: URLData, siteData: SiteData): EnhancedDetectedTechnology[] {
+    const detectedTechnologies: EnhancedDetectedTechnology[] = [];
+    const visited = new Set<string>();
+    const minConfidence = {
+      STRICT: 80,
+      NORMAL: 60,
+      LOOSE: 40,
+    }[this.detectionMode];
+
+    console.log(`[DEBUG] Detection mode: ${this.detectionMode}, Min confidence: ${minConfidence}%`);
+    console.log(`[DEBUG] Analyzing ${siteData.js.length} scripts, ${siteData.assetUrls.length} assets`);
+
+    const detect = (techName: string) => {
+      if (visited.has(techName)) return;
+      visited.add(techName);
+
       const techData = this.technologies[techName];
-      const result = EnhancedTechnologyDetector.detectTechnologyWithConfidence(techName, techData, siteData, reqData);
-      if (result.confidence > 0) {
-        detected.push({
+      if (!techData) return;
+
+      const result = EnhancedTechnologyDetector.detectTechnologyWithConfidence(techName, techData, siteData, urlData);
+      const confidenceLevel = EnhancedPatternMatcher.getConfidenceLevel(result.confidence);
+
+      console.log(`[DEBUG] ${techName}: ${result.confidence.toFixed(1)}% confidence (${confidenceLevel})`);
+      if (result.confidence >= minConfidence) {
+        console.log(`[DETECTED] ${techName} - ${result.confidence.toFixed(1)}% confidence`);
+        detectedTechnologies.push({
           name: techName,
-          confidence: result.confidence,
-          matches: result.matches,
+          confidence: Math.round(result.confidence * 10) / 10,
+          confidenceLevel,
           detectedUsing: result.detectedUsing,
+          matches: result.matches,
         });
+
+        if (techData.implies) {
+          const impliedTechs = Array.isArray(techData.implies) ? techData.implies : [techData.implies];
+          impliedTechs.forEach(detect);
+        }
+
+        if (techData.requires) {
+          const requiredTechs = Array.isArray(techData.requires) ? techData.requires : [techData.requires];
+          requiredTechs.forEach(detect);
+        }
       }
+    };
+
+    for (const techName of Object.keys(this.technologies)) {
+      detect(techName);
     }
-    return detected;
+
+    return detectedTechnologies.sort((a, b) => b.confidence - a.confidence);
   }
 }
