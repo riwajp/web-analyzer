@@ -8,7 +8,7 @@ export class WebPage {
     this.url = url;
   }
 
-  async fetchAndParse(): Promise<{ urlData: URLData; siteData: SiteData }> {
+  async fetchAndParse(): Promise<{ reqData: URLData; siteData: SiteData }> {
     try {
       const startTime = Date.now();
       let redirectCount = 0;
@@ -27,7 +27,7 @@ export class WebPage {
         redirectCount = 1;
       }
 
-      const urlData: URLData = {
+      const reqData: URLData = {
         sourceCode,
         headers: response.headers,
         cookies: response.headers.get('set-cookie') || '',
@@ -142,7 +142,7 @@ export class WebPage {
         suspiciousElements,
       };
 
-      return { urlData, siteData };
+      return { reqData, siteData };
     } catch (error) {
       console.error(`Failed to fetch and parse ${this.url}:`, error);
       throw error;

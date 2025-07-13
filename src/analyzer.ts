@@ -1,5 +1,4 @@
 import { performance } from 'perf_hooks';
-import { WebPage } from './webPage';
 import { TechnologyDetector } from './technologyDetector';
 import type { URLData, SiteData, EnhancedDetectionResult, DetectionConfig, BlockingIndicators, PageAnalysis, EnhancedDetectedTechnology, TechnologiesMap } from './types';
 
@@ -14,27 +13,23 @@ export class Analyzer {
     this.technologies = technologies;
   }
 
-  async analyze(): Promise<EnhancedDetectionResult> {
+  async analyze(reqData: URLData, siteData: SiteData): Promise<EnhancedDetectionResult> {
     const timings: Record<string, number> = {};
 
     try {
-      timings.fetchStart = performance.now();
-      const webPage = new WebPage(this.url);
-      const { urlData, siteData } = await webPage.fetchAndParse();
-      timings.afterFetch = performance.now();
-
+      timings.detectStart = performance.now();
       const detector = new TechnologyDetector(this.technologies, this.config.mode);
-      const technologies = detector.detectTechnologies(urlData, siteData);
+      const technologies = detector.detectTechnologies(reqData, siteData);
       timings.afterDetect = performance.now();
 
       const blockingIndicators = this.config.blockingDetectionEnabled
-        ? this.analyzeBlocking(siteData, urlData)
+        ? this.analyzeBlocking(siteData, reqData)
         : this.getDefaultBlockingIndicators();
 
-      const pageAnalysis = this.analyzePageMetrics(siteData, urlData, {
-        fetch: timings.afterFetch - timings.fetchStart,
-        parse: timings.afterDetect - timings.afterFetch,
-        total: timings.afterDetect - timings.fetchStart,
+      const pageAnalysis = this.analyzePageMetrics(siteData, reqData, {
+        fetch: reqData.responseTime,
+        parse: (timings.afterDetect - timings.detectStart) / 2,
+        total: timings.afterDetect - timings.detectStart,
       });
 
       const stats = this.getDetectionStats(technologies);
@@ -42,8 +37,8 @@ export class Analyzer {
 
       const rawData = this.config.includeRawData
         ? {
-            headers: Object.fromEntries(urlData.headers.entries()),
-            cookies: urlData.cookies ? [urlData.cookies] : [],
+            headers: Object.fromEntries(reqData.headers.entries()),
+            cookies: reqData.cookies ? [reqData.cookies] : [],
             suspiciousElements: siteData.suspiciousElements,
             metaTags: siteData.meta,
           }
@@ -51,17 +46,17 @@ export class Analyzer {
 
       return {
         url: this.url,
-        finalUrl: urlData.finalUrl,
-        statusCode: urlData.statusCode,
+        finalUrl: reqData.finalUrl,
+        statusCode: reqData.statusCode,
         technologies,
         blockingIndicators,
         pageAnalysis,
         stats,
         timings: {
-          fetch: +(timings.afterFetch - timings.fetchStart).toFixed(2),
-          parse: +(timings.afterDetect - timings.afterFetch).toFixed(2),
-          detect: +(timings.afterAnalysis - timings.afterDetect).toFixed(2),
-          total: +(timings.afterAnalysis - timings.fetchStart).toFixed(2),
+          fetch: reqData.responseTime,
+          parse: +((timings.afterDetect - timings.detectStart) / 2).toFixed(2),
+          detect: +((timings.afterAnalysis - timings.afterDetect) / 2).toFixed(2),
+          total: +(timings.afterAnalysis - timings.detectStart).toFixed(2),
         },
         rawData,
       };
@@ -143,7 +138,7 @@ export class Analyzer {
     return { detected, score, phrases };
   }
 
-  private analyzeBlocking(siteData: SiteData, urlData: URLData): BlockingIndicators {
+  private analyzeBlocking(siteData: SiteData, reqData: URLData): BlockingIndicators {
     const indicators = {
       statusCodeSuspicious: false,
       minimalContent: false,
@@ -166,7 +161,7 @@ export class Analyzer {
       'forbidden', 'unauthorized', 'security check', 'ddos protection', 'bot detection'
     ];
 
-    if (SUSPICIOUS_STATUS_CODES.includes(urlData.statusCode)) {
+    if (SUSPICIOUS_STATUS_CODES.includes(reqData.statusCode)) {
       indicators.statusCodeSuspicious = true;
       blockingScore += 30;
     }
@@ -191,10 +186,10 @@ export class Analyzer {
       blockingScore += 30;
     }
 
-    const fullContent = `${siteData.title} ${siteData.description} ${urlData.sourceCode}`.toLowerCase();
+    const fullContent = `${siteData.title} ${siteData.description} ${reqData.sourceCode}`.toLowerCase();
     const allScripts = [...siteData.scriptSrc, ...siteData.js].join(' ').toLowerCase();
-    const allCookies = urlData.cookies.toLowerCase();
-    const allHeaders = Array.from(urlData.headers.entries()).map(([k, v]) => `${k}: ${v}`).join(' ').toLowerCase();
+    const allCookies = reqData.cookies.toLowerCase();
+    const allHeaders = Array.from(reqData.headers.entries()).map(([k, v]) => `${k}: ${v}`).join(' ').toLowerCase();
 
     for (const [techName, techData] of Object.entries(this.technologies)) {
       if (!techData.html && !techData.js && !techData.scriptSrc && 
@@ -225,12 +220,12 @@ export class Analyzer {
       blockingScore += 20;
     }
 
-    if (urlData.redirectCount > 2) {
+    if (reqData.redirectCount > 2) {
       indicators.suspiciousRedirects = true;
       blockingScore += 10;
     }
 
-    if (urlData.responseTime < 100) {
+    if (reqData.responseTime < 100) {
       indicators.unusualResponseTime = true;
       blockingScore += 5;
     }
@@ -250,7 +245,7 @@ export class Analyzer {
       challengeType = 'javascript';
     } else if (suspiciousPhrases.some((p) => p.includes('browser'))) {
       challengeType = 'browser_check';
-    } else if (urlData.statusCode === 429) {
+    } else if (reqData.statusCode === 429) {
       challengeType = 'rate_limit';
     } else if (indicators.accessDeniedText) {
       challengeType = 'access_denied';
@@ -266,7 +261,7 @@ export class Analyzer {
     };
   }
 
-  private analyzePageMetrics(siteData: SiteData, urlData: URLData, timings: any): PageAnalysis {
+  private analyzePageMetrics(siteData: SiteData, reqData: URLData, timings: any): PageAnalysis {
     const formatBytes = (bytes: number): string => {
       if (bytes === 0) return '0 Bytes';
       const k = 1024;
@@ -282,11 +277,11 @@ export class Analyzer {
     };
 
     return {
-      pageSizeBytes: urlData.contentLength,
-      pageSizeHuman: formatBytes(urlData.contentLength),
+      pageSizeBytes: reqData.contentLength,
+      pageSizeHuman: formatBytes(reqData.contentLength),
       domElementCount: siteData.domElementCount,
       domComplexity: getDomComplexity(siteData.domElementCount),
-      contentType: urlData.contentType,
+      contentType: reqData.contentType,
       title: siteData.title,
       description: siteData.description,
       language: siteData.meta['language'] || siteData.meta['lang'] || 'unknown',

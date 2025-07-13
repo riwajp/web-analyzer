@@ -166,18 +166,18 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
     .map(([tech, count]) => `${tech}: ${count}`);
 
   return `
-        SUMMARY
-        ==========================
-        Total URLs: ${totalUrls}
-        Successful: ${successfulUrls} (${totalUrls > 0 ? ((successfulUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
-        Blocked/Failed: ${totalUrls - successfulUrls} (${totalUrls > 0 ? (((totalUrls - successfulUrls) / totalUrls) * 100).toFixed(1) : '0.0'}%)
-        Likely Blocked: ${blockedUrls} (${totalUrls > 0 ? ((blockedUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
+  SUMMARY
+  ==========================
+  Total URLs: ${totalUrls}
+  Successful: ${successfulUrls} (${totalUrls > 0 ? ((successfulUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
+  Blocked/Failed: ${totalUrls - successfulUrls} (${totalUrls > 0 ? (((totalUrls - successfulUrls) / totalUrls) * 100).toFixed(1) : '0.0'}%)
+  Likely Blocked: ${blockedUrls} (${totalUrls > 0 ? ((blockedUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
 
-        Average Technologies per Site: ${isFinite(avgTechnologies) ? avgTechnologies.toFixed(1) : '0.0'}
-        Average Confidence: ${isFinite(avgConfidence) ? avgConfidence.toFixed(1) : '0.0'}%
+  Average Technologies per Site: ${isFinite(avgTechnologies) ? avgTechnologies.toFixed(1) : '0.0'}
+  Average Confidence: ${isFinite(avgConfidence) ? avgConfidence.toFixed(1) : '0.0'}%
 
-        Top 10 Technologies:
-        ${topTechs.join('\n')}
+  Top 10 Technologies:
+  ${topTechs.join('\n')}
 `;
 }
 

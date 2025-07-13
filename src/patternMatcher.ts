@@ -1,4 +1,4 @@
-export interface PatternMatch {
+export interface PatternMatch { 
   pattern: string;
   confidence: number;
   priority: 'HIGH' | 'MEDIUM' | 'LOW';
@@ -196,13 +196,12 @@ export class EnhancedTechnologyDetector {
     techName: string,
     techData: any,
     siteData: any,
-    urlData: any
+    reqData: any
   ): DetectionResult {
     const allMatches: PatternMatch[] = [];
     const detectedTypes: string[] = [];
     let totalConfidence = 0;
 
-    // Define detection configurations
     const detectionConfigs = [
       {
         techKey: 'js',
@@ -221,20 +220,19 @@ export class EnhancedTechnologyDetector {
       {
         techKey: 'headers',
         dataKey: 'headers',
-        dataSource: urlData,
+        dataSource: reqData,
         checkMethod: 'checkHeaders',
         type: 'headers'
       },
       {
         techKey: 'cookies',
         dataKey: 'cookies',
-        dataSource: urlData,
+        dataSource: reqData,
         checkMethod: 'checkCookies',
         type: 'cookies'
       }
     ];
 
-    // Process each detection configuration
     for (const config of detectionConfigs) {
       const result = this.processDetection(config, techData, allMatches, detectedTypes);
       totalConfidence += result;
