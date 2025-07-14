@@ -31,7 +31,7 @@ export const WebAnalyzer = {
     const detector = new TechnologyDetector(this.technologies, 'NORMAL'); // Use internal default mode
     const technologies = detector.detectTechnologies(urlData, siteData);
     const analyzer = new Analyzer(url, this.technologies);
-    return await analyzer.analyze(siteData, technologies);
+    return await analyzer.analyze(siteData, technologies, urlData);
   },
 
   formatBytes(bytes: number): string {

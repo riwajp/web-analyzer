@@ -11,42 +11,42 @@ export class Analyzer {
     this.technologies = technologies;
   }
 
-  async analyze(siteData: SiteData, detectedTechnologies: EnhancedDetectedTechnology[]): Promise<EnhancedDetectionResult | null> {
+  async analyze(siteData: SiteData, detectedTechnologies: EnhancedDetectedTechnology[], urlData: URLData): Promise<EnhancedDetectionResult | null> {
     const timings: Record<string, number> = {};
     try {
       timings.detectStart = performance.now();
       const technologies = detectedTechnologies;
       timings.afterDetect = performance.now();
 
-      const blockingIndicators = this.analyzeBlocking(siteData, technologies);
+      const blockingIndicators = this.analyzeBlocking(siteData, technologies, urlData);
 
       const pageAnalysis = this.analyzePageMetrics(siteData, {
-        fetch: 0,
+        fetch: urlData.responseTime,
         parse: 0,
-        total: 0,
+        total: urlData.responseTime,
       });
 
       const stats = this.calculateStats(technologies);
       const rawData = {
-        headers: {},
-        cookies: [],
+        headers: Object.fromEntries(urlData.headers.entries()),
+        cookies: urlData.cookies.split(';').map(c => c.trim()).filter(Boolean),
         suspiciousElements: siteData.suspiciousElements,
         metaTags: siteData.meta,
       };
 
       return {
         url: this.url,
-        finalUrl: '',
-        statusCode: 0,
+        finalUrl: urlData.finalUrl,
+        statusCode: urlData.statusCode,
         technologies,
         blockingIndicators,
         pageAnalysis,
         stats,
         timings: {
-          fetch: 0,
+          fetch: urlData.responseTime,
           parse: 0,
           detect: 0,
-          total: 0,
+          total: urlData.responseTime,
         },
         rawData,
       };
@@ -134,7 +134,7 @@ export class Analyzer {
     return { detected, score, phrases };
   }
 
-  private analyzeBlocking(siteData: SiteData, detectedTechnologies: EnhancedDetectedTechnology[]): BlockingIndicators {
+  private analyzeBlocking(siteData: SiteData, detectedTechnologies: EnhancedDetectedTechnology[], urlData: URLData): BlockingIndicators {
     const indicators = {
       statusCodeSuspicious: false,
       minimalContent: false,
@@ -157,7 +157,7 @@ export class Analyzer {
       'forbidden', 'unauthorized', 'security check', 'ddos protection', 'bot detection'
     ];
 
-    if (SUSPICIOUS_STATUS_CODES.includes(0) && 0) { // Assuming reqData.statusCode is not available here, so using 0 for now
+    if (SUSPICIOUS_STATUS_CODES.includes(urlData.statusCode)) {
       indicators.statusCodeSuspicious = true;
       blockingScore += 30;
     }
@@ -180,10 +180,10 @@ export class Analyzer {
       blockingScore += 30;
     }
 
-    const fullContent = `${siteData.title} ${siteData.description} ${''}`.toLowerCase(); // Assuming reqData.sourceCode is not available
+    const fullContent = `${siteData.title} ${siteData.description} ${urlData.sourceCode}`.toLowerCase();
     const allScripts = [...siteData.scriptSrc, ...siteData.js].join(' ').toLowerCase();
-    const allCookies = ''; // Assuming reqData.cookies is not available
-    const allHeaders = Array.from(new Map().entries()).map(([k, v]) => `${k}: ${v}`).join(' ').toLowerCase(); // Assuming reqData.headers is not available
+    const allCookies = urlData.cookies.toLowerCase();
+    const allHeaders = Array.from(urlData.headers.entries()).map(([k, v]) => `${k}: ${v}`).join(' ').toLowerCase();
 
     for (const tech of detectedTechnologies) {
       const techData = this.technologies[tech.name];
@@ -214,13 +214,13 @@ export class Analyzer {
     }
 
     // Check for suspicious redirects
-    if (0 > 2) { // Assuming reqData.redirectCount is not available
+    if (urlData.redirectCount > 2) {
       indicators.suspiciousRedirects = true;
       blockingScore += 10;
     }
 
     // Check for unusual response times
-    if (0 < 100) { // Assuming reqData.responseTime is not available
+    if (urlData.responseTime > 10000) { // 10 seconds as an example threshold
       indicators.unusualResponseTime = true;
       blockingScore += 5;
     }
