@@ -1,6 +1,6 @@
-import fs from 'fs';
-import { WebAnalyzer } from './webAnalyzer';
-import type { EnhancedDetectionResult, DetectionConfig } from './types';
+import fs from "fs";
+import { WebAnalyzer } from "./webanalyzer";
+import type { EnhancedDetectionResult, DetectionConfig } from "./types";
 
 const urls = [
   "https://www.cvs.com/",
@@ -99,7 +99,7 @@ const urls = [
   "https://www.octopart.com/",
   "https://www.lowes.com/",
   "https://www.homedepot.com/",
-  "https://www.walmart.com/"
+  "https://www.walmart.com/",
 ];
 
 async function processBatch(
@@ -122,7 +122,7 @@ async function processBatch(
       // Ensure config is a complete DetectionConfig, not Partial
       if (
         !config ||
-        typeof config !== 'object' ||
+        typeof config !== "object" ||
         config.mode === undefined ||
         config.mode === null
       ) {
@@ -137,10 +137,13 @@ async function processBatch(
 
     const batchResults = await Promise.allSettled(batchPromises);
     batchResults.forEach((result, index) => {
-      if (result.status === 'fulfilled' && result.value.result) {
+      if (result.status === "fulfilled" && result.value.result) {
         results.push(result.value.result);
       } else {
-        console.error(`Failed to process ${batch[index]}:`, result.status === 'rejected' ? result.reason : 'No result');
+        console.error(
+          `Failed to process ${batch[index]}:`,
+          result.status === "rejected" ? result.reason : "No result"
+        );
       }
     });
   }
@@ -149,7 +152,7 @@ async function processBatch(
   console.log(`Batch processing complete!\n${summary}`);
 
   if (outputFile) {
-    fs.writeFileSync(outputFile, JSON.stringify(results, null, 2), 'utf-8');
+    fs.writeFileSync(outputFile, JSON.stringify(results, null, 2), "utf-8");
     console.log(`Results saved to ${outputFile}`);
   }
 
@@ -159,9 +162,15 @@ async function processBatch(
 function generateSummaryReport(results: EnhancedDetectionResult[]): string {
   const totalUrls = results.length;
   const successfulUrls = results.length;
-  const blockedUrls = results.filter((r) => r.blockingIndicators?.likelyBlocked).length;
-  const avgTechnologies = results.reduce((sum, r) => sum + (r.stats?.total ?? 0), 0) / (successfulUrls || 1);
-  const avgConfidence = results.reduce((sum, r) => sum + (r.stats?.averageConfidence ?? 0), 0) / (successfulUrls || 1);
+  const blockedUrls = results.filter(
+    (r) => r.blockingIndicators?.likelyBlocked
+  ).length;
+  const avgTechnologies =
+    results.reduce((sum, r) => sum + (r.stats?.total ?? 0), 0) /
+    (successfulUrls || 1);
+  const avgConfidence =
+    results.reduce((sum, r) => sum + (r.stats?.averageConfidence ?? 0), 0) /
+    (successfulUrls || 1);
 
   const techCounts: Record<string, number> = {};
   results.forEach((r) => {
@@ -179,22 +188,36 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
         SUMMARY
         ==========================
         Total URLs: ${totalUrls}
-        Successful: ${successfulUrls} (${totalUrls > 0 ? ((successfulUrls / totalUrls) * 100).toFixed(1) : '0.0'}%)
-        Blocked/Failed: ${totalUrls - successfulUrls} (${totalUrls > 0 ? (((totalUrls - successfulUrls) / totalUrls) * 100).toFixed(1) : '0.0'}%)
-        Likely Blocked: ${blockedUrls} (${successfulUrls > 0 ? ((blockedUrls / successfulUrls) * 100).toFixed(1) : '0.0'}%)
+        Successful: ${successfulUrls} (${
+    totalUrls > 0 ? ((successfulUrls / totalUrls) * 100).toFixed(1) : "0.0"
+  }%)
+        Blocked/Failed: ${totalUrls - successfulUrls} (${
+    totalUrls > 0
+      ? (((totalUrls - successfulUrls) / totalUrls) * 100).toFixed(1)
+      : "0.0"
+  }%)
+        Likely Blocked: ${blockedUrls} (${
+    successfulUrls > 0
+      ? ((blockedUrls / successfulUrls) * 100).toFixed(1)
+      : "0.0"
+  }%)
 
-        Average Technologies per Site: ${isFinite(avgTechnologies) ? avgTechnologies.toFixed(1) : '0.0'}
-        Average Confidence: ${isFinite(avgConfidence) ? avgConfidence.toFixed(1) : '0.0'}%
+        Average Technologies per Site: ${
+          isFinite(avgTechnologies) ? avgTechnologies.toFixed(1) : "0.0"
+        }
+        Average Confidence: ${
+          isFinite(avgConfidence) ? avgConfidence.toFixed(1) : "0.0"
+        }%
 
         Top 10 Technologies:
-        ${topTechs.join('\n')}
+        ${topTechs.join("\n")}
 `;
 }
 
 (async () => {
-  const outputFile = 'enhanced-brightdata-analysis.json';
+  const outputFile = "enhanced-brightdata-analysis.json";
   const config: Partial<DetectionConfig> = {
-    mode: 'NORMAL',
+    mode: "NORMAL",
     includeRawData: false,
     blockingDetectionEnabled: true,
     maxExternalScripts: 5,
@@ -212,23 +235,35 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
 
     console.log(`All ${results.length} URLs processed successfully!`);
 
-    const blockedSites = results.filter((r) => r.blockingIndicators?.likelyBlocked);
+    const blockedSites = results.filter(
+      (r) => r.blockingIndicators?.likelyBlocked
+    );
     if (blockedSites.length > 0) {
-      fs.writeFileSync('blocked-sites-analysis.json', JSON.stringify(blockedSites, null, 2), 'utf-8');
-      console.log(`${blockedSites.length} blocked sites saved to blocked-sites-analysis.json`);
+      fs.writeFileSync(
+        "blocked-sites-analysis.json",
+        JSON.stringify(blockedSites, null, 2),
+        "utf-8"
+      );
+      console.log(
+        `${blockedSites.length} blocked sites saved to blocked-sites-analysis.json`
+      );
     }
 
-    const highConfidenceDetections = results.filter((r) => r.stats.averageConfidence > 80 && r.stats.total > 5);
+    const highConfidenceDetections = results.filter(
+      (r) => r.stats.averageConfidence > 80 && r.stats.total > 5
+    );
     if (highConfidenceDetections.length > 0) {
       fs.writeFileSync(
-        'high-confidence-detections.json',
+        "high-confidence-detections.json",
         JSON.stringify(highConfidenceDetections, null, 2),
-        'utf-8'
+        "utf-8"
       );
-      console.log(`${highConfidenceDetections.length} high-confidence results saved to high-confidence-detections.json`);
+      console.log(
+        `${highConfidenceDetections.length} high-confidence results saved to high-confidence-detections.json`
+      );
     }
   } catch (error) {
-    console.error('Fatal error during batch processing:', error);
+    console.error("Fatal error during batch processing:", error);
     process.exit(1);
   }
 })();

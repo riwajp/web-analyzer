@@ -1,5 +1,5 @@
-import { JSDOM } from 'jsdom';
-import type { URLData, SiteData } from './types';
+import { JSDOM } from "jsdom";
+import type { URLData, SiteData } from "./types";
 
 export class WebPage {
   private url: string;
@@ -8,13 +8,19 @@ export class WebPage {
     this.url = url;
   }
 
-  async fetch(): Promise<{ response: Response; responseTime: number; sourceCode: string }> {
+  async fetch(): Promise<{
+    response: Response;
+    responseTime: number;
+    sourceCode: string;
+  }> {
     try {
       const startTime = Date.now();
+
       const response = await fetch(this.url, {
-        redirect: 'follow',
+        redirect: "follow",
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         },
       });
       const responseTime = Date.now() - startTime;
@@ -26,7 +32,11 @@ export class WebPage {
     }
   }
 
-  parse(response: Response, responseTime: number, sourceCode: string): { urlData: URLData; siteData: SiteData } {
+  parse(
+    response: Response,
+    responseTime: number,
+    sourceCode: string
+  ): { urlData: URLData; siteData: SiteData } {
     try {
       let redirectCount = 0;
       const contentLength = sourceCode.length;
@@ -38,11 +48,11 @@ export class WebPage {
       const urlData: URLData = {
         sourceCode,
         headers: response.headers,
-        cookies: response.headers.get('set-cookie') || '',
+        cookies: response.headers.get("set-cookie") || "",
         statusCode: response.status,
         responseTime,
         contentLength,
-        contentType: response.headers.get('content-type') || '',
+        contentType: response.headers.get("content-type") || "",
         finalUrl: response.url,
         redirectCount,
       };
@@ -50,25 +60,28 @@ export class WebPage {
       const dom = new JSDOM(sourceCode);
       const doc = dom.window.document;
 
-      const title = doc.querySelector('title')?.textContent?.trim() || '';
-      const description = doc.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+      const title = doc.querySelector("title")?.textContent?.trim() || "";
+      const description =
+        doc
+          .querySelector('meta[name="description"]')
+          ?.getAttribute("content") || "";
 
-      const allElements = doc.querySelectorAll('*');
+      const allElements = doc.querySelectorAll("*");
       const domElementCount = allElements.length;
 
-      const scriptCount = doc.querySelectorAll('script').length;
-      const imageCount = doc.querySelectorAll('img').length;
-      const linkCount = doc.querySelectorAll('link').length;
-      const formCount = doc.querySelectorAll('form').length;
+      const scriptCount = doc.querySelectorAll("script").length;
+      const imageCount = doc.querySelectorAll("img").length;
+      const linkCount = doc.querySelectorAll("link").length;
+      const formCount = doc.querySelectorAll("form").length;
 
       const hasCaptchaElements = !!(
-        doc.querySelector('.g-recaptcha') ||
-        doc.querySelector('.h-captcha') ||
-        doc.querySelector('.cf-turnstile') ||
-        doc.querySelector('[data-sitekey]') ||
-        sourceCode.includes('recaptcha') ||
-        sourceCode.includes('hcaptcha') ||
-        sourceCode.includes('turnstile')
+        doc.querySelector(".g-recaptcha") ||
+        doc.querySelector(".h-captcha") ||
+        doc.querySelector(".cf-turnstile") ||
+        doc.querySelector("[data-sitekey]") ||
+        sourceCode.includes("recaptcha") ||
+        sourceCode.includes("hcaptcha") ||
+        sourceCode.includes("turnstile")
       );
 
       const hasChallengeElements = !!(
@@ -76,8 +89,8 @@ export class WebPage {
         doc.querySelector('[class*="challenge"]') ||
         doc.querySelector('[id*="verification"]') ||
         doc.querySelector('[class*="verification"]') ||
-        sourceCode.includes('challenge-platform') ||
-        sourceCode.includes('browser-verification')
+        sourceCode.includes("challenge-platform") ||
+        sourceCode.includes("browser-verification")
       );
 
       const suspiciousElements: string[] = [];
@@ -97,37 +110,59 @@ export class WebPage {
       suspiciousSelectors.forEach((selector) => {
         const elements = doc.querySelectorAll(selector);
         elements.forEach((el) => {
-          if ((el as Element).id) suspiciousElements.push(`#${(el as Element).id}`);
-          if ((el as Element).className) suspiciousElements.push(`.${(el as Element).className.split(' ')[0]}`);
+          if ((el as Element).id)
+            suspiciousElements.push(`#${(el as Element).id}`);
+          if ((el as Element).className)
+            suspiciousElements.push(
+              `.${(el as Element).className.split(" ")[0]}`
+            );
         });
       });
 
-      const scriptSrc = Array.from(doc.querySelectorAll('script[src]'))
-        .map((el) => el.getAttribute('src'))
+      const scriptSrc = Array.from(doc.querySelectorAll("script[src]"))
+        .map((el) => el.getAttribute("src"))
         .filter((src): src is string => !!src);
 
       const assetUrls = [
-        ...Array.from(doc.querySelectorAll('script[src]')).map((el) => el.getAttribute('src')),
-        ...Array.from(doc.querySelectorAll('link[href]')).map((el) => el.getAttribute('href')),
-        ...Array.from(doc.querySelectorAll('img[src]')).map((el) => el.getAttribute('src')),
-        ...Array.from(doc.querySelectorAll('iframe[src]')).map((el) => el.getAttribute('src')),
-        ...Array.from(doc.querySelectorAll('source[src]')).map((el) => el.getAttribute('src')),
-        ...Array.from(doc.querySelectorAll('video[src]')).map((el) => el.getAttribute('src')),
-        ...Array.from(doc.querySelectorAll('audio[src]')).map((el) => el.getAttribute('src')),
+        ...Array.from(doc.querySelectorAll("script[src]")).map((el) =>
+          el.getAttribute("src")
+        ),
+        ...Array.from(doc.querySelectorAll("link[href]")).map((el) =>
+          el.getAttribute("href")
+        ),
+        ...Array.from(doc.querySelectorAll("img[src]")).map((el) =>
+          el.getAttribute("src")
+        ),
+        ...Array.from(doc.querySelectorAll("iframe[src]")).map((el) =>
+          el.getAttribute("src")
+        ),
+        ...Array.from(doc.querySelectorAll("source[src]")).map((el) =>
+          el.getAttribute("src")
+        ),
+        ...Array.from(doc.querySelectorAll("video[src]")).map((el) =>
+          el.getAttribute("src")
+        ),
+        ...Array.from(doc.querySelectorAll("audio[src]")).map((el) =>
+          el.getAttribute("src")
+        ),
       ].filter((src): src is string => !!src);
 
-      const js = Array.from(doc.querySelectorAll('script'))
-        .map((el) => el.textContent || '')
+      const js = Array.from(doc.querySelectorAll("script"))
+        .map((el) => el.textContent || "")
         .filter((script) => script.trim());
 
       const meta: Record<string, string> = {};
-      Array.from(doc.querySelectorAll('meta')).forEach((metaElement: HTMLElement) => {
-        const nameAttr = metaElement.getAttribute('name') || metaElement.getAttribute('property');
-        const contentAttr = metaElement.getAttribute('content');
-        if (nameAttr && contentAttr) {
-          meta[nameAttr.toLowerCase()] = contentAttr;
+      Array.from(doc.querySelectorAll("meta")).forEach(
+        (metaElement: HTMLElement) => {
+          const nameAttr =
+            metaElement.getAttribute("name") ||
+            metaElement.getAttribute("property");
+          const contentAttr = metaElement.getAttribute("content");
+          if (nameAttr && contentAttr) {
+            meta[nameAttr.toLowerCase()] = contentAttr;
+          }
         }
-      });
+      );
 
       const textContentLength = doc.body?.textContent?.trim().length || 0;
 

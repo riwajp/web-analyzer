@@ -1,8 +1,13 @@
-export interface PatternMatch { 
+import {
+  DETECTION_TYPE_CONFIDENCE,
+  DETECTION_TYPE_PRIORITY,
+} from "./confidence-constants";
+
+export interface PatternMatch {
   pattern: string;
   confidence: number;
-  priority: 'HIGH' | 'MEDIUM' | 'LOW';
-  type: 'exact' | 'regex' | 'fuzzy' | 'encoded';
+  priority: "HIGH" | "MEDIUM" | "LOW";
+  type: "exact" | "regex" | "fuzzy" | "encoded";
   location: string;
   matchedValue: string;
 }
@@ -15,12 +20,6 @@ export interface DetectionResult {
 }
 
 export class EnhancedPatternMatcher {
-  private static readonly CONFIDENCE_THRESHOLDS = {
-    HIGH: 80,
-    MEDIUM: 60,
-    LOW: 40,
-  };
-
   private static readonly PATTERN_WEIGHTS = {
     HIGH: 1.0,
     MEDIUM: 0.7,
@@ -32,14 +31,14 @@ export class EnhancedPatternMatcher {
     pattern: string | PatternMatch | PatternMatch[],
     baseConfidence: number = 50
   ): { matched: boolean; confidence: number; matches: PatternMatch[] } {
-    if (typeof pattern === 'string') {
+    if (typeof pattern === "string") {
       const patternMatch: PatternMatch = {
         pattern,
         confidence: baseConfidence,
-        priority: 'MEDIUM',
-        type: 'exact',
-        location: '',
-        matchedValue: '',
+        priority: "MEDIUM",
+        type: "exact",
+        location: "",
+        matchedValue: "",
       };
       return this.matchSinglePattern(value, patternMatch);
     }
@@ -60,21 +59,21 @@ export class EnhancedPatternMatcher {
     let confidence = 0;
 
     switch (pattern.type) {
-      case 'exact':
+      case "exact":
         matched = lowerValue.includes(lowerPattern);
         break;
-      case 'regex':
+      case "regex":
         try {
-          const regex = new RegExp(pattern.pattern, 'i');
+          const regex = new RegExp(pattern.pattern, "i");
           matched = regex.test(value);
         } catch (e) {
           matched = lowerValue.includes(lowerPattern);
         }
         break;
-      case 'fuzzy':
+      case "fuzzy":
         matched = this.fuzzyMatch(lowerValue, lowerPattern);
         break;
-      case 'encoded':
+      case "encoded":
         matched = this.matchEncodedPattern(value, pattern.pattern);
         break;
     }
@@ -120,8 +119,8 @@ export class EnhancedPatternMatcher {
   }
 
   private static fuzzyMatch(value: string, pattern: string): boolean {
-    const cleanValue = value.replace(/[0-9_\-\[\]]/g, '');
-    const cleanPattern = pattern.replace(/[0-9_\-\[\]]/g, '');
+    const cleanValue = value.replace(/[0-9_\-\[\]]/g, "");
+    const cleanPattern = pattern.replace(/[0-9_\-\[\]]/g, "");
     if (cleanValue.includes(cleanPattern)) {
       return true;
     }
@@ -139,9 +138,9 @@ export class EnhancedPatternMatcher {
     } catch (e) {}
 
     const hexPattern = pattern
-      .split('')
+      .split("")
       .map((c) => c.charCodeAt(0).toString(16))
-      .join('');
+      .join("");
     if (value.includes(hexPattern)) {
       return true;
     }
@@ -182,13 +181,6 @@ export class EnhancedPatternMatcher {
     const maxLen = Math.max(len1, len2);
     return (maxLen - matrix[len1][len2]) / maxLen;
   }
-
-  static getConfidenceLevel(confidence: number): 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE' {
-    if (confidence >= this.CONFIDENCE_THRESHOLDS.HIGH) return 'HIGH';
-    if (confidence >= this.CONFIDENCE_THRESHOLDS.MEDIUM) return 'MEDIUM';
-    if (confidence >= this.CONFIDENCE_THRESHOLDS.LOW) return 'LOW';
-    return 'NONE';
-  }
 }
 
 export class EnhancedTechnologyDetector {
@@ -204,37 +196,56 @@ export class EnhancedTechnologyDetector {
 
     const detectionConfigs = [
       {
-        techKey: 'js',
-        dataKey: 'js',
+        techKey: "js",
+        dataKey: "js",
         dataSource: siteData,
-        checkMethod: 'checkPatterns',
-        type: 'js'
+        checkMethod: "checkPatterns",
+        type: "js",
       },
       {
-        techKey: 'scriptSrc',
-        dataKey: 'assetUrls',
+        techKey: "scriptSrc",
+        dataKey: "assetUrls",
         dataSource: siteData,
-        checkMethod: 'checkPatterns',
-        type: 'scriptSrc'
+        checkMethod: "checkPatterns",
+        type: "scriptSrc",
       },
       {
-        techKey: 'headers',
-        dataKey: 'headers',
+        techKey: "headers",
+        dataKey: "headers",
         dataSource: reqData,
-        checkMethod: 'checkHeaders',
-        type: 'headers'
+        checkMethod: "checkHeaders",
+        type: "headers",
       },
       {
-        techKey: 'cookies',
-        dataKey: 'cookies',
+        techKey: "cookies",
+        dataKey: "cookies",
         dataSource: reqData,
-        checkMethod: 'checkCookies',
-        type: 'cookies'
-      }
+        checkMethod: "checkCookies",
+        type: "cookies",
+      },
+      {
+        techKey: "html",
+        dataKey: "html",
+        dataSource: reqData,
+        checkMethod: "checkHtml",
+        type: "html",
+      },
+      {
+        techKey: "dom",
+        dataKey: "dom",
+        dataSource: reqData,
+        checkMethod: "checkDom",
+        type: "dom",
+      },
     ];
 
     for (const config of detectionConfigs) {
-      const result = this.processDetection(config, techData, allMatches, detectedTypes);
+      const result = this.processDetection(
+        config,
+        techData,
+        allMatches,
+        detectedTypes
+      );
       totalConfidence += result;
     }
 
@@ -261,22 +272,36 @@ export class EnhancedTechnologyDetector {
     detectedTypes: string[]
   ): number {
     const { techKey, dataKey, dataSource, checkMethod, type } = config;
-    
+
     if (!techData[techKey] || !dataSource[dataKey]) {
       return 0;
     }
 
-    let result: { matched: boolean; confidence: number; matches: PatternMatch[] };
-    
+    let result: {
+      matched: boolean;
+      confidence: number;
+      matches: PatternMatch[];
+    };
+
     switch (checkMethod) {
-      case 'checkPatterns':
-        result = this.checkPatterns(techData[techKey], dataSource[dataKey], type);
+      case "checkPatterns":
+        result = this.checkPatterns(
+          techData[techKey],
+          dataSource[dataKey],
+          type
+        );
         break;
-      case 'checkHeaders':
+      case "checkHeaders":
         result = this.checkHeaders(techData[techKey], dataSource[dataKey]);
         break;
-      case 'checkCookies':
+      case "checkCookies":
         result = this.checkCookies(techData[techKey], dataSource[dataKey]);
+        break;
+      case "checkHtml":
+        result = this.checkHtml(techData[techKey], dataSource[dataKey]);
+        break;
+      case "checkDom":
+        result = this.checkDom(techData[techKey], dataSource[dataKey]);
         break;
       default:
         return 0;
@@ -301,7 +326,10 @@ export class EnhancedTechnologyDetector {
     let totalConfidence = 0;
 
     for (const item of items) {
-      const result = EnhancedPatternMatcher.matchPatternWithConfidence(item, normalizedPatterns);
+      const result = EnhancedPatternMatcher.matchPatternWithConfidence(
+        item,
+        normalizedPatterns
+      );
       totalConfidence = this.processResult(result, allMatches, totalConfidence);
     }
 
@@ -332,18 +360,25 @@ export class EnhancedTechnologyDetector {
     let totalConfidence = 0;
 
     for (const [headerName, headerPattern] of Object.entries(headerPatterns)) {
-      const headerValue = headers.get(headerName.trim().replace(':', ''));
+      const headerValue = headers.get(headerName.trim().replace(":", ""));
       if (headerValue) {
         const pattern: PatternMatch = {
           pattern: headerPattern,
           confidence: 75,
-          priority: 'HIGH',
-          type: 'regex',
-          location: 'headers',
+          priority: "HIGH",
+          type: "regex",
+          location: "headers",
           matchedValue: headerValue,
         };
-        const result = EnhancedPatternMatcher.matchPatternWithConfidence(headerValue, pattern);
-        totalConfidence = this.processResult(result, allMatches, totalConfidence);
+        const result = EnhancedPatternMatcher.matchPatternWithConfidence(
+          headerValue,
+          pattern
+        );
+        totalConfidence = this.processResult(
+          result,
+          allMatches,
+          totalConfidence
+        );
       }
     }
 
@@ -366,13 +401,15 @@ export class EnhancedTechnologyDetector {
         const pattern: PatternMatch = {
           pattern: cookieName,
           confidence: 85,
-          priority: 'HIGH',
-          type: 'exact',
-          location: 'cookies',
+          priority: "HIGH",
+          type: "exact",
+          location: "cookies",
           matchedValue: cookieName,
         };
         allMatches.push(pattern);
-        totalConfidence += pattern.confidence * EnhancedPatternMatcher['PATTERN_WEIGHTS'][pattern.priority];
+        totalConfidence +=
+          pattern.confidence *
+          EnhancedPatternMatcher["PATTERN_WEIGHTS"][pattern.priority];
       }
     }
 
@@ -383,20 +420,77 @@ export class EnhancedTechnologyDetector {
     };
   }
 
-  private static normalizePatterns(patterns: string[] | PatternMatch[], type: string): PatternMatch[] {
+  private static checkHtml(htmlPatterns: string[], html: string) {
+    const allMatches: PatternMatch[] = [];
+    let totalConfidence = 0;
+
+    for (const pattern of htmlPatterns) {
+      const patternMatch: PatternMatch = {
+        pattern: pattern,
+        confidence: 45,
+        priority: "HIGH",
+        type: "exact",
+        location: "headers",
+        matchedValue: pattern,
+      };
+      const result = EnhancedPatternMatcher.matchPatternWithConfidence(
+        html,
+        patternMatch
+      );
+      totalConfidence = this.processResult(result, allMatches, totalConfidence);
+    }
+
+    return {
+      matched: allMatches.length > 0,
+      confidence: Math.min(totalConfidence, 100),
+      matches: allMatches,
+    };
+  }
+
+  private static checkDom(domPatterns: any, dom: any) {
+    const allMatches: PatternMatch[] = [];
+    let totalConfidence = 0;
+
+    if (domPatterns && typeof domPatterns === "object") {
+      for (const domSelector of Object.keys(domPatterns)) {
+        const patternMatch: PatternMatch = {
+          pattern: domSelector,
+          confidence: 45,
+          priority: "HIGH",
+          type: "exact",
+          location: "headers",
+          matchedValue: "",
+        };
+        if (dom.querySelectorAll(domSelector).length > 0) {
+          allMatches.push(patternMatch);
+          totalConfidence += 30;
+        }
+      }
+    }
+    return {
+      matched: allMatches.length > 0,
+      confidence: Math.min(totalConfidence, 100),
+      matches: allMatches,
+    };
+  }
+
+  private static normalizePatterns(
+    patterns: string[] | PatternMatch[],
+    type: string
+  ): PatternMatch[] {
     if (!Array.isArray(patterns)) {
       patterns = [patterns];
     }
 
     return patterns.map((pattern) => {
-      if (typeof pattern === 'string') {
+      if (typeof pattern === "string") {
         return {
           pattern,
           confidence: this.getDefaultConfidence(type),
           priority: this.getDefaultPriority(type),
           type: this.getDefaultType(pattern),
           location: type,
-          matchedValue: '',
+          matchedValue: "",
         } as PatternMatch;
       }
       return pattern;
@@ -404,36 +498,24 @@ export class EnhancedTechnologyDetector {
   }
 
   private static getDefaultConfidence(type: string): number {
-    const confidenceMap: Record<string, number> = {
-      js: 60,
-      scriptSrc: 70,
-      headers: 80,
-      cookies: 85,
-      meta: 50,
-      dom: 65,
-    };
+    const confidenceMap = DETECTION_TYPE_CONFIDENCE;
     return confidenceMap[type] || 50;
   }
 
-  private static getDefaultPriority(type: string): 'HIGH' | 'MEDIUM' | 'LOW' {
-    const priorityMap: Record<string, 'HIGH' | 'MEDIUM' | 'LOW'> = {
-      cookies: 'HIGH',
-      headers: 'HIGH',
-      scriptSrc: 'MEDIUM',
-      js: 'MEDIUM',
-      meta: 'LOW',
-      dom: 'MEDIUM',
-    };
-    return priorityMap[type] || 'MEDIUM';
+  private static getDefaultPriority(type: string): "HIGH" | "MEDIUM" | "LOW" {
+    const priorityMap = DETECTION_TYPE_PRIORITY;
+    return priorityMap[type] || "MEDIUM";
   }
 
-  private static getDefaultType(pattern: string): 'exact' | 'regex' | 'fuzzy' | 'encoded' {
+  private static getDefaultType(
+    pattern: string
+  ): "exact" | "regex" | "fuzzy" | "encoded" {
     if (/[.*+?^${}()|[\]\\]/.test(pattern)) {
-      return 'regex';
+      return "regex";
     }
     if (/[0-9]{2,}|[A-Z]{2,}[a-z]{2,}[A-Z]{2,}/.test(pattern)) {
-      return 'fuzzy';
+      return "fuzzy";
     }
-    return 'exact';
+    return "exact";
   }
 }

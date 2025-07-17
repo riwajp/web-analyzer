@@ -1,11 +1,24 @@
-import { EnhancedPatternMatcher, EnhancedTechnologyDetector } from './patternMatcher';
-import type { URLData, SiteData, EnhancedDetectedTechnology, TechnologiesMap, DetectionMode } from './types';
+import {
+  getConfidenceLevel,
+  TECH_DETECTION_MODE_CONFIDENCE,
+} from "./confidence-constants";
+import {
+  EnhancedPatternMatcher,
+  EnhancedTechnologyDetector,
+} from "./patternMatcher";
+import type {
+  URLData,
+  SiteData,
+  EnhancedDetectedTechnology,
+  TechnologiesMap,
+  DetectionMode,
+} from "./types";
 
 export class TechnologyDetector {
   private technologies: TechnologiesMap;
   private detectionMode: DetectionMode;
 
-  constructor(technologies: TechnologiesMap, mode: DetectionMode = 'NORMAL') {
+  constructor(technologies: TechnologiesMap, mode: DetectionMode = "NORMAL") {
     this.technologies = technologies;
     this.detectionMode = mode;
   }
@@ -15,17 +28,20 @@ export class TechnologyDetector {
     console.log(`Detection mode set to: ${mode}`);
   }
 
-  detectTechnologies(urlData: URLData, siteData: SiteData): EnhancedDetectedTechnology[] {
+  detectTechnologies(
+    urlData: URLData,
+    siteData: SiteData
+  ): EnhancedDetectedTechnology[] {
     const detectedTechnologies: EnhancedDetectedTechnology[] = [];
     const visited = new Set<string>();
-    const minConfidence = {
-      STRICT: 80,
-      NORMAL: 60,
-      LOOSE: 40,
-    }[this.detectionMode];
+    const minConfidence = TECH_DETECTION_MODE_CONFIDENCE[this.detectionMode];
 
-    console.log(`[DEBUG] Detection mode: ${this.detectionMode}, Min confidence: ${minConfidence}%`);
-    console.log(`[DEBUG] Analyzing ${siteData.js.length} scripts, ${siteData.assetUrls.length} assets`);
+    console.log(
+      `[DEBUG] Detection mode: ${this.detectionMode}, Min confidence: ${minConfidence}%`
+    );
+    console.log(
+      `[DEBUG] Analyzing ${siteData.js.length} scripts, ${siteData.assetUrls.length} assets`
+    );
 
     const detect = (techName: string) => {
       if (visited.has(techName)) return;
@@ -34,12 +50,23 @@ export class TechnologyDetector {
       const techData = this.technologies[techName];
       if (!techData) return;
 
-      const result = EnhancedTechnologyDetector.detectTechnologyWithConfidence(techName, techData, siteData, urlData);
-      const confidenceLevel = EnhancedPatternMatcher.getConfidenceLevel(result.confidence);
+      const result = EnhancedTechnologyDetector.detectTechnologyWithConfidence(
+        techName,
+        techData,
+        siteData,
+        urlData
+      );
+      const confidenceLevel = getConfidenceLevel(result.confidence);
 
-      console.log(`[DEBUG] ${techName}: ${result.confidence.toFixed(1)}% confidence (${confidenceLevel})`);
+      console.log(
+        `[DEBUG] ${techName}: ${result.confidence.toFixed(
+          1
+        )}% confidence (${confidenceLevel})`
+      );
       if (result.confidence >= minConfidence) {
-        console.log(`[DETECTED] ${techName} - ${result.confidence.toFixed(1)}% confidence`);
+        console.log(
+          `[DETECTED] ${techName} - ${result.confidence.toFixed(1)}% confidence`
+        );
         detectedTechnologies.push({
           name: techName,
           confidence: Math.round(result.confidence * 10) / 10,
@@ -49,12 +76,16 @@ export class TechnologyDetector {
         });
 
         if (techData.implies) {
-          const impliedTechs = Array.isArray(techData.implies) ? techData.implies : [techData.implies];
+          const impliedTechs = Array.isArray(techData.implies)
+            ? techData.implies
+            : [techData.implies];
           impliedTechs.forEach(detect);
         }
 
         if (techData.requires) {
-          const requiredTechs = Array.isArray(techData.requires) ? techData.requires : [techData.requires];
+          const requiredTechs = Array.isArray(techData.requires)
+            ? techData.requires
+            : [techData.requires];
           requiredTechs.forEach(detect);
         }
       }

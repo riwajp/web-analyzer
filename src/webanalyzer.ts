@@ -1,10 +1,14 @@
-import fs from 'fs';
-import path from 'path';
-import { performance } from 'perf_hooks';
-import { WebPage } from './webPage';
-import { Analyzer } from './analyzer';
-import { TechnologyDetector } from './technologyDetector';
-import type { EnhancedDetectionResult, DetectionConfig, TechnologiesMap } from './types';
+import fs from "fs";
+import path from "path";
+import { performance } from "perf_hooks";
+import { WebPage } from "./webPage";
+import { Analyzer } from "./analyzer";
+import { TechnologyDetector } from "./technologyDetector";
+import type {
+  EnhancedDetectionResult,
+  DetectionConfig,
+  TechnologiesMap,
+} from "./types";
 
 export const WebAnalyzer = {
   initialized: false,
@@ -13,32 +17,38 @@ export const WebAnalyzer = {
   init(dataFiles: string[]) {
     for (const file of dataFiles) {
       const filePath = path.resolve(file);
-      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      const fileContent = fs.readFileSync(filePath, "utf-8");
       const technologiesFromFile: TechnologiesMap = JSON.parse(fileContent);
       this.technologies = { ...this.technologies, ...technologiesFromFile };
     }
     this.initialized = true;
-    console.log(`Loaded ${Object.keys(this.technologies).length} technologies.`);
+    console.log(
+      `Loaded ${Object.keys(this.technologies).length} technologies.`
+    );
   },
 
   async analyze(url: string): Promise<EnhancedDetectionResult | null> {
     if (!this.initialized) {
-      this.init(['src/data/tech.json']);
+      this.init(["src/data/tech.json"]);
     }
     const webPage = new WebPage(url);
     const { response, responseTime, sourceCode } = await webPage.fetch();
-    const { urlData, siteData } = webPage.parse(response, responseTime, sourceCode);
-    const detector = new TechnologyDetector(this.technologies, 'NORMAL'); // Use internal default mode
+    const { urlData, siteData } = webPage.parse(
+      response,
+      responseTime,
+      sourceCode
+    );
+    const detector = new TechnologyDetector(this.technologies, "LOOSE"); // Use internal default mode
     const technologies = detector.detectTechnologies(urlData, siteData);
-    const analyzer = new Analyzer(url, this.technologies);
+    const analyzer = new Analyzer(url);
     return await analyzer.analyze(siteData, technologies, urlData);
   },
 
   formatBytes(bytes: number): string {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   },
 };
