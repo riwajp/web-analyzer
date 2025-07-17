@@ -3,6 +3,14 @@ import { WebAnalyzer } from "./webanalyzer";
 import type { EnhancedDetectionResult, DetectionConfig } from "./types";
 
 const urls = [
+  "https://www.grove.co/", // hCaptcha
+  "https://login.payoneer.com/", //reblaze [js cookie :( ]
+  "https://www.rafael.co.il/", //reblaze
+  "https://darksmile.tickets/", // queue-fair [js cookie]
+  "https://www.reukraine.org/villages-eng", // queue-fair
+  "https://www.bankofamerica.com/", // akamai
+  "http://marketplace.aps.com/", //sucuri
+  "https://ezbatteryreconditioning.com/", //sucuri
   "https://www.cvs.com/",
   "https://www.footlocker.com/",
   "https://www.tripadvisor.com/",
@@ -181,7 +189,7 @@ function generateSummaryReport(results: EnhancedDetectionResult[]): string {
 
   const topTechs = Object.entries(techCounts)
     .sort(([, a], [, b]) => b - a)
-    .slice(0, 10)
+    // .slice(0, 10)
     .map(([tech, count]) => `${tech}: ${count}`);
 
   return `

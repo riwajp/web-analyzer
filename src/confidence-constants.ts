@@ -30,7 +30,7 @@ export const DETECTION_TYPE_CONFIDENCE: Record<string, number> = {
   cookies: 85,
   meta: 50,
   dom: 65,
-  html: 40,
+  html: 45,
 };
 
 // default priority levels for different types of detection
