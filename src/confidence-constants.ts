@@ -1,15 +1,18 @@
+// global confidence threshold levels
 export const CONFIDENCE_THRESHOLDS = {
   HIGH: 80,
   MEDIUM: 60,
   LOW: 40,
 };
 
+// confidence levels for technology detection mode
 export const TECH_DETECTION_MODE_CONFIDENCE = {
   STRICT: CONFIDENCE_THRESHOLDS.HIGH,
   NORMAL: CONFIDENCE_THRESHOLDS.MEDIUM,
   LOOSE: CONFIDENCE_THRESHOLDS.LOW,
 };
 
+// get confidence level string from numerical value
 export const getConfidenceLevel = (
   confidence: number
 ): "HIGH" | "MEDIUM" | "LOW" | "NONE" => {
@@ -19,6 +22,7 @@ export const getConfidenceLevel = (
   return "NONE";
 };
 
+// default confidence levels for different types of detection (needed to calculate technology's overall confidence)
 export const DETECTION_TYPE_CONFIDENCE: Record<string, number> = {
   js: 60,
   scriptSrc: 70,
@@ -29,6 +33,7 @@ export const DETECTION_TYPE_CONFIDENCE: Record<string, number> = {
   html: 40,
 };
 
+// default priority levels for different types of detection
 export const DETECTION_TYPE_PRIORITY: Record<
   string,
   "HIGH" | "MEDIUM" | "LOW"
