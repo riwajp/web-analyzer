@@ -1,6 +1,6 @@
 import fs from "fs";
 import { WebAnalyzer } from "./webanalyzer";
-import type { EnhancedDetectionResult, DetectionConfig } from "./types";
+import type { DetectionResult, DetectionConfig } from "./types";
 
 const urls = [
   "https://www.grove.co/", // hCaptcha
@@ -118,9 +118,9 @@ async function processBatch(
     outputFile?: string;
     progressCallback?: (processed: number, total: number, url: string) => void;
   } = {}
-): Promise<EnhancedDetectionResult[]> {
+): Promise<DetectionResult[]> {
   const { concurrent = 2, outputFile, progressCallback } = options;
-  const results: EnhancedDetectionResult[] = [];
+  const results: DetectionResult[] = [];
 
   console.log(`Starting batch processing of ${urls.length} URLs`);
 
@@ -167,7 +167,7 @@ async function processBatch(
   return results;
 }
 
-function generateSummaryReport(results: EnhancedDetectionResult[]): string {
+function generateSummaryReport(results: DetectionResult[]): string {
   const totalUrls = results.length;
   const successfulUrls = results.length;
   const blockedUrls = results.filter(

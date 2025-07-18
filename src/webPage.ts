@@ -74,95 +74,44 @@ export class WebPage {
       const linkCount = doc.querySelectorAll("link").length;
       const formCount = doc.querySelectorAll("form").length;
 
-      const hasCaptchaElements = !!(
-        doc.querySelector(".g-recaptcha") ||
-        doc.querySelector(".h-captcha") ||
-        doc.querySelector(".cf-turnstile") ||
-        doc.querySelector("[data-sitekey]") ||
-        sourceCode.includes("recaptcha") ||
-        sourceCode.includes("hcaptcha") ||
-        sourceCode.includes("turnstile")
-      );
-
-      const hasChallengeElements = !!(
-        doc.querySelector('[id*="challenge"]') ||
-        doc.querySelector('[class*="challenge"]') ||
-        doc.querySelector('[id*="verification"]') ||
-        doc.querySelector('[class*="verification"]') ||
-        sourceCode.includes("challenge-platform") ||
-        sourceCode.includes("browser-verification")
-      );
-
-      const suspiciousElements: string[] = [];
-      const suspiciousSelectors = [
-        '[id*="challenge"]',
-        '[class*="challenge"]',
-        '[id*="captcha"]',
-        '[class*="captcha"]',
-        '[id*="block"]',
-        '[class*="block"]',
-        '[id*="protection"]',
-        '[class*="protection"]',
-        '[id*="security"]',
-        '[class*="security"]',
-      ];
-
-      suspiciousSelectors.forEach((selector) => {
-        const elements = doc.querySelectorAll(selector);
-        elements.forEach((el) => {
-          if ((el as Element).id)
-            suspiciousElements.push(`#${(el as Element).id}`);
-          if ((el as Element).className)
-            suspiciousElements.push(
-              `.${(el as Element).className.split(" ")[0]}`
-            );
-        });
-      });
-
-      const scriptSrc = Array.from(doc.querySelectorAll("script[src]"))
+      const scriptSrc = [...doc.querySelectorAll("script[src]")]
         .map((el) => el.getAttribute("src"))
         .filter((src): src is string => !!src);
 
       const assetUrls = [
-        ...Array.from(doc.querySelectorAll("script[src]")).map((el) =>
-          el.getAttribute("src")
+        ...doc.querySelectorAll(
+          `script[src],
+     link[href],
+     img[src],
+     iframe[src],
+     source[src],
+     video[src],
+     audio[src]`
         ),
-        ...Array.from(doc.querySelectorAll("link[href]")).map((el) =>
-          el.getAttribute("href")
-        ),
-        ...Array.from(doc.querySelectorAll("img[src]")).map((el) =>
-          el.getAttribute("src")
-        ),
-        ...Array.from(doc.querySelectorAll("iframe[src]")).map((el) =>
-          el.getAttribute("src")
-        ),
-        ...Array.from(doc.querySelectorAll("source[src]")).map((el) =>
-          el.getAttribute("src")
-        ),
-        ...Array.from(doc.querySelectorAll("video[src]")).map((el) =>
-          el.getAttribute("src")
-        ),
-        ...Array.from(doc.querySelectorAll("audio[src]")).map((el) =>
-          el.getAttribute("src")
-        ),
-      ].filter((src): src is string => !!src);
+      ]
+        .map((el) => {
+          const tag = el.tagName.toLowerCase();
+          return tag === "link"
+            ? el.getAttribute("href")
+            : el.getAttribute("src");
+        })
+        .filter((src): src is string => !!src);
 
-      const js = Array.from(doc.querySelectorAll("script"))
+      const js = [...doc.querySelectorAll("script")]
         .map((el) => el.textContent || "")
         .filter((script) => script.trim());
 
       const meta: Record<string, string> = {};
-      Array.from(doc.querySelectorAll("meta")).forEach(
-        (metaElement: HTMLElement) => {
-          const nameAttr =
-            metaElement.getAttribute("name") ||
-            metaElement.getAttribute("property");
-          const contentAttr = metaElement.getAttribute("content");
-          if (nameAttr && contentAttr) {
-            meta[nameAttr.toLowerCase()] = contentAttr;
-          }
+
+      [...doc.querySelectorAll("meta")].forEach((metaElement: HTMLElement) => {
+        const nameAttr =
+          metaElement.getAttribute("name") ||
+          metaElement.getAttribute("property");
+        const contentAttr = metaElement.getAttribute("content");
+        if (nameAttr && contentAttr) {
+          meta[nameAttr.toLowerCase()] = contentAttr;
         }
-      );
+      });
 
       const textContentLength = doc.body?.textContent?.trim().length || 0;
 
@@ -180,9 +129,6 @@ export class WebPage {
         imageCount,
         linkCount,
         formCount,
-        hasCaptchaElements,
-        hasChallengeElements,
-        suspiciousElements,
       };
 
       return { urlData, siteData };
@@ -190,5 +136,16 @@ export class WebPage {
       console.error(`Failed to parse ${this.url}:`, error);
       throw error;
     }
+  }
+
+  async extractData(): Promise<{ urlData: URLData; siteData: SiteData }> {
+    const { response, responseTime, sourceCode } = await this.fetch();
+    const { urlData, siteData } = await this.parse(
+      response,
+      responseTime,
+      sourceCode
+    );
+
+    return { urlData, siteData };
   }
 }

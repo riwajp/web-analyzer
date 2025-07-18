@@ -1,14 +1,11 @@
 import { performance } from "perf_hooks";
-import { TechnologyDetector } from "./technologyDetector";
 import type {
   URLData,
   SiteData,
-  EnhancedDetectionResult,
-  DetectionConfig,
+  DetectionResult,
   BlockingIndicators,
   PageAnalysis,
-  EnhancedDetectedTechnology,
-  TechnologiesMap,
+  DetectedTechnology,
 } from "./types";
 
 export class Analyzer {
@@ -20,26 +17,27 @@ export class Analyzer {
 
   async analyze(
     siteData: SiteData,
-    detectedTechnologies: EnhancedDetectedTechnology[],
+    detectedTechnologies: DetectedTechnology[],
     urlData: URLData
-  ): Promise<EnhancedDetectionResult | null> {
+  ): Promise<DetectionResult | null> {
     const timings: Record<string, number> = {};
     try {
       timings.detectStart = performance.now();
       const technologies = detectedTechnologies;
       timings.afterDetect = performance.now();
 
-      const blockingIndicators = this.analyzeBlocking(
-        siteData,
-        technologies,
-        urlData
-      );
-
-      const pageAnalysis = this.analyzePageMetrics(siteData, {
+      const pageAnalysis = this.analyzePageMetrics(urlData, siteData, {
         fetch: urlData.responseTime,
         parse: 0,
         total: urlData.responseTime,
       });
+
+      const blockingIndicators = this.analyzeBlocking(
+        siteData,
+        technologies,
+        urlData,
+        pageAnalysis
+      );
 
       const stats = this.calculateStats(technologies);
       const rawData = {
@@ -48,7 +46,7 @@ export class Analyzer {
           .split(";")
           .map((c) => c.trim())
           .filter(Boolean),
-        suspiciousElements: siteData.suspiciousElements,
+        suspiciousElements: [], //siteData.suspiciousElements,
         metaTags: siteData.meta,
       };
 
@@ -76,8 +74,9 @@ export class Analyzer {
 
   private analyzeBlocking(
     siteData: SiteData,
-    detectedTechnologies: EnhancedDetectedTechnology[],
-    urlData: URLData
+    detectedTechnologies: DetectedTechnology[],
+    urlData: URLData,
+    pageAnalysis: PageAnalysis
   ): BlockingIndicators {
     const indicators = {
       statusCodeSuspicious: false,
@@ -89,6 +88,7 @@ export class Analyzer {
       botDetectionJs: false,
       minimalDomElements: false,
       unusualResponseTime: false,
+      suspiciousElements: false,
     };
 
     const suspiciousPhrases: string[] = [];
@@ -124,12 +124,17 @@ export class Analyzer {
       indicators.minimalDomElements = true;
       blockingScore += 25;
     }
-    if (siteData.hasChallengeElements) {
+    if (pageAnalysis.hasChallengeElements) {
       indicators.challengeDetected = true;
       blockingScore += 25;
     }
-    if (siteData.hasCaptchaElements) {
+    if (pageAnalysis.hasCaptchaElements) {
       indicators.captchaDetected = true;
+      blockingScore += 30;
+    }
+
+    if (pageAnalysis.suspiciousElements.length > 0) {
+      indicators.suspiciousElements = true;
       blockingScore += 30;
     }
 
@@ -231,16 +236,57 @@ export class Analyzer {
   }
 
   private analyzePageMetrics(
+    urlData: URLData,
     siteData: SiteData,
     p0: { fetch: number; parse: number; total: number }
   ): PageAnalysis {
-    const formatBytes = (bytes: number): string => {
-      if (bytes === 0) return "0 Bytes";
-      const k = 1024;
-      const sizes = ["Bytes", "KB", "MB", "GB"];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-    };
+    const doc = siteData.dom.window.document;
+
+    const hasCaptchaElements = !!(
+      doc.querySelector(
+        ".g-recaptcha,.h-captcha,.cf-turnstile,[data-sitekey]"
+      ) || /recaptcha|hcaptcha|turnstile/i.test(urlData.sourceCode)
+    );
+
+    const hasChallengeElements = !!(
+      doc.querySelector(
+        '[id*="challenge"], [class*="challenge"], [id*="verification"], [class*="verification"]'
+      ) || /challenge-platform|browser-verification/i.test(urlData.sourceCode)
+    );
+
+    const suspiciousElements: string[] = [];
+
+    const suspiciousSelectors: string[] = [
+      '[id*="challenge"]',
+      '[class*="challenge"]',
+      '[id*="captcha"]',
+      '[class*="captcha"]',
+      '[id*="block"]',
+      '[class*="block"]',
+      '[id*="protection"]',
+      '[class*="protection"]',
+      '[id*="security"]',
+      '[class*="security"]',
+    ];
+
+    for (const selector of suspiciousSelectors) {
+      const elements = doc.querySelectorAll(selector);
+
+      elements.forEach((el: Element) => {
+        const id = el.id?.trim();
+        if (id) {
+          suspiciousElements.push(`#${id}`);
+        }
+
+        const className = el.className?.trim();
+        if (className) {
+          const firstClass = className.split(/\s+/)[0];
+          if (firstClass) {
+            suspiciousElements.push(`.${firstClass}`);
+          }
+        }
+      });
+    }
 
     const getDomComplexity = (
       elementCount: number
@@ -265,6 +311,9 @@ export class Analyzer {
       hasJavascript: siteData.scriptCount > 0,
       externalResources: 0, // Assuming siteData.assetUrls is not available
       internalResources: 0, // Assuming siteData.assetUrls is not available
+      hasCaptchaElements,
+      hasChallengeElements,
+      suspiciousElements,
       performanceMetrics: {
         fetchTime: 0, // Assuming timings.fetch is not available
         parseTime: 0, // Assuming timings.parse is not available
@@ -273,7 +322,7 @@ export class Analyzer {
     };
   }
 
-  private calculateStats(results: EnhancedDetectedTechnology[]) {
+  private calculateStats(results: DetectedTechnology[]) {
     return {
       total: results.length,
       byConfidence: {

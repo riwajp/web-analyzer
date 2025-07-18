@@ -1,15 +1,15 @@
-import { detectTechnology } from '../index';
-import type { EnhancedDetectionResult } from '../types';
+import { detectTechnology } from "../index";
+import type { DetectionResult } from "../types";
 
-describe('WebAnalyzer', () => {
+describe("WebAnalyzer", () => {
   beforeEach(() => {
     // WebAnalyzer.setDetectionMode('NORMAL');
   });
 
-  test('should detect no blocking on a bot-friendly site', async () => {
-    const url = 'https://httpbin.org/html';
-    const result: EnhancedDetectionResult = await detectTechnology(url, {
-      mode: 'NORMAL',
+  test("should detect no blocking on a bot-friendly site", async () => {
+    const url = "https://httpbin.org/html";
+    const result: DetectionResult = await detectTechnology(url, {
+      mode: "NORMAL",
       blockingDetectionEnabled: true,
     });
 
@@ -20,7 +20,7 @@ describe('WebAnalyzer', () => {
     expect(result.blocking_indicators.challenge_type).toBeUndefined();
   }, 10000);
 
-  test('should detect Cloudflare challenge on a protected site', async () => {
+  test("should detect Cloudflare challenge on a protected site", async () => {
     const urls = [
       "https://www.cvs.com/",
       "https://www.footlocker.com/",
@@ -114,28 +114,38 @@ describe('WebAnalyzer', () => {
       "https://www.wayfair.com/",
       "https://www.weismarkets.com/",
       "https://www.wizzair.com/",
-      "https://www.worten.pt/"
+      "https://www.worten.pt/",
     ];
     const url = urls[0];
-    const result: EnhancedDetectionResult = await detectTechnology(url, {
-      mode: 'NORMAL',
+    const result: DetectionResult = await detectTechnology(url, {
+      mode: "NORMAL",
       blockingDetectionEnabled: true,
     });
     expect(result.blocking_indicators.likely_blocked).toBe(true);
-    expect(result.blocking_indicators.blocking_score).toBeGreaterThanOrEqual(40);
+    expect(result.blocking_indicators.blocking_score).toBeGreaterThanOrEqual(
+      40
+    );
     // Loosen assertion: just print suspicious_phrases for debug if not present
-    if (!result.blocking_indicators.suspicious_phrases || result.blocking_indicators.suspicious_phrases.length === 0) {
+    if (
+      !result.blocking_indicators.suspicious_phrases ||
+      result.blocking_indicators.suspicious_phrases.length === 0
+    ) {
       // eslint-disable-next-line no-console
-      console.warn('suspicious_phrases was empty:', result.blocking_indicators.suspicious_phrases);
+      console.warn(
+        "suspicious_phrases was empty:",
+        result.blocking_indicators.suspicious_phrases
+      );
     }
     expect(result.blocking_indicators.indicators.challenge_detected).toBe(true);
-    expect(['javascript', 'captcha']).toContain(result.blocking_indicators.challenge_type);
+    expect(["javascript", "captcha"]).toContain(
+      result.blocking_indicators.challenge_type
+    );
   }, 15000);
 
-  test('should handle network failure gracefully', async () => {
-    const url = 'https://nonexistent.example.com';
-    const result: EnhancedDetectionResult = await detectTechnology(url, {
-      mode: 'NORMAL',
+  test("should handle network failure gracefully", async () => {
+    const url = "https://nonexistent.example.com";
+    const result: DetectionResult = await detectTechnology(url, {
+      mode: "NORMAL",
       blockingDetectionEnabled: true,
     });
 

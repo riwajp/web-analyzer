@@ -24,20 +24,12 @@ export type SiteData = {
   imageCount: number;
   linkCount: number;
   formCount: number;
-  hasCaptchaElements: boolean;
-  hasChallengeElements: boolean;
-  suspiciousElements: string[];
 };
 
 export type DetectedTechnology = {
   name: string;
-  detectedUsing: string[];
-};
-
-export type EnhancedDetectedTechnology = {
-  name: string;
   confidence: number;
-  confidenceLevel: 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE';
+  confidenceLevel: "HIGH" | "MEDIUM" | "LOW" | "NONE";
   detectedUsing: string[];
   matches: PatternMatch[];
 };
@@ -45,8 +37,8 @@ export type EnhancedDetectedTechnology = {
 export type PatternMatch = {
   pattern: string;
   confidence: number;
-  priority: 'HIGH' | 'MEDIUM' | 'LOW';
-  type: 'exact' | 'regex' | 'fuzzy' | 'encoded';
+  priority: "HIGH" | "MEDIUM" | "LOW";
+  type: "exact" | "regex" | "fuzzy" | "encoded";
   location: string;
   matchedValue: string;
 };
@@ -66,7 +58,12 @@ export type BlockingIndicators = {
     unusualResponseTime: boolean;
   };
   suspiciousPhrases: string[];
-  challengeType?: 'captcha' | 'javascript' | 'browser_check' | 'rate_limit' | 'access_denied';
+  challengeType?:
+    | "captcha"
+    | "javascript"
+    | "browser_check"
+    | "rate_limit"
+    | "access_denied";
   detectedBotProtectionTechs?: string[];
 };
 
@@ -74,7 +71,7 @@ export type PageAnalysis = {
   domElementCount: number;
   pageSizeBytes: number;
   pageSizeHuman: string;
-  domComplexity: 'LOW' | 'MEDIUM' | 'HIGH';
+  domComplexity: "LOW" | "MEDIUM" | "HIGH";
   contentType: string;
   title: string;
   description: string;
@@ -85,6 +82,9 @@ export type PageAnalysis = {
   hasJavascript: boolean;
   externalResources: number;
   internalResources: number;
+  hasCaptchaElements: boolean;
+  hasChallengeElements: boolean;
+  suspiciousElements: string[];
   performanceMetrics: {
     fetchTime: number;
     parseTime: number;
@@ -92,11 +92,11 @@ export type PageAnalysis = {
   };
 };
 
-export type EnhancedDetectionResult = {
+export type DetectionResult = {
   url: string;
   finalUrl: string;
   statusCode: number;
-  technologies: EnhancedDetectedTechnology[];
+  technologies: DetectedTechnology[];
   blockingIndicators?: BlockingIndicators;
   pageAnalysis: PageAnalysis;
   stats: {
@@ -107,7 +107,7 @@ export type EnhancedDetectionResult = {
       LOW: number;
     };
     averageConfidence: number;
-    topDetection: EnhancedDetectedTechnology | null;
+    topDetection: DetectedTechnology | null;
   };
   timings: {
     fetch: number;
@@ -134,4 +134,4 @@ export type DetectionConfig = {
 };
 
 export type TechnologiesMap = Record<string, any>;
-export type DetectionMode = 'STRICT' | 'NORMAL' | 'LOOSE';
+export type DetectionMode = "STRICT" | "NORMAL" | "LOOSE";
