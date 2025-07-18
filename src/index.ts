@@ -138,6 +138,8 @@ async function processBatch(
           `A complete DetectionConfig with a defined 'mode' property must be provided to WebAnalyzer.analyze.`
         );
       }
+
+      WebAnalyzer.init(["src/data/tech.json"], config);
       const result = await WebAnalyzer.analyze(url);
       progressCallback?.(i + batch.indexOf(url) + 1, urls.length, url);
       return { url, result };

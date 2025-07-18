@@ -8,26 +8,37 @@ export class WebPage {
     this.url = url;
   }
 
-  async fetch(): Promise<{
+  async fetch(timeoutMs = 5000): Promise<{
     response: Response;
     responseTime: number;
     sourceCode: string;
   }> {
-    try {
-      const startTime = Date.now();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
+    const startTime = Date.now();
+    try {
       const response = await fetch(this.url, {
         redirect: "follow",
+        signal: controller.signal,
         headers: {
           "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         },
       });
+
+      clearTimeout(timeout);
+
       const responseTime = Date.now() - startTime;
       const sourceCode = await response.text();
+
       return { response, responseTime, sourceCode };
-    } catch (error) {
-      console.error(`Failed to fetch ${this.url}:`, error);
+    } catch (error: any) {
+      if (error.name === "AbortError") {
+        console.error(`Fetch for ${this.url} timed out after ${timeoutMs}ms.`);
+      } else {
+        console.error(`Failed to fetch ${this.url}:`, error);
+      }
       throw error;
     }
   }

@@ -238,52 +238,56 @@ export class TechnologyDetector {
     return 0;
   }
 
-  private checkPatterns(
-    patterns: string[] | PatternMatch[],
-    items: string[],
-    type: string
+  private runDetectionCheck<Input, Pattern>(
+    inputs: Input[],
+    patterns: Pattern[],
+    matchFn: (input: Input, pattern: Pattern) => PatternMatch | null,
+    confidenceLimit = 100
   ): { matched: boolean; confidence: number; matches: PatternMatch[] } {
-    const normalizedPatterns = this.normalizePatterns(patterns, type);
     const allMatches: PatternMatch[] = [];
     let totalConfidence = 0;
 
-    for (const item of items) {
-      const result = PatternMatcher.matchPatternWithConfidence(
-        item,
-        normalizedPatterns
-      );
-      totalConfidence = this.processResult(result, allMatches, totalConfidence);
+    for (const input of inputs) {
+      for (const pattern of patterns) {
+        const result = matchFn(input, pattern);
+        if (result) {
+          allMatches.push(result);
+          totalConfidence += result.confidence;
+        }
+      }
     }
 
     return {
       matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
+      confidence: Math.min(totalConfidence, confidenceLimit),
       matches: allMatches,
     };
   }
 
-  private processResult(
-    result: { matched: boolean; confidence: number; matches: PatternMatch[] },
-    allMatches: PatternMatch[],
-    currentConfidence: number
-  ): number {
-    if (result.matched) {
-      allMatches.push(...result.matches);
-      return currentConfidence + result.confidence;
-    }
-    return currentConfidence;
+  private checkPatterns(
+    patterns: string[] | PatternMatch[],
+    items: string[],
+    type: string
+  ) {
+    const normalized = this.normalizePatterns(patterns, type);
+    return this.runDetectionCheck(items, normalized, (item, pattern) => {
+      const result = PatternMatcher.matchPatternWithConfidence(item, pattern);
+      return result.matched ? { ...pattern, matchedValue: item } : null;
+    });
   }
 
   private checkHeaders(
     headerPatterns: Record<string, string>,
     headers: Headers
-  ): { matched: boolean; confidence: number; matches: PatternMatch[] } {
-    const allMatches: PatternMatch[] = [];
-    let totalConfidence = 0;
+  ) {
+    const patterns = Object.entries(headerPatterns);
+    return this.runDetectionCheck(
+      [headers],
+      patterns,
 
-    for (const [headerName, headerPattern] of Object.entries(headerPatterns)) {
-      const headerValue = headers.get(headerName.trim().replace(":", ""));
-      if (headerValue) {
+      (headers, [headerName, headerPattern]) => {
+        const headerValue = headers.get(headerName.trim().replace(":", ""));
+        if (!headerValue) return null;
         const pattern: PatternMatch = {
           pattern: headerPattern,
           confidence: 75,
@@ -296,104 +300,70 @@ export class TechnologyDetector {
           headerValue,
           pattern
         );
-        totalConfidence = this.processResult(
-          result,
-          allMatches,
-          totalConfidence
-        );
+        return result.matched
+          ? { ...pattern, matchedValue: headerValue }
+          : null;
       }
-    }
-
-    return {
-      matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-    };
+    );
   }
 
   private checkCookies(
     cookiePatterns: Record<string, string>,
     cookies: string
-  ): { matched: boolean; confidence: number; matches: PatternMatch[] } {
-    const allMatches: PatternMatch[] = [];
-    let totalConfidence = 0;
-
-    for (const [cookieName, cookiePattern] of Object.entries(cookiePatterns)) {
-      if (cookies.includes(cookieName)) {
-        const pattern: PatternMatch = {
-          pattern: cookieName,
-          confidence: 85,
-          priority: "HIGH",
-          type: "exact",
-          location: "cookies",
-          matchedValue: cookieName,
-        };
-        allMatches.push(pattern);
-        totalConfidence +=
-          pattern.confidence *
-          PatternMatcher["PATTERN_WEIGHTS"][pattern.priority];
+  ) {
+    const patterns = Object.keys(cookiePatterns);
+    return this.runDetectionCheck(
+      [cookies],
+      patterns,
+      (cookies, cookieName) => {
+        if (cookies.includes(cookieName)) {
+          return {
+            pattern: cookieName,
+            confidence: 85,
+            priority: "HIGH",
+            type: "exact",
+            location: "cookies",
+            matchedValue: cookieName,
+          };
+        }
+        return null;
       }
-    }
-
-    return {
-      matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-    };
+    );
   }
 
   private checkHtml(htmlPatterns: string[], html: string) {
-    const allMatches: PatternMatch[] = [];
-    let totalConfidence = 0;
-
-    for (const pattern of htmlPatterns) {
+    return this.runDetectionCheck([html], htmlPatterns, (html, pattern) => {
       const patternMatch: PatternMatch = {
-        pattern: pattern,
+        pattern,
         confidence: 45,
         priority: "HIGH",
         type: "exact",
-        location: "headers",
+        location: "html",
         matchedValue: pattern,
       };
       const result = PatternMatcher.matchPatternWithConfidence(
         html,
         patternMatch
       );
-      totalConfidence = this.processResult(result, allMatches, totalConfidence);
-    }
-
-    return {
-      matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-    };
+      return result.matched ? patternMatch : null;
+    });
   }
 
-  private checkDom(domPatterns: any, dom: any) {
-    const allMatches: PatternMatch[] = [];
-    let totalConfidence = 0;
-
-    if (domPatterns && typeof domPatterns === "object") {
-      for (const domSelector of Object.keys(domPatterns)) {
-        const patternMatch: PatternMatch = {
-          pattern: domSelector,
+  private checkDom(domPatterns: Record<string, unknown>, dom: Document) {
+    const selectors = Object.keys(domPatterns || {});
+    return this.runDetectionCheck(selectors, [dom], (selector) => {
+      if (dom.querySelectorAll(selector).length > 0) {
+        return {
+          pattern: selector,
           confidence: 45,
           priority: "HIGH",
           type: "exact",
-          location: "headers",
-          matchedValue: "",
+          location: "dom",
+          matchedValue: selector,
         };
-        if (dom.querySelectorAll(domSelector).length > 0) {
-          allMatches.push(patternMatch);
-          totalConfidence += 30;
-        }
       }
-    }
-    return {
-      matched: allMatches.length > 0,
-      confidence: Math.min(totalConfidence, 100),
-      matches: allMatches,
-    };
+      return null;
+    });
   }
 
   private normalizePatterns(

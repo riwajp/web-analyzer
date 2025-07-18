@@ -3,13 +3,28 @@ import path from "path";
 import { WebPage } from "./webPage";
 import { Analyzer } from "./analyzer";
 import { TechnologyDetector } from "./technologyDetector";
-import type { DetectionResult, TechnologiesMap } from "./types";
+import type {
+  DetectionConfig,
+  DetectionMode,
+  DetectionResult,
+  TechnologiesMap,
+} from "./types";
+import { config } from "process";
 
 export const WebAnalyzer = {
   initialized: false,
   technologies: {} as TechnologiesMap,
+  detectionConfig: {
+    mode: "LOOSE" as DetectionMode,
+    maxExternalScripts: 5,
+    scriptTimeout: 3000,
+    enableFuzzyMatching: true,
+    enableEncodedMatching: true,
+    includeRawData: true,
+    blockingDetectionEnabled: true,
+  },
 
-  init(dataFiles: string[]) {
+  init(dataFiles: string[], detectionConfig?: Partial<DetectionConfig>) {
     for (const file of dataFiles) {
       const filePath = path.resolve(file);
       const fileContent = fs.readFileSync(filePath, "utf-8");
@@ -17,6 +32,7 @@ export const WebAnalyzer = {
       this.technologies = { ...this.technologies, ...technologiesFromFile };
     }
     this.initialized = true;
+    this.detectionConfig = { ...this.detectionConfig, ...detectionConfig };
     console.log(
       `Loaded ${Object.keys(this.technologies).length} technologies.`
     );
@@ -28,10 +44,18 @@ export const WebAnalyzer = {
     }
     const webPage = new WebPage(url);
     const { urlData, siteData } = await webPage.extractData();
-    const detector = new TechnologyDetector(this.technologies, "LOOSE");
+    const detector = new TechnologyDetector(
+      this.technologies,
+      this.detectionConfig.mode
+    );
     const technologies = detector.detectTechnologies(urlData, siteData);
     const analyzer = new Analyzer(url);
-    return await analyzer.analyze(siteData, technologies, urlData);
+    return await analyzer.analyze(
+      siteData,
+      technologies,
+      urlData,
+      this.detectionConfig.blockingDetectionEnabled
+    );
   },
 
   formatBytes(bytes: number): string {

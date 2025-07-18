@@ -18,7 +18,8 @@ export class Analyzer {
   async analyze(
     siteData: SiteData,
     detectedTechnologies: DetectedTechnology[],
-    urlData: URLData
+    urlData: URLData,
+    blockingDetectionEnabled: boolean
   ): Promise<DetectionResult | null> {
     const timings: Record<string, number> = {};
     try {
@@ -32,12 +33,9 @@ export class Analyzer {
         total: urlData.responseTime,
       });
 
-      const blockingIndicators = this.analyzeBlocking(
-        siteData,
-        technologies,
-        urlData,
-        pageAnalysis
-      );
+      const blockingIndicators = blockingDetectionEnabled
+        ? this.analyzeBlocking(siteData, technologies, urlData, pageAnalysis)
+        : [];
 
       const stats = this.calculateStats(technologies);
       const rawData = {
@@ -55,7 +53,7 @@ export class Analyzer {
         finalUrl: urlData.finalUrl,
         statusCode: urlData.statusCode,
         technologies,
-        blockingIndicators,
+        ...(blockingDetectionEnabled ? { blockingIndicators } : {}),
         pageAnalysis,
         stats,
         timings: {
@@ -65,7 +63,7 @@ export class Analyzer {
           total: urlData.responseTime,
         },
         rawData,
-      };
+      } as DetectionResult;
     } catch (error) {
       console.error(`Error analyzing ${this.url}:`, error);
       return null;
