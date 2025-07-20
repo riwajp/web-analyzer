@@ -15,7 +15,7 @@ export const WebAnalyzer = {
   technologies: {} as TechnologiesMap,
   detectionConfig: {
     mode: "LOOSE" as DetectionMode,
-    maxExternalScripts: 5,
+    // maxExternalScripts: 5,
     fetchTimeout: 3000,
     blockingDetectionEnabled: true,
   },
@@ -36,6 +36,7 @@ export const WebAnalyzer = {
 
   async analyze(url: string): Promise<DetectionResult | null> {
     if (!this.initialized) {
+      console.warn("WebAnalyzer was not initialized. Using default tech.json.");
       this.init(["src/data/tech.json"]);
     }
     const webPage = new WebPage(url);
