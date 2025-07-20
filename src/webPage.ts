@@ -149,8 +149,12 @@ export class WebPage {
     }
   }
 
-  async extractData(): Promise<{ urlData: URLData; siteData: SiteData }> {
-    const { response, responseTime, sourceCode } = await this.fetch();
+  async extractData(
+    fetchTimeout: number
+  ): Promise<{ urlData: URLData; siteData: SiteData }> {
+    const { response, responseTime, sourceCode } = await this.fetch(
+      fetchTimeout
+    );
     const { urlData, siteData } = await this.parse(
       response,
       responseTime,

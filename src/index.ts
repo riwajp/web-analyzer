@@ -127,7 +127,7 @@ async function processBatch(
   for (let i = 0; i < urls.length; i += concurrent) {
     const batch = urls.slice(i, i + concurrent);
     const batchPromises = batch.map(async (url) => {
-      // Ensure config is a complete DetectionConfig, not Partial
+      // Ensure config (DetectionConfig) is provided
       if (
         !config ||
         typeof config !== "object" ||
@@ -219,7 +219,7 @@ function generateSummaryReport(results: DetectionResult[]): string {
           isFinite(avgConfidence) ? avgConfidence.toFixed(1) : "0.0"
         }%
 
-        Top 10 Technologies:
+        Det Technologies:
         ${topTechs.join("\n")}
 `;
 }

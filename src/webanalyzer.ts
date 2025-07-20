@@ -9,7 +9,6 @@ import type {
   DetectionResult,
   TechnologiesMap,
 } from "./types";
-import { config } from "process";
 
 export const WebAnalyzer = {
   initialized: false,
@@ -17,10 +16,7 @@ export const WebAnalyzer = {
   detectionConfig: {
     mode: "LOOSE" as DetectionMode,
     maxExternalScripts: 5,
-    scriptTimeout: 3000,
-    enableFuzzyMatching: true,
-    enableEncodedMatching: true,
-    includeRawData: true,
+    fetchTimeout: 3000,
     blockingDetectionEnabled: true,
   },
 
@@ -43,7 +39,9 @@ export const WebAnalyzer = {
       this.init(["src/data/tech.json"]);
     }
     const webPage = new WebPage(url);
-    const { urlData, siteData } = await webPage.extractData();
+    const { urlData, siteData } = await webPage.extractData(
+      this.detectionConfig.fetchTimeout
+    );
     const detector = new TechnologyDetector(
       this.technologies,
       this.detectionConfig.mode
@@ -56,13 +54,5 @@ export const WebAnalyzer = {
       urlData,
       this.detectionConfig.blockingDetectionEnabled
     );
-  },
-
-  formatBytes(bytes: number): string {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   },
 };

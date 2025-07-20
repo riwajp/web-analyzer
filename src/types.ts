@@ -85,15 +85,11 @@ export type PageAnalysis = {
   hasCaptchaElements: boolean;
   hasChallengeElements: boolean;
   suspiciousElements: string[];
-  performanceMetrics: {
-    fetchTime: number;
-    parseTime: number;
-    totalTime: number;
-  };
 };
 
 export type DetectionResult = {
   url: string;
+  fetchTime: number;
   finalUrl: string;
   statusCode: number;
   technologies: DetectedTechnology[];
@@ -109,12 +105,7 @@ export type DetectionResult = {
     averageConfidence: number;
     topDetection: DetectedTechnology | null;
   };
-  timings: {
-    fetch: number;
-    parse: number;
-    detect: number;
-    total: number;
-  };
+
   rawData?: {
     headers: Record<string, string>;
     cookies: string[];

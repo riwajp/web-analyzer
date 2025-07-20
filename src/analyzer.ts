@@ -1,4 +1,3 @@
-import { performance } from "perf_hooks";
 import type {
   URLData,
   SiteData,
@@ -21,21 +20,14 @@ export class Analyzer {
     urlData: URLData,
     blockingDetectionEnabled: boolean
   ): Promise<DetectionResult | null> {
-    const timings: Record<string, number> = {};
     try {
-      timings.detectStart = performance.now();
       const technologies = detectedTechnologies;
-      timings.afterDetect = performance.now();
 
-      const pageAnalysis = this.analyzePageMetrics(urlData, siteData, {
-        fetch: urlData.responseTime,
-        parse: 0,
-        total: urlData.responseTime,
-      });
+      const pageAnalysis = this.analyzePageMetrics(urlData, siteData);
 
       const blockingIndicators = blockingDetectionEnabled
         ? this.analyzeBlocking(siteData, technologies, urlData, pageAnalysis)
-        : [];
+        : {};
 
       const stats = this.calculateStats(technologies);
       const rawData = {
@@ -44,24 +36,20 @@ export class Analyzer {
           .split(";")
           .map((c) => c.trim())
           .filter(Boolean),
-        suspiciousElements: [], //siteData.suspiciousElements,
         metaTags: siteData.meta,
       };
 
       return {
         url: this.url,
+        fetchTime: urlData.responseTime,
+
         finalUrl: urlData.finalUrl,
         statusCode: urlData.statusCode,
         technologies,
         ...(blockingDetectionEnabled ? { blockingIndicators } : {}),
         pageAnalysis,
         stats,
-        timings: {
-          fetch: urlData.responseTime,
-          parse: 0,
-          detect: 0,
-          total: urlData.responseTime,
-        },
+
         rawData,
       } as DetectionResult;
     } catch (error) {
@@ -235,8 +223,7 @@ export class Analyzer {
 
   private analyzePageMetrics(
     urlData: URLData,
-    siteData: SiteData,
-    p0: { fetch: number; parse: number; total: number }
+    siteData: SiteData
   ): PageAnalysis {
     const doc = siteData.dom.window.document;
 
@@ -312,11 +299,6 @@ export class Analyzer {
       hasCaptchaElements,
       hasChallengeElements,
       suspiciousElements,
-      performanceMetrics: {
-        fetchTime: 0, // Assuming timings.fetch is not available
-        parseTime: 0, // Assuming timings.parse is not available
-        totalTime: 0, // Assuming timings.total is not available
-      },
     };
   }
 
