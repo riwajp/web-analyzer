@@ -92,8 +92,12 @@ export class TechnologyDetector {
       `[DEBUG] Detection mode: ${this.detectionMode}, Min confidence: ${minConfidence}%`
     );
 
-    const detect = (techName: string) => {
+    const detect = (
+      techName: string,
+      type: "detection" | "transitive" = "detection"
+    ) => {
       if (visited.has(techName)) return;
+
       visited.add(techName);
 
       const techData = this.technologies[techName];
@@ -105,37 +109,43 @@ export class TechnologyDetector {
         siteData,
         urlData
       );
-      const confidenceLevel = getConfidenceLevel(result.confidence);
 
+      const confidenceLevel = getConfidenceLevel(result.confidence);
       console.log(
         `[DEBUG] ${techName}: ${result.confidence.toFixed(
           1
         )}% confidence (${confidenceLevel})`
       );
-      if (result.confidence >= minConfidence) {
-        console.log(
-          `[DETECTED] ${techName} - ${result.confidence.toFixed(1)}% confidence`
-        );
+
+      //  If tech is actually detected, promote its type to detection
+      const isDetected = result.confidence >= minConfidence;
+
+      if (isDetected || type === "transitive") {
         detectedTechnologies.push({
           name: techName,
           confidence: Math.round(result.confidence * 10) / 10,
           confidenceLevel,
           detectedUsing: result.detectedUsing,
           matches: result.matches,
+          detectionType: isDetected ? "detection" : "transitive",
         });
 
         if (techData.implies) {
           const impliedTechs = Array.isArray(techData.implies)
             ? techData.implies
             : [techData.implies];
-          impliedTechs.forEach(detect);
+          impliedTechs.forEach((implied: string) =>
+            detect(implied, "transitive")
+          );
         }
 
         if (techData.requires) {
           const requiredTechs = Array.isArray(techData.requires)
             ? techData.requires
             : [techData.requires];
-          requiredTechs.forEach(detect);
+          requiredTechs.forEach((required: string) =>
+            detect(required, "transitive")
+          );
         }
       }
     };

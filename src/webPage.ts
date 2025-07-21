@@ -113,17 +113,20 @@ export class WebPage {
         .map((el) => el.textContent || "")
         .filter((script) => script.trim());
 
-      const meta: Record<string, string> = {};
-
-      [...doc.querySelectorAll("meta")].forEach((metaElement: HTMLElement) => {
+      const meta = [...doc.querySelectorAll("meta")].reduce<
+        Record<string, string>
+      >((acc, metaElement) => {
         const nameAttr =
           metaElement.getAttribute("name") ||
           metaElement.getAttribute("property");
         const contentAttr = metaElement.getAttribute("content");
+
         if (nameAttr && contentAttr) {
-          meta[nameAttr.toLowerCase()] = contentAttr;
+          acc[nameAttr.toLowerCase()] = contentAttr;
         }
-      });
+
+        return acc;
+      }, {});
 
       const textContentLength = doc.body?.textContent?.trim().length || 0;
 

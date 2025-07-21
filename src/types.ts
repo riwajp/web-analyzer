@@ -32,6 +32,7 @@ export type DetectedTechnology = {
   confidenceLevel: "HIGH" | "MEDIUM" | "LOW" | "NONE";
   detectedUsing: string[];
   matches: PatternMatch[];
+  detectionType: "transitive" | "detection";
 };
 
 export type PatternMatch = {
