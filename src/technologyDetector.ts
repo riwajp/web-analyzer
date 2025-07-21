@@ -309,23 +309,29 @@ export class TechnologyDetector {
 
   private checkCookies(
     cookiePatterns: Record<string, string>,
-    cookies: string
+    cookies: Record<string, any>
   ) {
-    const patterns = Object.keys(cookiePatterns);
+    const cookiePatternKeys = Object.keys(cookiePatterns);
+    const cookieKeys = Object.keys(cookies);
+
     return this.runDetectionCheck(
-      [cookies],
-      patterns,
-      (cookies, cookieName) => {
-        if (cookies.includes(cookieName)) {
+      cookieKeys,
+      cookiePatternKeys,
+      (cookieKey, cookiePatternKey) => {
+        if (!cookieKey.includes(cookiePatternKey)) return null;
+        if (
+          !cookiePatterns[cookiePatternKey] ||
+          RegExp(cookiePatterns[cookiePatternKey]).test(cookies[cookieKey])
+        )
           return {
-            pattern: cookieName,
+            pattern: cookiePatternKey,
             confidence: 85,
             priority: "HIGH",
             type: "exact",
             location: "cookies",
-            matchedValue: cookieName,
+            matchedValue: cookieKey,
           };
-        }
+
         return null;
       }
     );

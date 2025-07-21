@@ -32,10 +32,8 @@ export class Analyzer {
       const stats = this.calculateStats(technologies);
       const rawData = {
         headers: Object.fromEntries(urlData.headers.entries()),
-        cookies: urlData.cookies
-          .split(";")
-          .map((c) => c.trim())
-          .filter(Boolean),
+        cookies: urlData.cookies,
+
         metaTags: siteData.meta,
       };
 
@@ -239,39 +237,26 @@ export class Analyzer {
       ) || /challenge-platform|browser-verification/i.test(urlData.sourceCode)
     );
 
-    const suspiciousElements: string[] = [];
-
     const suspiciousSelectors: string[] = [
       '[id*="challenge"]',
       '[class*="challenge"]',
       '[id*="captcha"]',
       '[class*="captcha"]',
       '[id*="block"]',
-      '[class*="block"]',
+      // '[class*="block"]',
       '[id*="protection"]',
       '[class*="protection"]',
       '[id*="security"]',
       '[class*="security"]',
     ];
 
-    for (const selector of suspiciousSelectors) {
-      const elements = doc.querySelectorAll(selector);
-
-      elements.forEach((el: Element) => {
-        const id = el.id?.trim();
-        if (id) {
-          suspiciousElements.push(`#${id}`);
-        }
-
-        const className = el.className?.trim();
-        if (className) {
-          const firstClass = className.split(/\s+/)[0];
-          if (firstClass) {
-            suspiciousElements.push(`.${firstClass}`);
-          }
-        }
-      });
-    }
+    const suspiciousElements: any[] = [
+      ...doc.querySelectorAll(suspiciousSelectors.join(",")),
+    ].map((el) => ({
+      tag: el.tagName,
+      id: el.id,
+      class: el.className,
+    }));
 
     const getDomComplexity = (
       elementCount: number

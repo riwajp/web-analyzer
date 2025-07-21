@@ -1,7 +1,7 @@
 export type URLData = {
   sourceCode: string;
   headers: Headers;
-  cookies: string;
+  cookies: Record<string, any>;
   statusCode: number;
   responseTime: number;
   contentLength: number;
@@ -84,7 +84,7 @@ export type PageAnalysis = {
   internalResources: number;
   hasCaptchaElements: boolean;
   hasChallengeElements: boolean;
-  suspiciousElements: string[];
+  suspiciousElements: { tag: string; id: string; class: string }[];
 };
 
 export type DetectionResult = {

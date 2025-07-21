@@ -1,5 +1,6 @@
 import { JSDOM } from "jsdom";
 import type { URLData, SiteData } from "./types";
+import * as cookie from "cookie";
 
 export class WebPage {
   private url: string;
@@ -59,7 +60,7 @@ export class WebPage {
       const urlData: URLData = {
         sourceCode,
         headers: response.headers,
-        cookies: response.headers.get("set-cookie") || "",
+        cookies: cookie.parse(response.headers.get("set-cookie") ?? ""),
         statusCode: response.status,
         responseTime,
         contentLength,

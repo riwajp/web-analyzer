@@ -24,6 +24,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "cookie": "^1.0.2",
     "jsdom": "^26.1.0",
     "webappalyzer-js": "^1.0.7"
   }
