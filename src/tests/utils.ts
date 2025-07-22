@@ -4,47 +4,47 @@ export function generateWebPageForTech(
   techName: string,
   techData: TechData
 ): string {
-  const externalScriptTags: string[] = [];
-  const bodySnippets: string[] = [];
+  const externalScriptTags =
+    (techData.scriptSrc as Array<string> | undefined)?.reduce(
+      (acc, srcPattern) =>
+        acc + `<script src="${getDummyMatchForRegex(srcPattern)}"></script>\n`,
+      ""
+    ) ?? "";
 
-  if (techData.scriptSrc) {
-    (techData.scriptSrc as Array<string>).forEach((srcPattern) => {
-      externalScriptTags.push(
-        `<script src="${getDummyMatchForRegex(srcPattern)}"></script>`
-      );
-    });
-  }
+  const bodySnippets = techData.dom
+    ? Object.keys(techData.dom).reduce((acc, selector) => {
+        if (selector.startsWith(".")) {
+          return acc + `<div class="${selector.slice(1)}"></div>\n`;
+        } else if (selector.startsWith("#")) {
+          return acc + `<div id="${selector.slice(1)}"></div>\n`;
+        } else if (selector.startsWith("[")) {
+          const attr = selector.slice(1, -1);
+          return acc + `<div ${attr}></div>\n`;
+        } else {
+          return acc + `<${selector}></${selector}>\n`;
+        }
+      }, "")
+    : "";
 
-  if (techData.dom) {
-    Object.keys(techData.dom).forEach((selector) => {
-      if (selector.startsWith(".")) {
-        bodySnippets.push(`<div class="${selector.slice(1)}"></div>`);
-      } else if (selector.startsWith("#")) {
-        bodySnippets.push(`<div id="${selector.slice(1)}"></div>`);
-      } else if (selector.startsWith("[")) {
-        const attr = selector.slice(1, -1);
-        bodySnippets.push(`<div ${attr}></div>`);
-      } else {
-        bodySnippets.push(`<${selector}></${selector}>`);
-      }
-    });
-  }
+  const metaTags = techData.meta
+    ? Object.entries(techData.meta).reduce(
+        (acc, [name, content]) =>
+          acc + `<meta name="${name}" content="${content}">\n`,
+        ""
+      )
+    : "";
 
   const html = `
     <!DOCTYPE html>
     <html>
       <head>
         <title>${techName} example webpage</title>
-
-        ${Object.entries(techData.meta ?? {}).map(
-          ([name, content]) => `<meta name="${name}" content="${content}">`
-        )}
-        
-        ${externalScriptTags?.join("\n")}
+        ${metaTags}
+        ${externalScriptTags}
       </head>
       <body>
         ${((techData.html as Array<string>) ?? []).join("\n")}
-        ${bodySnippets.join("\n")}
+        ${bodySnippets}
       </body>
       <script>
         ${((techData.js as Array<string>) ?? []).join("\n")}
@@ -72,11 +72,11 @@ export function mockFetchForTech(
   }
 
   if (techData.cookies) {
-    const cookieString = Object.entries(techData.cookies)
-      .map(
-        ([name, _regex]) => `${name}=${getDummyMatchForRegex(_regex)}; Path=/;`
-      )
-      .join(";");
+    const cookieString = Object.entries(techData.cookies).reduce(
+      (acc, [name, regex]) =>
+        acc + `${name}=${getDummyMatchForRegex(regex)}; Path=/;`,
+      ""
+    );
     responseHeaders.set("set-cookie", cookieString);
   }
 
@@ -96,21 +96,11 @@ export function getUrlForTech(techName: string): string {
 
 export function getDummyMatchForRegex(pattern: string | RegExp): string {
   const regex = typeof pattern === "string" ? new RegExp(pattern) : pattern;
+  let dummyMatch = regex.source;
 
-  const source = regex.source;
-
-  let dummyMatch = source;
-
-  // Handle escaped slashes
   dummyMatch = dummyMatch.replace(/\\\//g, "/");
-
-  // Handle escaped backslashes
   dummyMatch = dummyMatch.replace(/\\\\/g, "\\");
-
-  // Replace escaped dots with literal dots:
   dummyMatch = dummyMatch.replace(/\\\./g, ".");
-
-  // Replace .* or .+ with dummy text:
   dummyMatch = dummyMatch.replace(/\.\*/g, "dummy");
   dummyMatch = dummyMatch.replace(/\.\+/g, "dummy");
 
