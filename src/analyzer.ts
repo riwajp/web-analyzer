@@ -1,10 +1,10 @@
 import type {
-  URLData,
-  SiteData,
   DetectionResult,
   BlockingIndicators,
   PageAnalysis,
   DetectedTechnology,
+  WebPageData,
+  SuspiciousElement,
 } from "./types";
 
 export class Analyzer {
@@ -15,34 +15,33 @@ export class Analyzer {
   }
 
   async analyze(
-    siteData: SiteData,
+    webPageData: WebPageData,
     detectedTechnologies: DetectedTechnology[],
-    urlData: URLData,
     blockingDetectionEnabled: boolean
   ): Promise<DetectionResult | null> {
     try {
       const technologies = detectedTechnologies;
 
-      const pageAnalysis = this.analyzePageMetrics(urlData, siteData);
+      const pageAnalysis = this.analyzePageMetrics(webPageData);
 
       const blockingIndicators = blockingDetectionEnabled
-        ? this.analyzeBlocking(siteData, technologies, urlData, pageAnalysis)
+        ? this.analyzeBlocking(webPageData, detectedTechnologies, pageAnalysis)
         : {};
 
       const stats = this.calculateStats(technologies);
       const rawData = {
-        headers: Object.fromEntries(urlData.headers.entries()),
-        cookies: urlData.cookies,
+        headers: Object.fromEntries(webPageData.headers.entries()),
+        cookies: webPageData.cookies,
 
-        metaTags: siteData.meta,
+        metaTags: webPageData.meta,
       };
 
       return {
         url: this.url,
-        fetchTime: urlData.responseTime,
+        fetchTime: webPageData.responseTime,
 
-        finalUrl: urlData.finalUrl,
-        statusCode: urlData.statusCode,
+        finalUrl: webPageData.finalUrl,
+        statusCode: webPageData.statusCode,
         technologies,
         ...(blockingDetectionEnabled ? { blockingIndicators } : {}),
         pageAnalysis,
@@ -57,9 +56,8 @@ export class Analyzer {
   }
 
   private analyzeBlocking(
-    siteData: SiteData,
+    webPageData: WebPageData,
     detectedTechnologies: DetectedTechnology[],
-    urlData: URLData,
     pageAnalysis: PageAnalysis
   ): BlockingIndicators {
     const indicators = {
@@ -94,17 +92,20 @@ export class Analyzer {
       "bot detection",
     ];
 
-    if (SUSPICIOUS_STATUS_CODES.includes(urlData.statusCode)) {
+    if (SUSPICIOUS_STATUS_CODES.includes(webPageData.statusCode)) {
       indicators.statusCodeSuspicious = true;
       blockingScore += 30;
     }
 
-    if (siteData.textContentLength < 500 && siteData.domElementCount < 50) {
+    if (
+      webPageData.textContentLength < 500 &&
+      webPageData.domElementCount < 50
+    ) {
       indicators.minimalContent = true;
       blockingScore += 20;
     }
 
-    if (siteData.domElementCount < 10) {
+    if (webPageData.domElementCount < 10) {
       indicators.minimalDomElements = true;
       blockingScore += 25;
     }
@@ -122,26 +123,24 @@ export class Analyzer {
       blockingScore += 30;
     }
 
-    for (const tech of detectedTechnologies) {
-      blockingScore += Math.min(25);
-      indicators.botDetectionJs = true;
-    }
+    blockingScore += detectedTechnologies.length * 25;
+    if (detectedTechnologies.length > 0) indicators.botDetectionJs = true;
 
     // Check for suspicious page titles
-    const lowerTitle = siteData.title.toLowerCase();
+    const lowerTitle = webPageData.title.toLowerCase();
     if (SUSPICIOUS_TITLES.some((title) => lowerTitle.includes(title))) {
       indicators.accessDeniedText = true;
       blockingScore += 20;
     }
 
     // Check for suspicious redirects
-    if (urlData.redirectCount > 2) {
+    if (webPageData.redirectCount > 2) {
       indicators.suspiciousRedirects = true;
       blockingScore += 10;
     }
 
     // Check for unusual response times
-    if (urlData.responseTime > 10000) {
+    if (webPageData.responseTime > 10000) {
       // 10 seconds as an example threshold
       indicators.unusualResponseTime = true;
       blockingScore += 5;
@@ -219,22 +218,20 @@ export class Analyzer {
     };
   }
 
-  private analyzePageMetrics(
-    urlData: URLData,
-    siteData: SiteData
-  ): PageAnalysis {
-    const doc = siteData.dom.window.document;
+  private analyzePageMetrics(webPageData: WebPageData): PageAnalysis {
+    const doc = webPageData.dom.window.document;
 
     const hasCaptchaElements = !!(
       doc.querySelector(
         ".g-recaptcha,.h-captcha,.cf-turnstile,[data-sitekey]"
-      ) || /recaptcha|hcaptcha|turnstile/i.test(urlData.sourceCode)
+      ) || /recaptcha|hcaptcha|turnstile/i.test(webPageData.sourceCode)
     );
 
     const hasChallengeElements = !!(
       doc.querySelector(
         '[id*="challenge"], [class*="challenge"], [id*="verification"], [class*="verification"]'
-      ) || /challenge-platform|browser-verification/i.test(urlData.sourceCode)
+      ) ||
+      /challenge-platform|browser-verification/i.test(webPageData.sourceCode)
     );
 
     const suspiciousSelectors: string[] = [
@@ -250,7 +247,7 @@ export class Analyzer {
       '[class*="security"]',
     ];
 
-    const suspiciousElements: any[] = [
+    const suspiciousElements: SuspiciousElement[] = [
       ...doc.querySelectorAll(suspiciousSelectors.join(",")),
     ].map((el) => ({
       tag: el.tagName,
@@ -269,16 +266,17 @@ export class Analyzer {
     return {
       pageSizeBytes: 0, // Assuming reqData.contentLength is not available
       pageSizeHuman: "0 Bytes",
-      domElementCount: siteData.domElementCount,
-      domComplexity: getDomComplexity(siteData.domElementCount),
+      domElementCount: webPageData.domElementCount,
+      domComplexity: getDomComplexity(webPageData.domElementCount),
       contentType: "", // Assuming reqData.contentType is not available
-      title: siteData.title,
-      description: siteData.description,
-      language: siteData.meta["language"] || siteData.meta["lang"] || "unknown",
-      viewport: siteData.meta["viewport"] || "not set",
-      charset: siteData.meta["charset"] || "unknown",
-      hasForms: siteData.formCount > 0,
-      hasJavascript: siteData.scriptCount > 0,
+      title: webPageData.title,
+      description: webPageData.description,
+      language:
+        webPageData.meta["language"] || webPageData.meta["lang"] || "unknown",
+      viewport: webPageData.meta["viewport"] || "not set",
+      charset: webPageData.meta["charset"] || "unknown",
+      hasForms: webPageData.formCount > 0,
+      hasJavascript: webPageData.scriptCount > 0,
       externalResources: 0, // Assuming siteData.assetUrls is not available
       internalResources: 0, // Assuming siteData.assetUrls is not available
       hasCaptchaElements,

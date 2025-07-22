@@ -40,19 +40,19 @@ export const WebAnalyzer = {
       this.init(["src/data/tech.json"]);
     }
     const webPage = new WebPage(url);
-    const { urlData, siteData } = await webPage.extractData(
+    const webPageData = await webPage.extractData(
       this.detectionConfig.fetchTimeout
     );
     const detector = new TechnologyDetector(
       this.technologies,
       this.detectionConfig.mode
     );
-    const technologies = detector.detectTechnologies(urlData, siteData);
+    const technologies = detector.detectTechnologies(webPageData);
     const analyzer = new Analyzer(url);
     return await analyzer.analyze(
-      siteData,
+      webPageData,
       technologies,
-      urlData,
+
       this.detectionConfig.blockingDetectionEnabled
     );
   },

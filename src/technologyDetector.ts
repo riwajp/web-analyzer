@@ -4,15 +4,16 @@ import {
   getConfidenceLevel,
   TECH_DETECTION_MODE_CONFIDENCE,
 } from "./confidence-constants";
+import type { JSDOM } from "jsdom";
 
 import { PatternMatcher, PatternMatch } from "./patternMatcher";
 
 import type {
-  URLData,
-  SiteData,
+  WebPageData,
   DetectedTechnology,
   TechnologiesMap,
   DetectionMode,
+  DetectionSource,
 } from "./types";
 
 export interface DetectionResult {
@@ -25,46 +26,40 @@ export interface DetectionResult {
 export class TechnologyDetector {
   private technologies: TechnologiesMap;
   private detectionMode: DetectionMode;
-  private detectionConfigs = [
+  private dectionSources: DetectionSource[] = [
     {
       techKey: "js",
       dataKey: "js",
-      dataSource: "siteData",
       checkMethod: "checkPatterns",
       type: "js",
     },
     {
       techKey: "scriptSrc",
       dataKey: "assetUrls",
-      dataSource: "siteData",
       checkMethod: "checkPatterns",
       type: "scriptSrc",
     },
     {
       techKey: "headers",
       dataKey: "headers",
-      dataSource: "urlData",
       checkMethod: "checkHeaders",
       type: "headers",
     },
     {
       techKey: "cookies",
       dataKey: "cookies",
-      dataSource: "urlData",
       checkMethod: "checkCookies",
       type: "cookies",
     },
     {
       techKey: "html",
-      dataKey: "html",
-      dataSource: "urlData",
+      dataKey: "sourceCode",
       checkMethod: "checkHtml",
       type: "html",
     },
     {
       techKey: "dom",
       dataKey: "dom",
-      dataSource: "urlData",
       checkMethod: "checkDom",
       type: "dom",
     },
@@ -80,10 +75,7 @@ export class TechnologyDetector {
     console.log(`Detection mode set to: ${mode}`);
   }
 
-  detectTechnologies(
-    urlData: URLData,
-    siteData: SiteData
-  ): DetectedTechnology[] {
+  detectTechnologies(webPageData: WebPageData): DetectedTechnology[] {
     const detectedTechnologies: DetectedTechnology[] = [];
     const visited = new Set<string>();
     const minConfidence = TECH_DETECTION_MODE_CONFIDENCE[this.detectionMode];
@@ -106,8 +98,7 @@ export class TechnologyDetector {
       const result = this.detectTechnologyWithConfidence(
         techName,
         techData,
-        siteData,
-        urlData
+        webPageData
       );
 
       const confidenceLevel = getConfidenceLevel(result.confidence);
@@ -159,20 +150,17 @@ export class TechnologyDetector {
 
   private detectTechnologyWithConfidence(
     techName: string,
-    techData: any,
-    siteData: any,
-    urlData: any
+    techData: Record<string, string | object | string[]>,
+    webpageData: WebPageData
   ): DetectionResult {
     const allMatches: PatternMatch[] = [];
     const detectedTypes: string[] = [];
     let totalConfidence = 0;
 
-    for (const config of this.detectionConfigs) {
-      const dataSource = config["dataSource"] == "urlData" ? urlData : siteData;
-
+    for (const detectionSource of this.dectionSources) {
       const result = this.processDetection(
-        config,
-        dataSource,
+        detectionSource,
+        webpageData,
         techData,
         allMatches,
         detectedTypes
@@ -191,21 +179,15 @@ export class TechnologyDetector {
   }
 
   private processDetection(
-    config: {
-      techKey: string;
-      dataKey: string;
-      dataSource: any;
-      checkMethod: string;
-      type: string;
-    },
-    dataSource: any,
-    techData: any,
+    detectionSource: DetectionSource,
+    webPageData: WebPageData,
+    techData: Record<string, string | object | string[]>,
     allMatches: PatternMatch[],
     detectedTypes: string[]
   ): number {
-    const { techKey, dataKey, checkMethod, type } = config;
+    const { techKey, dataKey, checkMethod, type } = detectionSource;
 
-    if (!techData[techKey] || !dataSource[dataKey]) {
+    if (!techData[techKey] || !webPageData[dataKey]) {
       return 0;
     }
 
@@ -218,22 +200,34 @@ export class TechnologyDetector {
     switch (checkMethod) {
       case "checkPatterns":
         result = this.checkPatterns(
-          techData[techKey],
-          dataSource[dataKey],
+          techData[techKey] as string[],
+          webPageData[dataKey] as string[],
           type
         );
         break;
       case "checkHeaders":
-        result = this.checkHeaders(techData[techKey], dataSource[dataKey]);
+        result = this.checkHeaders(
+          techData[techKey] as Record<string, string>,
+          webPageData[dataKey] as Headers
+        );
         break;
       case "checkCookies":
-        result = this.checkCookies(techData[techKey], dataSource[dataKey]);
+        result = this.checkCookies(
+          techData[techKey] as Record<string, string>,
+          webPageData[dataKey] as Record<string, string>
+        );
         break;
       case "checkHtml":
-        result = this.checkHtml(techData[techKey], dataSource[dataKey]);
+        result = this.checkHtml(
+          techData[techKey] as string[],
+          webPageData[dataKey] as string
+        );
         break;
       case "checkDom":
-        result = this.checkDom(techData[techKey], dataSource[dataKey]);
+        result = this.checkDom(
+          techData[techKey] as Record<string, string>,
+          webPageData[dataKey] as JSDOM
+        );
         break;
       default:
         return 0;
@@ -319,7 +313,7 @@ export class TechnologyDetector {
 
   private checkCookies(
     cookiePatterns: Record<string, string>,
-    cookies: Record<string, any>
+    cookies: Record<string, string | undefined>
   ) {
     const cookiePatternKeys = Object.keys(cookiePatterns);
     const cookieKeys = Object.keys(cookies);
@@ -331,7 +325,9 @@ export class TechnologyDetector {
         if (!cookieKey.includes(cookiePatternKey)) return null;
         if (
           !cookiePatterns[cookiePatternKey] ||
-          RegExp(cookiePatterns[cookiePatternKey]).test(cookies[cookieKey])
+          RegExp(cookiePatterns[cookiePatternKey]).test(
+            cookies[cookieKey] ?? ""
+          )
         )
           return {
             pattern: cookiePatternKey,
@@ -365,10 +361,10 @@ export class TechnologyDetector {
     });
   }
 
-  private checkDom(domPatterns: Record<string, unknown>, dom: Document) {
+  private checkDom(domPatterns: Record<string, unknown>, dom: JSDOM) {
     const selectors = Object.keys(domPatterns || {});
     return this.runDetectionCheck(selectors, [dom], (selector) => {
-      if (dom.querySelectorAll(selector).length > 0) {
+      if (dom.window.document.querySelectorAll(selector).length > 0) {
         return {
           pattern: selector,
           confidence: 45,

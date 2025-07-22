@@ -1,20 +1,19 @@
-export type URLData = {
+import type { JSDOM } from "jsdom";
+
+export type WebPageData = {
   sourceCode: string;
   headers: Headers;
-  cookies: Record<string, any>;
+  cookies: Record<string, string | undefined>;
   statusCode: number;
   responseTime: number;
   contentLength: number;
   contentType: string;
   finalUrl: string;
   redirectCount: number;
-};
-
-export type SiteData = {
   scriptSrc: string[];
   js: string[];
   meta: Record<string, string>;
-  dom: any;
+  dom: JSDOM;
   assetUrls: string[];
   title: string;
   description: string;
@@ -109,8 +108,8 @@ export type DetectionResult = {
 
   rawData?: {
     headers: Record<string, string>;
-    cookies: string[];
-    suspiciousElements: string[];
+    cookies: Record<string, string | undefined>;
+    suspiciousElements: SuspiciousElement[];
     metaTags: Record<string, string>;
   };
 };
@@ -125,5 +124,19 @@ export type DetectionConfig = {
   blockingDetectionEnabled: boolean;
 };
 
-export type TechnologiesMap = Record<string, any>;
+export type DetectionSource = {
+  techKey: string;
+  dataKey: keyof WebPageData;
+  checkMethod: string;
+  type: string;
+};
+
+export type SuspiciousElement = {
+  tag: string;
+  id: string;
+  class: string;
+};
+
+export type TechData = Record<string, string | object | string[]>;
+export type TechnologiesMap = Record<string, TechData>;
 export type DetectionMode = "STRICT" | "NORMAL" | "LOOSE";

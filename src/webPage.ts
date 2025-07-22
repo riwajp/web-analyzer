@@ -1,5 +1,5 @@
 import { JSDOM } from "jsdom";
-import type { URLData, SiteData } from "./types";
+import type { WebPageData } from "./types";
 import * as cookie from "cookie";
 
 export class WebPage {
@@ -34,6 +34,8 @@ export class WebPage {
       const sourceCode = await response.text();
 
       return { response, responseTime, sourceCode };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.name === "AbortError") {
         console.error(`Fetch for ${this.url} timed out after ${timeoutMs}ms.`);
@@ -48,7 +50,7 @@ export class WebPage {
     response: Response,
     responseTime: number,
     sourceCode: string
-  ): { urlData: URLData; siteData: SiteData } {
+  ): WebPageData {
     try {
       let redirectCount = 0;
       const contentLength = sourceCode.length;
@@ -56,18 +58,6 @@ export class WebPage {
       if (response.url !== this.url) {
         redirectCount = 1;
       }
-
-      const urlData: URLData = {
-        sourceCode,
-        headers: response.headers,
-        cookies: cookie.parse(response.headers.get("set-cookie") ?? ""),
-        statusCode: response.status,
-        responseTime,
-        contentLength,
-        contentType: response.headers.get("content-type") || "",
-        finalUrl: response.url,
-        redirectCount,
-      };
 
       const dom = new JSDOM(sourceCode);
       const doc = dom.window.document;
@@ -130,7 +120,16 @@ export class WebPage {
 
       const textContentLength = doc.body?.textContent?.trim().length || 0;
 
-      const siteData: SiteData = {
+      const webpageData: WebPageData = {
+        sourceCode,
+        headers: response.headers,
+        cookies: cookie.parse(response.headers.get("set-cookie") ?? ""),
+        statusCode: response.status,
+        responseTime,
+        contentLength,
+        contentType: response.headers.get("content-type") || "",
+        finalUrl: response.url,
+        redirectCount,
         scriptSrc,
         js,
         meta,
@@ -145,26 +144,19 @@ export class WebPage {
         linkCount,
         formCount,
       };
-
-      return { urlData, siteData };
+      return webpageData;
     } catch (error) {
       console.error(`Failed to parse ${this.url}:`, error);
       throw error;
     }
   }
 
-  async extractData(
-    fetchTimeout: number
-  ): Promise<{ urlData: URLData; siteData: SiteData }> {
+  async extractData(fetchTimeout: number): Promise<WebPageData> {
     const { response, responseTime, sourceCode } = await this.fetch(
       fetchTimeout
     );
-    const { urlData, siteData } = await this.parse(
-      response,
-      responseTime,
-      sourceCode
-    );
+    const webPageData = await this.parse(response, responseTime, sourceCode);
 
-    return { urlData, siteData };
+    return webPageData;
   }
 }
