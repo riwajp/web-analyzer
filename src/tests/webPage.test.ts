@@ -22,7 +22,7 @@ describe("webPage", () => {
     }
   });
 
-  test("correct header extraction", () => {
+  it("extracts header correctly", () => {
     for (const [techName, techData] of Object.entries(technologies)) {
       if (!techData.headers) continue;
 
@@ -36,7 +36,7 @@ describe("webPage", () => {
     }
   });
 
-  test("correct cookies extraction", () => {
+  it("extracts cookies correctly", () => {
     for (const [techName, techData] of Object.entries(technologies)) {
       if (!techData.cookies) continue;
 
@@ -50,7 +50,7 @@ describe("webPage", () => {
     }
   });
 
-  test("correct inline JS extraction", () => {
+  it("extracts inline JS correctly", () => {
     for (const [techName, techData] of Object.entries(technologies)) {
       if (!techData.js) continue;
 
@@ -61,7 +61,7 @@ describe("webPage", () => {
     }
   });
 
-  test("correct HTML extraction", () => {
+  it("extracts HTML correctly", () => {
     for (const [techName, techData] of Object.entries(technologies)) {
       if (!techData.html) continue;
 
@@ -72,7 +72,7 @@ describe("webPage", () => {
     }
   });
 
-  test("correct scriptSrc extraction", () => {
+  it("extracts scriptSrc correctly", () => {
     for (const [techName, techData] of Object.entries(technologies)) {
       if (!techData.scriptSrc) continue;
 
@@ -87,7 +87,7 @@ describe("webPage", () => {
     }
   });
 
-  test("correct DOM element extraction", () => {
+  it("extracts DOM elements correctly", () => {
     for (const [techName, techData] of Object.entries(technologies)) {
       if (!techData.dom) continue;
 
