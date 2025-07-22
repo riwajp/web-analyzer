@@ -151,12 +151,11 @@ export class WebPage {
     }
   }
 
-  async extractData(fetchTimeout: number): Promise<WebPageData> {
+  async extractData(fetchTimeout: number = 5000): Promise<WebPageData> {
     const { response, responseTime, sourceCode } = await this.fetch(
       fetchTimeout
     );
     const webPageData = await this.parse(response, responseTime, sourceCode);
-
     return webPageData;
   }
 }

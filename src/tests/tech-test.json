@@ -1,0 +1,43 @@
+{
+  "Cloudflare": {
+    "description": "Cloudflare DDoS protection and bot management",
+    "website": "https://www.cloudflare.com",
+    "headers": {
+      "cf-ray": ".*",
+      "cf-cache-status": ".*",
+      "server": "cloudflare"
+    },
+    "cookies": {
+      "__cf_bm": ".*",
+      "cf_clearance": ".*",
+      "__cfruid": ".*"
+    },
+    "js": [
+      "challenge-platform",
+      "cf-4/",
+      "cloudflare-static/rocket-loader",
+      "/cdn-cgi/challenge-platform/"
+    ],
+    "html": [
+      "Checking your browser before accessing",
+      "DDoS protection by Cloudflare",
+      "Ray ID:",
+      "cf-browser-verification"
+    ],
+    "scriptSrc": [
+      "/cdn-cgi/challenge-platform/",
+      "cloudflare-static/rocket-loader"
+    ]
+  },
+  "reCAPTCHA": {
+    "description": "Google reCAPTCHA",
+    "website": "https://www.google.com/recaptcha",
+    "scriptSrc": ["recaptcha.*\\.js", "www\\.google\\.com/recaptcha"],
+    "js": ["grecaptcha", "g-recaptcha"],
+    "html": ["g-recaptcha", "recaptcha"],
+    "dom": {
+      ".g-recaptcha": true,
+      "[data-sitekey]": true
+    }
+  }
+}

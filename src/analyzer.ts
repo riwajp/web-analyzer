@@ -39,14 +39,12 @@ export class Analyzer {
       return {
         url: this.url,
         fetchTime: webPageData.responseTime,
-
         finalUrl: webPageData.finalUrl,
         statusCode: webPageData.statusCode,
         technologies,
         ...(blockingDetectionEnabled ? { blockingIndicators } : {}),
         pageAnalysis,
         stats,
-
         rawData,
       } as DetectionResult;
     } catch (error) {

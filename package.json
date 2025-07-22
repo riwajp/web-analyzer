@@ -6,8 +6,7 @@
   "scripts": {
     "start": "ts-node src/index",
     "build": "tsc",
-    "test": "ts-node src/test.ts",
-    "analyze": "ts-node src/test-analysis.ts"
+    "test": "npx jest src/tests/webPage.test.ts"
   },
   "keywords": [],
   "author": "",
