@@ -37,7 +37,7 @@ export const WebAnalyzer = {
   async analyze(url: string): Promise<DetectionResult | null> {
     if (!this.initialized) {
       console.warn("WebAnalyzer was not initialized. Using default tech.json.");
-      this.init(["src/data/tech.json"]);
+      this.init(["src/tests/tech-test.json"]);
     }
     const webPage = new WebPage(url);
     const webPageData = await webPage.extractData(

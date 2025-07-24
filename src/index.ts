@@ -139,7 +139,7 @@ async function processBatch(
         );
       }
 
-      WebAnalyzer.init(["src/data/tech.json"], config);
+      WebAnalyzer.init(["src/tests/tech-test.json"], config);
       const result = await WebAnalyzer.analyze(url);
       progressCallback?.(i + batch.indexOf(url) + 1, urls.length, url);
       return { url, result };

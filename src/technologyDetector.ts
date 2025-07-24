@@ -72,25 +72,30 @@ export class TechnologyDetector {
 
   setDetectionMode(mode: DetectionMode) {
     this.detectionMode = mode;
-    console.log(`Detection mode set to: ${mode}`);
+    // console.log(`Detection mode set to: ${mode}`);
   }
 
   detectTechnologies(webPageData: WebPageData): DetectedTechnology[] {
     const detectedTechnologies: DetectedTechnology[] = [];
-    const visited = new Set<string>();
+    const visited = {
+      detection: new Set<string>(),
+      transitive: new Set<string>(),
+    };
+
     const minConfidence = TECH_DETECTION_MODE_CONFIDENCE[this.detectionMode];
 
-    console.log(
-      `[DEBUG] Detection mode: ${this.detectionMode}, Min confidence: ${minConfidence}%`
-    );
+    // console.log(
+    //   `[DEBUG] Detection mode: ${this.detectionMode}, Min confidence: ${minConfidence}%`
+    // );
 
     const detect = (
       techName: string,
       type: "detection" | "transitive" = "detection"
     ) => {
-      if (visited.has(techName)) return;
+      if (visited.detection.has(techName) && type == "detection") return;
+      if (visited.transitive.has(techName) && type == "transitive") return;
 
-      visited.add(techName);
+      visited[type].add(techName);
 
       const techData = this.technologies[techName];
       if (!techData) return;
@@ -102,11 +107,11 @@ export class TechnologyDetector {
       );
 
       const confidenceLevel = getConfidenceLevel(result.confidence);
-      console.log(
-        `[DEBUG] ${techName}: ${result.confidence.toFixed(
-          1
-        )}% confidence (${confidenceLevel})`
-      );
+      // console.log(
+      //   `[DEBUG] ${techName}: ${result.confidence.toFixed(
+      //     1
+      //   )}% confidence (${confidenceLevel})`
+      // );
 
       //  If tech is actually detected, promote its type to detection
       const isDetected = result.confidence >= minConfidence;
@@ -121,23 +126,17 @@ export class TechnologyDetector {
           detectionType: isDetected ? "detection" : "transitive",
         });
 
-        if (techData.implies) {
-          const impliedTechs = Array.isArray(techData.implies)
-            ? techData.implies
-            : [techData.implies];
-          impliedTechs.forEach((implied: string) =>
-            detect(implied, "transitive")
-          );
-        }
-
-        if (techData.requires) {
-          const requiredTechs = Array.isArray(techData.requires)
-            ? techData.requires
-            : [techData.requires];
-          requiredTechs.forEach((required: string) =>
-            detect(required, "transitive")
-          );
-        }
+        ["implies", "requires"].forEach((key) => {
+          const transitiveTechs = techData[key];
+          if (transitiveTechs) {
+            const transitiveTechsList = Array.isArray(transitiveTechs)
+              ? transitiveTechs
+              : [transitiveTechs];
+            transitiveTechsList.forEach((tech: string) =>
+              detect(tech, "transitive")
+            );
+          }
+        });
       }
     };
 
@@ -357,6 +356,7 @@ export class TechnologyDetector {
         html,
         patternMatch
       );
+
       return result.matched ? patternMatch : null;
     });
   }
