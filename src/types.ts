@@ -116,10 +116,6 @@ export type DetectionResult = {
 
 export type DetectionConfig = {
   mode: DetectionMode;
-  maxExternalScripts: number;
-  scriptTimeout: number;
-  enableFuzzyMatching: boolean;
-  enableEncodedMatching: boolean;
   includeRawData: boolean;
   blockingDetectionEnabled: boolean;
 };

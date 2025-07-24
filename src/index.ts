@@ -230,8 +230,6 @@ function generateSummaryReport(results: DetectionResult[]): string {
     mode: "NORMAL",
     includeRawData: false,
     blockingDetectionEnabled: true,
-    maxExternalScripts: 5,
-    scriptTimeout: 3000,
   };
 
   try {

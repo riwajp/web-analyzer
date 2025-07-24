@@ -132,7 +132,7 @@ export class Analyzer {
     }
 
     // Check for suspicious redirects
-    if (webPageData.redirectCount > 2) {
+    if (webPageData.redirectCount >= 2) {
       indicators.suspiciousRedirects = true;
       blockingScore += 10;
     }

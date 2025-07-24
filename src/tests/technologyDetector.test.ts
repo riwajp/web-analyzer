@@ -31,7 +31,7 @@ describe("technologyDetector", () => {
     for (const [techName] of Object.entries(technologies)) {
       const results = detectedTechnologiesMap[techName];
       const detected = results.find((r) => r.name === techName);
-      if (!detected) console.log(`Testing for ${techName}`);
+
       expect(detected).toBeDefined();
       expect(detected?.confidence).toBeGreaterThanOrEqual(
         TECH_DETECTION_MODE_CONFIDENCE.NORMAL
@@ -99,11 +99,11 @@ describe("technologyDetector", () => {
     }
   });
 
-  //   it("returns sorted results by confidence", () => {
-  //     for (const [techName, results] of Object.entries(detectedTechnologiesMap)) {
-  //       const confidences = results.map((r) => r.confidence);
-  //       const sorted = [...confidences].sort((a, b) => b - a);
-  //       expect(confidences).toEqual(sorted);
-  //     }
-  //   });
+  it("returns sorted results by confidence", () => {
+    for (const [, results] of Object.entries(detectedTechnologiesMap)) {
+      const confidences = results.map((r) => r.confidence);
+      const sorted = [...confidences].sort((a, b) => b - a);
+      expect(confidences).toEqual(sorted);
+    }
+  });
 });

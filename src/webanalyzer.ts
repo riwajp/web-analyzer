@@ -16,7 +16,7 @@ export const WebAnalyzer = {
   detectionConfig: {
     mode: "LOOSE" as DetectionMode,
     // maxExternalScripts: 5,
-    fetchTimeout: 3000,
+    fetchTimeout: 10000,
     blockingDetectionEnabled: true,
   },
 
