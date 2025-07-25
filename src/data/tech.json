@@ -149,7 +149,7 @@
       "rbzid": ".*",
       "rbzsessionid": ".*"
     },
-    "js": ["reblaze"]
+    "js": ["reblaze", "rbzns"]
   },
   "Queue-Fair": {
     "description": "Queue-Fair virtual waiting room",

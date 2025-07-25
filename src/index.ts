@@ -139,7 +139,7 @@ async function processBatch(
         );
       }
 
-      WebAnalyzer.init(["src/tests/tech-test.json"], config);
+      WebAnalyzer.init(["src/data/tech.json"], config);
       const result = await WebAnalyzer.analyze(url);
       progressCallback?.(i + batch.indexOf(url) + 1, urls.length, url);
       return { url, result };
@@ -257,6 +257,19 @@ function generateSummaryReport(results: DetectionResult[]): string {
       );
     }
 
+    const notBlockedSites = results.filter(
+      (r) => !r.blockingIndicators?.likelyBlocked
+    );
+    if (notBlockedSites.length > 0) {
+      fs.writeFileSync(
+        "not-blocked-sites-analysis.json",
+        JSON.stringify(notBlockedSites, null, 2),
+        "utf-8"
+      );
+      console.log(
+        `${notBlockedSites.length} not-blocked sites saved to not-blocked-sites-analysis.json`
+      );
+    }
     const highConfidenceDetections = results.filter(
       (r) => r.stats.averageConfidence > 80 && r.stats.total > 5
     );

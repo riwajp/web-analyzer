@@ -9,6 +9,41 @@ import type {
 
 export class Analyzer {
   private url: string;
+  private SUSPICIOUS_STATUS_CODES = [
+    403, 429, 503, 520, 521, 522, 523, 524, 525, 526, 527, 530,
+  ];
+
+  private SUSPICIOUS_PHRASE_PATTERNS: RegExp[] = [
+    /\brate ?limit(ed)?\b/i,
+    /\btoo many requests\b/i,
+    /\bsuspicious (activity|traffic)\b/i,
+    /\baccess (denied|restricted|blocked)\b/i,
+    /\b(blocked|your connection has been blocked)\b/i,
+    /\b(request looks automated|automated request)\b/i,
+    /\b(unusual|suspicious) traffic\b/i,
+    /\bverify (you are )?(human|(ro)?bot)?\b/i,
+    /\b((ro)?bot check|you are not a (ro)?bot)\b/i,
+    /\bsolve (the )?(captcha|puzzle|challenge)\b/i,
+    /\b(security check|browser verification|checking your browser)\b/i,
+    /\bcloudflare\b/i,
+    /\bddos protection\b/i,
+    /\bplease wait\b/i,
+    /\b(cookies|javascript)\b.*\b(enabled|disabled)\b|\b(enabled|disabled)\b.*\b(cookies|javascript)\b/i,
+  ];
+
+  private SUSPICIOUS_TITLE_PATTERNS: RegExp[] = [
+    /\bjust a moment\b/i,
+    /\bplease wait\b/i,
+    /\b(access|permission) denied\b/i,
+    /\b(blocked|blocked access)\b/i,
+    /\b(error|error \d{3})\b/i,
+    /\bforbidden\b/i,
+    /\bunauthorized\b/i,
+    /\bsecurity (check|verification)\b/i,
+    /\bddos protection\b/i,
+    /\b(ro)?bot detection\b/i,
+    /\b(human)\b.*\b((ro)?bot)\b|\b((ro)?bot)\b.*\b(human)\b/i,
+  ];
 
   constructor(url: string) {
     this.url = url;
@@ -32,8 +67,10 @@ export class Analyzer {
       const rawData = {
         headers: Object.fromEntries(webPageData.headers.entries()),
         cookies: webPageData.cookies,
-
         metaTags: webPageData.meta,
+        sourceCode:
+          webPageData.dom.window.document.querySelector("body")?.innerHTML ??
+          "",
       };
 
       return {
@@ -46,6 +83,7 @@ export class Analyzer {
         pageAnalysis,
         stats,
         rawData,
+        textContentLength: webPageData.textContentLength,
       } as DetectionResult;
     } catch (error) {
       console.error(`Error analyzing ${this.url}:`, error);
@@ -63,7 +101,7 @@ export class Analyzer {
       minimalContent: false,
       challengeDetected: false,
       captchaDetected: false,
-      accessDeniedText: false,
+      suspiciousTitle: false,
       suspiciousRedirects: false,
       botDetectionJs: false,
       minimalDomElements: false,
@@ -71,64 +109,57 @@ export class Analyzer {
       suspiciousElements: false,
     };
 
-    const suspiciousPhrases: string[] = [];
+    const detectedSuspiciousPhrases: string[] = [];
     let blockingScore = 0;
 
-    const SUSPICIOUS_STATUS_CODES = [
-      403, 429, 503, 520, 521, 522, 523, 524, 525, 526, 527, 530,
-    ];
-    const SUSPICIOUS_TITLES = [
-      "just a moment",
-      "please wait",
-      "access denied",
-      "blocked",
-      "error",
-      "forbidden",
-      "unauthorized",
-      "security check",
-      "ddos protection",
-      "bot detection",
-    ];
-
-    if (SUSPICIOUS_STATUS_CODES.includes(webPageData.statusCode)) {
+    if (this.SUSPICIOUS_STATUS_CODES.includes(webPageData.statusCode)) {
       indicators.statusCodeSuspicious = true;
-      blockingScore += 30;
+      blockingScore += 100;
     }
 
-    if (
-      webPageData.textContentLength < 500 &&
-      webPageData.domElementCount < 50
-    ) {
+    if (webPageData.bodyDomElementCount < 10) {
+      blockingScore += 40;
+    }
+
+    if (webPageData.textContentLength < 500) {
       indicators.minimalContent = true;
-      blockingScore += 20;
+      blockingScore += 30;
+    }
+    if (webPageData.bodyDomElementCount < 50) {
+      indicators.minimalDomElements = true;
+      blockingScore += 30;
     }
 
-    if (webPageData.domElementCount < 10) {
-      indicators.minimalDomElements = true;
-      blockingScore += 25;
-    }
-    if (pageAnalysis.hasChallengeElements) {
-      indicators.challengeDetected = true;
-      blockingScore += 25;
-    }
-    if (pageAnalysis.hasCaptchaElements) {
-      indicators.captchaDetected = true;
+    // Check for suspicious page titles
+    if (
+      this.SUSPICIOUS_TITLE_PATTERNS.some((pattern) =>
+        pattern.test(webPageData.title)
+      )
+    ) {
+      indicators.suspiciousTitle = true;
       blockingScore += 30;
+    }
+
+    if (pageAnalysis.hasChallengeElements || pageAnalysis.hasCaptchaElements) {
+      indicators.challengeDetected = pageAnalysis.hasChallengeElements;
+      indicators.captchaDetected = pageAnalysis.hasCaptchaElements;
+      blockingScore += 10;
     }
 
     if (pageAnalysis.suspiciousElements.length > 0) {
       indicators.suspiciousElements = true;
-      blockingScore += 30;
+      blockingScore += 10;
     }
 
-    blockingScore += detectedTechnologies.length * 25;
-    if (detectedTechnologies.length > 0) indicators.botDetectionJs = true;
+    // Check for suspicious phrases
+    const urls = webPageData.finalUrl + this.url;
 
-    // Check for suspicious page titles
-    const lowerTitle = webPageData.title.toLowerCase();
-    if (SUSPICIOUS_TITLES.some((title) => lowerTitle.includes(title))) {
-      indicators.accessDeniedText = true;
-      blockingScore += 20;
+    for (const pattern of this.SUSPICIOUS_PHRASE_PATTERNS) {
+      if (pattern.test(webPageData.sourceCode) || pattern.test(urls)) {
+        detectedSuspiciousPhrases.push(pattern.source);
+        if (indicators.minimalDomElements || indicators.minimalContent)
+          blockingScore += 10;
+      }
     }
 
     // Check for suspicious redirects
@@ -139,9 +170,8 @@ export class Analyzer {
 
     // Check for unusual response times
     if (webPageData.responseTime > 10000) {
-      // 10 seconds as an example threshold
       indicators.unusualResponseTime = true;
-      blockingScore += 5;
+      blockingScore += 10;
     }
 
     // Determine challenge type
@@ -184,22 +214,26 @@ export class Analyzer {
       )
     );
 
+    if (
+      detectedCaptchaTechnologies.length +
+        detectedJavascriptTechnologies.length >
+      0
+    )
+      indicators.botDetectionJs = true;
+
     if (detectedCaptchaTechnologies.length > 0) {
       challengeType = "captcha";
     } else if (detectedJavascriptTechnologies.length > 0) {
       challengeType = "javascript";
-    } else if (suspiciousPhrases.some((p) => p.includes("browser"))) {
+    } else if (detectedSuspiciousPhrases.some((p) => p.includes("browser"))) {
       challengeType = "browser_check";
     } else if (
-      suspiciousPhrases.some(
-        (p) =>
-          p.includes("429") ||
-          p.includes("rate limit") ||
-          p.includes("too many requests")
+      detectedSuspiciousPhrases.some(
+        (p) => p.includes("rate limit") || p.includes("too many requests")
       )
     ) {
       challengeType = "rate_limit";
-    } else if (indicators.accessDeniedText) {
+    } else if (indicators.suspiciousTitle) {
       challengeType = "access_denied";
     }
 
@@ -207,7 +241,7 @@ export class Analyzer {
       likelyBlocked: blockingScore >= 40,
       blockingScore: Math.min(blockingScore, 100),
       indicators,
-      suspiciousPhrases,
+      suspiciousPhrases: detectedSuspiciousPhrases,
       challengeType,
       detectedBotProtectionTechs: [
         ...detectedCaptchaTechnologies.map((t) => t.name),
@@ -233,16 +267,10 @@ export class Analyzer {
     );
 
     const suspiciousSelectors: string[] = [
-      '[id*="challenge"]',
-      '[class*="challenge"]',
       '[id*="captcha"]',
       '[class*="captcha"]',
-      '[id*="block"]',
-      // '[class*="block"]',
       '[id*="protection"]',
       '[class*="protection"]',
-      '[id*="security"]',
-      '[class*="security"]',
     ];
 
     const suspiciousElements: SuspiciousElement[] = [
@@ -262,11 +290,11 @@ export class Analyzer {
     };
 
     return {
-      pageSizeBytes: 0, // Assuming reqData.contentLength is not available
+      pageSizeBytes: 0,
       pageSizeHuman: "0 Bytes",
-      domElementCount: webPageData.domElementCount,
-      domComplexity: getDomComplexity(webPageData.domElementCount),
-      contentType: "", // Assuming reqData.contentType is not available
+      bodyDomElementCount: webPageData.bodyDomElementCount,
+      domComplexity: getDomComplexity(webPageData.bodyDomElementCount),
+      contentType: webPageData.contentType,
       title: webPageData.title,
       description: webPageData.description,
       language:
@@ -275,8 +303,7 @@ export class Analyzer {
       charset: webPageData.meta["charset"] || "unknown",
       hasForms: webPageData.formCount > 0,
       hasJavascript: webPageData.scriptCount > 0,
-      externalResources: 0, // Assuming siteData.assetUrls is not available
-      internalResources: 0, // Assuming siteData.assetUrls is not available
+      externalResources: webPageData.assetUrls.length,
       hasCaptchaElements,
       hasChallengeElements,
       suspiciousElements,

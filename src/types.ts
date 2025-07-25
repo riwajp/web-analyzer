@@ -17,7 +17,7 @@ export type WebPageData = {
   assetUrls: string[];
   title: string;
   description: string;
-  domElementCount: number;
+  bodyDomElementCount: number;
   textContentLength: number;
   scriptCount: number;
   imageCount: number;
@@ -51,7 +51,7 @@ export type BlockingIndicators = {
     minimalContent: boolean;
     challengeDetected: boolean;
     captchaDetected: boolean;
-    accessDeniedText: boolean;
+    suspiciousTitle: boolean;
     suspiciousRedirects: boolean;
     botDetectionJs: boolean;
     minimalDomElements: boolean;
@@ -68,7 +68,7 @@ export type BlockingIndicators = {
 };
 
 export type PageAnalysis = {
-  domElementCount: number;
+  bodyDomElementCount: number;
   pageSizeBytes: number;
   pageSizeHuman: string;
   domComplexity: "LOW" | "MEDIUM" | "HIGH";
@@ -81,7 +81,6 @@ export type PageAnalysis = {
   hasForms: boolean;
   hasJavascript: boolean;
   externalResources: number;
-  internalResources: number;
   hasCaptchaElements: boolean;
   hasChallengeElements: boolean;
   suspiciousElements: { tag: string; id: string; class: string }[];
@@ -95,6 +94,7 @@ export type DetectionResult = {
   technologies: DetectedTechnology[];
   blockingIndicators?: BlockingIndicators;
   pageAnalysis: PageAnalysis;
+  textContentLength?: number;
   stats: {
     total: number;
     byConfidence: {
@@ -111,6 +111,7 @@ export type DetectionResult = {
     cookies: Record<string, string | undefined>;
     suspiciousElements: SuspiciousElement[];
     metaTags: Record<string, string>;
+    sourceCode?: string;
   };
 };
 

@@ -100,8 +100,9 @@ export class WebPage {
           .querySelector('meta[name="description"]')
           ?.getAttribute("content") || "";
 
-      const allElements = doc.querySelectorAll("*");
-      const domElementCount = allElements.length;
+      const body = doc.querySelector("body");
+      const bodyElements = body ? body.querySelectorAll("*") : [];
+      const bodyDomElementCount = bodyElements.length;
 
       const scriptCount = doc.querySelectorAll("script").length;
       const imageCount = doc.querySelectorAll("img").length;
@@ -169,7 +170,7 @@ export class WebPage {
         assetUrls,
         title,
         description,
-        domElementCount,
+        bodyDomElementCount,
         textContentLength,
         scriptCount,
         imageCount,
