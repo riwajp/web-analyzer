@@ -118,15 +118,14 @@ export class Analyzer {
     }
 
     if (webPageData.bodyDomElementCount < 10) {
-      blockingScore += 40;
+      blockingScore += 70;
+    } else if (webPageData.bodyDomElementCount < 50) {
+      indicators.minimalDomElements = true;
+      blockingScore += 30;
     }
 
     if (webPageData.textContentLength < 500) {
       indicators.minimalContent = true;
-      blockingScore += 30;
-    }
-    if (webPageData.bodyDomElementCount < 50) {
-      indicators.minimalDomElements = true;
       blockingScore += 30;
     }
 
