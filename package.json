@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/index",
     "build": "tsc",
-    "test": "npx jest src/tests/webPage.test.ts"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

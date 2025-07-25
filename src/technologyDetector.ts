@@ -5,7 +5,6 @@ import {
   TECH_DETECTION_MODE_CONFIDENCE,
 } from "./confidence-constants";
 import type { JSDOM } from "jsdom";
-
 import { PatternMatcher, PatternMatch } from "./patternMatcher";
 
 import type {
@@ -72,7 +71,6 @@ export class TechnologyDetector {
 
   setDetectionMode(mode: DetectionMode) {
     this.detectionMode = mode;
-    // console.log(`Detection mode set to: ${mode}`);
   }
 
   detectTechnologies(webPageData: WebPageData): DetectedTechnology[] {
@@ -107,11 +105,6 @@ export class TechnologyDetector {
       );
 
       const confidenceLevel = getConfidenceLevel(result.confidence);
-      // console.log(
-      //   `[DEBUG] ${techName}: ${result.confidence.toFixed(
-      //     1
-      //   )}% confidence (${confidenceLevel})`
-      // );
 
       //  If tech is actually detected, promote its type to detection
       const isDetected = result.confidence >= minConfidence;

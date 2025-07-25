@@ -1,4 +1,5 @@
-import { TechData } from "../types";
+import { DetectedTechnology, TechData, WebPageData } from "../types";
+import { JSDOM } from "jsdom";
 
 export function generateWebPageForTech(
   techName: string,
@@ -105,4 +106,63 @@ export function getDummyMatchForRegex(pattern: string | RegExp): string {
   dummyMatch = dummyMatch.replace(/\.\+/g, "dummy");
 
   return dummyMatch;
+}
+
+export function generateMockWebPageData(options: {
+  domElementCount?: number;
+  statusCode?: number;
+  responseTime?: number;
+  title?: string;
+  redirectCount?: number;
+  textContentLength?: number;
+  hasCaptchaElement?: boolean;
+  hasChallengeElement?: boolean;
+  meta?: Record<string, string>;
+}): WebPageData {
+  const dom = new JSDOM(`<html>
+    <head><title>${options.title || "Test Page"}</title></head>
+    <body>
+      ${options.hasCaptchaElement ? '<div id="captcha-box"></div>' : ""}
+      ${options.hasChallengeElement ? '<div id="challenge-box"></div>' : ""}
+    </body>
+  </html>`);
+
+  return {
+    sourceCode: options.hasCaptchaElement
+      ? "<div>recaptcha</div>"
+      : "<html></html>",
+    headers: new Headers(),
+    cookies: {},
+    statusCode: options.statusCode ?? 200,
+    responseTime: options.responseTime ?? 200,
+    contentLength: 1500,
+    contentType: "text/html",
+    finalUrl: "https://example.com",
+    redirectCount: options.redirectCount ?? 0,
+    scriptSrc: [],
+    js: [],
+    meta: options.meta || {},
+    dom,
+    assetUrls: [],
+    title: options.title ?? "Test Page",
+    description: "Mocked page",
+    domElementCount: options.domElementCount ?? 50,
+    textContentLength: options.textContentLength ?? 800,
+    scriptCount: 1,
+    imageCount: 1,
+    linkCount: 1,
+    formCount: 1,
+  };
+}
+export function generateMockDetectedTechs(
+  names: string[]
+): DetectedTechnology[] {
+  return names.map((name) => ({
+    name,
+    confidence: 90,
+    confidenceLevel: "HIGH",
+    detectedUsing: ["pattern"],
+    matches: [],
+    detectionType: "detection",
+  }));
 }

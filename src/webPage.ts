@@ -86,7 +86,7 @@ export class WebPage {
     try {
       const finalRedirectCount = redirectCount;
       const contentLength = sourceCode.length;
-      console.log(redirectCount);
+
       // if (response.url !== this.url) {
       //   finalRedirectCount = Math.max(1, redirectCount);
       // }
