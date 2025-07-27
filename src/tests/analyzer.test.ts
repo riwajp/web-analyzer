@@ -8,7 +8,7 @@ describe("Analyzer", () => {
     const analyzer = new Analyzer(url);
 
     const webPageData = generateMockWebPageData({
-      domElementCount: 8,
+      bodyDomElementCount: 8,
       statusCode: 403,
       textContentLength: 200,
       hasCaptchaElement: true,
@@ -31,7 +31,7 @@ describe("Analyzer", () => {
     expect(pageAnalysis.hasJavascript).toBe(true);
     expect(pageAnalysis.hasCaptchaElements).toBe(true);
     expect(pageAnalysis.hasChallengeElements).toBe(true);
-    expect(pageAnalysis.suspiciousElements.length).toBe(2);
+    expect(pageAnalysis.suspiciousElements.length).toBe(1);
 
     // Tests for BlockingIndicators
     const blockingIndicators = result!.blockingIndicators!;
@@ -43,7 +43,7 @@ describe("Analyzer", () => {
     expect(blockingIndicators.indicators.challengeDetected).toBe(true);
     expect(blockingIndicators.indicators.captchaDetected).toBe(true);
     expect(blockingIndicators.indicators.suspiciousRedirects).toBe(true);
-    expect(blockingIndicators.indicators.accessDeniedText).toBe(true);
+    expect(blockingIndicators.indicators.suspiciousTitle).toBe(true);
     expect(blockingIndicators.indicators.botDetectionJs).toBe(true);
     expect(blockingIndicators.challengeType).toBe("captcha");
     expect(blockingIndicators.detectedBotProtectionTechs).toEqual(
@@ -55,7 +55,7 @@ describe("Analyzer", () => {
     const analyzer = new Analyzer("https://normal-page.com");
 
     const webPageData = generateMockWebPageData({
-      domElementCount: 200,
+      bodyDomElementCount: 200,
       statusCode: 200,
       textContentLength: 5000,
       redirectCount: 0,

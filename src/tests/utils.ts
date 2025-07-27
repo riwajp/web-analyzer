@@ -109,7 +109,7 @@ export function getDummyMatchForRegex(pattern: string | RegExp): string {
 }
 
 export function generateMockWebPageData(options: {
-  domElementCount?: number;
+  bodyDomElementCount?: number;
   statusCode?: number;
   responseTime?: number;
   title?: string;
@@ -146,7 +146,7 @@ export function generateMockWebPageData(options: {
     assetUrls: [],
     title: options.title ?? "Test Page",
     description: "Mocked page",
-    domElementCount: options.domElementCount ?? 50,
+    bodyDomElementCount: options.bodyDomElementCount ?? 50,
     textContentLength: options.textContentLength ?? 800,
     scriptCount: 1,
     imageCount: 1,
