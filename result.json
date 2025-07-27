@@ -1,0 +1,92 @@
+{
+  "url": "https://www.rafael.co.il/",
+  "fetchTime": 1235,
+  "finalUrl": "https://www.rafael.co.il/",
+  "statusCode": 247,
+  "technologies": [
+    {
+      "name": "Reblaze",
+      "confidence": 60,
+      "confidenceLevel": "MEDIUM",
+      "detectedUsing": [
+        "js"
+      ],
+      "matches": [
+        {
+          "pattern": "rbzns",
+          "confidence": 60,
+          "priority": "MEDIUM",
+          "type": "exact",
+          "location": "js",
+          "matchedValue": "\n;;window.rbzns={\"protocol\":\"https:\",\"location_host\":\"www.rafael.co.il\",\"seed\":\"YivWE3VAEn6c95OzxlBeP/Txi5hGfYkuw86A1WUaz8mO/riD1/WUjZEO41kVbVCVFRg6Rt2TqrU9DP71AxUg+gLkv5MDh0s7/t4JKLSIQrHxJDNo9fI83oEWmqw9g8k0gBjvorbq6MvW2BnRFz7X98cwHVac3r4GIAAaEo0cx8M8o3v5N8EMq8Lb2OFYlfFpfP5aPzrycYL5w65g2ENMNqkbIDT9TMn9cEvX1hr8Ec7uA900O4JXML4ex7dh/MkfRuU=\",\"storage\":3,\"bereshit\":\"1\"};winsocks();"
+        }
+      ],
+      "detectionType": "detection"
+    }
+  ],
+  "blockingIndicators": {
+    "likelyBlocked": true,
+    "blockingScore": 100,
+    "indicators": {
+      "statusCodeSuspicious": false,
+      "minimalContent": true,
+      "challengeDetected": false,
+      "captchaDetected": false,
+      "suspiciousTitle": false,
+      "suspiciousRedirects": false,
+      "botDetectionJs": false,
+      "minimalDomElements": true,
+      "unusualResponseTime": false,
+      "suspiciousElements": false
+    },
+    "suspiciousPhrases": [],
+    "detectedBotProtectionTechs": []
+  },
+  "pageAnalysis": {
+    "pageSizeBytes": 0,
+    "pageSizeHuman": "0 Bytes",
+    "bodyDomElementCount": 0,
+    "domComplexity": "LOW",
+    "contentType": "text/html; charset=utf-8",
+    "title": "",
+    "description": "",
+    "language": "unknown",
+    "viewport": "not set",
+    "charset": "unknown",
+    "hasForms": false,
+    "hasJavascript": true,
+    "externalResources": 1,
+    "hasCaptchaElements": false,
+    "hasChallengeElements": false,
+    "suspiciousElements": []
+  },
+  "stats": {
+    "total": 1,
+    "byConfidence": {
+      "HIGH": 0,
+      "MEDIUM": 1,
+      "LOW": 0
+    },
+    "averageConfidence": 60,
+    "topDetection": {
+      "name": "Reblaze",
+      "confidence": 60,
+      "confidenceLevel": "MEDIUM",
+      "detectedUsing": [
+        "js"
+      ],
+      "matches": [
+        {
+          "pattern": "rbzns",
+          "confidence": 60,
+          "priority": "MEDIUM",
+          "type": "exact",
+          "location": "js",
+          "matchedValue": "\n;;window.rbzns={\"protocol\":\"https:\",\"location_host\":\"www.rafael.co.il\",\"seed\":\"YivWE3VAEn6c95OzxlBeP/Txi5hGfYkuw86A1WUaz8mO/riD1/WUjZEO41kVbVCVFRg6Rt2TqrU9DP71AxUg+gLkv5MDh0s7/t4JKLSIQrHxJDNo9fI83oEWmqw9g8k0gBjvorbq6MvW2BnRFz7X98cwHVac3r4GIAAaEo0cx8M8o3v5N8EMq8Lb2OFYlfFpfP5aPzrycYL5w65g2ENMNqkbIDT9TMn9cEvX1hr8Ec7uA900O4JXML4ex7dh/MkfRuU=\",\"storage\":3,\"bereshit\":\"1\"};winsocks();"
+        }
+      ],
+      "detectionType": "detection"
+    }
+  },
+  "textContentLength": 0
+}

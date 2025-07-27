@@ -1,11 +1,11 @@
 import type { DetectedTechnology } from "../types";
-import { Analyzer } from "../analyzer";
+import { Analyzer } from "../lib/analyzer";
 import { generateMockWebPageData, generateMockDetectedTechs } from "./utils";
 
 describe("Analyzer", () => {
   it("detects captcha and challenge with correct blocking indicators and page analysis", async () => {
     const url = "https://blocked.com";
-    const analyzer = new Analyzer(url);
+    const analyzer = new Analyzer(url, { blockingDetectionEnabled: true });
 
     const webPageData = generateMockWebPageData({
       bodyDomElementCount: 8,
@@ -22,7 +22,7 @@ describe("Analyzer", () => {
       "reCAPTCHA",
     ]);
 
-    const result = await analyzer.analyze(webPageData, detectedTechs, true);
+    const result = await analyzer.analyze(webPageData, detectedTechs);
 
     // Tests for PageAnalysis
     const pageAnalysis = result!.pageAnalysis;
@@ -52,7 +52,9 @@ describe("Analyzer", () => {
   });
 
   it("doesn't flag blocked when blocking score is low", async () => {
-    const analyzer = new Analyzer("https://normal-page.com");
+    const analyzer = new Analyzer("https://normal-page.com", {
+      blockingDetectionEnabled: true,
+    });
 
     const webPageData = generateMockWebPageData({
       bodyDomElementCount: 200,
@@ -64,7 +66,7 @@ describe("Analyzer", () => {
 
     const detectedTechs: DetectedTechnology[] = [];
 
-    const result = await analyzer.analyze(webPageData, detectedTechs, true);
+    const result = await analyzer.analyze(webPageData, detectedTechs);
 
     expect(result!.blockingIndicators?.likelyBlocked).toBe(false);
   });

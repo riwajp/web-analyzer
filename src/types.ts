@@ -119,6 +119,7 @@ export type DetectionConfig = {
   mode: DetectionMode;
   includeRawData: boolean;
   blockingDetectionEnabled: boolean;
+  fetchTimeout: number;
 };
 
 export type DetectionSource = {

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index",
+    "start": "ts-node src/cli https://www.rafael.co.il/ --detect-blocking",
     "build": "tsc",
     "test": "jest"
   },

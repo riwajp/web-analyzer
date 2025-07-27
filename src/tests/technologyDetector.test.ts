@@ -1,12 +1,12 @@
 import path from "path";
 import fs from "fs";
 import { DetectedTechnology, TechnologiesMap } from "../types";
-import { WebPage } from "../webPage";
-import { TechnologyDetector } from "../technologyDetector";
+import { WebPage } from "../lib/webPage";
+import { TechnologyDetector } from "../lib/technologyDetector";
 import { getUrlForTech, mockFetchForTech } from "./utils";
 import { TECH_DETECTION_MODE_CONFIDENCE } from "../confidence-constants";
 
-const filePath = path.resolve("src/tests/tech-test.json");
+const filePath = path.resolve("src/data/tech-test.json");
 const fileContent = fs.readFileSync(filePath, "utf-8");
 
 const technologies: TechnologiesMap = JSON.parse(fileContent);

@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { TechnologiesMap, WebPageData } from "../types";
-import { WebPage } from "../webPage";
+import { WebPage } from "../lib/webPage";
 import { getUrlForTech, mockFetchForTech } from "./utils";
 
 const filePath = path.resolve("src/data/tech.json");
