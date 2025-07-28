@@ -40,7 +40,7 @@ export type PatternMatch = {
   priority: "HIGH" | "MEDIUM" | "LOW";
   type: "exact" | "regex" | "fuzzy" | "encoded";
   location: string;
-  matchedValue: string;
+  matchedValues: string[];
 };
 
 export type BlockingIndicators = {
@@ -69,8 +69,6 @@ export type BlockingIndicators = {
 
 export type PageAnalysis = {
   bodyDomElementCount: number;
-  pageSizeBytes: number;
-  pageSizeHuman: string;
   domComplexity: "LOW" | "MEDIUM" | "HIGH";
   contentType: string;
   title: string;

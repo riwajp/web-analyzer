@@ -292,8 +292,6 @@ export class Analyzer {
     };
 
     return {
-      pageSizeBytes: 0,
-      pageSizeHuman: "0 Bytes",
       bodyDomElementCount: webPageData.bodyDomElementCount,
       domComplexity: getDomComplexity(webPageData.bodyDomElementCount),
       contentType: webPageData.contentType,

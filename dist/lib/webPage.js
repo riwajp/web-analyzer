@@ -107,9 +107,6 @@ class WebPage {
         try {
             const finalRedirectCount = redirectCount;
             const contentLength = sourceCode.length;
-            // if (response.url !== this.url) {
-            //   finalRedirectCount = Math.max(1, redirectCount);
-            // }
             const dom = new jsdom_1.JSDOM(sourceCode);
             const doc = dom.window.document;
             const title = ((_b = (_a = doc.querySelector("title")) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.trim()) || "";

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
-const webanalyzer_1 = require("../webanalyzer");
+const webanalyzer_1 = require("../lib/webanalyzer");
 const urls = [
     "https://www.grove.co/", // hCaptcha
     "https://login.payoneer.com/", //reblaze [js cookie :( ]
@@ -203,6 +203,7 @@ function generateSummaryReport(results) {
         mode: "NORMAL",
         includeRawData: false,
         blockingDetectionEnabled: true,
+        fetchTimeout: 3000,
     };
     try {
         const results = yield processBatch(urls, config, {

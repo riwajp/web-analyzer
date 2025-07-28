@@ -167,7 +167,7 @@ class TechnologyDetector {
         const normalized = this.normalizePatterns(patterns, type);
         return this.runDetectionCheck(items, normalized, (item, pattern) => {
             const result = patternMatcher_1.PatternMatcher.matchPatternWithConfidence(item, pattern);
-            return result.matched ? Object.assign(Object.assign({}, pattern), { matchedValue: item }) : null;
+            return result.matched ? result.match : null;
         });
     }
     checkHeaders(headerPatterns, headers) {
@@ -182,11 +182,10 @@ class TechnologyDetector {
                 priority: "HIGH",
                 type: "regex",
                 location: "headers",
-                matchedValue: headerValue,
+                matchedValues: [],
             };
             const result = patternMatcher_1.PatternMatcher.matchPatternWithConfidence(headerValue, pattern);
-            return result.matched
-                ? Object.assign(Object.assign({}, pattern), { matchedValue: headerValue }) : null;
+            return result.matched ? result.match : null;
         });
     }
     checkCookies(cookiePatterns, cookies) {
@@ -204,7 +203,7 @@ class TechnologyDetector {
                     priority: "HIGH",
                     type: "exact",
                     location: "cookies",
-                    matchedValue: cookieKey,
+                    matchedValues: [],
                 };
             return null;
         });
@@ -217,10 +216,10 @@ class TechnologyDetector {
                 priority: "HIGH",
                 type: "exact",
                 location: "html",
-                matchedValue: pattern,
+                matchedValues: [],
             };
             const result = patternMatcher_1.PatternMatcher.matchPatternWithConfidence(html, patternMatch);
-            return result.matched ? patternMatch : null;
+            return result.matched ? result.match : null;
         });
     }
     checkDom(domPatterns, dom) {
@@ -233,7 +232,7 @@ class TechnologyDetector {
                     priority: "HIGH",
                     type: "exact",
                     location: "dom",
-                    matchedValue: selector,
+                    matchedValues: [],
                 };
             }
             return null;
@@ -251,7 +250,7 @@ class TechnologyDetector {
                     priority: this.getDefaultPriority(type),
                     type: this.getDefaultType(pattern),
                     location: type,
-                    matchedValue: "",
+                    matchedValues: [],
                 };
             }
             return pattern;

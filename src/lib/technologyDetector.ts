@@ -5,7 +5,7 @@ import {
   TECH_DETECTION_MODE_CONFIDENCE,
 } from "../confidence-constants";
 import type { JSDOM } from "jsdom";
-import { PatternMatcher, PatternMatch } from "./patternMatcher";
+import { PatternMatcher } from "./patternMatcher";
 
 import type {
   WebPageData,
@@ -13,6 +13,7 @@ import type {
   TechnologiesMap,
   DetectionMode,
   DetectionSource,
+  PatternMatch,
 } from "../types";
 
 export interface DetectionResult {
@@ -268,7 +269,7 @@ export class TechnologyDetector {
     const normalized = this.normalizePatterns(patterns, type);
     return this.runDetectionCheck(items, normalized, (item, pattern) => {
       const result = PatternMatcher.matchPatternWithConfidence(item, pattern);
-      return result.matched ? { ...pattern, matchedValue: item } : null;
+      return result.matched ? result.match : null;
     });
   }
 
@@ -290,15 +291,13 @@ export class TechnologyDetector {
           priority: "HIGH",
           type: "regex",
           location: "headers",
-          matchedValue: headerValue,
+          matchedValues: [],
         };
         const result = PatternMatcher.matchPatternWithConfidence(
           headerValue,
           pattern
         );
-        return result.matched
-          ? { ...pattern, matchedValue: headerValue }
-          : null;
+        return result.matched ? result.match : null;
       }
     );
   }
@@ -327,7 +326,7 @@ export class TechnologyDetector {
             priority: "HIGH",
             type: "exact",
             location: "cookies",
-            matchedValue: cookieKey,
+            matchedValues: [],
           };
 
         return null;
@@ -343,14 +342,14 @@ export class TechnologyDetector {
         priority: "HIGH",
         type: "exact",
         location: "html",
-        matchedValue: pattern,
+        matchedValues: [],
       };
       const result = PatternMatcher.matchPatternWithConfidence(
         html,
         patternMatch
       );
 
-      return result.matched ? patternMatch : null;
+      return result.matched ? result.match : null;
     });
   }
 
@@ -364,7 +363,7 @@ export class TechnologyDetector {
           priority: "HIGH",
           type: "exact",
           location: "dom",
-          matchedValue: selector,
+          matchedValues: [],
         };
       }
       return null;
@@ -387,7 +386,7 @@ export class TechnologyDetector {
           priority: this.getDefaultPriority(type),
           type: this.getDefaultType(pattern),
           location: type,
-          matchedValue: "",
+          matchedValues: [],
         } as PatternMatch;
       }
       return pattern;

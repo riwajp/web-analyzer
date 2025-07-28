@@ -87,10 +87,6 @@ export class WebPage {
       const finalRedirectCount = redirectCount;
       const contentLength = sourceCode.length;
 
-      // if (response.url !== this.url) {
-      //   finalRedirectCount = Math.max(1, redirectCount);
-      // }
-
       const dom = new JSDOM(sourceCode);
       const doc = dom.window.document;
 
